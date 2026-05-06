@@ -1,4 +1,5 @@
-## Hi there 👋
+## Hi, I'm Bipolar-cat 🐾
+​メンタルヘルスと技術の架け橋を目指すウェブ開発者です。
 
 <!--
 **Bipolar-cat/Bipolar-cat** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
