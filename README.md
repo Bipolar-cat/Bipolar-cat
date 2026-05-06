@@ -1,4 +1,4 @@
-## Hi, I'm Bipolar-cat 🐾
+## Hi, I'm Bipolar-cat 🐱🐾
 ​メンタルヘルスと技術の架け橋を目指すウェブ開発者です。
 
 <!--
