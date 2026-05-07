@@ -24,6 +24,9 @@
 ### 🐱 About Me
 * 🔭 **I’m currently working on**: 心と体の記録ツール「InnerNote」を開発しています。
 * 🌱 **I’m currently learning**: HTML5, CSS3, JavaScript, React, GitHub, Render
-* 👯 **I’m looking to collaborate on**: 当事者の生活を支えるデジタルツールの開発
-* 💬 **Ask me about**: step3-summary や step10-summary の使い方について
+* 👯 **I’m looking to collaborate on**:
+* 🤔 **I’m looking for help whis**: 
+* 💬 **Ask me about**:
 * 📫 **How to reach me**: 1102.okappi73@gmail.com
+* ✨️ **fun fact**:Two cats🐱, Fuku and Hime, and a Baumkuchen
+　
