@@ -19,3 +19,11 @@
 * URLをタップし、その日の気分や活動を入力します。
 * 「summary(診察用まとめ)」を押すと、診察に最適なフォーマットで出力されます。
 * 出力された内容を、診察時に医師へ提示または共有してください。
+---
+
+### 🐱 About Me
+* 🔭 **I’m currently working on**: 心と体の記録ツール「InnerNote」を開発しています。
+* 🌱 **I’m currently learning**: HTML5, CSS3, JavaScript, React, GitHub, Render
+* 👯 **I’m looking to collaborate on**: 当事者の生活を支えるデジタルツールの開発
+* 💬 **Ask me about**: step3-summary や step10-summary の使い方について
+* 📫 **How to reach me**: 1102.okappi73@gmail.com
