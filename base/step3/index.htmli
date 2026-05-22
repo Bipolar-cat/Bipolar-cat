@@ -1,1 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerNote</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 25px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #5C6BC0;
+            font-size: 32px;
+            margin: 10px 0 0 0;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .input-section {
+            padding: 0 20px;
+        }
+
+        .label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 15px 0 8px 5px; /* ラベルとの間隔を少し調整 */
+            color: #444;
+            font-size: 15px;
+        }
+
+        /* 3段階ボタン：さらに横長、縦をスリムに (padding 10px -> 8px) */
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px; /* ボタン同士の隙間を少し詰めて横長感を強調 */
+            margin-bottom: 5px;
+        }
+
+        .btn-group button {
+            flex: 1;
+            padding: 8px 0; /* 縦幅をさらに短く */
+            border-radius: 8px; /* 角丸を少しシャープに */
+            border: 1px solid #eee;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666;
+            font-size: 14px;
+        }
+
+        #mood-btns button.active {
+            background-color: #E3F2FD;
+            border: 1px solid #2196F3;
+            color: #1976D2;
+        }
+
+        #cond-btns button.active {
+            background-color: #FFF3E0;
+            border: 1px solid #FFA726;
+            color: #FB8C00;
+        }
+
+        textarea {
+            width: 100%;
+            height: 65px; /* メモ欄も少しだけコンパクトに */
+            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: none;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
+        }
+
+        /* 記録ボタン：横幅を一杯に、角丸を調整 */
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 30px; /* 1000003954.pngを参考にしっかり角を丸める */
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 280px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+        }
+
+        h3 {
+            margin-top: 35px;
+            color: #444;
+            font-size: 18px;
+            padding: 0 20px;
+        }
+
+        .log-list {
+            width: 100%;
+        }
+
+        .log-item {
+            text-align: left;
+            padding: 15px 20px;
+            background: #fff;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 14px;
+            transition: background-color 0.5s;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            background-color: #fff9c4 !important;
+        }
+
+        .log-date {
+            color: #4A90E2;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
+
+        <div class="input-section">
+            <label class="label">今の気分は？</label>
+            <div id="mood-btns" class="btn-group">
+                <button onclick="setVal('mood', 1, this)">低い</button>
+                <button onclick="setVal('mood', 2, this)" class="active">普通</button>
+                <button onclick="setVal('mood', 3, this)">良い</button>
+            </div>
+
+            <label class="label">体の調子は？</label>
+            <div id="cond-btns" class="btn-group">
+                <button onclick="setVal('cond', 1, this)">悪い</button>
+                <button onclick="setVal('cond', 2, this)" class="active">普通</button>
+                <button onclick="setVal('cond', 3, this)">良い</button>
+            </div>
+
+            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+            
+            <button class="save-btn" onclick="saveData()">記録する</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <h3>最近の記録</h3>
+        <div id="log-list" class="log-list"></div>
+    </div>
+
+    <script>
+        let selectedMood = 2;
+        let selectedCond = 2;
+
+        function setVal(type, val, btn) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (type === 'mood') selectedMood = val;
+            else selectedCond = val;
+        }
+
+        function saveData() {
+            const note = document.getElementById('note').value;
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            const logs = JSON.parse(localStorage.getItem('innernote_3step_logs') || '[]');
+            logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note });
+            localStorage.setItem('innernote_3step_logs', JSON.stringify(logs));
+            
+            alert("記録しました！");
+            location.reload();
+        }
+
+        window.onload = () => {
+            const logs = JSON.parse(localStorage.getItem('innernote_3step_logs') || '[]');
+            const last10 = logs.slice(-10);
+            
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: last10.map(l => l.date),
+                    datasets: [
+                        { 
+                            label: '気分', data: last10.map(l => l.mood), 
+                            borderColor: '#2196F3', backgroundColor: '#2196F3', 
+                            borderWidth: 2, tension: 0.3, fill: false, 
+                            pointRadius: 4, pointHitRadius: 15 
+                        },
+                        { 
+                            label: '体調', data: last10.map(l => l.cond), 
+                            borderColor: '#FFA726', backgroundColor: '#FFA726', 
+                            borderWidth: 2, tension: 0.3, fill: false, 
+                            pointRadius: 4, pointHitRadius: 15 
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: { padding: { left: 10, right: 10 } },
+                    interaction: { mode: 'index', intersect: false },
+                    onClick: (evt, elements, chart) => {
+                        const points = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                        if (points.length > 0) {
+                            scrollToLog(last10[points[0].index].date);
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 5 } },
+                        y: { 
+                            min: 0.8, max: 3.2,
+                            ticks: { 
+                                stepSize: 1, 
+                                callback: v => v==3?'良い':v==2?'普通':v==1?'低/悪':'',
+                                font: { size: 10 }, color: '#aaa'
+                            },
+                            grid: { color: '#f0f0f0' }
+                        }
+                    },
+                    plugins: { 
+                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 12 } } }
+                    }
+                }
+            });
+
+            function scrollToLog(dateStr) {
+                const logItems = document.querySelectorAll('.log-item');
+                logItems.forEach(item => {
+                    item.classList.remove('highlight');
+                    if (item.querySelector('.log-date').innerText === dateStr) {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        item.classList.add('highlight');
+                    }
+                });
+            }
+
+            const logList = document.getElementById('log-list');
+            logs.slice().reverse().forEach(l => {
+                const div = document.createElement('div');
+                div.className = 'log-item';
+                div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood==3?'良い':l.mood==2?'普通':'低'} / 体調: ${l.cond==3?'良い':l.cond==2?'普通':'悪い'}<br>${l.note}`;
+                logList.appendChild(div);
+            });
+        };
+    </script>
+</body>
+</html>
 
