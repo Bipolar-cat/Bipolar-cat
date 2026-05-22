@@ -18,6 +18,9 @@
 
 ![アプリの操作画面](app-image.png)
 ![アプリの操作画面](app-image2.png)
+## ツール一覧
+- [基本の記録 (base)](./base/index.html)
+- [サマリー付き記録 (summary)](./summary/index.html)
 
 ### 🚀 使い方
 
