@@ -510,20 +510,17 @@
                 logList.appendChild(div);
             });
 
-            // グラフの描画
-            const last10 = logs.slice(-10);
-            const ctx = document.getElementById('myChart').getContext('2d');
-            
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: last10.map(l => l.date),
-                    datasets: [
-                        { 
-                            label: '気分', data: last10.map(l => l.mood), 
-                            borderColor: '#3b82f6', backgroundColor: '#3b82f6',
-                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6',
-                            pointHitRadius: 25
+           // グラフの描画
+const last10 = logs.slice(-10);
+const ctx = document.getElementById('myChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: last10.map(l => l.date),
+        // ...（中略）...
+        datasets: [ ... ]
+    }
                         },
                         { 
                             label: '体調', data: last10.map(l => l.cond), 
