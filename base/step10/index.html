@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnerNote</title>
+    <title>InnerNote - Perfect Sync 350</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -19,7 +19,7 @@
             max-width: 450px;
             width: 100%;
             background: white;
-            padding: 25px 0;
+            padding: 20px 0;
             border-radius: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             text-align: center;
@@ -28,15 +28,15 @@
 
         h1 {
             color: #5C6BC0;
-            font-size: 32px;
-            margin: 10px 0 0 0;
+            font-size: 28px;
+            margin: 5px 0 0 0;
         }
 
         .subtitle {
             color: #888;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: bold;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
 
         .input-section {
@@ -47,112 +47,123 @@
             display: block;
             text-align: left;
             font-weight: bold;
-            margin: 15px 0 8px 5px; /* ラベルとの間隔を少し調整 */
-            color: #444;
+            margin: 8px 0 5px 5px;
+            color: #333;
             font-size: 15px;
         }
 
-        /* 3段階ボタン：さらに横長、縦をスリムに (padding 10px -> 8px) */
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-            gap: 6px; /* ボタン同士の隙間を少し詰めて横長感を強調 */
-            margin-bottom: 5px;
+        .scroll-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 2px 0 10px 5px;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .btn-group button {
-            flex: 1;
-            padding: 8px 0; /* 縦幅をさらに短く */
-            border-radius: 8px; /* 角丸を少しシャープに */
-            border: 1px solid #eee;
-            background: white;
+        .scroll-wrapper::-webkit-scrollbar { display: none; }
+
+        .btn-group-circle {
+            display: inline-flex;
+            gap: 12px;
+        }
+
+        .btn-group-circle button {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            color: #9ca3af;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.2s;
-            color: #666;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #mood-btns button.active {
-            background-color: #E3F2FD;
-            border: 1px solid #2196F3;
-            color: #1976D2;
+            border: 2px solid #bfdbfe;
+            color: #3b82f6;
+            background-color: #eff6ff;
+            font-weight: bold;
         }
 
         #cond-btns button.active {
-            background-color: #FFF3E0;
-            border: 1px solid #FFA726;
-            color: #FB8C00;
+            border: 2px solid #fde68a;
+            color: #f59e0b;
+            background-color: #fffbeb;
+            font-weight: bold;
         }
 
         textarea {
             width: 100%;
-            height: 65px; /* メモ欄も少しだけコンパクトに */
-            margin: 15px 0;
-            padding: 12px 15px;
+            height: 50px;
+            margin: 5px 0 15px 0;
+            padding: 10px 15px;
             border-radius: 12px;
             border: none;
-            background-color: #f5f5f5;
+            background-color: #f3f4f6;
             font-size: 14px;
             box-sizing: border-box;
             resize: none;
             color: #333;
         }
 
-        /* 記録ボタン：横幅を一杯に、角丸を調整 */
         .save-btn {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             background-color: #4A90E2;
             color: white;
             border: none;
-            border-radius: 30px; /* 1000003954.pngを参考にしっかり角を丸める */
+            border-radius: 30px;
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             display: block;
         }
 
         .chart-container {
             width: 100%;
-            height: 280px;
-            border-top: 1px solid #f0f0f0;
+            height: 350px;
+            border-top: 1px solid #f3f4f6;
             padding-top: 15px;
         }
 
         h3 {
-            margin-top: 35px;
+            margin-top: 30px;
             color: #444;
             font-size: 18px;
             padding: 0 20px;
         }
 
         .log-list {
-            width: 100%;
+            padding: 0 20px;
         }
 
         .log-item {
             text-align: left;
-            padding: 15px 20px;
-            background: #fff;
-            border-bottom: 1px solid #f5f5f5;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
             font-size: 14px;
-            transition: background-color 0.5s;
-        }
-
-        .log-item:last-child {
-            border-bottom: none;
+            transition: background-color 0.4s, border-color 0.4s;
         }
 
         .highlight {
             background-color: #fff9c4 !important;
+            border-color: #fbc02d !important;
         }
 
         .log-date {
-            color: #4A90E2;
+            color: #4b5563;
             font-weight: bold;
-            margin-bottom: 5px;
             display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -162,22 +173,17 @@
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
         <div class="input-section">
-            <label class="label">今の気分は？</label>
-            <div id="mood-btns" class="btn-group">
-                <button onclick="setVal('mood', 1, this)">低い</button>
-                <button onclick="setVal('mood', 2, this)" class="active">普通</button>
-                <button onclick="setVal('mood', 3, this)">良い</button>
+            <label class="label">今の気分？ (1～10)</label>
+            <div class="scroll-wrapper">
+                <div id="mood-btns" class="btn-group-circle"></div>
             </div>
 
-            <label class="label">体の調子は？</label>
-            <div id="cond-btns" class="btn-group">
-                <button onclick="setVal('cond', 1, this)">悪い</button>
-                <button onclick="setVal('cond', 2, this)" class="active">普通</button>
-                <button onclick="setVal('cond', 3, this)">良い</button>
+            <label class="label">体の調子？ (1～10)</label>
+            <div class="scroll-wrapper">
+                <div id="cond-btns" class="btn-group-circle"></div>
             </div>
 
             <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
@@ -190,90 +196,109 @@
     </div>
 
     <script>
-        let selectedMood = 2;
-        let selectedCond = 2;
+        let selectedMood = 5;
+        let selectedCond = 5;
+        let highlightTimeout = null; // タイマー管理用
 
-        function setVal(type, val, btn) {
-            const parent = btn.parentElement;
-            parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if (type === 'mood') selectedMood = val;
-            else selectedCond = val;
+        function createCircleButtons(containerId, type) {
+            const container = document.getElementById(containerId);
+            for (let i = 1; i <= 10; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                if (i === 5) btn.className = 'active';
+                btn.onclick = function() {
+                    container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    if (type === 'mood') selectedMood = i;
+                    else selectedCond = i;
+                };
+                container.appendChild(btn);
+            }
         }
+
+        createCircleButtons('mood-btns', 'mood');
+        createCircleButtons('cond-btns', 'cond');
 
         function saveData() {
             const note = document.getElementById('note').value;
             const now = new Date();
             const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-            
-            const logs = JSON.parse(localStorage.getItem('innernote_3step_logs') || '[]');
+            const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
             logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note });
-            localStorage.setItem('innernote_3step_logs', JSON.stringify(logs));
-            
+            localStorage.setItem('innernote_vfinal_400_logs', JSON.stringify(logs));
             alert("記録しました！");
             location.reload();
         }
 
         window.onload = () => {
-            const logs = JSON.parse(localStorage.getItem('innernote_3step_logs') || '[]');
+            const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
             const last10 = logs.slice(-10);
             
             const ctx = document.getElementById('myChart').getContext('2d');
-            new Chart(ctx, {
+            const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: last10.map(l => l.date),
                     datasets: [
                         { 
                             label: '気分', data: last10.map(l => l.mood), 
-                            borderColor: '#2196F3', backgroundColor: '#2196F3', 
-                            borderWidth: 2, tension: 0.3, fill: false, 
-                            pointRadius: 4, pointHitRadius: 15 
+                            borderColor: '#3b82f6', backgroundColor: '#3b82f6',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6'
                         },
                         { 
                             label: '体調', data: last10.map(l => l.cond), 
-                            borderColor: '#FFA726', backgroundColor: '#FFA726', 
-                            borderWidth: 2, tension: 0.3, fill: false, 
-                            pointRadius: 4, pointHitRadius: 15 
+                            borderColor: '#f59e0b', backgroundColor: '#f59e0b',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b'
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    layout: { padding: { left: 10, right: 10 } },
-                    interaction: { mode: 'index', intersect: false },
-                    onClick: (evt, elements, chart) => {
-                        const points = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                        if (points.length > 0) {
-                            scrollToLog(last10[points[0].index].date);
+                    layout: { padding: { left: 10, right: 20, bottom: 20 } },
+                    onClick: (evt, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const clickedDate = last10[index].date;
+                            scrollToLog(clickedDate);
                         }
                     },
                     scales: {
-                        x: { ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 5 } },
-                        y: { 
-                            min: 0.8, max: 3.2,
-                            ticks: { 
-                                stepSize: 1, 
-                                callback: v => v==3?'良い':v==2?'普通':v==1?'低/悪':'',
-                                font: { size: 10 }, color: '#aaa'
-                            },
-                            grid: { color: '#f0f0f0' }
-                        }
+                        x: { ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 } },
+                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
                     },
-                    plugins: { 
-                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 12 } } }
-                    }
+                    plugins: { legend: { position: 'top' } }
                 }
             });
 
             function scrollToLog(dateStr) {
                 const logItems = document.querySelectorAll('.log-item');
+                
+                // 1. 進行中のタイマーを停止
+                if (highlightTimeout) clearTimeout(highlightTimeout);
+                
+                // 2. 全てのハイライトを強制的に即時削除（再アニメーションを可能にする）
                 logItems.forEach(item => {
+                    item.style.transition = 'none'; // 一瞬 transition を消して即リセット
                     item.classList.remove('highlight');
+                    item.offsetHeight; // リフローを強制してスタイルを適用
+                    item.style.transition = ''; // transition を戻す
+                });
+
+                // 3. 該当項目を探してスクロール＆ハイライト
+                logItems.forEach(item => {
                     if (item.querySelector('.log-date').innerText === dateStr) {
                         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        item.classList.add('highlight');
+                        
+                        // 微小な遅延を入れることでブラウザに「新しいクラスがついた」と認識させる
+                        setTimeout(() => {
+                            item.classList.add('highlight');
+                        }, 10);
+
+                        // 4. 数秒後に消去するタイマーを設定
+                        highlightTimeout = setTimeout(() => {
+                            item.classList.remove('highlight');
+                        }, 3000);
                     }
                 });
             }
@@ -282,7 +307,7 @@
             logs.slice().reverse().forEach(l => {
                 const div = document.createElement('div');
                 div.className = 'log-item';
-                div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood==3?'良い':l.mood==2?'普通':'低'} / 体調: ${l.cond==3?'良い':l.cond==2?'普通':'悪い'}<br>${l.note}`;
+                div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note}`;
                 logList.appendChild(div);
             });
         };
