@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerNote</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* いただいた元の完成形CSSをベースとして完全固定 */
+        body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 25px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #5C6BC0;
+            font-size: 32px;
+            margin: 10px 0 0 0;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* --- 主な診断名エリアのスタイル（横幅2/3・左揃え） --- */
+        .diagnosis-area {
+            width: 66.6%;
+            margin: 0 auto 20px auto;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .diagnosis-fixed-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .change-btn {
+            background: none;
+            border: none;
+            color: #4A90E2;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .select-box {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            font-size: 13px;
+            color: #333;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .other-diagnosis-input {
+            display: none;
+            width: 100%;
+            margin-top: 6px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #4A90E2;
+            background-color: #fff;
+            font-size: 13px;
+            box-sizing: border-box;
+            color: #333;
+        }
+        /* ----------------------------------------------- */
+
+        .input-section {
+            padding: 0 20px;
+        }
+
+        .label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 15px 0 8px 5px;
+            color: #444;
+            font-size: 15px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+            margin-bottom: 5px;
+        }
+
+        .btn-group button {
+            flex: 1;
+            padding: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666;
+            font-size: 14px;
+        }
+
+        #mood-btns button.active {
+            background-color: #E3F2FD;
+            border: 1px solid #2196F3;
+            color: #1976D2;
+        }
+
+        #cond-btns button.active {
+            background-color: #FFF3E0;
+            border: 1px solid #FFA726;
+            color: #FB8C00;
+        }
+
+        textarea {
+            width: 100%;
+            height: 65px;
+            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: none;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        /* グラフ表示領域の高さ調整 */
+        .chart-container {
+            width: 100%;
+            height: 290px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+        }
+
+        /* --- summary（一定期間まとめ）エリアのスタイル --- */
+        .summary-section {
+            padding: 0 20px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .summary-action-btn {
+            background-color: #00C853;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 200, 83, 0.15);
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .summary-action-btn:hover { opacity: 0.9; }
+
+        .summary-ts {
+            font-size: 11px;
+            color: #aaa;
+            margin: 8px 0 15px 0;
+        }
+
+        .summary-card {
+            display: none;
+            text-align: left;
+            background-color: #F1F8E9;
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid #DCEDC8;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .report-header { font-weight: bold; color: #2E7D32; font-size: 15px; border-bottom: 1px dashed #C5E1A5; padding-bottom: 6px; margin-bottom: 12px; display: block; }
+        .report-item { margin-bottom: 6px; color: #333; }
+        .report-label { font-weight: bold; color: #558B2F; min-width: 80px; display: inline-block; }
+        .report-notes { background: white; padding: 10px 14px; border-radius: 10px; border: 1px solid #E8F5E9; margin-top: 6px; max-height: 100px; overflow-y: auto; font-size: 13px; color: #555; }
+
+        h3 {
+            margin-top: 35px;
+            color: #444;
+            font-size: 18px;
+            padding: 0 20px;
+        }
+
+        .log-list {
+            width: 100%;
+        }
+
+        .log-item {
+            text-align: left;
+            padding: 15px 20px;
+            background: #fff;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 14px;
+            transition: background-color 0.5s;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            background-color: #fff9c4 !important;
+        }
+
+        .log-date {
+            color: #4A90E2;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
+
+        <div class="diagnosis-area" style="margin-bottom: 20px;">
+    <div id="diagnosis-select-container" style="display: block;">
+        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
+            <option value="">主な診断名を選択</option>
+            <option value="未診断（健常者）">未診断（健常者）</option>
+            <option value="うつ病">うつ病</option>
+            <option value="双極症">双極症</option>
+            <option value="統合失調症">統合失調症</option>
+            <option value="不安障害">不安障害</option>
+            <option value="適応障害">適応障害</option>
+            <option value="発達障害">発達障害</option>
+            <option value="その他">その他</option>
+        </select>
+    </div>
+
+    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
+        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
+        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
+    </div>
+        </div>
+
+        <div class="input-section">
+            <label class="label">今の気分は？</label>
+            <div id="mood-btns" class="btn-group">
+                <button onclick="setVal('mood', 1, this)">低い</button>
+                <button onclick="setVal('mood', 2, this)" class="active">普通</button>
+                <button onclick="setVal('mood', 3, this)">良い</button>
+            </div>
+
+            <label class="label">体の調子は？</label>
+            <div id="cond-btns" class="btn-group">
+                <button onclick="setVal('cond', 1, this)">悪い</button>
+                <button onclick="setVal('cond', 2, this)" class="active">普通</button>
+                <button onclick="setVal('cond', 3, this)">良い</button>
+            </div>
+
+            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+            
+            <button class="save-btn" onclick="saveData()">記録する</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="summary-section">
+            <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
+            <div id="summary-ts" class="summary-ts">前回まとめ作成：なし</div>
+            
+            <div id="summary-card" class="summary-card">
+                <span class="report-header">【一定期間まとめレポート】</span>
+                <div id="summary-content"></div>
+            </div>
+        </div>
+
+        <h3>最近の記録</h3>
+        <div id="log-list" class="log-list"></div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'innernote_3step_logs';
+        const DIAGNOSIS_KEY = 'innernote_saved_diagnosis'; // 診断名固定用のキー
+        let selectedMood = 2;
+        let selectedCond = 2;
+
+        // その他入力欄の切り替え
+        function toggleOtherDiagnosis() {
+            const select = document.getElementById('diagnosis-select');
+            const otherInput = document.getElementById('diagnosis-other');
+            if (select.value === 'その他') {
+                otherInput.style.display = 'block';
+                otherInput.focus();
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.value = '';
+            }
+        }
+
+        // 変更ボタンを押した時
+        function enableDiagnosisChange() {
+            document.getElementById('diagnosis-fixed-container').style.display = 'none';
+            document.getElementById('diagnosis-select-container').style.display = 'block';
+        }
+
+        function setVal(type, val, btn) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (type === 'mood') selectedMood = val;
+            else selectedCond = val;
+        }
+
+        function saveData() {
+            const note = document.getElementById('note').value;
+            
+            // 診断名の取得ロジック（追加）
+            let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症"; // デフォルト
+            const isSelectVisible = document.getElementById('diagnosis-select-container').style.display !== 'none';
+            
+            if (isSelectVisible) {
+                const select = document.getElementById('diagnosis-select');
+                diagnosisVal = select.value;
+                if (diagnosisVal === 'その他') {
+                    const otherText = document.getElementById('diagnosis-other').value.trim();
+                    diagnosisVal = otherText ? `その他 (${otherText})` : 'その他';
+                }
+                // 次回のために選択された診断名を固定保存
+                localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
+            }
+
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            // 保存データにdiagnosisを追加
+            logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note, ts: now.getTime(), diagnosis: diagnosisVal });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+            
+            alert("記録しました！");
+            location.reload();
+        }
+
+        function generateSummary() {
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            if (logs.length === 0) return alert("まとめを作成するための記録がありません。");
+
+            const lastSummaryTs = parseInt(localStorage.getItem('last_summary_ts_step3') || '0');
+            let targets = logs.filter(l => (l.ts || 0) > lastSummaryTs);
+            
+            if (targets.length === 0) {
+                if(confirm("前回作成以降の新しい記録がありません。直近のデータを再集計しますか？")) {
+                    targets = logs.slice(-10); 
+                } else {
+                    return;
+                }
+            }
+            
+            const avgMood = (targets.reduce((acc, curr) => acc + curr.mood, 0) / targets.length).toFixed(1);
+            const avgCond = (targets.reduce((acc, curr) => acc + curr.cond, 0) / targets.length).toFixed(1);
+            
+            const notesList = targets.filter(l => l.note && l.note.trim() !== '').map(l => `・ ${l.note}`).join('<br>');
+            const periodStr = `${targets[0].date.split(' ')[0]} ～ ${targets[targets.length-1].date.split(' ')[0]}`;
+
+            document.getElementById('summary-card').style.display = 'block';
+            document.getElementById('summary-content').innerHTML = `
+                <div class="report-item"><span class="report-label">対象期間:</span> ${periodStr} (${targets.length}件の記録)</div>
+                <div class="report-item"><span class="report-label">平均気分:</span> ${avgMood} / 3.0</div>
+                <div class="report-item"><span class="report-label">平均体調:</span> ${avgCond} / 3.0</div>
+                <div class="report-item" style="margin-top: 8px;"><span class="report-label">期間中のメモ:</span></div>
+                <div class="report-notes">${notesList || '（この期間のメモはありません）'}</div>
+            `;
+
+            const now = new Date();
+            const nowStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            localStorage.setItem('last_summary_ts_step3', now.getTime());
+            localStorage.setItem('last_summary_str_step3', nowStr);
+            document.getElementById('summary-ts').innerText = `前回まとめ作成：${nowStr}`;
+        }
+
+        window.onload = () => {
+            // --- 診断名の固定表示ロジック（追加） ---
+            const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
+            if (savedDiagnosis) {
+                document.getElementById('diagnosis-select-container').style.display = 'none';
+                document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+                document.getElementById('diagnosis-text').innerText = `診断名: ${savedDiagnosis}`;
+                // セレクトボックスの値も同期させておく
+                const select = document.getElementById('diagnosis-select');
+                // 保存された値が選択肢にあるか確認（その他 (XXX) の場合はその他を選択）
+                if (savedDiagnosis.startsWith("その他 (")) {
+                    select.value = "その他";
+                } else {
+                    select.value = savedDiagnosis;
+                }
+            } else {
+                // 初回訪問時はセレクトボックスを表示
+                document.getElementById('diagnosis-fixed-container').style.display = 'none';
+                document.getElementById('diagnosis-select-container').style.display = 'block';
+            }
+
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const last10 = logs.slice(-10);
+            
+            const savedStr = localStorage.getItem('last_summary_str_step3');
+            if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: last10.map(l => l.date),
+                    datasets: [
+                        { 
+                            label: '気分', data: last10.map(l => l.mood), 
+                            borderColor: '#2196F3', backgroundColor: '#2196F3', 
+                            borderWidth: 2, tension: 0.3, fill: false, 
+                            pointRadius: 4, pointHitRadius: 15 
+                        },
+                        { 
+                            label: '体調', data: last10.map(l => l.cond), 
+                            borderColor: '#FFA726', backgroundColor: '#FFA726', 
+                            borderWidth: 2, tension: 0.3, fill: false, 
+                            pointRadius: 4, pointHitRadius: 15 
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: { padding: { left: 10, right: 10, bottom: 5 } },
+                    interaction: { mode: 'index', intersect: false },
+                    onClick: (evt, elements, chart) => {
+                        const points = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                        if (points.length > 0) {
+                            scrollToLog(last10[points[0].index].date);
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { 
+                                // ラベルをスキップせず、45度に傾けて1行ですべて表示する
+                                autoSkip: false,
+                                maxRotation: 45, 
+                                minRotation: 45, 
+                                font: { size: 9 },
+                                color: '#666'
+                            },
+                            grid: { display: false }
+                        },
+                        y: { 
+                            min: 0.8, max: 3.2,
+                            ticks: { 
+                                stepSize: 1, 
+                                callback: v => v==3?'良い':v==2?'普通':v==1?'低/悪':'',
+                                font: { size: 10 }, color: '#aaa'
+                            },
+                            grid: { color: '#f0f0f0' }
+                        }
+                    },
+                    plugins: { 
+                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 12 } } }
+                    }
+                }
+            });
+
+            function scrollToLog(dateStr) {
+                const logItems = document.querySelectorAll('.log-item');
+                logItems.forEach(item => {
+                    item.classList.remove('highlight');
+                    if (item.querySelector('.log-date').innerText === dateStr) {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        item.classList.add('highlight');
+                    }
+                });
+            }
+
+            const logList = document.getElementById('log-list');
+            logs.slice().reverse().forEach(l => {
+                const div = document.createElement('div');
+                div.className = 'log-item';
+                // 履歴に診断名を表示（追加）
+                const diagStr = l.diagnosis ? ` [${l.diagnosis}]` : '';
+                div.innerHTML = `<span class="log-date">${l.date}${diagStr}</span>気分: ${l.mood==3?'良い':l.mood==2?'普通':'低'} / 体調: ${l.cond==3?'良い':l.cond==2?'普通':'悪い'}<br>${l.note}`;
+                logList.appendChild(div);
+            });
+        };
+    </script>
+</body>
+</html>
+
