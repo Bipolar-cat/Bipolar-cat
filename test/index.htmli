@@ -4,7 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnerNote - Perfect Sync 350 (Diagnosis & Summary Ver)</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+// グラフを生成・更新する共通関数
+function renderScrollableChart(logs) {
+    const canvas = document.getElementById('myChart');
+    const container = document.getElementById('chart-wrapper'); // 枠
+    
+    // データ数に合わせて幅を調整（1件あたり50px）
+    const newWidth = Math.max(window.innerWidth, logs.length * 50);
+    container.style.width = newWidth + 'px';
+
+    if (window.myChartInstance) window.myChartInstance.destroy();
+
+    const ctx = canvas.getContext('2d');
+    window.myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date), // 全件表示
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6' },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
+            ]
+        },
+        options: {
+            responsive: false, // 重要：CSSで幅を制御するため
+            maintainAspectRatio: false
+        }
+    });
+}</script>
     <style>
         /* 全体の背景とフォント、パディングを最適化 */
         body {
@@ -327,7 +354,11 @@
         </div>
 
         <div class="chart-container">
-            <canvas id="myChart"></canvas>
+            <div style="width: 100%; overflow-x: auto;">
+   　 <div id="chart-wrapper" style="height: 300px;">
+        <canvas id="myChart"></canvas>
+    　　</div>
+　　　</div>
         </div>
 
         <div class="summary-section">
@@ -497,11 +528,11 @@
                 document.getElementById('diagnosis-select-container').style.display = 'block';
             }
 
-            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            const logList = document.getElementById('log-list');
+           　　 const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            　　const logList = document.getElementById('log-list');
             
-            const savedStr = localStorage.getItem('last_summary_str_final');
-            if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
+            　　const savedStr = localStorage.getItem('last_summary_str_final');
+           　　 if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
 
             // 履歴リストの描画
             logs.slice().reverse().forEach(l => {
