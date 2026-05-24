@@ -6,8 +6,6 @@
     <title>InnerNote - Perfect Sync 350 (Diagnosis & Summary Ver)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
@@ -41,7 +39,7 @@ window.onload = () => {
     const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
     renderScrollableChart(logs);
 };
-</script>　
+</script>
     <style>
         /* 全体の背景とフォント、パディングを最適化 */
         body {
@@ -228,13 +226,8 @@ window.onload = () => {
         .chart-container {
             width: 100%;
             height: 350px;
-            overflow-x: auto; /* 横スクロールを許可 */
-            white-space: nowrap;
-            position: relative;
-        }
-        #myChart {
-         /* データ数に応じてキャンバスの幅を自動で広げる（後述のJSで制御） */
-            height: 300px;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 15px;
         }
 
         /* Summary機能用レイアウトスタイル */
@@ -364,11 +357,7 @@ window.onload = () => {
         </div>
 
         <div class="chart-container">
-            <div style="width: 100%; overflow-x: auto;">
-   　 <div id="chart-wrapper" style="height: 300px;">
-        <canvas id="myChart"></canvas>
-    　　</div>
-　　　</div>
+            <canvas id="myChart"></canvas>
         </div>
 
         <div class="summary-section">
@@ -538,11 +527,11 @@ window.onload = () => {
                 document.getElementById('diagnosis-select-container').style.display = 'block';
             }
 
-           　　 const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            　　const logList = document.getElementById('log-list');
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const logList = document.getElementById('log-list');
             
-            　　const savedStr = localStorage.getItem('last_summary_str_final');
-           　　 if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
+            const savedStr = localStorage.getItem('last_summary_str_final');
+            if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
 
             // 履歴リストの描画
             logs.slice().reverse().forEach(l => {
@@ -550,27 +539,38 @@ window.onload = () => {
                 div.className = 'log-item';
                 const itemTs = l.ts || new Date(l.date).getTime();
                 div.id = `log-${itemTs}`;
+                
                 const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
                 div.innerHTML = `<span class="log-date">${l.date}${diagBadge}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
                 logList.appendChild(div);
-            })
+            });
 
-　　　　　　updateChartWidth(logs); 
-
-　　　　　　new Chart(ctx, {
-    　　　　　　　　type: 'line',
-   　　　　　　　　 data: {
-        labels: logs.map(l => l.date), // 全件表示にする
-        datasets: [
-            { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', ... },
-            { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', ... }
-        ]
-    },
- 　　   options: {
-        　　responsive: false, // 横幅を固定制御するため
-        　　maintainAspectRatio: false
-    　　}
-　　});
+            // グラフの描画
+            const last10 = logs.slice(-10);
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: last10.map(l => l.date),
+                    datasets: [
+                        { 
+                            label: '気分', data: last10.map(l => l.mood), 
+                            borderColor: '#3b82f6', backgroundColor: '#3b82f6',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6',
+                            pointHitRadius: 25
+                        },
+                        { 
+                            label: '体調', data: last10.map(l => l.cond), 
+                            borderColor: '#f59e0b', backgroundColor: '#f59e0b',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b',
+                            pointHitRadius: 25
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     layout: { padding: { left: 10, right: 20, bottom: 20 } },
                     interaction: { mode: 'index', intersect: false },
                     onClick: (evt, elements, chart) => {
