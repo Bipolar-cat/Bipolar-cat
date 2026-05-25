@@ -221,7 +221,22 @@ window.onload = () => {
             margin-bottom: 20px;
             display: block;
         }
+　　　　　/* グラフ全体を包み、はみ出した分を横スクロールさせる */
+.chart-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+}
 
+/* グラフの形を維持する固定幅コンテナ */
+#chart-wrapper {
+    width: 450px;           /* グラフの幅を固定して形を崩さない */
+    height: 350px;
+    margin: 0 auto;
+    background: white;
+}
         /* グラフエリア（高さ350px、直結ボーダー、余白） */
         .chart-container {
             width: 100%;
@@ -356,9 +371,11 @@ window.onload = () => {
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
-        </div>
+        <div class="chart-scroll">
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
 
         <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
@@ -573,27 +590,24 @@ window.onload = () => {
                     ]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: { padding: { left: 10, right: 20, bottom: 20 } },
-                    interaction: { mode: 'index', intersect: false },
-                    onClick: (evt, elements, chart) => {
-                        const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                        if (activePoints.length > 0) {
-                            const index = activePoints[0].index;
-                            const logData = last10[index];
-                            const targetTimestamp = logData.ts || new Date(logData.date).getTime();
-                            scrollToLog(targetTimestamp);
-                        }
-                    },
-                    scales: {
-                        x: { 
-                            ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
-                            grid: { display: false }
-                        },
-                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
-                    },
-                    plugins: { legend: { position: 'top' } }
+    responsive: false,           // ←ここを true から false に変更
+    maintainAspectRatio: false,
+    layout: { padding: { left: 10, right: 20, bottom: 0, top: 10 } },
+    interaction: { mode: 'index', intersect: false },
+    onClick: (evt, elements, chart) => { /* 元のonClickの内容をそのまま残す */ },
+    scales: {
+        x: {
+            ticks: { maxRotation: 45, minRotation: 45 },
+            grid: { display: false }
+        },
+        y: {
+            min: 0,              // ←ここを追加
+            max: 10,             // ←ここを追加
+            ticks: { stepSize: 1 }
+        }
+    },
+    plugins: { legend: { position: 'top' } }
+}
                 }
             });
 
