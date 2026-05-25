@@ -230,6 +230,7 @@ window.onload = () => {
             padding-top: 15px;
         }
 　　　　/* グラフのスクロール設定 */
+.chart-/* グラフのスクロール用外枠 */
 .chart-scroll {
     width: 100%;
     overflow-x: auto;
@@ -238,13 +239,13 @@ window.onload = () => {
     margin: 20px 0;
 }
 
-/* グラフの形を固定する設定 */
+/* グラフのサイズを物理的に固定 */
 #chart-wrapper {
-    width: 450px;
-    height: 350px;
+    width: 450px !important;  /* 重要：強制的に幅を固定 */
+    height: 350px !important; /* 重要：強制的に高さを固定 */
     margin: 0 auto;
     background: white;
-}　
+}
         /* Summary機能用レイアウトスタイル */
         .summary-section {
             padding: 0 20px;
