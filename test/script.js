@@ -1,4 +1,3 @@
-<script>
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
     const container = document.getElementById('chart-wrapper');
@@ -31,8 +30,6 @@ window.onload = () => {
     const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
     renderScrollableChart(logs);
 };
-</script>
-<script>
         let selectedMood = 5, selectedCond = 5;
         let highlightTimeout = null;
         
@@ -275,5 +272,3 @@ window.onload = () => {
                 }
             }
         };
-    </script>
-
