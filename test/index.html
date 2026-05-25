@@ -325,11 +325,21 @@
                     ]
                 },
                 options: {
-                    responsive: false,
-                    maintainAspectRatio: false,
-                    scales: { y: { min: 1, max: 10 } }
-                }
-            });
+    responsive: false, // CSS制御のため
+    maintainAspectRatio: false,
+    scales: {
+        y: {
+            min: 1,
+            max: 10,
+            ticks: {
+                stepSize: 1 // 1刻みで表示する設定
+            },
+            grid: {
+                color: '#e5e7eb' // 目盛りの線を見やすくする
+            }
+        }
+    }
+}
 
             // 履歴リスト描画などの既存処理
             const logList = document.getElementById('log-list');
