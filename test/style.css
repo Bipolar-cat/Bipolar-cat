@@ -270,3 +270,17 @@
             font-weight: bold;
             margin-left: 8px;
         }
+.chart-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+}
+
+#chart-wrapper {
+    width: 450px !important; /* グラフの幅を固定 */
+    height: 350px !important;
+    margin: 0 auto;
+    background: white;
+}
