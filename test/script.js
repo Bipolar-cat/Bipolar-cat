@@ -74,11 +74,18 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-// ...保存処理やその他の関数はそのまま残してください...
-// データの保存処理
 function saveData() {
-    const note = document.getElementById('note').value;
+    // ... (データの取得処理など)
+
+    // ローカルストレージにデータを保存
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     
+    // 保存完了の通知
+    alert("記録しました！");
+
+    // ページを強制的に再読み込みし、最新のデータを描画し直す
+    location.reload();
+}
     // 診断名の取得
     let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
     const select = document.getElementById('diagnosis-select');
