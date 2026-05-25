@@ -1,5 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
