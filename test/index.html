@@ -229,8 +229,7 @@ window.onload = () => {
             border-top: 1px solid #f3f4f6;
             padding-top: 15px;
         }
-　　　　/* グラフのスクロール設定 */
-.chart-/* グラフのスクロール用外枠 */
+　　　　/* グラフ全体を包む外枠（これがないと横に崩れる） */
 .chart-scroll {
     width: 100%;
     overflow-x: auto;
@@ -239,10 +238,10 @@ window.onload = () => {
     margin: 20px 0;
 }
 
-/* グラフのサイズを物理的に固定 */
+/* グラフのサイズを物理的に固定（!importantで強制固定） */
 #chart-wrapper {
-    width: 450px !important;  /* 重要：強制的に幅を固定 */
-    height: 350px !important; /* 重要：強制的に高さを固定 */
+    width: 450px !important;
+    height: 350px !important;
     margin: 0 auto;
     background: white;
 }
@@ -591,20 +590,21 @@ window.onload = () => {
                     ]
                 },
                 options: {
-    responsive: false,           // 自動調整を無効化
-    maintainAspectRatio: false,
-    scales: {
-        y: {
-            min: 0,              // 縦軸を0〜10で固定
-            max: 10,
-            ticks: {
-                stepSize: 1
-            }
-        }
-    },
-    // 以下、元からある機能（onClickなど）は消さずに残してください
-    layout: { padding: 10 }
-}
+        responsive: false,           // ←ここを false にする（最重要！）
+        maintainAspectRatio: false,  // CSSのサイズを優先
+        layout: { padding: { left: 10, right: 20, bottom: 20 } },
+        interaction: { mode: 'index', intersect: false },
+        onClick: (evt, elements, chart) => { /* ... 元の処理 ... */ },
+        scales: {
+            x: { 
+                ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
+                grid: { display: false }
+            },
+            y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
+        },
+        plugins: { legend: { position: 'top' } }
+    }
+});
             });
 
             function scrollToLog(timestamp) {
