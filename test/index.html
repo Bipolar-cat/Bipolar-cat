@@ -224,11 +224,25 @@ window.onload = () => {
 
         /* グラフエリア（高さ350px、直結ボーダー、余白） */
         .chart-container {
-            width: 100%;
-            height: 350px;
-            border-top: 1px solid #f3f4f6;
-            padding-top: 15px;
-        }
+    width: 900px;           /* グラフが崩れない最低限の幅を確保 */
+    height: 350px;
+    background: white;
+    padding: 20px;
+    border-top: 1px solid #f3f4f6;
+    margin: 0 auto;         /* 中央寄せ */
+}
+        .chart-scroll {
+    width: 100%;             /* 画面幅に合わせる */
+    overflow-x: auto;        /* これで横スクロールを有効にする */
+    overflow-y: hidden;      /* 縦の余計なスクロールを防ぐ */
+    -webkit-overflow-scrolling: touch; /* iPhoneでの滑らかなスクロール用 */
+}
+
+#chart-wrapper {
+    width: 900px;            /* グラフの幅を900pxに固定して崩れないようにする */
+    height: 350px;
+    margin: 0 auto;          /* 中央寄せ */
+}
 
         /* Summary機能用レイアウトスタイル */
         .summary-section {
@@ -356,8 +370,10 @@ window.onload = () => {
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
+        <div class="chart-scroll">
+    <div id="chart-wrapper">
+        <canvas id="myChart"></canvas>
+    </div>
         </div>
 
         <div class="summary-section">
@@ -574,7 +590,7 @@ window.onload = () => {
                     ]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
                     maintainAspectRatio: false,
                     layout: { padding: { left: 10, right: 20, bottom: 20 } },
                     interaction: { mode: 'index', intersect: false },
@@ -592,7 +608,7 @@ window.onload = () => {
                             ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
                             grid: { display: false }
                         },
-                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
+                        y: { min: 0, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
                     },
                     plugins: { legend: { position: 'top' } }
                 }
