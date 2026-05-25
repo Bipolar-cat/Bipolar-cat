@@ -590,21 +590,28 @@ window.onload = () => {
                     ]
                 },
                 options: {
-        responsive: false,           // ←ここを false にする（最重要！）
-        maintainAspectRatio: false,  // CSSのサイズを優先
-        layout: { padding: { left: 10, right: 20, bottom: 20 } },
-        interaction: { mode: 'index', intersect: false },
-        onClick: (evt, elements, chart) => { /* ... 元の処理 ... */ },
-        scales: {
-            x: { 
-                ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
-                grid: { display: false }
-            },
-            y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
-        },
-        plugins: { legend: { position: 'top' } }
-    }
-});
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: { padding: { left: 10, right: 20, bottom: 20 } },
+                    interaction: { mode: 'index', intersect: false },
+                    onClick: (evt, elements, chart) => {
+                        const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                        if (activePoints.length > 0) {
+                            const index = activePoints[0].index;
+                            const logData = last10[index];
+                            const targetTimestamp = logData.ts || new Date(logData.date).getTime();
+                            scrollToLog(targetTimestamp);
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
+                            grid: { display: false }
+                        },
+                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
+                    },
+                    plugins: { legend: { position: 'top' } }
+                }
             });
 
             function scrollToLog(timestamp) {
