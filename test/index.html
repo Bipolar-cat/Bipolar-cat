@@ -325,17 +325,19 @@
                     ]
                 },
                 options: {
-    responsive: false, // 既存の設定
-    maintainAspectRatio: false, // 既存の設定
+    responsive: false,
+    maintainAspectRatio: false,
     scales: {
         y: {
             min: 1,      // 最小値を1に固定
             max: 10,     // 最大値を10に固定
             ticks: {
-                stepSize: 1 // 目盛りを1刻みにする
+                stepSize: 1, // 目盛りを1刻みに設定
+                beginAtZero: false // 0を表示しない
             }
         }
     }
+                }
                 }
 
             // 履歴リスト描画などの既存処理
