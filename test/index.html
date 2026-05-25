@@ -229,7 +229,22 @@ window.onload = () => {
             border-top: 1px solid #f3f4f6;
             padding-top: 15px;
         }
+　　　　/* グラフのスクロール設定 */
+.chart-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+}
 
+/* グラフの形を固定する設定 */
+#chart-wrapper {
+    width: 450px;
+    height: 350px;
+    margin: 0 auto;
+    background: white;
+}　
         /* Summary機能用レイアウトスタイル */
         .summary-section {
             padding: 0 20px;
@@ -356,9 +371,11 @@ window.onload = () => {
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
-        </div>
+        <div class="chart-scroll">
+    <div id="chart-wrapper">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
 
         <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
@@ -573,28 +590,20 @@ window.onload = () => {
                     ]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: { padding: { left: 10, right: 20, bottom: 20 } },
-                    interaction: { mode: 'index', intersect: false },
-                    onClick: (evt, elements, chart) => {
-                        const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                        if (activePoints.length > 0) {
-                            const index = activePoints[0].index;
-                            const logData = last10[index];
-                            const targetTimestamp = logData.ts || new Date(logData.date).getTime();
-                            scrollToLog(targetTimestamp);
-                        }
-                    },
-                    scales: {
-                        x: { 
-                            ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
-                            grid: { display: false }
-                        },
-                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
-                    },
-                    plugins: { legend: { position: 'top' } }
-                }
+    responsive: false,           // 自動調整を無効化
+    maintainAspectRatio: false,
+    scales: {
+        y: {
+            min: 0,              // 縦軸を0〜10で固定
+            max: 10,
+            ticks: {
+                stepSize: 1
+            }
+        }
+    },
+    // 以下、元からある機能（onClickなど）は消さずに残してください
+    layout: { padding: 10 }
+}
             });
 
             function scrollToLog(timestamp) {
