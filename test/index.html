@@ -322,14 +322,8 @@
         </div>
 
         <div class="chart-container">
-    <canvas id="myChart"></canvas>
-</div>
-
-<div class="chart-scroll-wrapper" style="overflow-x: auto; width: 100%;">
-    <div id="chart-container" style="width: 1000px; height: 350px;">
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
+            <canvas id="myChart"></canvas>
+        </div>
 
         <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
@@ -518,7 +512,27 @@
 
             // グラフの描画
             const last10 = logs.slice(-10);
-            data.labels
+            const ctx = document.getElementById('myChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: last10.map(l => l.date),
+                    datasets: [
+                        { 
+                            label: '気分', data: last10.map(l => l.mood), 
+                            borderColor: '#3b82f6', backgroundColor: '#3b82f6',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6',
+                            pointHitRadius: 25
+                        },
+                        { 
+                            label: '体調', data: last10.map(l => l.cond), 
+                            borderColor: '#f59e0b', backgroundColor: '#f59e0b',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b',
+                            pointHitRadius: 25
+                        }
+                    ]
+                },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
