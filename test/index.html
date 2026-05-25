@@ -598,7 +598,15 @@ new Chart(ctx, {
     options: {
         responsive: false,
         maintainAspectRatio: false,
-
+　　　　　 scales: {
+        y: {
+            min: 0,
+            max: 10,
+            ticks: {
+                stepSize: 1
+            }
+        }
+    },
         layout: {
             padding: {
                 left: 10,
