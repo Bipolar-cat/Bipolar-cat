@@ -325,21 +325,18 @@
                     ]
                 },
                 options: {
-    responsive: false, // CSS制御のため
-    maintainAspectRatio: false,
+    responsive: false, // 既存の設定
+    maintainAspectRatio: false, // 既存の設定
     scales: {
         y: {
-            min: 1,
-            max: 10,
+            min: 1,      // 最小値を1に固定
+            max: 10,     // 最大値を10に固定
             ticks: {
-                stepSize: 1 // 1刻みで表示する設定
-            },
-            grid: {
-                color: '#e5e7eb' // 目盛りの線を見やすくする
+                stepSize: 1 // 目盛りを1刻みにする
             }
         }
     }
-}
+                }
 
             // 履歴リスト描画などの既存処理
             const logList = document.getElementById('log-list');
