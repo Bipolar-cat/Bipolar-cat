@@ -4,30 +4,23 @@ let highlightTimeout = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// ページ読み込み時に実行
 window.onload = () => {
-    // 1. 診断名の復元
-    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-    if (savedDiagnosis) {
-        document.getElementById('diagnosis-select-container').style.display = 'none';
-        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
-        document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
-    }
+    initApp(); // 全ての初期化をここにまとめる
+};
 
-    // 2. ボタン生成
+function initApp() {
+    // 1. 診断名の復元処理
+    restoreDiagnosis();
+
+    // 2. ボタンの生成
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 3. 履歴リスト表示
+    // 3. データの取得と描画
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const logList = document.getElementById('log-list');
-    logs.slice().reverse().forEach(l => {
-        const div = document.createElement('div');
-        div.className = 'log-item';
-        div.id = `log-${l.ts || new Date(l.date).getTime()}`;
-        div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
-        logList.appendChild(div);
-    });
+    renderLogList(logs); // 履歴リストを表示する関数
+    renderChart(logs);   // グラフを描画する関数
+}
 
     // 4. グラフ描画
     renderChart(logs);
