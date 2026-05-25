@@ -18,10 +18,21 @@ function renderScrollableChart(logs) {
                 { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
             ]
         },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false
-        }
+         options: {
+        responsive: false,           // ← trueから false に変更してください！
+        maintainAspectRatio: false,
+        layout: { padding: { left: 10, right: 20, bottom: 20 } },
+        interaction: { mode: 'index', intersect: false },
+        onClick: (evt, elements, chart) => {
+            const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+            if (activePoints.length > 0) {
+                const index = activePoints[0].index;
+                // last10 が定義されていないエラーを防ぐため allLogs を使用
+                const logData = allLogs[index]; 
+                const targetTimestamp = logData.ts || new Date(logData.date).getTime();
+                scrollToLog(targetTimestamp);
+            }
+        },
     });
 }
 
