@@ -76,3 +76,35 @@ function createCircleButtons(containerId, type) {
 }
 
 // ...保存処理やその他の関数はそのまま残してください...
+// データの保存処理
+function saveData() {
+    const note = document.getElementById('note').value;
+    
+    // 診断名の取得
+    let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
+    const select = document.getElementById('diagnosis-select');
+    if (select && select.value) {
+        diagnosisVal = select.value;
+    }
+
+    const now = new Date();
+    const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    
+    // 既存データの取得
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    
+    // 新しい記録を追加
+    logs.push({ 
+        ts: now.getTime(), 
+        date: dateStr, 
+        diagnosis: diagnosisVal,
+        mood: selectedMood, 
+        cond: selectedCond, 
+        note: note 
+    });
+    
+    // 保存してリロード
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    alert("記録しました！");
+    location.reload(); // これが実行されることで画面が更新され、グラフとリストに反映されます
+}
