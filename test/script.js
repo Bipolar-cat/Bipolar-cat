@@ -1,30 +1,36 @@
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
 
+// --- script.js の先頭部分 ---
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-window.onload = () => {
-    initApp(); // 全ての初期化をここにまとめる
-};
-
+// ページ読み込み時に実行する処理をまとめる
 function initApp() {
-    // 1. 診断名の復元処理
-    restoreDiagnosis();
+    // 1. 診断名の復元
+    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
+    if (savedDiagnosis) {
+        document.getElementById('diagnosis-select-container').style.display = 'none';
+        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+        document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
+    }
 
-    // 2. ボタンの生成
+    // 2. ボタン生成（ここに配置！）
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 3. データの取得と描画
+    // 3. グラフとログの描画
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    renderLogList(logs); // 履歴リストを表示する関数
-    renderChart(logs);   // グラフを描画する関数
+    renderChart(logs);
+    // ...リスト表示処理...
 }
 
-    // 4. グラフ描画
-    renderChart(logs);
-};
+// 最後に1回だけ実行
+initApp();
+
+// ボタン生成関数などはそのまま下に記述
+function createCircleButtons(containerId, type) { /* ... */ }
+// renderChart関数などもそのまま下に記述
 
 function renderChart(allLogs) {
     const ctx = document.getElementById('myChart').getContext('2d');
