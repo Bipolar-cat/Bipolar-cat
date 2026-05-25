@@ -187,13 +187,23 @@
             display: block;
         }
 
-        /* グラフエリア（高さ350px、直結ボーダー、余白） */
-        .chart-container {
-            width: 100%;
-            height: 350px;
-            border-top: 1px solid #f3f4f6;
-            padding-top: 15px;
-        }
+        .chart-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.chart-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.chart-container {
+    width: 1200px;   /* ← 横幅を広げる */
+    height: 350px;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 15px;
+}
 
         /* Summary機能用レイアウトスタイル */
         .summary-section {
@@ -321,8 +331,10 @@
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
+        <div class="chart-scroll">
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
         </div>
 
         <div class="summary-section">
@@ -533,7 +545,7 @@
                     ]
                 },
                 options: {
-                    responsive: true,
+                    responsive: false,
                     maintainAspectRatio: false,
                     layout: { padding: { left: 10, right: 20, bottom: 20 } },
                     interaction: { mode: 'index', intersect: false },
