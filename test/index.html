@@ -437,7 +437,6 @@
                 }
             }
             
-            const avgMood = (targets.reduce((acc, curr) => acc + curr.mood, 0) / targets.length).toFixed(1);
             const avgCond = (targets.reduce((acc, curr) => acc + curr.cond, 0) / targets.length).toFixed(1);
             
             // 最も多く記録されていた診断名を集計抽出
@@ -547,16 +546,22 @@
                             scrollToLog(targetTimestamp);
                         }
                     },
-                    scales: {
-                        x: { 
-                            ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
-                            grid: { display: false }
-                        },
-                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
-                    },
-                    plugins: { legend: { position: 'top' } }
-                }
-            });
+                   scales: {
+    x: {
+        ticks: { maxRotation: 45, minRotation: 45 },
+        grid: { display: false }
+    },
+    y: {
+        min: 1,
+        max: 10,
+        ticks: {
+            stepSize: 1
+        }
+    }
+},
+plugins: { 
+    legend: { position: 'top' } 
+}
 
             function scrollToLog(timestamp) {
                 const logItems = document.querySelectorAll('.log-item');
