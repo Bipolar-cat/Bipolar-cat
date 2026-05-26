@@ -1,24 +1,21 @@
-       /* 全体の背景とフォント、パディングを最適化 */
-        body {
-            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-        }
+       body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0; /* paddingを0にしてcontainer側で制御します */
+    display: block; /* flexからblockに変更 */
+}
 
-        /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
-        .container {
-            max-width: 450px;
-            width: 100%;
-            background: white;
-            padding: 20px 0;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            overflow: hidden;
-        }
+.container {
+    max-width: 450px;
+    width: 95%; /* 画面幅いっぱいにしないよう少し余裕を持つ */
+    margin: 0 auto; /* これで中央寄せになります */
+    background: white;
+    padding: 20px 0;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+}
 
         h1 {
             color: #5C6BC0;
