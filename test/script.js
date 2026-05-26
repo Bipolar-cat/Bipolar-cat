@@ -45,3 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
         createButtons('cond-btns', 'active');
     }
 });
+function saveData() {
+    // 選択されたボタンの値を取得
+    const moodBtn = document.querySelector('#mood-btns button.active');
+    const condBtn = document.querySelector('#cond-btns button.active');
+    const note = document.getElementById('note').value;
+
+    if (!moodBtn || !condBtn) {
+        alert('気分と調子を選択してください');
+        return;
+    }
+
+    const data = {
+        mood: moodBtn.innerText,
+        cond: condBtn.innerText,
+        note: note,
+        date: new Date().toLocaleString()
+    };
+
+    console.log('保存データ:', data);
+    alert('記録しました！');
+    // この後、リスト表示やグラフ更新の処理を繋げていきます
+}
