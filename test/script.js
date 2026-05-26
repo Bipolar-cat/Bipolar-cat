@@ -47,25 +47,12 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-function renderLogList(logs) {
-    const logList = document.getElementById('log-list');
-    if (!logList) return;
-    
-    // 表のヘッダーを作成
-    logList.innerHTML = `
-        <table style="width: 100%; border-collapse: collapse; margin: 0 auto;">
-            <tr style="border-bottom: 2px solid #ccc;">
-                <th>日時</th><th>気分</th><th>体調</th>
-            </tr>
-            ${logs.slice().reverse().map(l => `
-                <tr style="border-bottom: 1px solid #eee; text-align: center;">
-                    <td style="padding: 8px;">${l.date.substring(5)}</td>
-                    <td>${l.mood}</td>
-                    <td>${l.cond}</td>
-                </tr>
-            `).join('')}
-        </table>
-    `;
+/* 記録項目をカード形式に */
+.log-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 function renderChart(allLogs) {
