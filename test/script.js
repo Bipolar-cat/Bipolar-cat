@@ -54,3 +54,14 @@ function createCircleButtons(containerId, type) {
     }
 }
 // ...以降、renderChartやsaveDataなどの関数はそのまま残す
+function saveData() {
+    // ...（データ取得と保存の処理）...
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    alert("記録しました！");
+
+    // リロードの前に念のため少しだけ時間を置く（ブラウザの同期ズレ対策）
+    setTimeout(() => {
+        location.reload();
+    }, 100);
+}
