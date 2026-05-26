@@ -1,4 +1,3 @@
-// エラー回避用
 window.onerror = function(msg, url, line) {
     console.log("エラー発生: " + msg + " (行: " + line + ")");
 };
@@ -26,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 4. グラフ描画
     if (logs.length > 0) {
-        renderChart(logs);
-    }
+const latestLogs = allLogs.slice(-10);
+renderChart(latestLogs);
 });
 
 function renderLogList(logs) {
