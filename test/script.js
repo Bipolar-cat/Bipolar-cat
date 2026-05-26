@@ -91,3 +91,28 @@ function saveData() {
     alert("記録しました！");
     location.reload();
 }
+// 診断名を変更するために一度ロックを解除する
+function unlockDiagnosis() {
+    // 1. 固定表示エリアを隠す
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+    // 2. セレクトボックスを表示する
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+    // 3. 保存された診断名を削除（必要に応じて）
+    localStorage.removeItem(DIAGNOSIS_KEY);
+}
+
+// 診断名を選択したときに固定する
+function lockDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    const value = select.value;
+    if (!value) return;
+
+    // 1. ローカルストレージに保存
+    localStorage.setItem(DIAGNOSIS_KEY, value);
+    
+    // 2. 表示を切り替える
+    document.getElementById('diagnosis-select-container').style.display = 'none';
+    const fixed = document.getElementById('diagnosis-fixed-container');
+    fixed.style.display = 'flex';
+    document.getElementById('diagnosis-text').innerText = `主な診断名: ${value}`;
+}
