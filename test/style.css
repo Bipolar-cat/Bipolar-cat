@@ -80,23 +80,31 @@ h1 { color: #5C6BC0; font-size: 24px; }
 
 /* 確定後の診断名を表示する枠のスタイル */
 .fixed-box {
-    background-color: #f9fafb; /* 背景色（グレー）を維持 */
-    border: 1px solid #e5e7eb; /* 枠線も維持 */
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
     border-radius: 8px;
     padding: 12px 16px;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
+    /* 追加・修正箇所 */
+    width: 100%;           /* 幅を100%にする */
+    box-sizing: border-box; /* パディングを含めて幅を計算させる（崩れ防止） */
 }
 
-/* 変更ボタン（青フォント） */
+/* 変更ボタンのスタイル */
 .change-btn {
     background: none;
     border: none;
-    color: #3b82f6; /* 青色フォントを指定 */
+    color: #3b82f6;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
-    padding: 0; /* 余計な隙間を削除 */
+    padding: 0;
+    
+    /* 変更ボタンが左寄せにならないよう調整 */
+    white-space: nowrap;    /* ボタンが改行されないようにする */
+    margin-left: 10px;      /* テキストとの間に少し隙間を作る */
 }
