@@ -50,13 +50,22 @@ function createCircleButtons(containerId, type) {
 function renderLogList(logs) {
     const logList = document.getElementById('log-list');
     if (!logList) return;
-    logList.innerHTML = '';
-    logs.slice().reverse().forEach(l => {
-        const div = document.createElement('div');
-        div.className = 'log-item';
-        div.innerHTML = `<strong>${l.date}</strong><br>気分:${l.mood} / 体調:${l.cond}<br>${l.note || ''}<hr>`;
-        logList.appendChild(div);
-    });
+    
+    // 表のヘッダーを作成
+    logList.innerHTML = `
+        <table style="width: 100%; border-collapse: collapse; margin: 0 auto;">
+            <tr style="border-bottom: 2px solid #ccc;">
+                <th>日時</th><th>気分</th><th>体調</th>
+            </tr>
+            ${logs.slice().reverse().map(l => `
+                <tr style="border-bottom: 1px solid #eee; text-align: center;">
+                    <td style="padding: 8px;">${l.date.substring(5)}</td>
+                    <td>${l.mood}</td>
+                    <td>${l.cond}</td>
+                </tr>
+            `).join('')}
+        </table>
+    `;
 }
 
 function renderChart(allLogs) {
