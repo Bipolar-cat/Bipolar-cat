@@ -176,21 +176,29 @@
             display: block;
         }
 
-        /* グラフを包む枠の強制指定 */
+   /* --- グラフの枠 --- */
 .chart-container {
     width: 100%;
+    max-width: 450px; /* containerに合わせる */
+    margin: 0 auto;   /* 中央寄せ */
     height: 350px;
     padding: 10px;
     box-sizing: border-box;
 }
 
-/* ログリストが画面全体に広がらないようにする */
+/* --- ログリスト --- */
 .log-list {
     width: 100%;
     max-width: 450px;
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
+    text-align: left; /* リストの中身は左寄せに */
+}
+
+/* 余計な横並びを防ぐため、追加 */
+.container {
+    overflow: hidden; /* 中身がはみ出すのを防ぐ */
 }
 
         /* Summary機能用レイアウトスタイル */
