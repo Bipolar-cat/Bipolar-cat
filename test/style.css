@@ -66,3 +66,42 @@ textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; backgr
 .log-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0; }
 .log-date { font-weight: bold; color: #333; }
 .log-scores { color: #666; }
+
+/* 最近の記録リスト全体のスタイル */
+#log-list {
+    width: 90%;
+    margin: 20px auto;
+    text-align: left;
+}
+
+/* 個別の記録カード */
+.log-item {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* 日時（青色） */
+.log-date {
+    color: #3b82f6; /* 青色 */
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* 気分・体調の数値 */
+.log-score {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin-bottom: 6px;
+}
+
+/* コメント（メモ） */
+.log-note {
+    font-size: 0.95rem;
+    color: #374151;
+    word-break: break-all; /* 長い文字の折り返し */
+}
