@@ -29,10 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ボタン生成関数
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container) {
+        console.error("IDが見つかりません: " + containerId); // ここにエラーが出たらHTMLのIDが間違っています
+        return;
+    }
+    // ...
+}
     
     // 重複防止：既にボタンがある場合はクリア
     container.innerHTML = '';
