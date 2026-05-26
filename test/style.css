@@ -282,3 +282,28 @@
     margin: 0 auto;
     background: white;
 }
+/* リスト全体の設定 */
+.log-item {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    align-items: flex-end;  /* 要素を右寄せにする */
+}
+
+/* 日時を青色にする */
+.log-date {
+    color: #3b82f6; /* 青色 */
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* メモの内容 */
+.log-note {
+    font-size: 1em;
+    margin-top: 5px;
+    color: #333;
+}
