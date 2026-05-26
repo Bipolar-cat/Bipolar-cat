@@ -101,20 +101,22 @@ function lockDiagnosis() {
     document.getElementById('diagnosis-text').innerText = `主な診断名: ${value}`;
 }
 
-function renderLogList(logs) {
+ function renderLogList(logs) {
     const logList = document.getElementById('log-list');
     if (!logList) return;
-    logList.innerHTML = '';
+    logList.innerHTML = ''; // 一旦クリア
+    
     // 配列の新しい順に表示
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
         div.className = 'log-item';
-        // HTMLを構築（右の表形式を再現、一言メモも表示）
+        
+        // 日時を青色にするためにクラスを分けます
         div.innerHTML = `
-            <span class="log-date">${l.date}</span>
-            <span class="log-scores">気分:${l.mood} / 体調:${l.cond}</span>
-            ${l.note ? `<div class="log-note" style="font-size:12px; color:#666; text-align:right;">${l.note}</div>` : ''}
+            <div class="log-date">${l.date}</div>
+            <div class="log-score">気分:${l.mood} / 体調:${l.cond}</div>
+            <div class="log-note">${l.note || 'メモなし'}</div>
         `;
         logList.appendChild(div);
     });
-}
+ }
