@@ -233,19 +233,20 @@
         .report-notes { background: white; padding: 10px 14px; border-radius: 10px; border: 1px solid #E8F5E9; margin-top: 6px; max-height: 100px; overflow-y: auto; font-size: 13px; color: #555; }
 
         .log-title { text-align: center; font-size: 18px; font-weight: bold; color: #444; margin: 30px 0 15px; }
-        .log-list { padding: 0 20px; }
-        
+       #log-list {
+    width: 90%;          /* 幅を少し絞って画面中央に配置 */
+    margin: 0 auto;      /* 左右中央寄せ */
+    text-align: left;    /* 文字自体は左揃えの方が見やすい */
+    padding: 10px;
+}
         .log-item {
-            text-align: left;
-            padding: 15px;
-            margin-bottom: 12px;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 15px;
-            font-size: 14px;
-            transition: background-color 0.4s, border-color 0.4s;
-            box-sizing: border-box;
-        }
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-left: 5px solid #3b82f6; /* 気分に合わせて色を変えてもOK */
+}
 
         .log-item.highlight {
             background-color: #fff9c4
