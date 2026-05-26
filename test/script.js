@@ -19,15 +19,26 @@ function initApp() {
         document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
     }
 
-    // 2. ボタン生成（ここに配置！）
+    // すべての処理をページ読み込み後に実行する最終形
+document.addEventListener('DOMContentLoaded', () => {
+    // ボタン生成
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
-
-    // 3. グラフとログの描画
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    renderChart(logs);
-    // ...リスト表示処理...
-}
+    
+    // ログ取得と描画
+    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+    if (logs.length > 0) {
+        // 最近の記録を表示
+        const logList = document.getElementById('log-list');
+        // ... (ここにログ表示処理)
+        
+        // グラフを描画
+        const canvas = document.getElementById('myChart');
+        if (canvas) {
+            new Chart(canvas.getContext('2d'), { /* 設定 */ });
+        }
+    }
+});
 
 // 最後に1回だけ実行
 initApp();
