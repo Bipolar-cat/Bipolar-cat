@@ -37,9 +37,11 @@ function createButtons(containerId, activeClass) {
     }
 }
 
-// 読み込み時に実行
-window.onload = () => {
-    createButtons('mood-btns', 'active');
-    createButtons('cond-btns', 'active');
-    // ...（既存の初期化処理があればここに続ける）
-};
+// script.js の最後尾にある window.onload を以下のように書き換えてください
+document.addEventListener('DOMContentLoaded', () => {
+    // ボタンを生成する場所がHTMLに存在するかチェック
+    if(document.getElementById('mood-btns') && document.getElementById('cond-btns')) {
+        createButtons('mood-btns', 'active');
+        createButtons('cond-btns', 'active');
+    }
+});
