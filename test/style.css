@@ -68,29 +68,34 @@ textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; backgr
 .log-scores { color: #666; }
 
 /* リスト全体の親 */
+/* リスト全体の親（統合済み） */
 #log-list {
     width: 90%;
     margin: 20px auto;
     text-align: left;
-}
-
-/* 記録カードの枠（重要） */
-.log-item {
-    background: #fff;
-    border: 1px solid #ddd; /* 枠線 */
-    border-radius: 15px;    /* 角丸 */
-    padding: 15px;          /* 内側の余白 */
-    margin-bottom: 15px;    /* カード間の隙間 */
     display: flex;
     flex-direction: column;
 }
 
-/* 日時を青色に */
+/* 記録の枠（統合済み・ここを直せば全て反映されます） */
+.log-item {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 左寄せ */
+}
+
+/* 日時（青色） */
 .log-date {
-    color: #3b82f6;
+    color: #3b82f6; 
+    font-size: 0.85rem;
     font-weight: bold;
-    font-size: 0.9em;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 /* 気分・体調の数値 */
@@ -100,7 +105,7 @@ textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; backgr
     margin-bottom: 6px;
 }
 
-/* コメント（メモ） */
+/* メモ表示 */
 .log-note {
     font-size: 0.95rem;
     color: #374151;
