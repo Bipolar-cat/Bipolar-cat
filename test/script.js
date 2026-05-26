@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     if (savedDiagnosis) {
         document.getElementById('diagnosis-select-container').style.display = 'none';
-        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+        const fixedContainer = document.getElementById('diagnosis-fixed-container');
+        fixedContainer.style.display = 'flex';
         document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
     }
 
@@ -22,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 3. データ取得と描画
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    renderLogList(logs); // 記録リスト表示
+    renderLogList(logs);
     if (logs.length > 0) {
-        renderChart(logs.slice(-10)); // グラフ表示
+        renderChart(logs.slice(-10));
     }
 });
 
@@ -36,6 +37,7 @@ function createCircleButtons(containerId, type) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.type = "button";
+        btn.className = "circle-btn";
         if (i === 5) btn.classList.add('active');
         btn.onclick = function() {
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
@@ -47,14 +49,6 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-/* 記録項目をカード形式に */
-.log-item {
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
 function renderChart(allLogs) {
     const canvas = document.getElementById('myChart');
     if (!canvas) return;
@@ -64,7 +58,7 @@ function renderChart(allLogs) {
     window.myChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: allLogs.map(l => l.date.split(' ')[0].substring(5)),
+            labels: allLogs.map(l => l.date.split(' ')[0]),
             datasets: [
                 { label: '気分', data: allLogs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
                 { label: '体調', data: allLogs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
@@ -76,7 +70,6 @@ function renderChart(allLogs) {
 
 function saveData() {
     const note = document.getElementById('note').value;
-    const diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
     const now = new Date();
     const dateStr = `${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
     
@@ -87,44 +80,33 @@ function saveData() {
     alert("記録しました！");
     location.reload();
 }
-// 診断名を変更するために一度ロックを解除する
+
 function unlockDiagnosis() {
-    // 1. 固定表示エリアを隠す
     document.getElementById('diagnosis-fixed-container').style.display = 'none';
-    // 2. セレクトボックスを表示する
     document.getElementById('diagnosis-select-container').style.display = 'block';
-    // 3. 保存された診断名を削除（必要に応じて）
     localStorage.removeItem(DIAGNOSIS_KEY);
 }
 
-// 診断名を選択したときに固定する
 function lockDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const value = select.value;
     if (!value) return;
-
-    // 1. ローカルストレージに保存
     localStorage.setItem(DIAGNOSIS_KEY, value);
-    
-    // 2. 表示を切り替える
     document.getElementById('diagnosis-select-container').style.display = 'none';
     const fixed = document.getElementById('diagnosis-fixed-container');
     fixed.style.display = 'flex';
     document.getElementById('diagnosis-text').innerText = `主な診断名: ${value}`;
 }
+
 function renderLogList(logs) {
     const logList = document.getElementById('log-list');
     if (!logList) return;
-    logList.innerHTML = ''; // 一旦クリア
-    
-    // 配列の新しい順に表示
+    logList.innerHTML = '';
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
         div.className = 'log-item';
-        
-        // HTMLを構築（青色の日付、メモを表示）
         div.innerHTML = `
-            <div class="log-date">${l.date}</div>
+            <div class="log-date" style="color: blue; font-weight: bold;">${l.date}</div>
             <div class="log-score">気分:${l.mood} / 体調:${l.cond}</div>
             <div class="log-note">${l.note || 'メモなし'}</div>
         `;
