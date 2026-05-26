@@ -45,16 +45,32 @@ function renderLogList(logs) {
 function renderChart(allLogs) {
     const canvas = document.getElementById('myChart');
     if (!canvas) return;
-    new Chart(canvas.getContext('2d'), {
+
+    // 既存のグラフを破棄
+    if (window.myChartInstance) window.myChartInstance.destroy();
+
+    const ctx = canvas.getContext('2d');
+    window.myChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: allLogs.map(l => l.date),
+            labels: allLogs.map(l => l.date.split(' ')[0].substring(5) + '\n' + l.date.split(' ')[1]), 
             datasets: [
                 { label: '気分', data: allLogs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
                 { label: '体調', data: allLogs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
         },
-        options: { responsive: false, maintainAspectRatio: false }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: true, text: '今の気分・体調の推移', font: { size: 16 } },
+                legend: { position: 'top' }
+            },
+            scales: {
+                x: { ticks: { font: { size: 10 }, maxRotation: 0 } }, // 回転させないことで重なりを防ぐ
+                y: { min: 0, max: 10, ticks: { stepSize: 1 } }
+            }
+        }
     });
 }
 
