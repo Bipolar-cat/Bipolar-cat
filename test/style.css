@@ -1,6 +1,6 @@
-/* 全体の背景とフォント */
+/* 全体の背景と中央寄せ設定 */
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 10px;
@@ -8,6 +8,7 @@ body {
     justify-content: center;
 }
 
+/* 中央の白い角丸ホワイトボックス */
 .container {
     max-width: 450px;
     width: 100%;
@@ -16,43 +17,52 @@ body {
     border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     text-align: center;
+    overflow: hidden; /* 中身がはみ出すのを防ぐ */
 }
 
-/* 診断名エリア */
+h1 { color: #5C6BC0; font-size: 28px; margin: 5px 0; }
+.subtitle { color: #888; font-size: 0.75rem; font-weight: bold; margin-bottom: 15px; }
+
+/* 診断名エリア（右のグレーボックスを再現） */
 .diagnosis-area { width: 90%; margin: 0 auto 20px auto; text-align: left; }
 #diagnosis-select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
+#diagnosis-fixed-container {
+    background-color: #efefef;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex; /* flexboxで変更ボタンを右端に */
+    justify-content: space-between;
+    align-items: center;
+}
+.change-btn { background: none; border: none; color: #4A90E2; font-size: 14px; cursor: pointer; }
 
-/* 1〜10ボタンの横並び設定 */
+/* 1〜10ボタンの横並び（右の黄色と青のデフォルトを再現） */
+.input-section { padding: 0 20px; text-align: left; }
+.input-section label { display: block; font-weight: bold; color: #333; margin: 10px 0 5px; }
 .scroll-wrapper { width: 100%; overflow-x: auto; padding: 10px 0; display: flex; justify-content: center; }
 .btn-group-circle { display: inline-flex; gap: 8px; }
 .circle-btn {
     width: 38px; height: 38px; min-width: 38px;
     border-radius: 50%; border: 1px solid #e5e7eb;
-    background: #fff; color: #9ca3af; font-size: 14px;
+    background: #fff; color: #9ca3af; font-size: 16px;
     cursor: pointer; display: flex; align-items: center; justify-content: center;
 }
-.circle-btn.active { border-color: #3b82f6; color: #3b82f6; background-color: #eff6ff; font-weight: bold; }
+/* 気分ボタン（青）、体調ボタン（黄）それぞれのactive状態を定義 */
+#mood-btns .circle-btn.active { border-color: #bfdbfe; color: #3b82f6; background-color: #eff6ff; font-weight: bold; }
+#cond-btns .circle-btn.active { border-color: #fde68a; color: #f59e0b; background-color: #fffbeb; font-weight: bold; }
 
-/* グラフエリア */
-.chart-scroll { width: 100%; overflow-x: auto; margin: 20px 0; }
+/* メモと記録ボタン */
+textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; background: #f3f4f6; border: none; resize: none; margin-bottom: 15px; }
+.save-btn { width: 100%; padding: 12px; background-color: #4A90E2; color: white; border: none; border-radius: 30px; cursor: pointer; font-size: 16px; }
+
+/* グラフ（右の画像を再現） */
+.chart-scroll { width: 100%; overflow-x: auto; margin: 20px 0; border-top: 1px solid #f3f4f6; padding-top: 15px; }
 #chart-wrapper { width: 450px; height: 300px; margin: 0 auto; }
 
-/* 記録リスト（右寄せ・青い日時・一言メモ） */
-#log-list { width: 90%; margin: 0 auto; }
-.log-item {
-    background: #fff;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    border: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* 右寄せ */
-}
-.log-date { color: #3b82f6; font-size: 0.9em; font-weight: bold; }
-.log-note { font-size: 14px; color: #333; margin-top: 5px; width: 100%; text-align: right; }
-.log-score { font-size: 12px; color: #666; }
-
-/* その他ボタン類 */
-.save-btn { width: 90%; padding: 12px; background-color: #4A90E2; color: white; border: none; border-radius: 30px; margin: 20px auto; display: block; }
-textarea { width: 90%; height: 60px; padding: 10px; border-radius: 12px; background: #f3f4f6; border: none; resize: none; }
+/* まとめ・リスト */
+.summary-section { padding: 0 20px; }
+.summary-action-btn { background-color: #00C853; color: white; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; }
+#log-list { width: 90%; margin: 20px auto; text-align: left; }
+.log-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0; }
+.log-date { font-weight: bold; color: #333; }
+.log-scores { color: #666; }
