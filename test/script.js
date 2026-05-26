@@ -104,14 +104,11 @@ function lockDiagnosis() {
  function renderLogList(logs) {
     const logList = document.getElementById('log-list');
     if (!logList) return;
-    logList.innerHTML = ''; // 一旦クリア
+    logList.innerHTML = ''; 
     
-    // 配列の新しい順に表示
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
-        div.className = 'log-item';
-        
-        // 日時を青色にするためにクラスを分けます
+        div.className = 'log-item'; // CSSの枠設定が適用されます
         div.innerHTML = `
             <div class="log-date">${l.date}</div>
             <div class="log-score">気分:${l.mood} / 体調:${l.cond}</div>
@@ -119,4 +116,4 @@ function lockDiagnosis() {
         `;
         logList.appendChild(div);
     });
- }
+}
