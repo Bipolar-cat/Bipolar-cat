@@ -107,7 +107,18 @@
     white-space: nowrap;
     padding: 10px 0;
 }
-        .scroll-wrapper::-webkit-scrollbar { display: none; }
+       .scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    min-height: 50px; /* ここが重要！0だとボタンが隠れます */
+    display: flex;
+    align-items: center;
+}
+
+.btn-group-circle {
+    display: flex;
+    flex-wrap: nowrap; /* 改行させない */
+}
 
         .btn-group-circle {
     display: flex;
