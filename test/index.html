@@ -12,29 +12,24 @@
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
-
         <div class="diagnosis-area" style="margin-bottom: 20px;">
-    <div id="diagnosis-select-container" style="display: block;">
-        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
-   
+            <div id="diagnosis-select-container" style="display: block;">
+                <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px;">
+                    <option value="">主な診断名を選択</option>
+                    <option value="未診断（健常者）">未診断（健常者）</option>
+                    <option value="うつ病">うつ病</option>
+                    <option value="双極症">双極症</option>
+                    <option value="統合失調症">統合失調症</option>
+                    <option value="不安障害">不安障害</option>
+                    <option value="適応障害">適応障害</option>
+                    <option value="発達障害">発達障害</option>
+                    <option value="その他">その他</option>
+                </select>
             </div>
-           <div id="diagnosis-fixed-container" style="display: none; ...">
-    <span id="diagnosis-text" style="font-weight: bold; color: #333;"></span>
-    <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
-</div>
+            <div id="diagnosis-fixed-container" style="display: none; align-items: center; justify-content: space-between;">
+                <span id="diagnosis-text" style="font-weight: bold;"></span>
+                <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
+            </div>
         </div>
 
         <div class="input-section">
@@ -48,19 +43,19 @@
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
-        <div class="chart-scroll" style="margin: 20px 0;">
+        <div class="chart-scroll">
             <div id="chart-wrapper" style="height: 300px; width: 100%;">
                 <canvas id="myChart"></canvas>
             </div>
         </div>
 
-        <div class="summary-section" style="text-align: center; margin: 20px 0;">
+        <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
             <div id="summary-ts">前回まとめ作成：なし</div>
             <div id="summary-card"><div id="summary-content"></div></div>
         </div>
 
-        <div class="log-title" style="font-weight: bold; margin-top: 20px;">最近の記録</div>
+        <div class="log-title">最近の記録</div>
         <div id="log-list" class="log-list"></div>
 
     </div> <script src="script.js"></script>
