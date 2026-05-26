@@ -108,14 +108,13 @@ function lockDiagnosis() {
     
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
-        // ここをCSSで作成した枠クラス 'record-item' に変更
-        div.className = 'record-item'; 
+        div.className = 'record-item'; // グレーの枠を適用
         
-        // 日付部分にクラス 'log-date' を指定して青色を適用
+        // 構造を段で管理（flexで縦並びに）
         div.innerHTML = `
             <div class="log-date">${l.date}</div>
             <div class="log-scores">気分:${l.mood} / 体調:${l.cond}</div>
-            <div class="log-memo">${l.note || 'メモなし'}</div>
+            <div class="log-note">${l.note || 'メモなし'}</div>
         `;
         logList.appendChild(div);
     });
