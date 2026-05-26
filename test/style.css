@@ -72,9 +72,11 @@ textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; backgr
     width: 90%;
     margin: 20px auto;
     text-align: left;
+    display: flex;
+    flex-direction: column; /* リストを縦に並べる */
 }
 
-/* 個別の記録カード */
+/* 個別の記録カード（ここが重要：flex設定と見た目の枠設定を統合） */
 .log-item {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -82,11 +84,14 @@ textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; backgr
     padding: 15px;
     margin-bottom: 12px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    display: flex;
+    flex-direction: column; /* 中身を縦に積み上げる */
+    align-items: flex-start; /* 左詰め */
 }
 
 /* 日時（青色） */
 .log-date {
-    color: #3b82f6; /* 青色 */
+    color: #3b82f6; 
     font-size: 0.85rem;
     font-weight: bold;
     margin-bottom: 4px;
@@ -103,5 +108,6 @@ textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; backgr
 .log-note {
     font-size: 0.95rem;
     color: #374151;
-    word-break: break-all; /* 長い文字の折り返し */
+    word-break: break-all;
+    width: 100%;
 }
