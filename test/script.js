@@ -112,3 +112,22 @@ function lockDiagnosis() {
     fixed.style.display = 'flex';
     document.getElementById('diagnosis-text').innerText = `主な診断名: ${value}`;
 }
+function renderLogList(logs) {
+    const logList = document.getElementById('log-list');
+    if (!logList) return;
+    logList.innerHTML = ''; // 一旦クリア
+    
+    // 配列の新しい順に表示
+    logs.slice().reverse().forEach(l => {
+        const div = document.createElement('div');
+        div.className = 'log-item';
+        
+        // HTMLを構築（青色の日付、メモを表示）
+        div.innerHTML = `
+            <div class="log-date">${l.date}</div>
+            <div class="log-score">気分:${l.mood} / 体調:${l.cond}</div>
+            <div class="log-note">${l.note || 'メモなし'}</div>
+        `;
+        logList.appendChild(div);
+    });
+}
