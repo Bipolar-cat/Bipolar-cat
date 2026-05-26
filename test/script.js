@@ -101,21 +101,25 @@ function lockDiagnosis() {
     document.getElementById('diagnosis-text').innerText = `主な診断名: ${value}`;
 }
 
- function renderLogList(logs) {
+ // リスト表示を更新する関数
+function renderLogList(logs) {
     const logList = document.getElementById('log-list');
     if (!logList) return;
     logList.innerHTML = ''; 
     
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
-        div.className = 'record-item'; // グレーの枠を適用
+        div.className = 'record-item'; // CSSで定義した枠クラス
+        div.id = `log-${l.ts || new Date(l.date).getTime()}`;
         
-        // 構造を段で管理（flexで縦並びに）
+        const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
+        
+        // CSSで段管理するため、divで囲みます
         div.innerHTML = `
-            <div class="log-date">${l.date}</div>
-            <div class="log-scores">気分:${l.mood} / 体調:${l.cond}</div>
+            <div class="log-date">${l.date}${diagBadge}</div>
+            <div class="log-scores">気分: ${l.mood} | 体調: ${l.cond}</div>
             <div class="log-note">${l.note || 'メモなし'}</div>
         `;
         logList.appendChild(div);
     });
- }
+}
