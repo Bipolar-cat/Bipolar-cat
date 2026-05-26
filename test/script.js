@@ -1,16 +1,13 @@
-// 読み込みチェックとエラー回避用ラッパー
+// エラー回避用
 window.onerror = function(msg, url, line) {
     console.log("エラー発生: " + msg + " (行: " + line + ")");
 };
-let selectedMood = 5, selectedCond = 5;
-let highlightTimeout = null;
 
-// --- script.js の先頭部分 ---
+let selectedMood = 5, selectedCond = 5;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// ページ読み込み時に実行する処理をまとめる
-function initApp() {
+document.addEventListener('DOMContentLoaded', () => {
     // 1. 診断名の復元
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     if (savedDiagnosis) {
@@ -19,37 +16,36 @@ function initApp() {
         document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
     }
 
-    // すべての処理をページ読み込み後に実行する最終形
-document.addEventListener('DOMContentLoaded', () => {
-    // ボタン生成
+    // 2. ボタン生成
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
     
-    // ログ取得と描画
-    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+    // 3. ログの描画
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    renderLogList(logs);
+    
+    // 4. グラフ描画
     if (logs.length > 0) {
-        // 最近の記録を表示
-        const logList = document.getElementById('log-list');
-        // ... (ここにログ表示処理)
-        
-        // グラフを描画
-        const canvas = document.getElementById('myChart');
-        if (canvas) {
-            new Chart(canvas.getContext('2d'), { /* 設定 */ });
-        }
+        renderChart(logs);
     }
 });
 
-// 最後に1回だけ実行
-initApp();
-
-// ボタン生成関数などはそのまま下に記述
-function createCircleButtons(containerId, type) { /* ... */ }
-// renderChart関数などもそのまま下に記述
+function renderLogList(logs) {
+    const logList = document.getElementById('log-list');
+    if (!logList) return;
+    logList.innerHTML = ''; // クリア
+    logs.slice().reverse().forEach(l => {
+        const div = document.createElement('div');
+        div.className = 'log-item';
+        div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+        logList.appendChild(div);
+    });
+}
 
 function renderChart(allLogs) {
-    const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
+    const canvas = document.getElementById('myChart');
+    if (!canvas) return;
+    new Chart(canvas.getContext('2d'), {
         type: 'line',
         data: {
             labels: allLogs.map(l => l.date),
@@ -58,26 +54,17 @@ function renderChart(allLogs) {
                 { label: '体調', data: allLogs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
         },
-        options: {
-            responsive: false, // ★ここを false にすることで崩れを防ぐ
-            maintainAspectRatio: false,
-            onClick: (evt, elements, chart) => {
-                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                if (activePoints.length > 0) {
-                    const index = activePoints[0].index;
-                    const logData = allLogs[index]; // ★last10 を allLogs に修正
-                    scrollToLog(logData.ts || new Date(logData.date).getTime());
-                }
-            }
-        }
+        options: { responsive: false, maintainAspectRatio: false }
     });
 }
 
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
+    if (!container) return;
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
+        btn.type = "button";
         if (i === 5) btn.classList.add('active');
         btn.onclick = function() {
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
@@ -90,42 +77,21 @@ function createCircleButtons(containerId, type) {
 }
 
 function saveData() {
-    // ... (データの取得処理など)
-
-    // ローカルストレージにデータを保存
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-    
-    // 保存完了の通知
-    alert("記録しました！");
-
-    // ページを強制的に再読み込みし、最新のデータを描画し直す
-    location.reload();
-}
-    // 診断名の取得
+    const note = document.getElementById('note').value;
     let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
     const select = document.getElementById('diagnosis-select');
-    if (select && select.value) {
-        diagnosisVal = select.value;
-    }
+    if (select && select.value) diagnosisVal = select.value;
 
     const now = new Date();
     const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     
-    // 既存データの取得
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    
-    // 新しい記録を追加
     logs.push({ 
-        ts: now.getTime(), 
-        date: dateStr, 
-        diagnosis: diagnosisVal,
-        mood: selectedMood, 
-        cond: selectedCond, 
-        note: note 
+        ts: now.getTime(), date: dateStr, diagnosis: diagnosisVal,
+        mood: selectedMood, cond: selectedCond, note: note 
     });
     
-    // 保存してリロード
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     alert("記録しました！");
-    location.reload(); // これが実行されることで画面が更新され、グラフとリストに反映されます
+    location.reload();
 }
