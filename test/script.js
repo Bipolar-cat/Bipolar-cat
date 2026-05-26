@@ -1,3 +1,7 @@
+// 読み込みチェックとエラー回避用ラッパー
+window.onerror = function(msg, url, line) {
+    console.log("エラー発生: " + msg + " (行: " + line + ")");
+};
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
 
