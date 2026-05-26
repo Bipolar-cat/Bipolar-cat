@@ -113,7 +113,7 @@
     display: flex;
     overflow-x: auto;
     gap: 10px;
-    padding: 10px;
+    padding: 10px 0;
     min-height: 50px; /* ここが大事です */
         }
 
@@ -122,15 +122,15 @@
     height: 52px;
     min-width: 52px; /* スマホで縮まないように固定 */
     border-radius: 50%;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
     cursor: pointer;
 }
 
         /* ボタンが選択された時のスタイル（元のデザインを維持） */
 #mood-btns button.active {
-    border: 2px solid #bfdbfe;
     color: #3b82f6;
     background-color: #eff6ff;
-    font-weight: bold;
 }
         #cond-btns button.active {
     border: 2px solid #fde68a;
