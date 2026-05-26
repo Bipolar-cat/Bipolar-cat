@@ -109,29 +109,20 @@
 }
         .scroll-wrapper::-webkit-scrollbar { display: none; }
 
-        /* 10段階ボタンの横並びgapと配置 */
         .btn-group-circle {
-            display: inline-flex;
-            gap: 12px;
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    min-height: 50px; /* ここが大事です */
         }
 
         /* ボタンの大きさ（52px正円）とフォント・カラー */
 .btn-group-circle button {
-    width: 52px;
     height: 52px;
     min-width: 52px; /* スマホで縮まないように固定 */
     border-radius: 50%;
-    border: 1px solid #e5e7eb;
-    background: #ffffff;
-    color: #9ca3af;
-    font-size: 18px;
     cursor: pointer;
-    transition: all 0.2s;
-    display: flex; /* 中央揃えのため追加 */
-    align-items: center; /* 中央揃えのため追加 */
-    justify-content: center; /* 中央揃えのため追加 */
-    box-sizing: border-box; /* パディングを含めてサイズ計算 */
-    padding: 0;
 }
 
         /* ボタンが選択された時のスタイル（元のデザインを維持） */
