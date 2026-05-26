@@ -130,17 +130,20 @@
 
         /* ボタンの大きさ（52px正円）とフォント・カラー */
 .btn-group-circle button {
-    height: 52px;
-    min-width: 52px; /* スマホで縮まないように固定 */
-    border-radius: 50%;
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-}
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         /* 選択中のボタンのスタイル */
 .btn-group-circle button.active {
     background: #3b82f6;
