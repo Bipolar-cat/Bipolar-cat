@@ -45,32 +45,41 @@ function renderChart(allLogs) {
     const canvas = document.getElementById('myChart');
     if (!canvas) return;
 
-    // 既存のグラフを破棄
-    if (window.myChartInstance) window.myChartInstance.destroy();
-
-    const ctx = canvas.getContext('2d');
-    window.myChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: allLogs.map(l => l.date.split(' ')[0].substring(5) + '\n' + l.date.split(' ')[1]), 
-            datasets: [
-                { label: '気分', data: allLogs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
-                { label: '体調', data: allLogs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
-            ]
+    // 既のグラフを破棄
+    // renderChart関数内を以下のように書き換えます
+window.myChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+        // 日本形式（MM/DD HH:mm）で表示し、改行して時間を表示
+        labels: allLogs.map(l => {
+            const dateParts = l.date.split(' '); // "2026/5/26" と "09:12" に分ける
+            const dayPart = dateParts[0].split('/').slice(1).join('/'); // 月/日 に加工
+            return dayPart + '\n' + dateParts[1];
+        }),
+        datasets: [
+            { label: '気分', data: allLogs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
+            { label: '体調', data: allLogs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            title: { display: true, text: '今の気分・体調の推移', font: { size: 16 } },
+            legend: { position: 'top' }
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                title: { display: true, text: '今の気分・体調の推移', font: { size: 16 } },
-                legend: { position: 'top' }
+        scales: {
+            x: { 
+                ticks: { 
+                    font: { size: 9 }, 
+                    maxRotation: 45, // ★ここを 45 にすると斜めになります
+                    minRotation: 45 
+                }
             },
-            scales: {
-                x: { ticks: { font: { size: 10 }, maxRotation: 0 } }, // 回転させないことで重なりを防ぐ
-                y: { min: 0, max: 10, ticks: { stepSize: 1 } }
-            }
+            y: { min: 0, max: 10, ticks: { stepSize: 1 } }
         }
-    });
+    }
+});
 }
 
 function createCircleButtons(containerId, type) {
