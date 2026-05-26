@@ -12,20 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     if (savedDiagnosis) {
         document.getElementById('diagnosis-select-container').style.display = 'none';
-        const fixedContainer = document.getElementById('diagnosis-fixed-container');
-        fixedContainer.style.display = 'flex';
+        const fixed = document.getElementById('diagnosis-fixed-container');
+        fixed.style.display = 'flex';
         document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
     }
 
-    // 2. ボタン生成
+    // 2. ボタン生成（今の気分、体の調子）
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
     
     // 3. データ取得と描画
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    renderLogList(logs);
+    renderLogList(logs); // 記録リスト表示（右の表形式を再現）
     if (logs.length > 0) {
-        renderChart(logs.slice(-10));
+        renderChart(logs.slice(-10)); // グラフ表示（右の画像を再現）
     }
 });
 
@@ -37,8 +37,8 @@ function createCircleButtons(containerId, type) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.type = "button";
-        btn.className = "circle-btn";
-        if (i === 5) btn.classList.add('active');
+        btn.className = 'circle-btn';
+        if (i === 5) btn.classList.add('active'); // 5をデフォルト選択
         btn.onclick = function() {
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
@@ -58,8 +58,10 @@ function renderChart(allLogs) {
     window.myChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: allLogs.map(l => l.date.split(' ')[0]),
+            // 西暦を除いた日時（MM/DD）をラベルに
+            labels: allLogs.map(l => l.date.substring(5)),
             datasets: [
+                // 右の画像の青と黄色の線を再現
                 { label: '気分', data: allLogs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
                 { label: '体調', data: allLogs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
@@ -71,7 +73,8 @@ function renderChart(allLogs) {
 function saveData() {
     const note = document.getElementById('note').value;
     const now = new Date();
-    const dateStr = `${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+    // 日付を「YYYY/MM/DD HH:mm」形式に
+    const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note });
@@ -102,13 +105,15 @@ function renderLogList(logs) {
     const logList = document.getElementById('log-list');
     if (!logList) return;
     logList.innerHTML = '';
+    // 配列の新しい順に表示
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
         div.className = 'log-item';
+        // HTMLを構築（右の表形式を再現、一言メモも表示）
         div.innerHTML = `
-            <div class="log-date" style="color: blue; font-weight: bold;">${l.date}</div>
-            <div class="log-score">気分:${l.mood} / 体調:${l.cond}</div>
-            <div class="log-note">${l.note || 'メモなし'}</div>
+            <span class="log-date">${l.date}</span>
+            <span class="log-scores">気分:${l.mood} / 体調:${l.cond}</span>
+            ${l.note ? `<div class="log-note" style="font-size:12px; color:#666; text-align:right;">${l.note}</div>` : ''}
         `;
         logList.appendChild(div);
     });
