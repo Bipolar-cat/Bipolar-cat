@@ -11,7 +11,27 @@
 
     <div class="container">
         <h1>InnerNote</h1>
-        <p>準備中...</p>
+        <p>**気分と調子の変化を記録**</p>
+                <div class="diagnosis-area" style="margin-bottom: 20px;">
+            <div id="diagnosis-select-container" style="display: block;">
+                <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px;">
+                    <option value="">主な診断名を選択</option>
+                    <option value="未診断（健常者）">未診断（健常者）</option>
+                    <option value="うつ病">うつ病</option>
+                    <option value="双極症">双極症</option>
+                    <option value="統合失調症">統合失調症</option>
+                    <option value="不安障害">不安障害</option>
+                    <option value="適応障害">適応障害</option>
+                    <option value="発達障害">発達障害</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
+
+            <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
+                <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
+                <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer;">変更</button>
+            </div>
+                </div>
     </div>
 
     <script src="script.js"></script>
