@@ -116,6 +116,9 @@
 }
 
 .btn-group-circle {
+            display: inline-flex;
+            gap: 12px;
+        }
 .btn-group-circle button {
             width: 52px;
             height: 52px;
