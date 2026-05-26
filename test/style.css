@@ -77,26 +77,33 @@ textarea { width: 100%; height: 60px; padding: 10px; border-radius: 12px; backgr
     flex-direction: column;
 }
 
-/* 枠内のレイアウト調整 */
+/* グレー枠の設定 */
 .record-item {
     border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 8px;
+    border-radius: 12px;        /* 少し丸みをつけて今風に */
+    padding: 12px;
+    margin-bottom: 10px;
     background-color: #ffffff;
     display: flex;
-    justify-content: space-between; /* 左右に配置を分ける */
-    align-items: center;            /* 縦位置を中央に揃える */
+    flex-direction: column;    /* これにより「段」で管理されます */
+    gap: 5px;                  /* 段と段の間の隙間 */
 }
 
-/* もしhover時に色を変えたい場合 */
-.record-item:hover {
-  background-color: #f9f9f9; 
-}
-/* 最近の記録のタイトルを左寄せに */
-#recent-records-title {
-    width: 90%;
-    margin: 10px auto;
+/* 西暦日時を青色にする */
+.log-date {
     font-weight: bold;
+    color: #4A90E2;            /* 青色 */
+    font-size: 0.9em;
+}
+
+/* スコア（気分/体調） */
+.log-scores {
     color: #555;
+    font-size: 0.95em;
+}
+
+/* メモ */
+.log-note {
+    color: #333;
+    font-size: 0.95em;
 }
