@@ -210,39 +210,38 @@ window.onload = () => {
 　　　　　　　// label: '体調', data: allLogs.map(l => l.cond),
             const ctx = document.getElementById('myChart').getContext('2d');
             
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: allLogs.map(l => l.date),
-                    datasets: [
-                        { 
-                            label: '気分', data: allLogs.map(l => l.mood), // allLogs
-                            borderColor: '#3b82f6', backgroundColor: '#3b82f6',
-                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6',
-                            pointHitRadius: 25
-                        },
-                        { 
-                            label: '体調', data: allLogs.map(l => l.cond), // allLogs に変更
-                            borderColor: '#f59e0b', backgroundColor: '#f59e0b',
-                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b',
-                            pointHitRadius: 25
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: { padding: { left: 10, right: 20, bottom: 20 } },
-                    interaction: { mode: 'index', intersect: false },
-                    onClick: (evt, elements, chart) => {
-                        const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                        if (activePoints.length > 0) {
-                            const index = activePoints[0].index;
-                            const logData = last10[index];
-                            const targetTimestamp = logData.ts || new Date(logData.date).getTime();
-                            scrollToLog(targetTimestamp);
-                        }
-                    },
+            // グラフ描画の直前で last10 を定義する
+　　　　　　　const last10 = allLogs.slice(-10); 
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: allLogs.map(l => l.date.substring(5)), // 日付を見やすく短縮
+        datasets: [
+            { 
+                label: '気分', data: allLogs.map(l => l.mood),
+                borderColor: '#3b82f6', tension: 0.3
+            },
+            { 
+                label: '体調', data: allLogs.map(l => l.cond),
+                borderColor: '#f59e0b', tension: 0.3
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        onClick: (evt, elements, chart) => {
+            const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+            if (activePoints.length > 0) {
+                const index = activePoints[0].index;
+                // ここで allLogs を正しく参照
+                const logData = allLogs[index]; 
+                const targetTimestamp = logData.ts || new Date(logData.date).getTime();
+                scrollToLog(targetTimestamp);
+            }
+        },
+
                     scales: {
                         x: { 
                             ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
