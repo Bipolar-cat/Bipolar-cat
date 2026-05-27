@@ -4,32 +4,38 @@ document.addEventListener('DOMContentLoaded', () => {
     renderChart();
 });
 
-// ボタン生成関数
-function createCircleButtons(containerId, type) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
+function renderScrollableChart(logs) {
+    const canvas = document.getElementById('myChart');
+    const container = document.getElementById('chart-wrapper');
     
-    for (let i = 1; i <= 10; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        btn.type = "button"; // フォーム送信を防ぐ
-        if (i === 5) btn.classList.add('active'); // 初期値
-        
-        btn.onclick = function() {
-            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            if (type === 'mood') selectedMood = i;
-            else selectedCond = i;
-        };
-        container.appendChild(btn);
-    }
+    // データ数に合わせて幅を計算
+    const newWidth = Math.max(window.innerWidth, logs.length * 50);
+    container.style.width = newWidth + 'px';
+
+    if (window.myChartInstance) window.myChartInstance.destroy();
+
+    const ctx = canvas.getContext('2d');
+    window.myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date),
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6' },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
+            ]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false
+        }
+    });
 }
 
-// 実行
-document.addEventListener('DOMContentLoaded', () => {
-    createCircleButtons('mood-btns', 'mood');
-    createCircleButtons('cond-btns', 'cond');
-});
+// 3. 実行（ページ読み込み時に実行する）
+window.onload = () => {
+    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+    renderScrollableChart(logs);
+};
 
 // 読み込み完了後にボタンを作成
 window.addEventListener('load', () => {
