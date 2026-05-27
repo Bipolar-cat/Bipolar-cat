@@ -21,9 +21,10 @@ function lockDiagnosis() {
     }
 }
 
+// 診断名の変更
 function unlockDiagnosis() {
-    document.getElementById('diagnosis-select-container').classList.remove('hidden');
-    document.getElementById('diagnosis-fixed-container').classList.add('hidden');
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
 }
     
     selectContainer.classList.remove('hidden');
