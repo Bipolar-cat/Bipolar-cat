@@ -1,118 +1,23 @@
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 450px;
-    width: 95%;
-    margin: 20px auto; /* 上下に余白を作り、左右を中央寄せ */
-    background: white;
-    padding: 20px;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    text-align: center;
-}
-
-h1 { color: #5C6BC0; font-size: 24px; }
-.subtitle { color: #888; font-size: 14px; margin-bottom: 20px; }
-/* 表示・非表示切り替え用クラス */
+/* --- 既存の基本設定 --- */
+body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+.container { max-width: 450px; width: 95%; margin: 20px auto; background: white; padding: 20px; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
 .hidden { display: none !important; }
-.visible { display: flex !important; }
 
-.scroll-wrapper {
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 10px 0;
-    margin-bottom: 10px;
-}
-
-/* ボタンのスタイル定義 */
-.btn-group-circle {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 10px 0;
-    margin: 0;
-    border: none; /* 線を消す */
-}
-
-/* ボタンの共通設定 */
+/* --- ボタン共通設定 --- */
+.btn-group-circle { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0; border: none; }
 .btn-group-circle button {
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
+    width: 52px; height: 52px; min-width: 52px;
     border-radius: 50%;
-    border: 2px solid #e5e7eb; /* 初期状態の枠線 */
+    border: 2px solid #e5e7eb;
     background: white;
-    color: #9ca3af; /* 未選択時の文字色 */
+    color: #9ca3af;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: all 0.2s ease; /* 色が変わる時のアニメーション */
+    font-size: 16px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease;
 }
 
-/* --- 気分ボタン（青） --- */
-#mood-btns button.active {
-    border-color: #3b82f6; /* 青色の枠 */
-    background-color: #3b82f6; /* 青色で塗りつぶし */
-    color: white; /* 文字は白 */
-}
-
-/* --- 体調ボタン（オレンジ） --- */
-#cond-btns button.active {
-    border-color: #f59e0b; /* オレンジ色の枠 */
-    background-color: #f59e0b; /* オレンジ色で塗りつぶし */
-    color: white; /* 文字は白 */
-}
-
-/* グレーの線を消すための設定 */
-.scroll-wrapper {
-    border: none !important;
-    padding: 0 !important;
-    margin-bottom: 10px !important;
-}
-.hidden { display: none !important; }
-.visible { display: flex !important; align-items: center; justify-content: center; }
-
-/* 確定後の診断名を表示する枠のスタイル */
-.fixed-box {
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    /* 追加・修正箇所 */
-    width: 100%;           /* 幅を100%にする */
-    box-sizing: border-box; /* パディングを含めて幅を計算させる（崩れ防止） */
-}
-
-/* 変更ボタンのスタイル */
-.change-btn {
-    background: none;
-    border: none;
-    color: #3b82f6;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 0;
-    
-    /* 変更ボタンが左寄せにならないよう調整 */
-    white-space: nowrap;    /* ボタンが改行されないようにする */
-    margin-left: 10px;      /* テキストとの間に少し隙間を作る */
-}
-/* style.css の末尾に追記してください */
-
+/* --- 【最優先】選択時の色設定 --- */
 #mood-btns button.active {
     border-color: #3b82f6 !important;
     background-color: #3b82f6 !important;
@@ -124,3 +29,18 @@ h1 { color: #5C6BC0; font-size: 24px; }
     background-color: #f59e0b !important;
     color: white !important;
 }
+
+/* --- 固定枠 --- */
+.fixed-box {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.change-btn { background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 14px; font-weight: bold; }
