@@ -109,7 +109,13 @@ function scrollToLog(timestamp) {
     const target = document.getElementById(`log-${timestamp}`);
     if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // クラスを一度削除してから付与することでアニメーションを再発火させる
+        target.classList.remove('highlight');
+        void target.offsetWidth; // 強制リフロー
         target.classList.add('highlight');
-        setTimeout(() => target.classList.remove('highlight'), 3000);
+        
+        clearTimeout(highlightTimeout);
+        highlightTimeout = setTimeout(() => target.classList.remove('highlight'), 3000);
     }
 }
