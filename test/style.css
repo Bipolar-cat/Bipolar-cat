@@ -19,4 +19,11 @@
     background: #fff;
     cursor: pointer;
 }
+
+/* 選択したボタンの色 */
+.scroll-wrapper button.active {
+    background-color: #3b82f6 !important;
+    color: white;
+    border-color: #3b82f6;
+}
 .change-btn { color: #3b82f6; border: none; background: none; cursor: pointer; }
