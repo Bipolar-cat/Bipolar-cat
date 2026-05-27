@@ -1,5 +1,3 @@
-let myChart;
-
 document.addEventListener('DOMContentLoaded', () => {
     createButtons('mood-btns');
     createButtons('cond-btns');
