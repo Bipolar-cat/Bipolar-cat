@@ -11,9 +11,15 @@
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div id="diagnosis-area" class="input-section">
-            <div id="select-area">
-                <select id="diagnosis-select">    
+        <div class="input-section" style="margin-bottom: 20px;">
+    
+    <div id="diagnosis-fixed-container" class="fixed-box">
+        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未選択</span>
+        <button type="button" class="change-btn" onclick="showSelect()">変更</button>
+    </div>
+
+    <div id="diagnosis-select-container" class="hidden" style="margin: 0 20px;">
+        <select id="diagnosis-select" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e5e7eb;">   
                     <option value="">主な診断名を選択</option>
                     <option value="未診断（健常者）">未診断（健常者）</option>
                     <option value="うつ病">うつ病</option>
@@ -24,8 +30,9 @@
                     <option value="発達障害">発達障害</option>
                     <option value="その他">その他</option>
                 </select>
-            <button onclick="lockDiagnosis()">確定</button>
-            </div>
+        <button type="button" onclick="saveSelection()" style="width: 100%; padding: 8px; margin-top: 8px; border-radius: 8px; cursor: pointer;">決定</button>
+    </div>
+        </div>
             <div id="fixed-area" class="fixed-box" style="display: none;">
                 <span id="diagnosis-text"></span>
                 <button class="change-btn" onclick="unlockDiagnosis()">変更</button>
