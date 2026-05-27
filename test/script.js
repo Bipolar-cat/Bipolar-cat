@@ -5,6 +5,60 @@ let myChartInstance = null; // ★ここに追加！
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
+// --- 2. グラフ描画専用関数（★ここを挿入！） ---
+function renderChart(logs) {
+    const canvas = document.getElementById('myChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    if (myChartInstance) {
+        myChartInstance.destroy(); // 古いグラフを消す
+    }
+
+    myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date),
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            onClick: (evt, elements, chart) => {
+                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                if (activePoints.length > 0) {
+                    const index = activePoints[0].index;
+                    const logData = logs[index];
+                    scrollToLog(logData.ts || new Date(logData.date).getTime());
+                }
+            }
+        }
+    });
+}
+
+// --- 3. ページ読み込み時の処理 ---
+window.onload = () => {
+    // 診断名の復元ロジック（そのまま）
+    // ...
+    
+    // ログリストの描画ロジック（そのまま）
+    // ...
+
+    // ★グラフの呼び出しをこの1行に変更！
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    renderChart(logs); 
+};
+
+// --- 4. その他の関数（saveDataなど）は一番下にそのまま置く ---
+function createCircleButtons(...) { ... }
+function toggleOtherDiagnosis(...) { ... }
+function enableDiagnosisChange(...) { ... }
+function saveData(...) { ... }
+function scrollToLog(...) { ...
+    
 // --- 初期化 ---
 window.onload = () => {
     // 診断名の復元
