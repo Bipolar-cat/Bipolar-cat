@@ -26,21 +26,23 @@ if (select.value) {
     }
 }
 
-// 「変更」ボタン：固定枠を隠し、プルダウンを表示
+// 「変更」ボタンを押したとき：固定表示を消してプルダウンを出す
 function showSelect() {
-    document.getElementById('diagnosis-fixed-container').classList.add('hidden');
-    document.getElementById('diagnosis-select-container').classList.remove('hidden');
+    document.getElementById('diagnosis-fixed').style.display = 'none';
+    document.getElementById('diagnosis-select-area').style.display = 'block';
 }
 
-// 「決定」ボタン：プルダウンの内容を反映し、固定枠に戻す
-function saveSelection() {
+// 「決定」ボタンを押したとき：選んだ内容を反映して戻す
+function saveDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const text = document.getElementById('diagnosis-text');
     
+    // テキストを更新
     text.innerText = '診断名: ' + select.value;
     
-    document.getElementById('diagnosis-fixed-container').classList.remove('hidden');
-    document.getElementById('diagnosis-select-container').classList.add('hidden');
+    // 表示を切り替え
+    document.getElementById('diagnosis-fixed').style.display = 'flex';
+    document.getElementById('diagnosis-select-area').style.display = 'none';
 }
 
 function createButtons(id) {
