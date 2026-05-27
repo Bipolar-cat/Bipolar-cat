@@ -32,60 +32,50 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
-        .diagnosis-area {
-            width: 66.6%;
-            margin: 0 auto 20px auto;
-            text-align: left;
-            box-sizing: border-box;
-        }
+.diagnosis-area {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
 
-        .diagnosis-fixed-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f5f5f5;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #333;
-            box-sizing: border-box;
-        }
+.diagnosis-fixed-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+}
 
-        .change-btn {
-            background: none;
-            border: none;
-            color: #4A90E2;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0;
-        }
+.change-btn {
+    background: none;
+    border: none;
+    color: #4A90E2;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        .select-box {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            font-size: 13px;
-            color: #333;
-            outline: none;
-            box-sizing: border-box;
-        }
+.select-box {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
 
-        .other-diagnosis-input {
-            display: none;
-            width: 100%;
-            margin-top: 6px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #4A90E2;
-            background-color: #fff;
-            font-size: 13px;
-            box-sizing: border-box;
-            color: #333;
-        }
+.other-diagnosis-input {
+    display: none;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #4A90E2;
+    box-sizing: border-box;
+}
 
         .input-section {
             padding: 0 20px;
