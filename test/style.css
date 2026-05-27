@@ -7,16 +7,16 @@ body {
             justify-content: center;
         }
 
-        /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
         .container {
-            max-width: 450px;
-            width: 100%;
-            background: white;
-            padding: 20px 0;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            overflow: hidden;
+    max-width: 450px;       /* ここを450pxに指定 */
+    width: 100%;            /* スマホなど画面が小さい時は幅に収まるようにします */
+    margin: 0 auto;         /* 画面中央に配置 */
+    background: white;
+    padding: 20px 0;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    overflow: hidden;
         }
 
         h1 {
