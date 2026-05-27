@@ -1,11 +1,16 @@
-// ページ読み込み時に実行
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('diagnosis-text').innerText = "診断名: 双極症";
-});
+    // 診断名の初期表示
+    const diagnosisText = document.getElementById('diagnosis-text');
+    if (diagnosisText) {
+        diagnosisText.innerText = "診断名: 双極症";
+    }
+
+    // ボタンの生成（引数にIDを渡す）
     createButtons('mood-btns');
     createButtons('cond-btns');
 });
 
+// 診断名の確定
 function lockDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const selectContainer = document.getElementById('diagnosis-select-container');
@@ -14,8 +19,10 @@ function lockDiagnosis() {
 
     if (select.value) {
         diagnosisText.innerText = '診断名: ' + select.value;
-        selectContainer.classList.add('hidden'); // 選択肢を消す
-        fixedContainer.classList.remove('hidden'); // BOXを表示する
+        // classListで制御
+        selectContainer.classList.add('hidden');
+        fixedContainer.classList.remove('hidden');
+        fixedContainer.style.display = 'flex'; // CSSのflexを維持
     } else {
         alert('診断名を選択してください');
     }
@@ -23,15 +30,16 @@ function lockDiagnosis() {
 
 // 診断名の変更
 function unlockDiagnosis() {
-    document.getElementById('diagnosis-select-container').style.display = 'block';
-    document.getElementById('diagnosis-fixed-container').style.display = 'none';
-}
+    const selectContainer = document.getElementById('diagnosis-select-container');
+    const fixedContainer = document.getElementById('diagnosis-fixed-container');
     
     selectContainer.classList.remove('hidden');
+    selectContainer.style.display = 'block';
     fixedContainer.classList.add('hidden');
-    fixedContainer.classList.remove('visible');
+    fixedContainer.style.display = 'none';
 }
 
+// ボタン生成ロジック
 function createButtons(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -40,7 +48,7 @@ function createButtons(containerId) {
         const btn = document.createElement('button');
         btn.innerText = i;
         
-        // 【ここを追加】初期値として「5」をアクティブにする
+        // 初期値として「5」をアクティブにする
         if (i === 5) {
             btn.classList.add('active');
         }
@@ -58,6 +66,7 @@ function saveData() {
     const moodBtn = document.querySelector('#mood-btns button.active');
     const condBtn = document.querySelector('#cond-btns button.active');
     const note = document.getElementById('note').value;
+    const diagnosis = document.getElementById('diagnosis-text').innerText;
 
     if (!moodBtn || !condBtn) {
         alert('気分と調子を選択してください');
@@ -65,6 +74,7 @@ function saveData() {
     }
 
     const data = {
+        diagnosis: diagnosis,
         mood: moodBtn.innerText,
         cond: condBtn.innerText,
         note: note,
