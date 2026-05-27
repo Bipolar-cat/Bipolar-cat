@@ -174,7 +174,8 @@ function saveData() {
             if (val >= 4.5) return '普通';
             return '低下気味';
         }
-
+// 全ての記録データを last10 という変数として定義する
+const last10 = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
       window.onload = () => {
             // 診断名の固定表示復元ロジック
             const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
