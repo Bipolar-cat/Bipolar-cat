@@ -26,10 +26,10 @@ function initChart() {
         options: { responsive: true, maintainAspectRatio: false }
     });
 }
-// --- 1. グローバル変数の定義エリア ---
+// ファイルの一番上の変数定義エリア
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
-let myChartInstance = null; // ★ここに追加！
+let myChartInstance = null; // ★これを追加
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
@@ -63,6 +63,29 @@ function renderChart(logs) {
                     scrollToLog(logData.ts || new Date(logData.date).getTime());
                 }
             }
+        }
+    });
+}
+// ★この関数を丸ごと挿入
+function renderChart(logs) {
+    const canvas = document.getElementById('myChart');
+    if (!canvas) return; 
+    const ctx = canvas.getContext('2d');
+    
+    if (myChartInstance) myChartInstance.destroy(); // 古いグラフを削除
+
+    myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date),
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
         }
     });
 }
