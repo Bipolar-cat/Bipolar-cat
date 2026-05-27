@@ -16,15 +16,16 @@ function saveDiagnosis() {
     document.getElementById('select-area').style.display = 'none';
 }
 
-// ボタン生成
 function createButtons(id) {
     const cont = document.getElementById(id);
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.onclick = () => {
-            cont.querySelectorAll('button').forEach(b => b.style.background = '#fff');
-            btn.style.background = '#eff6ff';
+            // まず全てのボタンから 'active' クラスを外す
+            cont.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            // 押したボタンに 'active' クラスを付ける
+            btn.classList.add('active');
         };
         cont.appendChild(btn);
     }
