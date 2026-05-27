@@ -1,3 +1,10 @@
+// ページ読み込み時に実行
+document.addEventListener('DOMContentLoaded', () => {
+    createButtons('mood-btns');
+    createButtons('cond-btns');
+});
+
+// 診断名の固定機能
 function lockDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const selectContainer = document.getElementById('diagnosis-select-container');
@@ -6,13 +13,13 @@ function lockDiagnosis() {
 
     if (select.value) {
         diagnosisText.innerText = '診断名: ' + select.value;
-        // クラスを付け替えて表示を制御
         selectContainer.classList.add('hidden');
         fixedContainer.classList.remove('hidden');
         fixedContainer.classList.add('visible');
     }
 }
 
+// 診断名の変更機能
 function unlockDiagnosis() {
     const selectContainer = document.getElementById('diagnosis-select-container');
     const fixedContainer = document.getElementById('diagnosis-fixed-container');
@@ -21,32 +28,27 @@ function unlockDiagnosis() {
     fixedContainer.classList.add('hidden');
     fixedContainer.classList.remove('visible');
 }
+
 // ボタン生成処理
 function createButtons(containerId) {
     const container = document.getElementById(containerId);
-    if (!container) return; // コンテナがなければ終了
+    if (!container) return; 
     
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.onclick = function() {
-            // 他のボタンのactiveを解除
+            // 同じグループの他のボタンの active を外す
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            // 押したボタンにactiveを付与
+            // 押したボタンに active を付ける
             btn.classList.add('active');
         };
         container.appendChild(btn);
     }
 }
 
-// ページ読み込み時に実行
-window.onload = () => {
-    createButtons('mood-btns');
-    createButtons('cond-btns');
-};
-});
+// データ保存機能
 function saveData() {
-    // 選択されたボタンの値を取得
     const moodBtn = document.querySelector('#mood-btns button.active');
     const condBtn = document.querySelector('#cond-btns button.active');
     const note = document.getElementById('note').value;
@@ -65,13 +67,4 @@ function saveData() {
 
     console.log('保存データ:', data);
     alert('記録しました！');
-    // この後、リスト表示やグラフ更新の処理を繋げていきます
 }
-// script.js 内の onclick 処理
-btn.onclick = function() {
-    // 1. 同じグループのボタンから 'active' を全て外す
-    container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    
-    // 2. 押したボタンに 'active' を付ける
-    btn.classList.add('active');
-};
