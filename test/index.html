@@ -23,27 +23,37 @@
                     <option value="発達障害">発達障害</option>
                     <option value="その他">その他</option>
                 </select>
-                <button onclick="lockDiagnosis()">確定</button>
-            </div>
-　　　　　　　　<div id="diagnosis-container" class="fixed-box">
-    <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 双極症</span>
-    <button class="change-btn">変更</button>
+                <div class="container">
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
+
+    <div id="diagnosis-wrapper">
+        <div id="diagnosis-select-area">
+            <select id="diagnosis-select">
+                <option value="">主な診断名を選択</option>
+                <option value="双極症">双極症</option>
+                <option value="うつ病">うつ病</option>
+            </select>
+            <button onclick="lockDiagnosis()">確定</button>
+        </div>
+        
+        <div id="diagnosis-fixed-area" class="hidden fixed-box">
+            <span id="diagnosis-text"></span>
+            <button class="change-btn" onclick="unlockDiagnosis()">変更</button>
         </div>
     </div>
-<div class="input-section">
-    <label class="label">今の気分？ (1～10)</label>
-    <div class="scroll-wrapper">
-        <div id="mood-btns" class="btn-group-circle"></div>
+
+    <div class="input-section">
+        <label class="label">今の気分？ (1〜10)</label>
+        <div id="mood-btns" class="scroll-wrapper btn-group-circle"></div>
+        
+        <label class="label">体の調子？ (1〜10)</label>
+        <div id="cond-btns" class="scroll-wrapper btn-group-circle"></div>
     </div>
 
-    <label class="label">体の調子？ (1～10)</label>
-    <div class="scroll-wrapper">
-        <div id="cond-btns" class="btn-group-circle"></div>
-    </div>
-    
     <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
- 　　<button class="save-btn" onclick="saveData()">記録する</button>
-　　 </div>
+    <button class="save-btn" onclick="saveData()">記録する</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
