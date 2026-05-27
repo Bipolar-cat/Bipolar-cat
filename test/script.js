@@ -94,3 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // ...既存の処理...
     renderChart();
 });
+
+// グラフの描画設定（Chart.js用）
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['5/25', '5/26'], // ここがグラフの横軸（日付）になります
+        datasets: [{
+            label: '気分',
+            data: [5, 8], // ここがグラフのデータ（数値）になります
+            borderColor: '#3b82f6',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: false, // スクロールさせるために固定
+        scales: {
+            y: { min: 0, max: 10 } // 1〜10の範囲で表示
+        }
+    }
+});
