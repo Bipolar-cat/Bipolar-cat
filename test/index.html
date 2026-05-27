@@ -2,37 +2,17 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnerNote</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
         <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
-
-        <div id="diagnosis-area" class="input-section">
-            <div id="fixed-area" class="fixed-box">
-                <span id="diagnosis-text">診断名: 双極症</span>
-                <button class="change-btn" onclick="showSelect()">変更</button>
-            </div>
-            <div id="select-area" style="display:none;">
-                <select id="diagnosis-select">
-                    <option value="双極症">双極症</option>
-                    <option value="うつ病">うつ病</option>
-                </select>
-                <button onclick="saveDiagnosis()">決定</button>
-            </div>
-        </div>
-
-        <div class="input-section">
-            <label>今の気分？</label>
-            <div id="mood-btns" class="scroll-wrapper"></div>
-            <label>体の調子？</label>
-            <div id="cond-btns" class="scroll-wrapper"></div>
-        </div>
-
-        <button class="save-btn" onclick="saveData()">記録する</button>
+        <p>診断名やボタンが入る場所です</p>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
