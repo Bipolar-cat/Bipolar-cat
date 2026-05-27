@@ -1,5 +1,7 @@
+// --- 1. グローバル変数の定義エリア ---
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
+let myChartInstance = null; // ★ここに追加！
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
