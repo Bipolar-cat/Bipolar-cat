@@ -13,8 +13,6 @@
     padding: 20px 0;
     border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    
-    /* これを追加して中央寄せ */
     text-align: center; 
             }
 
