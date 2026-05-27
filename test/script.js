@@ -22,8 +22,10 @@ function unlockDiagnosis() {
     fixedContainer.classList.remove('visible');
 }
 // ボタン生成処理
-function createButtons(containerId, activeClass) {
+function createButtons(containerId) {
     const container = document.getElementById(containerId);
+    if (!container) return; // コンテナがなければ終了
+    
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
@@ -37,13 +39,11 @@ function createButtons(containerId, activeClass) {
     }
 }
 
-// script.js の最後尾にある window.onload を以下のように書き換えてください
-document.addEventListener('DOMContentLoaded', () => {
-    // ボタンを生成する場所がHTMLに存在するかチェック
-    if(document.getElementById('mood-btns') && document.getElementById('cond-btns')) {
-        createButtons('mood-btns', 'active');
-        createButtons('cond-btns', 'active');
-    }
+// ページ読み込み時に実行
+window.onload = () => {
+    createButtons('mood-btns');
+    createButtons('cond-btns');
+};
 });
 function saveData() {
     // 選択されたボタンの値を取得
