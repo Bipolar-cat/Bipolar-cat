@@ -44,38 +44,36 @@ body {
             font-size: 15px;
         }
 
-        /* ボタンを囲むエリア（スクロール担当） */
+/* 横スクロール用のラッパー */
 .scroll-wrapper {
-    overflow-x: auto;          /* 横スクロールを許可 */
-    white-space: nowrap;       /* 中身を改行させない */
-    display: block;            /* ブロック要素として扱う */
-    width: 100%;               /* コンテナの幅に合わせる */
-    padding: 10px 0;
-    -webkit-overflow-scrolling: touch; /* スクロールを滑らかにする */
+    overflow-x: auto;           /* 横スクロールを許可 */
+    white-space: nowrap;        /* 中身を改行させない */
+    padding: 2px 0 10px 5px;
+    -webkit-overflow-scrolling: touch; /* iOSで滑らかにスクロール */
 }
 
-/* ボタンを並べるグループ */
+/* スクロールバーを非表示にする */
+.scroll-wrapper::-webkit-scrollbar { 
+    display: none; 
+}
+
+/* ボタンのグループ（横並びにする） */
 .btn-group-circle {
-    display: inline-flex;      /* これが重要：横並びを強制 */
-    gap: 12px;
-    padding-left: 5px;         /* 左端の余白 */
-    padding-right: 5px;        /* 右端の余白 */
+    display: inline-flex;       /* inline-flexで横一列に並べる */
+    gap: 12px;                  /* ボタン同士の間隔 */
 }
 
+/* ボタン個別のスタイル */
 .btn-group-circle button {
-    flex: 0 0 52px; /* 幅と最小幅を52pxに固定 */
-    height: 52px;    /* 高さを52pxに固定 */
+    flex: 0 0 52px;             /* サイズを52pxで固定（伸縮させない） */
+    height: 52px;
     border-radius: 50%;
     border: 1px solid #e5e7eb;
     background: #ffffff;
-    color: #9ca3af;
-    font-size: 18px;
     cursor: pointer;
-    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0; /* 余計なマージンを消す */
 }
 
         #mood-btns button.active {
