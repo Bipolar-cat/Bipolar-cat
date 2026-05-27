@@ -1,5 +1,22 @@
 .container { max-width: 450px; margin: 0 auto; background: white; padding: 20px; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
 .fixed-box { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f9fafb; border-radius: 8px; }
-.scroll-wrapper { display: flex; overflow-x: auto; gap: 8px; padding: 10px 0; }
-.scroll-wrapper button { width: 52px; height: 52px; border-radius: 50%; border: 1px solid #ddd; }
+
+.scroll-wrapper {
+    display: flex;
+    overflow-x: auto; /* 横スクロールを可能にする */
+    gap: 8px;
+    padding: 10px 0;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 数字ボタンの形 */
+.scroll-wrapper button {
+    flex: 0 0 40px; /* ボタンのサイズ */
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
 .change-btn { color: #3b82f6; border: none; background: none; cursor: pointer; }
