@@ -16,11 +16,15 @@ h1 { color: #3b82f6; /* 青色に戻す */ font-size: 24px; }
     -webkit-overflow-scrolling: touch; /* スマホでのスクロールをスムーズに */
 }
 
+/* --- ボタン共通（未選択時：グレーの枠線） --- */
 .btn-group-circle button {
     width: 52px;
     height: 52px;
     min-width: 52px;
     border-radius: 50%;
+    border: 2px solid #e5e7eb; /* グレーの枠線 */
+    background: white;
+    color: #9ca3af;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
@@ -31,39 +35,16 @@ h1 { color: #3b82f6; /* 青色に戻す */ font-size: 24px; }
     transition: all 0.2s ease;
 }
 
-/* --- 気分ボタン：青色設定 --- */
-#mood-btns button {
-    border: 2px solid #3b82f6; /* 青色の枠 */
-    color: #3b82f6;
-    background: white;
-}
+/* --- 気分ボタン：選択時（青） --- */
 #mood-btns button.active {
-    background-color: #3b82f6; /* 選択時は青で塗りつぶし */
-    color: white;
+    border-color: #3b82f6 !important;
+    background-color: #3b82f6 !important;
+    color: white !important;
 }
 
-/* --- 体調ボタン：オレンジ色設定 --- */
-#cond-btns button {
-    border: 2px solid #f59e0b; /* オレンジ色の枠 */
-    color: #f59e0b;
-    background: white;
-}
+/* --- 体調ボタン：選択時（オレンジ） --- */
 #cond-btns button.active {
-    background-color: #f59e0b; /* 選択時はオレンジで塗りつぶし */
-    color: white;
+    border-color: #f59e0b !important;
+    background-color: #f59e0b !important;
+    color: white !important;
 }
-
-/* --- 固定枠 --- */
-.fixed-box {
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
-}
-.change-btn { background: none; border: none; color: #3b82f6; cursor: pointer; font-size: 14px; font-weight: bold; }
