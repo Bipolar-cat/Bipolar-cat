@@ -1,5 +1,7 @@
 // ページ読み込み時に実行
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('diagnosis-text').innerText = "診断名: 双極症";
+});
     createButtons('mood-btns');
     createButtons('cond-btns');
 });
