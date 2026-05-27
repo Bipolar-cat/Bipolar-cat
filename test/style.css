@@ -18,7 +18,7 @@ body {
             overflow: hidden;
         }
 
-       h1 {
+        h1 {
             color: #5C6BC0;
             font-size: 28px;
             margin: 5px 0 0 0;
@@ -44,37 +44,35 @@ body {
             font-size: 15px;
         }
 
-/* 横スクロール用のラッパー */
-.scroll-wrapper {
-    overflow-x: auto;           /* 横スクロールを許可 */
-    white-space: nowrap;        /* 中身を改行させない */
-    padding: 2px 0 10px 5px;
-    -webkit-overflow-scrolling: touch; /* iOSで滑らかにスクロール */
-}
+        .scroll-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 2px 0 10px 5px;
+            -webkit-overflow-scrolling: touch;
+        }
 
-/* スクロールバーを非表示にする */
-.scroll-wrapper::-webkit-scrollbar { 
-    display: none; 
-}
+        .scroll-wrapper::-webkit-scrollbar { display: none; }
 
-/* ボタンのグループ（横並びにする） */
-.btn-group-circle {
-    display: inline-flex;       /* inline-flexで横一列に並べる */
-    gap: 12px;                  /* ボタン同士の間隔 */
-}
+        .btn-group-circle {
+            display: inline-flex;
+            gap: 12px;
+        }
 
-/* ボタン個別のスタイル */
-.btn-group-circle button {
-    flex: 0 0 52px;             /* サイズを52pxで固定（伸縮させない） */
-    height: 52px;
-    border-radius: 50%;
-    border: 1px solid #e5e7eb;
-    background: #ffffff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .btn-group-circle button {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         #mood-btns button.active {
             border: 2px solid #bfdbfe;
