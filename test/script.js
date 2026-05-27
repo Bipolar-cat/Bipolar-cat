@@ -26,13 +26,13 @@ if (select.value) {
     }
 }
 
-// 「変更」ボタンを押したとき：固定枠を隠し、選択肢を表示
+// 「変更」ボタン：固定枠を隠し、プルダウンを表示
 function showSelect() {
     document.getElementById('diagnosis-fixed-container').classList.add('hidden');
     document.getElementById('diagnosis-select-container').classList.remove('hidden');
 }
 
-// 「決定」ボタンを押したとき：選択した内容を固定枠に反映して表示
+// 「決定」ボタン：プルダウンの内容を反映し、固定枠に戻す
 function saveSelection() {
     const select = document.getElementById('diagnosis-select');
     const text = document.getElementById('diagnosis-text');
