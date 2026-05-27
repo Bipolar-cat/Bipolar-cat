@@ -9,20 +9,29 @@ function createButtons(id) {
     const cont = document.getElementById(id);
     if (!cont) return;
     
-    // CSSのスタイルを適用するためにこのクラスを追加
     cont.classList.add('btn-group-circle');
-    
     cont.innerHTML = ''; 
+    
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.type = "button";
         
         btn.onclick = function() {
-            // 同じ親要素内の全てのボタンから active を外す
+            // 1. 全てのボタンから 'active' クラスを削除
             cont.querySelectorAll('button').forEach(s => s.classList.remove('active'));
-            // クリックされたボタンに active をつける
+            // 2. クリックしたボタンに 'active' クラスを追加
             this.classList.add('active');
+            
+            // 3. (念のため) 明示的にスタイルをリセット＆適用
+            cont.querySelectorAll('button').forEach(b => {
+                b.style.backgroundColor = '';
+                b.style.border = '';
+                b.style.color = '';
+            });
+            this.style.backgroundColor = (id === 'mood-btns') ? '#eff6ff' : '#fffbeb';
+            this.style.border = (id === 'mood-btns') ? '2px solid #3b82f6' : '2px solid #fde68a';
+            this.style.color = (id === 'mood-btns') ? '#3b82f6' : '#f59e0b';
         };
         cont.appendChild(btn);
     }
