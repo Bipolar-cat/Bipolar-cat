@@ -43,15 +43,16 @@ body {
             color: #333;
             font-size: 15px;
         }
+                    
+        /* ボタン群の配置 */
+.scroll-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+}
 
-        .scroll-wrapper {
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 2px 0 10px 5px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .scroll-wrapper::-webkit-scrollbar { display: none; }
+.scroll-wrapper::-webkit-scrollbar { display: none; }
 
 /* 診断名を表示するBOXのスタイル */
 .fixed-box {
@@ -74,44 +75,43 @@ body {
     font-size: 14px;
     font-weight: bold;
 }
-        /* 10段階ボタンの横並びgapと配置 */
         .btn-group-circle {
-            display: inline-flex;
-            gap: 12px;
+    display: inline-flex;
+    gap: 8px; /* ボタンの間隔 */
         }
 
-        /* ボタンの大きさ（52px正円）とフォント・カラーを完全一致 */
-        .btn-group-circle button {
-            width: 52px;
-            height: 52px;
-            min-width: 52px;
-            border-radius: 50%;
-            border: 1px solid #e5e7eb;
-            background: #ffffff;
-            color: #9ca3af;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            padding: 0;
-        }
+        /* 52pxの円形ボタンの基本スタイル */
+.btn-group-circle button {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #9ca3af;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
 
-        #mood-btns button.active {
-            border: 2px solid #bfdbfe;
-            color: #3b82f6;
-            background-color: #eff6ff;
-            font-weight: bold;
-        }
+        /* 気分ボタン（青色）のアクティブ時 */
+#mood-btns button.active {
+    border: 2px solid #bfdbfe;
+    color: #3b82f6;
+    background-color: #eff6ff;
+    font-weight: bold;
+}
 
-        #cond-btns button.active {
-            border: 2px solid #fde68a;
-            color: #f59e0b;
-            background-color: #fffbeb;
-            font-weight: bold;
-        }
+/* 体調ボタン（オレンジ色）のアクティブ時 */
+#cond-btns button.active {
+    border: 2px solid #fde68a;
+    color: #f59e0b;
+    background-color: #fffbeb;
+    font-weight: bold;
+}
 
         /* 今の気持ちメモの大きさ（高さ50px、角丸12px、背景色）を完全一致 */
         textarea {
