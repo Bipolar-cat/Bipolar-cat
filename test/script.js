@@ -30,3 +30,24 @@ function createButtons(id) {
         cont.appendChild(btn);
     }
 }
+// Chart.js の設定の一部
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: dates, // 日付の配列
+        datasets: [{
+            label: '気分',
+            data: moodData // 過去データ全ての配列
+        }]
+    },
+    options: {
+        responsive: false, // 自動リサイズをオフにすることで、親要素の幅を維持
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                min: Math.max(0, moodData.length - 10) // 常に最新の10件が見えるように調整
+            }
+        }
+    }
+});
