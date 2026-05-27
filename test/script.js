@@ -67,3 +67,11 @@ function saveData() {
     alert('記録しました！');
     // この後、リスト表示やグラフ更新の処理を繋げていきます
 }
+// script.js 内の onclick 処理
+btn.onclick = function() {
+    // 1. 同じグループのボタンから 'active' を全て外す
+    container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    
+    // 2. 押したボタンに 'active' を付ける
+    btn.classList.add('active');
+};
