@@ -28,15 +28,21 @@ function lockDiagnosis() {
     }
 }
 
-// 診断名の変更
-function unlockDiagnosis() {
-    const selectContainer = document.getElementById('diagnosis-select-container');
-    const fixedContainer = document.getElementById('diagnosis-fixed-container');
+// 「変更」ボタンを押したとき：固定枠を隠し、選択肢を表示
+function showSelect() {
+    document.getElementById('diagnosis-fixed-container').classList.add('hidden');
+    document.getElementById('diagnosis-select-container').classList.remove('hidden');
+}
+
+// 「決定」ボタンを押したとき：選択した内容を固定枠に反映して表示
+function saveSelection() {
+    const select = document.getElementById('diagnosis-select');
+    const text = document.getElementById('diagnosis-text');
     
-    selectContainer.classList.remove('hidden');
-    selectContainer.style.display = 'block';
-    fixedContainer.classList.add('hidden');
-    fixedContainer.style.display = 'none';
+    text.innerText = '診断名: ' + select.value;
+    
+    document.getElementById('diagnosis-fixed-container').classList.remove('hidden');
+    document.getElementById('diagnosis-select-container').classList.add('hidden');
 }
 
 // ボタン生成ロジック
