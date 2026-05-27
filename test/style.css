@@ -111,3 +111,16 @@ h1 { color: #5C6BC0; font-size: 24px; }
     white-space: nowrap;    /* ボタンが改行されないようにする */
     margin-left: 10px;      /* テキストとの間に少し隙間を作る */
 }
+/* style.css の末尾に追記してください */
+
+#mood-btns button.active {
+    border-color: #3b82f6 !important;
+    background-color: #3b82f6 !important;
+    color: white !important;
+}
+
+#cond-btns button.active {
+    border-color: #f59e0b !important;
+    background-color: #f59e0b !important;
+    color: white !important;
+}
