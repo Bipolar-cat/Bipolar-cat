@@ -77,23 +77,31 @@ let selectedMood = 5, selectedCond = 5;
         createCircleButtons('mood-btns', 'mood');
         createCircleButtons('cond-btns', 'cond');
 
-// データの保存処理
-        function saveData() {
-            const note = document.getElementById('note').value;
-            
-            // 診断名の取得ロジック
-            let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
-            const isSelectVisible = document.getElementById('diagnosis-select-container').style.display !== 'none';
-            
-            if (isSelectVisible) {
-                const select = document.getElementById('diagnosis-select');
-                diagnosisVal = select.value;
-                if (diagnosisVal === 'その他') {
-                    const otherText = document.getElementById('diagnosis-other').value.trim();
-                    diagnosisVal = otherText ? `その他 (${otherText})` : 'その他';
-                }
-                localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
-            }
+// 選択モードへ切り替え
+function enableDiagnosisChange() {
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+}
+
+// 診断名の保存と確定
+function saveData() {
+    const note = document.getElementById('note').value;
+    
+    // 診断名の確定ロジック
+    let diagnosisVal = "";
+    const isSelectVisible = document.getElementById('diagnosis-select-container').style.display !== 'none';
+    
+    if (isSelectVisible) {
+        const select = document.getElementById('diagnosis-select');
+        diagnosisVal = select.value;
+        if (diagnosisVal === 'その他') {
+            const otherText = document.getElementById('diagnosis-other').value.trim();
+            diagnosisVal = otherText ? `その他 (${otherText})` : 'その他';
+        }
+        localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
+    } else {
+        diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY);
+    }
 
             const now = new Date();
             const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
