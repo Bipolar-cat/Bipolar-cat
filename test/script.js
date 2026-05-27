@@ -3,9 +3,23 @@ let myChart;
 
 // ページが読み込まれたら実行
 document.addEventListener('DOMContentLoaded', () => {
-    // グラフの初期描画
+    createButtons('mood-btns');
+    createButtons('cond-btns');
     renderChart();
 });
+
+function createButtons(id) {
+    const cont = document.getElementById(id);
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = i;
+        btn.onclick = () => {
+            cont.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        };
+        cont.appendChild(btn);
+    }
+}
 
 function renderChart() {
     const ctx = document.getElementById('myChart').getContext('2d');
@@ -49,12 +63,3 @@ window.addEventListener('load', () => {
                 fill: false
             }]
         },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-                y: { min: 0, max: 10 }
-            }
-        }
-    });
-});
