@@ -24,6 +24,3 @@
     font-size: 14px;
     font-weight: bold;
 }
-
-/* 非表示用クラス（JSで制御） */
-.hidden { display: none !important; }
