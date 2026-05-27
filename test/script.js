@@ -1,23 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 診断名の初期表示
-    const diagnosisText = document.getElementById('diagnosis-text');
-    if (diagnosisText) {
-        diagnosisText.innerText = "診断名: 双極症";
-    }
-
-    // ボタンの生成（引数にIDを渡す）
     createButtons('mood-btns');
     createButtons('cond-btns');
 });
 
-// 診断名の確定
 function lockDiagnosis() {
-    const select = document.getElementById('diagnosis-select');
-    const selectContainer = document.getElementById('diagnosis-select-container');
-    const fixedContainer = document.getElementById('diagnosis-fixed-container');
-    const diagnosisText = document.getElementById('diagnosis-text');
+    const sel = document.getElementById('diagnosis-select');
+    document.getElementById('diagnosis-text').innerText = '診断名: ' + sel.value;
+    document.getElementById('select-area').style.display = 'none';
+    document.getElementById('fixed-area').style.display = 'flex';
+}
 
-    if (select.value) {
+function unlockDiagnosis() {
+    document.getElementById('select-area').style.display = 'block';
+    document.getElementById('fixed-area').style.display = 'none';
+}
+
+if (select.value) {
         diagnosisText.innerText = '診断名: ' + select.value;
         // classListで制御
         selectContainer.classList.add('hidden');
@@ -45,25 +43,16 @@ function saveSelection() {
     document.getElementById('diagnosis-select-container').classList.add('hidden');
 }
 
-// ボタン生成ロジック
-function createButtons(containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    
+function createButtons(id) {
+    const cont = document.getElementById(id);
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        
-        // 初期値として「5」をアクティブにする
-        if (i === 5) {
-            btn.classList.add('active');
-        }
-
-        btn.onclick = function() {
-            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.onclick = () => {
+            cont.querySelectorAll('button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         };
-        container.appendChild(btn);
+        cont.appendChild(btn);
     }
 }
 
