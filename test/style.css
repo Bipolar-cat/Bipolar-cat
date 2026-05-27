@@ -10,10 +10,11 @@
 .fixed-box { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f9fafb; border-radius: 8px; }
 
 /* タイトルを青くする */
-h1 {
-    color: #3b82f6;
-    font-size: 24px;
-}
+ h1 {
+            color: #5C6BC0;
+            font-size: 28px;
+            margin: 5px 0 0 0;
+ }
 
 /* ボタンエリアが表示されるように確保 */
 .scroll-wrapper {
