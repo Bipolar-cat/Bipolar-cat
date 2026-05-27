@@ -16,6 +16,13 @@
             margin: 5px 0 0 0;
  }
 
+.subtitle {
+            color: #888;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+}
+
 /* ボタンエリアが表示されるように確保 */
 .scroll-wrapper {
     display: flex;
