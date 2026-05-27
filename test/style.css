@@ -44,25 +44,22 @@ body {
             font-size: 15px;
         }
 
-        .scroll-wrapper {
-    overflow-x: auto; /* 横スクロールを許可 */
-    white-space: nowrap; /* ボタンを横一列に並べる */
+        /* ボタンを囲むエリア（スクロール担当） */
+.scroll-wrapper {
+    overflow-x: auto;          /* 横スクロールを許可 */
+    white-space: nowrap;       /* 中身を改行させない */
+    display: block;            /* ブロック要素として扱う */
+    width: 100%;               /* コンテナの幅に合わせる */
     padding: 10px 0;
-    margin-bottom: 10px;
-    -webkit-overflow-scrolling: touch; /* iOSでの滑らかなスクロール */
-    display: flex; /* Flexboxで整列 */
-    gap: 10px; /* ボタン同士の間隔 */
+    -webkit-overflow-scrolling: touch; /* スクロールを滑らかにする */
 }
 
-/* スクロールバーを隠す（見栄えのため） */
-.scroll-wrapper::-webkit-scrollbar {
-    display: none;
-}
-
+/* ボタンを並べるグループ */
 .btn-group-circle {
-    display: inline-flex;
+    display: inline-flex;      /* これが重要：横並びを強制 */
     gap: 12px;
-    padding: 5px; /* スクロール時に端が切れないよう少し余白を入れる */
+    padding-left: 5px;         /* 左端の余白 */
+    padding-right: 5px;        /* 右端の余白 */
 }
 
 .btn-group-circle button {
