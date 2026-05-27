@@ -39,34 +39,37 @@ h1 { color: #5C6BC0; font-size: 24px; }
     border: none; /* 線を消す */
 }
 
+/* ボタンの共通設定 */
 .btn-group-circle button {
     width: 52px;
     height: 52px;
     min-width: 52px;
     border-radius: 50%;
-    border: 1px solid #ddd;
+    border: 2px solid #e5e7eb; /* 初期状態の枠線 */
     background: white;
-    color: #333;
+    color: #9ca3af; /* 未選択時の文字色 */
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    margin: 0;
+    transition: all 0.2s ease; /* 色が変わる時のアニメーション */
 }
 
-/* 気分ボタン（青） */
+/* --- 気分ボタン（青） --- */
 #mood-btns button.active {
-    background-color: #dbeafe;
-    border-color: #3b82f6;
-    color: #2563eb;
+    border-color: #3b82f6; /* 青色の枠 */
+    background-color: #3b82f6; /* 青色で塗りつぶし */
+    color: white; /* 文字は白 */
 }
 
-/* 体調ボタン（オレンジ） */
+/* --- 体調ボタン（オレンジ） --- */
 #cond-btns button.active {
-    background-color: #ffedd5;
-    border-color: #f59e0b;
-    color: #d97706;
+    border-color: #f59e0b; /* オレンジ色の枠 */
+    background-color: #f59e0b; /* オレンジ色で塗りつぶし */
+    color: white; /* 文字は白 */
 }
 
 /* グレーの線を消すための設定 */
