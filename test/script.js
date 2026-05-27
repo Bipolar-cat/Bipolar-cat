@@ -6,24 +6,34 @@ document.addEventListener('DOMContentLoaded', () => {
     renderChart();
 });
 
+// ボタン生成関数
 function createButtons(id) {
     const cont = document.getElementById(id);
-    if (!cont) return;
-    cont.innerHTML = ''; 
+    if (!cont) {
+        console.error("要素が見つかりません: " + id);
+        return;
+    }
+    cont.innerHTML = ''; // 中身を一度クリア
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.onclick = () => {
-            cont.querySelectorAll('button').forEach(b => {
-                b.style.background = '';
-                b.classList.remove('active');
-            });
-            btn.style.background = '#e0f2fe';
-            btn.classList.add('active');
+        btn.type = "button"; // ボタンタイプを指定
+        btn.onclick = function() {
+            // 他のボタンの active を外す
+            const siblings = cont.querySelectorAll('button');
+            siblings.forEach(s => s.classList.remove('active'));
+            // 自分に active をつける
+            this.classList.add('active');
         };
         cont.appendChild(btn);
     }
 }
+
+// 読み込み完了後にボタンを作成
+window.addEventListener('load', () => {
+    createButtons('mood-btns');
+    createButtons('cond-btns');
+});
 
 function renderChart() {
     const ctx = document.getElementById('myChart')?.getContext('2d');
