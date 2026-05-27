@@ -20,17 +20,21 @@ body {
         }
 
         h1 {
-            color: #5C6BC0;
-            font-size: 28px;
-            margin: 5px 0 0 0;
-        }
+        /* タイトルとサブタイトルを中央へ */
+h1 {
+    color: #5C6BC0;
+    font-size: 28px;
+    margin: 5px 0 0 0;
+    text-align: center; /* 念のため追加 */
+}
 
-        .subtitle {
-            color: #888;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+.subtitle {
+    color: #888;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center; /* 念のため追加 */
+}
         .input-section {
             padding: 0 20px;
         }
