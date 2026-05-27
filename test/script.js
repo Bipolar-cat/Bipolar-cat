@@ -1,3 +1,31 @@
+// グラフ描画用インスタンスを保持する変数
+let myChartInstance = null;
+
+// ページ読み込み時にグラフを確実に描画する処理
+function initChart() {
+    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+    const canvas = document.getElementById('myChart');
+    if (!canvas) return; // canvasタグが見つからないなら何もしない
+
+    const ctx = canvas.getContext('2d');
+    
+    // 既存のグラフがあれば削除してリセット
+    if (myChartInstance) {
+        myChartInstance.destroy();
+    }
+
+    myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date),
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6' },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+}
 // --- 1. グローバル変数の定義エリア ---
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
