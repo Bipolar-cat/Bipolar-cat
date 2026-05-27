@@ -16,7 +16,8 @@
             padding: 20px 0;
             border-radius: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
+            text-align: center; /* コンテナ内のテキストをすべて中央寄せにする */
+        }
             overflow: hidden;
         }
 
@@ -24,8 +25,12 @@
 h1 {
     color: #5C6BC0;
     font-size: 24px;
-    margin: 10px 0 5px 0;
+    margin: 20px 0 5px 0; /* 上下の余白を調整 */
     font-weight: bold;
+}
+
+p {
+    margin: 0 0 20px 0; /* 下の余白を調整して間隔をあける */
 }
 
 .subtitle {
