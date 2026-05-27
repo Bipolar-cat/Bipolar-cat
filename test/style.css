@@ -3,18 +3,33 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f8f9
 .container { max-width: 450px; width: 95%; margin: 20px auto; background: white; padding: 20px; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
 .hidden { display: none !important; }
 
-/* --- ボタン共通設定 --- */
-.btn-group-circle { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0; border: none; }
+/* ボタンのグループ（コンテナ） */
+.btn-group-circle {
+    display: flex !important; /* 強制的に横並びにする */
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin: 0;
+    width: 100%;
+}
+
+/* ボタンそのものの定義 */
 .btn-group-circle button {
-    width: 52px; height: 52px; min-width: 52px;
+    width: 52px;
+    height: 52px;
+    min-width: 52px; /* スマホで潰れないようにする */
     border-radius: 50%;
     border: 2px solid #e5e7eb;
     background: white;
     color: #9ca3af;
     cursor: pointer;
-    font-size: 16px; font-weight: bold;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s ease;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex; /* これがないと数字が中央に来ない */
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0; /* ボタンが小さくならないようにする */
 }
 
 /* --- 【最優先】選択時の色設定 --- */
