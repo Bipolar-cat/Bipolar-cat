@@ -1,29 +1,42 @@
-.container { max-width: 450px; margin: 0 auto; background: white; padding: 20px; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+.container {
+    max-width: 450px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
 .fixed-box { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f9fafb; border-radius: 8px; }
 
 .scroll-wrapper {
     display: flex;
-    overflow-x: auto; /* 横スクロールを可能にする */
+    overflow-x: auto;
     gap: 8px;
     padding: 10px 0;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
 
-/* 数字ボタンの形 */
+.scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* 数字ボタンのスタイル */
 .scroll-wrapper button {
-    flex: 0 0 40px; /* ボタンのサイズ */
+    flex: 0 0 40px;
     height: 40px;
     border-radius: 50%;
     border: 1px solid #ddd;
     background: #fff;
     cursor: pointer;
+    font-size: 14px;
 }
 
-/* 選択したボタンの色 */
+/* 選択時の色（完成形に合わせる） */
 .scroll-wrapper button.active {
-    background-color: #3b82f6 !important;
-    color: white;
-    border-color: #3b82f6;
+    background-color: #eff6ff;
+    border: 2px solid #3b82f6;
+    color: #3b82f6;
 }
 .change-btn { color: #3b82f6; border: none; background: none; cursor: pointer; }
