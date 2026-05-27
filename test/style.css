@@ -1,38 +1,64 @@
-.container {
-    max-width: 450px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-}
-.fixed-box { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f9fafb; border-radius: 8px; }
+body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-/* タイトルを青くする */
- h1 {
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
             color: #5C6BC0;
             font-size: 28px;
             margin: 5px 0 0 0;
- }
+        }
 
-.subtitle {
+        .subtitle {
             color: #888;
             font-size: 0.75rem;
             font-weight: bold;
             margin-bottom: 15px;
-}
+        }
 
-/* ボタンエリアが表示されるように確保 */
-.scroll-wrapper {
-    display: flex;
-    overflow-x: auto;
-    gap: 8px;
-    padding: 10px 0;
-    margin-bottom: 10px; /* 余白を追加 */
-}
+        .input-section {
+            padding: 0 20px;
+        }
 
-.btn-group-circle button {
+        .label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 8px 0 5px 5px;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .scroll-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 2px 0 10px 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scroll-wrapper::-webkit-scrollbar { display: none; }
+
+        .btn-group-circle {
+            display: inline-flex;
+            gap: 12px;
+        }
+
+        .btn-group-circle button {
             width: 52px;
             height: 52px;
             min-width: 52px;
@@ -46,58 +72,88 @@
             display: flex;
             align-items: center;
             justify-content: center;
-}
+        }
 
-.scroll-wrapper::-webkit-scrollbar {
-    display: none;
-}
+        #mood-btns button.active {
+            border: 2px solid #bfdbfe;
+            color: #3b82f6;
+            background-color: #eff6ff;
+            font-weight: bold;
+        }
 
-/* 数字ボタンのスタイル */
-.scroll-wrapper button {
-    flex: 0 0 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background: #fff;
-    cursor: pointer;
-    font-size: 14px;
-}
+        #cond-btns button.active {
+            border: 2px solid #fde68a;
+            color: #f59e0b;
+            background-color: #fffbeb;
+            font-weight: bold;
+        }
 
-/* 選択時の色（完成形に合わせる） */
-.scroll-wrapper button.active {
-    background-color: #eff6ff;
-    border: 2px solid #3b82f6;
-    color: #3b82f6;
-}
-.change-btn { color: #3b82f6; border: none; background: none; cursor: pointer; }
+        textarea {
+            width: 100%;
+            height: 50px;
+            margin: 5px 0 15px 0;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: none;
+            background-color: #f3f4f6;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
+        }
 
-/* メモ欄のスタイル */
-textarea {
-    width: 100%;
-    height: 80px;
-    margin: 15px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box; /* 幅をはみ出さないようにする */
-}
+        .save-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: block;
+        }
 
-/* 記録するボタンのスタイル */
-.save-btn {
-    width: 100%;
-    padding: 15px;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-}
+        .chart-container {
+            width: 100%;
+            height: 350px;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 15px;
+        }
 
-.scroll-container {
-    overflow-x: auto; /* 横スクロールを許可 */
-    white-space: nowrap;
-    border: 1px solid #ddd;
-    padding: 10px;
-}
+        h3 {
+            margin-top: 30px;
+            color: #444;
+            font-size: 18px;
+            padding: 0 20px;
+        }
+
+        .log-list {
+            padding: 0 20px;
+        }
+
+        .log-item {
+            text-align: left;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            font-size: 14px;
+            transition: background-color 0.4s, border-color 0.4s;
+        }
+
+        .highlight {
+            background-color: #fff9c4 !important;
+            border-color: #fbc02d !important;
+        }
+
+        .log-date {
+            color: #4b5563;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
