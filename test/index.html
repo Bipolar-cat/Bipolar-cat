@@ -27,29 +27,6 @@
             <label class="label">体の調子？ (1〜10)</label>
             <div id="cond-btns" class="scroll-wrapper"></div>
         </div>
-        ```
-
-そして、ボタンを実際に表示させるために、`script.js` に以下のコードを一番下に追記してください。
-
-### `script.js` に追加
-```javascript
-document.addEventListener('DOMContentLoaded', () => {
-    createButtons('mood-btns');
-    createButtons('cond-btns');
-});
-
-function createButtons(id) {
-    const cont = document.getElementById(id);
-    for (let i = 1; i <= 10; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        btn.onclick = () => {
-            cont.querySelectorAll('button').forEach(b => b.style.background = '#fff');
-            btn.style.background = '#eff6ff';
-        };
-        cont.appendChild(btn);
-    }
-}
         </div>
     </div>
 
