@@ -8,48 +8,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div class="input-section" style="margin-bottom: 20px;">
-    
-    <div id="diagnosis-container" class="input-section" style="margin-bottom: 20px;">
-    
-    <div id="diagnosis-fixed" class="fixed-box">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未選択</span>
-        <button type="button" class="change-btn" onclick="showSelect()">変更</button>
+    <div id="diagnosis-area" class="input-section">
+        </div>
+
+    <div class="input-section">
+        <label class="label">今の気分？ (1〜10)</label>
+        <div id="mood-btns" class="scroll-wrapper btn-group-circle"></div>
+        
+        <label class="label">体の調子？ (1〜10)</label>
+        <div id="cond-btns" class="scroll-wrapper btn-group-circle"></div>
     </div>
 
-    <div id="diagnosis-select-area" style="display: none; margin: 0 20px;">
-        <select id="diagnosis-select" style="width: 100%; padding: 10px; border-radius: 8px;">
-                    <option value="">主な診断名を選択</option>
-                    <option value="未診断（健常者）">未診断（健常者）</option>
-                    <option value="うつ病">うつ病</option>
-                    <option value="双極症">双極症</option>
-                    <option value="統合失調症">統合失調症</option>
-                    <option value="不安障害">不安障害</option>
-                    <option value="適応障害">適応障害</option>
-                    <option value="発達障害">発達障害</option>
-                    <option value="その他">その他</option>
-                </select>
-        <button type="button" onclick="saveDiagnosis()" style="width: 100%; margin-top: 8px;">決定</button>
-    </div>
-        </div>
-            <div id="fixed-area" class="fixed-box" style="display: none;">
-                <span id="diagnosis-text"></span>
-                <button class="change-btn" onclick="unlockDiagnosis()">変更</button>
-            </div>
-        </div>
-
-        <div class="input-section">
-            <label class="label">今の気分？ (1〜10)</label>
-            <div class="scroll-wrapper"><div id="mood-btns" class="btn-group-circle"></div></div>
-            <label class="label">体の調子？ (1〜10)</label>
-            <div class="scroll-wrapper"><div id="cond-btns" class="btn-group-circle"></div></div>
-        </div>
-
-        <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+    <div class="input-section">
+        <textarea id="note"></textarea>
         <button class="save-btn" onclick="saveData()">記録する</button>
+    </div>
     </div>
     <script src="script.js"></script>
 </body>
