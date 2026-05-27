@@ -1,20 +1,53 @@
+// データの保存（LocalStorageを使用）
+let records = JSON.parse(localStorage.getItem('innerNoteRecords')) || [];
+
+function saveData() {
+    const mood = document.querySelector('#mood-btns button.active')?.innerText;
+    const cond = document.querySelector('#cond-btns button.active')?.innerText;
+    const note = document.getElementById('note').value;
+
+    if (!mood || !cond) { alert('気分と調子を選んでください'); return; }
+
+    const newRecord = { date: new Date().toLocaleString(), mood, cond, note };
+    records.push(newRecord);
+    localStorage.setItem('innerNoteRecords', JSON.stringify(records));
+    
+    updateChart(); // グラフを更新
+    alert('記録しました！');
+}
+
+// グラフ描画
+let myChart;
+function updateChart() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const labels = records.map(r => r.date);
+    const moodData = records.map(r => r.mood);
+    const condData = records.map(r => r.cond);
+
+    if (myChart) myChart.destroy(); // 古いグラフを削除
+
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                { label: '気分', data: moodData, borderColor: '#3b82f6' },
+                { label: '体調', data: condData, borderColor: '#f59e0b' }
+            ]
+        },
+        options: {
+            responsive: false,
+            scales: { x: { min: Math.max(0, records.length - 10) } } // 最新10件を表示
+        }
+    });
+}
+
+// 初期化
 document.addEventListener('DOMContentLoaded', () => {
     createButtons('mood-btns');
     createButtons('cond-btns');
+    updateChart();
 });
-
-// 診断名の表示切り替え
-function showSelect() {
-    document.getElementById('fixed-area').style.display = 'none';
-    document.getElementById('select-area').style.display = 'block';
-}
-
-function saveDiagnosis() {
-    const sel = document.getElementById('diagnosis-select');
-    document.getElementById('diagnosis-text').innerText = '診断名: ' + sel.value;
-    document.getElementById('fixed-area').style.display = 'flex';
-    document.getElementById('select-area').style.display = 'none';
-}
 
 function createButtons(id) {
     const cont = document.getElementById(id);
@@ -22,32 +55,42 @@ function createButtons(id) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.onclick = () => {
-            // まず全てのボタンから 'active' クラスを外す
             cont.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            // 押したボタンに 'active' クラスを付ける
             btn.classList.add('active');
         };
         cont.appendChild(btn);
     }
 }
-// Chart.js の設定の一部
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: dates, // 日付の配列
+
+// グラフ描画関数
+let myChart;
+function renderChart() {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    
+    // 仮のデータ（実際はここに保存したデータが入ります）
+    const data = {
+        labels: ['5/25', '5/26'],
         datasets: [{
             label: '気分',
-            data: moodData // 過去データ全ての配列
+            data: [5, 8],
+            borderColor: '#3b82f6',
+            fill: false
         }]
-    },
-    options: {
-        responsive: false, // 自動リサイズをオフにすることで、親要素の幅を維持
-        maintainAspectRatio: false,
-        scales: {
-            x: {
-                min: Math.max(0, moodData.length - 10) // 常に最新の10件が見えるように調整
-            }
+    };
+
+    if (myChart) myChart.destroy();
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false
         }
-    }
+    });
+}
+
+// ページ読み込み時にグラフを表示
+document.addEventListener('DOMContentLoaded', () => {
+    // ...既存の処理...
+    renderChart();
 });
