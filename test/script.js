@@ -54,16 +54,39 @@ let selectedMood = 5;
         createCircleButtons('mood-btns', 'mood');
         createCircleButtons('cond-btns', 'cond');
 
-        function saveData() {
-            const note = document.getElementById('note').value;
-            const now = new Date();
-            const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-            const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
-            logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note });
-            localStorage.setItem('innernote_vfinal_400_logs', JSON.stringify(logs));
-            alert("記録しました！");
-            location.reload();
-        }
+// ページ読み込み時に診断名の初期値を設定
+function loadDiagnosis() {
+    const savedDiagnosis = localStorage.getItem('innernote_last_diagnosis');
+    if (savedDiagnosis) {
+        document.getElementById('diagnosis-select').value = savedDiagnosis;
+    }
+}
+
+        // 記録保存時に診断名も保存する
+function saveData() {
+    const note = document.getElementById('note').value;
+    const diagnosis = document.getElementById('diagnosis-select').value;
+    
+    // 診断名を次回のために保存
+    localStorage.setItem('innernote_last_diagnosis', diagnosis);
+    
+    // 以下、従来の保存処理
+    const now = new Date();
+    const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+    const logs = JSON.parse(localStorage.getItem('innernote_logs') || '[]');
+    
+    logs.push({ 
+        date: dateStr, 
+        diagnosis: diagnosis, 
+        mood: selectedMood, 
+        cond: selectedCond, 
+        note: note 
+    });
+    
+    localStorage.setItem('innernote_logs', JSON.stringify(logs));
+    alert("記録しました！");
+    location.reload();
+}
 
         window.onload = () => {
             const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
