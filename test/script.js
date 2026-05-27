@@ -33,3 +33,28 @@ function renderChart() {
         }
     });
 }
+
+// グラフ描画を確実に行うための修正
+window.addEventListener('load', () => {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['5/25', '5/26', '5/27'],
+            datasets: [{
+                label: '気分',
+                data: [5, 8, 6],
+                borderColor: '#3b82f6',
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                y: { min: 0, max: 10 }
+            }
+        }
+    });
+});
