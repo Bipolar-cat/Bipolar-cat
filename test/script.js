@@ -31,10 +31,33 @@ window.onload = () => {
     renderScrollableChart(logs);
 };
 
-let selectedMood = 5;
-        let selectedCond = 5;
-        let highlightTimeout = null; // タイマー管理用
+let selectedMood = 5, selectedCond = 5;
+        let highlightTimeout = null;
+        
+        // ローカルストレージキーの定義
+        const STORAGE_KEY = 'innernote_vfinal_400_logs';
+        const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
+        // その他入力欄の切り替え
+        function toggleOtherDiagnosis() {
+            const select = document.getElementById('diagnosis-select');
+            const otherInput = document.getElementById('diagnosis-other');
+            if (select.value === 'その他') {
+                otherInput.style.display = 'block';
+                otherInput.focus();
+            } else {
+                otherInput.style.display = 'none';
+                otherInput.value = '';
+            }
+        }
+
+        // 変更ボタン押下時
+        function enableDiagnosisChange() {
+            document.getElementById('diagnosis-fixed-container').style.display = 'none';
+            document.getElementById('diagnosis-select-container').style.display = 'block';
+        }
+
+        // 10段階サークルスクロールボタンの生成
         function createCircleButtons(containerId, type) {
             const container = document.getElementById(containerId);
             for (let i = 1; i <= 10; i++) {
@@ -54,118 +77,199 @@ let selectedMood = 5;
         createCircleButtons('mood-btns', 'mood');
         createCircleButtons('cond-btns', 'cond');
 
-// ページ読み込み時に診断名の初期値を設定
-function loadDiagnosis() {
-    const savedDiagnosis = localStorage.getItem('innernote_last_diagnosis');
-    if (savedDiagnosis) {
-        document.getElementById('diagnosis-select').value = savedDiagnosis;
-    }
-}
-
-        // 記録保存時に診断名も保存する
-function saveData() {
-    const note = document.getElementById('note').value;
-    const diagnosis = document.getElementById('diagnosis-select').value;
-    
-    // 診断名を次回のために保存
-    localStorage.setItem('innernote_last_diagnosis', diagnosis);
-    
-    // 以下、従来の保存処理
-    const now = new Date();
-    const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
-    const logs = JSON.parse(localStorage.getItem('innernote_logs') || '[]');
-    
-    logs.push({ 
-        date: dateStr, 
-        diagnosis: diagnosis, 
-        mood: selectedMood, 
-        cond: selectedCond, 
-        note: note 
-    });
-    
-    localStorage.setItem('innernote_logs', JSON.stringify(logs));
-    alert("記録しました！");
-    location.reload();
-}
-
-        window.onload = () => {
-            const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
-            const last10 = logs.slice(-10);
+// データの保存処理
+        function saveData() {
+            const note = document.getElementById('note').value;
             
+            // 診断名の取得ロジック
+            let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
+            const isSelectVisible = document.getElementById('diagnosis-select-container').style.display !== 'none';
+            
+            if (isSelectVisible) {
+                const select = document.getElementById('diagnosis-select');
+                diagnosisVal = select.value;
+                if (diagnosisVal === 'その他') {
+                    const otherText = document.getElementById('diagnosis-other').value.trim();
+                    diagnosisVal = otherText ? `その他 (${otherText})` : 'その他';
+                }
+                localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
+            }
+
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            
+            logs.push({ 
+                ts: now.getTime(), 
+                date: dateStr, 
+                diagnosis: diagnosisVal,
+                mood: selectedMood, 
+                cond: selectedCond, 
+                note: note 
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+            alert("記録しました！");
+            location.reload();
+        }
+
+        // summary (一定期間まとめ) 生成ロジック
+        function generateSummary() {
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            if (logs.length === 0) return alert("まとめを作成するための記録がありません。");
+
+            const lastSummaryTs = parseInt(localStorage.getItem('last_summary_ts_final') || '0');
+            let targets = logs.filter(l => (l.ts || new Date(l.date).getTime()) > lastSummaryTs);
+            
+            if (targets.length === 0) {
+                if(confirm("前回作成以降の新しい記録がありません。直近のデータを再集計しますか？")) {
+                    targets = logs.slice(-10); 
+                } else {
+                    return;
+                }
+            }
+            
+            const avgMood = (targets.reduce((acc, curr) => acc + curr.mood, 0) / targets.length).toFixed(1);
+            const avgCond = (targets.reduce((acc, curr) => acc + curr.cond, 0) / targets.length).toFixed(1);
+            
+// 最も多く記録されていた診断名を集計抽出
+            const diagCounts = {};
+            targets.forEach(t => {
+                const d = t.diagnosis || '指定なし';
+                diagCounts[d] = (diagCounts[d] || 0) + 1;
+            });
+            const topDiagnosis = Object.keys(diagCounts).reduce((a, b) => diagCounts[a] > diagCounts[b] ? a : b, '指定なし');
+
+            const notesList = targets.filter(l => l.note && l.note.trim() !== '').map(l => `・ ${l.note}`).join('<br>');
+            const periodStr = `${targets[0].date.split(' ')[0]} ～ ${targets[targets.length-1].date.split(' ')[0]}`;
+
+            document.getElementById('summary-card').style.display = 'block';
+            document.getElementById('summary-content').innerHTML = `
+                <div class="report-item"><span class="report-label">対象期間:</span> ${periodStr} (${targets.length}件の記録)</div>
+                <div class="report-item"><span class="report-label">主な診断名:</span> ${topDiagnosis}</div>
+                <div class="report-item"><span class="report-label">平均気分:</span> ${avgMood} / 10.0 (${getEvaluationLabel(avgMood)})</div>
+                <div class="report-item"><span class="report-label">平均体調:</span> ${avgCond} / 10.0 (${getEvaluationLabel(avgCond)})</div>
+                <div class="report-item" style="margin-top: 8px;"><span class="report-label">期間中のメモ:</span></div>
+                <div class="report-notes">${notesList || '（この期間のメモはありません）'}</div>
+            `;
+
+            const now = new Date();
+            const nowStr = `${now.getFullYear()}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            localStorage.setItem('last_summary_ts_final', now.getTime());
+            localStorage.setItem('last_summary_str_final', nowStr);
+            document.getElementById('summary-ts').innerText = `前回まとめ作成：${nowStr}`;
+        }
+
+        function getEvaluationLabel(val) {
+            if (val >= 7.5) return '良好';
+            if (val >= 4.5) return '普通';
+            return '低下気味';
+        }
+
+      window.onload = () => {
+            // 診断名の固定表示復元ロジック
+            const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
+            if (savedDiagnosis) {
+                document.getElementById('diagnosis-select-container').style.display = 'none';
+                document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+                document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
+                const select = document.getElementById('diagnosis-select');
+                if (savedDiagnosis.startsWith("その他 (")) {
+                    select.value = "その他";
+                } else {
+                    select.value = savedDiagnosis;
+                }
+            } else {
+                document.getElementById('diagnosis-fixed-container').style.display = 'none';
+                document.getElementById('diagnosis-select-container').style.display = 'block';
+            }
+
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const logList = document.getElementById('log-list');
+            
+            const savedStr = localStorage.getItem('last_summary_str_final');
+            if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
+
+            // 履歴リストの描画
+            logs.slice().reverse().forEach(l => {
+                const div = document.createElement('div');
+                div.className = 'log-item';
+                const itemTs = l.ts || new Date(l.date).getTime();
+                div.id = `log-${itemTs}`;
+                
+                const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
+                div.innerHTML = `<span class="log-date">${l.date}${diagBadge}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+                logList.appendChild(div);
+            });
+
+            // グラフの描画
+            const allLogs = logs; // 全データを使用する
+
+　　　　　　　// datasets の中身も同様に allLogs を使います
+　　　　　　　// label: '気分', data: allLogs.map(l => l.mood),
+　　　　　　　// label: '体調', data: allLogs.map(l => l.cond),
             const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
+            
+            new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: last10.map(l => l.date),
+                    labels: allLogs.map(l => l.date),
                     datasets: [
                         { 
-                            label: '気分', data: last10.map(l => l.mood), 
+                            label: '気分', data: allLogs.map(l => l.mood), // allLogs
                             borderColor: '#3b82f6', backgroundColor: '#3b82f6',
-                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6'
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6',
+                            pointHitRadius: 25
                         },
                         { 
-                            label: '体調', data: last10.map(l => l.cond), 
+                            label: '体調', data: allLogs.map(l => l.cond), // allLogs に変更
                             borderColor: '#f59e0b', backgroundColor: '#f59e0b',
-                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b'
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b',
+                            pointHitRadius: 25
                         }
                     ]
                 },
-                options: {
+options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     layout: { padding: { left: 10, right: 20, bottom: 20 } },
-                    onClick: (evt, elements) => {
-                        if (elements.length > 0) {
-                            const index = elements[0].index;
-                            const clickedDate = last10[index].date;
-                            scrollToLog(clickedDate);
+                    interaction: { mode: 'index', intersect: false },
+                    onClick: (evt, elements, chart) => {
+                        const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                        if (activePoints.length > 0) {
+                            const index = activePoints[0].index;
+                            const logData = last10[index];
+                            const targetTimestamp = logData.ts || new Date(logData.date).getTime();
+                            scrollToLog(targetTimestamp);
                         }
                     },
                     scales: {
-                        x: { ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 } },
+                        x: { 
+                            ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
+                            grid: { display: false }
+                        },
                         y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
                     },
                     plugins: { legend: { position: 'top' } }
                 }
             });
 
-            function scrollToLog(dateStr) {
+            function scrollToLog(timestamp) {
                 const logItems = document.querySelectorAll('.log-item');
+                const targetElement = document.getElementById(`log-${timestamp}`);
                 
-                // 1. 進行中のタイマーを停止
                 if (highlightTimeout) clearTimeout(highlightTimeout);
                 
-                // 2. 全てのハイライトを強制的に即時削除（再アニメーションを可能にする）
                 logItems.forEach(item => {
-                    item.style.transition = 'none'; // 一瞬 transition を消して即リセット
+                    item.style.transition = 'none';
                     item.classList.remove('highlight');
-                    item.offsetHeight; // リフローを強制してスタイルを適用
-                    item.style.transition = ''; // transition を戻す
+                    item.offsetHeight;
+                    item.style.transition = '';
                 });
 
-                // 3. 該当項目を探してスクロール＆ハイライト
-                logItems.forEach(item => {
-                    if (item.querySelector('.log-date').innerText === dateStr) {
-                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        
-                        // 微小な遅延を入れることでブラウザに「新しいクラスがついた」と認識させる
-                        setTimeout(() => {
-                            item.classList.add('highlight');
-                        }, 10);
-
-                        // 4. 数秒後に消去するタイマーを設定
-                        highlightTimeout = setTimeout(() => {
-                            item.classList.remove('highlight');
-                        }, 3000);
-                    }
-                });
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(() => { targetElement.classList.add('highlight'); }, 10);
+                    highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
+                }
             }
-
-            const logList = document.getElementById('log-list');
-            logs.slice().reverse().forEach(l => {
-                const div = document.createElement('div');
-                div.className = 'log-item';
-                div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note}`;
-                logList.appendChild(div);
-            });
         };
