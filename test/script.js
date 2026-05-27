@@ -25,6 +25,8 @@ function renderScrollableChart(logs) {
     });
 }
 
+// 全ての記録データを last10 という変数として定義する
+const last10 = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
 // 3. 実行（ページ読み込み時に実行する）
 window.onload = () => {
     const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
