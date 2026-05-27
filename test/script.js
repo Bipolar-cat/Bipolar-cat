@@ -3,18 +3,23 @@ let myChart;
 
 // ページが読み込まれたら実行
 document.addEventListener('DOMContentLoaded', () => {
+    // これがボタンを作る指令です
     createButtons('mood-btns');
     createButtons('cond-btns');
+    // これがグラフを描く指令です
     renderChart();
 });
 
 function createButtons(id) {
     const cont = document.getElementById(id);
+    if (!cont) return; // エラー防止
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.onclick = () => {
-            cont.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            // ボタンを押した時の色変え
+            cont.querySelectorAll('button').forEach(b => b.style.background = '');
+            btn.style.background = '#e0f2fe';
             btn.classList.add('active');
         };
         cont.appendChild(btn);
