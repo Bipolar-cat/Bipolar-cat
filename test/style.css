@@ -23,7 +23,7 @@
 /* タイトルとサブタイトルのスタイル（念のため確認） */
 h1 {
     color: #5C6BC0;
-    font-size: 24px;
+    font-size: 28px;
     margin: 20px 0 5px 0; /* 上下の余白を調整 */
     font-weight: bold;
 }
