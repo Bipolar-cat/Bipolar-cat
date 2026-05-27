@@ -33,15 +33,14 @@ let myChartInstance = null; // ★これを追加
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// --- 2. グラフ描画専用関数（★ここを挿入！） ---
+
+// --- 2. グラフ描画関数 ---
 function renderChart(logs) {
     const canvas = document.getElementById('myChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     
-    if (myChartInstance) {
-        myChartInstance.destroy(); // 古いグラフを消す
-    }
+    if (myChartInstance) myChartInstance.destroy();
 
     myChartInstance = new Chart(ctx, {
         type: 'line',
@@ -52,20 +51,10 @@ function renderChart(logs) {
                 { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            onClick: (evt, elements, chart) => {
-                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                if (activePoints.length > 0) {
-                    const index = activePoints[0].index;
-                    const logData = logs[index];
-                    scrollToLog(logData.ts || new Date(logData.date).getTime());
-                }
-            }
-        }
+        options: { responsive: true, maintainAspectRatio: false }
     });
 }
+
 // ★この関数を丸ごと挿入
 function renderChart(logs) {
     const canvas = document.getElementById('myChart');
@@ -90,17 +79,14 @@ function renderChart(logs) {
     });
 }
 
-// --- 3. ページ読み込み時の処理 ---
+// --- 3. ページ読み込み時 ---
 window.onload = () => {
-    // 診断名の復元ロジック（そのまま）
-    // ...
-    
-    // ログリストの描画ロジック（そのまま）
-    // ...
-
-    // ★グラフの呼び出しをこの1行に変更！
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    renderChart(logs); 
+    
+    // グラフ描画を実行
+    renderChart(logs);
+    
+    // ... 他のリスト生成処理など ...
 };
 
 // --- 4. その他の関数（saveDataなど）は一番下にそのまま置く ---
