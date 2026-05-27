@@ -5,37 +5,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ボタン生成関数
-function createButtons(id) {
-    const cont = document.getElementById(id);
-    if (!cont) return;
-    
-    cont.classList.add('btn-group-circle');
-    cont.innerHTML = ''; 
+function createCircleButtons(containerId, type) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
     
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.type = "button";
+        btn.type = "button"; // フォーム送信を防ぐ
+        if (i === 5) btn.classList.add('active'); // 初期値
         
         btn.onclick = function() {
-            // 1. 全てのボタンから 'active' クラスを削除
-            cont.querySelectorAll('button').forEach(s => s.classList.remove('active'));
-            // 2. クリックしたボタンに 'active' クラスを追加
+            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            
-            // 3. (念のため) 明示的にスタイルをリセット＆適用
-            cont.querySelectorAll('button').forEach(b => {
-                b.style.backgroundColor = '';
-                b.style.border = '';
-                b.style.color = '';
-            });
-            this.style.backgroundColor = (id === 'mood-btns') ? '#eff6ff' : '#fffbeb';
-            this.style.border = (id === 'mood-btns') ? '2px solid #3b82f6' : '2px solid #fde68a';
-            this.style.color = (id === 'mood-btns') ? '#3b82f6' : '#f59e0b';
+            if (type === 'mood') selectedMood = i;
+            else selectedCond = i;
         };
-        cont.appendChild(btn);
+        container.appendChild(btn);
     }
 }
+
+// 実行
+document.addEventListener('DOMContentLoaded', () => {
+    createCircleButtons('mood-btns', 'mood');
+    createCircleButtons('cond-btns', 'cond');
+});
 
 // 読み込み完了後にボタンを作成
 window.addEventListener('load', () => {
