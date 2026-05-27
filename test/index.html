@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnerNote - Perfect Sync 350 (Diagnosis & Summary Ver)</title>
+    <title>InnerNote - Perfect Sync 350</title>
     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
    <div class="container">
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
         <div class="diagnosis-area" style="margin-bottom: 20px;">
-    <div id="diagnosis-select-container" style="display: block;">
-        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
-    </div>
+            <div id="diagnosis-select-container" style="display: block;">
+                <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
+                    <option value="">主な診断名を選択</option>
+                    <option value="未診断（健常者）">未診断（健常者）</option>
+                    <option value="うつ病">うつ病</option>
+                    <option value="双極症">双極症</option>
+                    <option value="統合失調症">統合失調症</option>
+                    <option value="不安障害">不安障害</option>
+                    <option value="適応障害">適応障害</option>
+                    <option value="発達障害">発達障害</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
 
-    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
-    </div>
-</div>
+            <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
+                <span id="diagnosis-text" style="font-weight: bold; color: #333;"></span>
+                <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
+            </div>
+        </div>
 
         <div class="input-section">
             <label class="label">今の気分？ (1～10)</label>
@@ -52,7 +55,6 @@
         <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
             <div id="summary-ts">前回まとめ作成：なし</div>
-            
             <div id="summary-card">
                 <span class="report-header">【一定期間まとめレポート】</span>
                 <div id="summary-content"></div>
@@ -62,8 +64,7 @@
         <div class="log-title">最近の記録</div>
         <div id="log-list" class="log-list"></div>
    </div>
-<body>
 
-    <script src="script.js"></script>
+   <script src="script.js"></script>
 </body>
 </html>
