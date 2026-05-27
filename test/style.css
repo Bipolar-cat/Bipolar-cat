@@ -54,6 +54,32 @@ body {
 
         .scroll-wrapper::-webkit-scrollbar { display: none; }
 
+/* 確定後の診断名を表示する枠 */
+.fixed-box {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 表示・非表示切り替え用 */
+.hidden { display: none !important; }
+
+/* 変更ボタンのスタイル */
+.change-btn {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
         /* 10段階ボタンの横並びgapと配置 */
         .btn-group-circle {
             display: inline-flex;
