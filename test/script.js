@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     createButtons('cond-btns');
 });
 
-// 診断名の固定機能
 function lockDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const selectContainer = document.getElementById('diagnosis-select-container');
@@ -13,16 +12,17 @@ function lockDiagnosis() {
 
     if (select.value) {
         diagnosisText.innerText = '診断名: ' + select.value;
-        selectContainer.classList.add('hidden');
-        fixedContainer.classList.remove('hidden');
-        fixedContainer.classList.add('visible');
+        selectContainer.classList.add('hidden'); // 選択肢を消す
+        fixedContainer.classList.remove('hidden'); // BOXを表示する
+    } else {
+        alert('診断名を選択してください');
     }
 }
 
-// 診断名の変更機能
 function unlockDiagnosis() {
-    const selectContainer = document.getElementById('diagnosis-select-container');
-    const fixedContainer = document.getElementById('diagnosis-fixed-container');
+    document.getElementById('diagnosis-select-container').classList.remove('hidden');
+    document.getElementById('diagnosis-fixed-container').classList.add('hidden');
+}
     
     selectContainer.classList.remove('hidden');
     fixedContainer.classList.add('hidden');
