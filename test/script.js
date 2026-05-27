@@ -9,20 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
 // ボタン生成関数
 function createButtons(id) {
     const cont = document.getElementById(id);
-    if (!cont) {
-        console.error("要素が見つかりません: " + id);
-        return;
-    }
-    cont.innerHTML = ''; // 中身を一度クリア
+    if (!cont) return;
+    
+    // CSSのスタイルを適用するためにこのクラスを追加
+    cont.classList.add('btn-group-circle');
+    
+    cont.innerHTML = ''; 
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.type = "button"; // ボタンタイプを指定
+        btn.type = "button";
+        
         btn.onclick = function() {
-            // 他のボタンの active を外す
-            const siblings = cont.querySelectorAll('button');
-            siblings.forEach(s => s.classList.remove('active'));
-            // 自分に active をつける
+            // 同じ親要素内の全てのボタンから active を外す
+            cont.querySelectorAll('button').forEach(s => s.classList.remove('active'));
+            // クリックされたボタンに active をつける
             this.classList.add('active');
         };
         cont.appendChild(btn);
