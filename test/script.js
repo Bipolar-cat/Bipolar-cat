@@ -29,18 +29,21 @@ function unlockDiagnosis() {
     fixedContainer.classList.remove('visible');
 }
 
-// ボタン生成処理
 function createButtons(containerId) {
     const container = document.getElementById(containerId);
-    if (!container) return; 
+    if (!container) return;
     
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
+        
+        // 【ここを追加】初期値として「5」をアクティブにする
+        if (i === 5) {
+            btn.classList.add('active');
+        }
+
         btn.onclick = function() {
-            // 同じグループの他のボタンの active を外す
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            // 押したボタンに active を付ける
             btn.classList.add('active');
         };
         container.appendChild(btn);
