@@ -10,7 +10,9 @@
     <div class="container">
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
-
+    <div id="diagnosis-container" class="diagnosis-container">
+    </div>
+        
         <div class="diagnosis-area" style="margin-bottom: 20px;">
     <div id="diagnosis-select-container" style="display: block;">
         <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
@@ -33,19 +35,24 @@
 </div>
 
         <div class="input-section">
-            <label class="label">今の気分？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="mood-btns" class="btn-group-circle"></div>
-            </div>
-
-            <label class="label">体の調子？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="cond-btns" class="btn-group-circle"></div>
-            </div>
-
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            <button class="save-btn" onclick="saveData()">記録する</button>
+        <label class="label">今の気分？ (1〜10)</label>
+        <div class="scroll-wrapper">
+            <div id="mood-btns" class="btn-group-circle"></div>
         </div>
+
+        <label class="label">体の調子？ (1〜10)</label>
+        <div class="scroll-wrapper">
+            <div id="cond-btns" class="btn-group-circle"></div>
+        </div>
+
+        <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+        <button class="save-btn" onclick="saveData()">記録する</button>
+    </div>
+
+    <div class="chart-container">
+        <div id="chart-wrapper"><canvas id="myChart"></canvas></div>
+    </div>
+    </div>
 
         <div class="chart-container">
             <canvas id="myChart"></canvas>
@@ -64,6 +71,7 @@
         <div class="log-title">最近の記録</div>
         <div id="log-list" class="log-list"></div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
 
