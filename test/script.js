@@ -7,15 +7,12 @@ const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 // --- ボタン生成関数 ---
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
-    if (!container) {
-        console.error("コンテナが見つかりません: " + containerId);
-        return;
-    }
+    if (!container) return;
     container.innerHTML = '';
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.type = "button"; // フォーム送信を防ぐ
+        btn.type = "button";
         if (i === 5) btn.className = 'active';
         btn.onclick = function() {
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
@@ -26,35 +23,6 @@ function createCircleButtons(containerId, type) {
         container.appendChild(btn);
     }
 }
-
-
-// --- 初期化処理 ---
-const init = () => {
-    // 1. ボタン生成
-    createCircleButtons('mood-btns', 'mood');
-    createCircleButtons('cond-btns', 'cond');
-
-    // 2. ログ表示
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const logList = document.getElementById('log-list');
-    if (logList) {
-        logList.innerHTML = '';
-        logs.slice().reverse().forEach(l => {
-            const div = document.createElement('div');
-            div.className = 'log-item';
-            div.innerHTML = `<span>${l.date}</span> 気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
-            logList.appendChild(div);
-        });
-    }
-
-    // 3. グラフ表示
-    if (typeof renderChart === 'function') {
-        renderChart(logs.slice(-10));
-    }
-};
-
-// DOMが完全に準備できてから実行
-document.addEventListener('DOMContentLoaded
 
 // --- グラフ描画関数 ---
 function renderChart(logs) {
@@ -81,30 +49,13 @@ function renderChart(logs) {
     });
 }
 
-// --- ボタン生成関数 ---
-function createCircleButtons(containerId, type) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = '';
-    for (let i = 1; i <= 10; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        if (i === 5) btn.className = 'active';
-        btn.onclick = function() {
-            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            if (type === 'mood') selectedMood = i;
-            else selectedCond = i;
-        };
-        container.appendChild(btn);
-    }
-}
-
 // --- ページ初期化 ---
 window.onload = () => {
+    // ボタン生成
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
     
+    // ログリスト表示
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const logList = document.getElementById('log-list');
     if (logList) {
@@ -116,5 +67,7 @@ window.onload = () => {
             logList.appendChild(div);
         });
     }
+    
+    // グラフ描画（最新10件）
     renderChart(logs.slice(-10));
 };
