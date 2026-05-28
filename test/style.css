@@ -32,6 +32,7 @@ body {
             margin-bottom: 15px;
         }
 
+
         /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
         .diagnosis-area {
             width: 66.6%;
@@ -86,6 +87,80 @@ body {
             box-sizing: border-box;
             color: #333;
         }
+
+　　　　　　/* 診断名コンテナ全体 */
+.diagnosis-container {
+    background-color: #f3f4f6; /* 薄いグレーの背景 */
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* 固定表示エリア */
+.diagnosis-fixed-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+/* 診断名テキスト */
+.diagnosis-text {
+    font-size: 1.1rem;
+}
+
+/* 「変更」ボタン */
+.change-btn {
+    background: none;
+    border: none;
+    color: #3b82f6; /* 青色 */
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+}
+.change-btn:hover {
+    text-decoration: underline;
+}
+
+/* 選択エリア全体 */
+.diagnosis-select-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ラベルテキスト */
+.label-text {
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+/* プルダウンと入力欄のグループ */
+.diagnosis-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* セレクトボックス */
+.diagnosis-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: white;
+}
+
+/* 「その他」入力欄 */
+.diagnosis-other-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+}　
         /* ----------------------------------------------- */
 
         .input-section {
