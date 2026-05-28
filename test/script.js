@@ -1,3 +1,18 @@
+window.onerror = function(message, source, lineno, colno, error) {
+    const errorDiv = document.createElement('div');
+    errorDiv.style.position = 'fixed';
+    errorDiv.style.top = '0';
+    errorDiv.style.left = '0';
+    errorDiv.style.width = '100%';
+    errorDiv.style.backgroundColor = 'red';
+    errorDiv.style.color = 'white';
+    errorDiv.style.padding = '10px';
+    errorDiv.style.zIndex = '9999';
+    errorDiv.style.fontSize = '12px';
+    errorDiv.textContent = `エラー: ${message} (行: ${lineno})`;
+    document.body.appendChild(errorDiv);
+};
+
 // --- グローバル変数 ---
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
