@@ -97,7 +97,7 @@ function renderChart(logs) {
 window.onload = () => {
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
-    
+
     // 履歴表示
     if (logList) {
         logList.innerHTML = '';
@@ -246,55 +246,36 @@ function unlockDiagnosis() {
         }
 
         window.onload = () => {
-            // 診断名の固定表示復元ロジック
-            const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-            if (savedDiagnosis) {
-                document.getElementById('diagnosis-select-container').style.display = 'none';
-                document.getElementById('diagnosis-fixed-container').style.display = 'flex';
-                document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
-                const select = document.getElementById('diagnosis-select');
-                if (savedDiagnosis.startsWith("その他 (")) {
-                    select.value = "その他";
-                } else {
-                    select.value = savedDiagnosis;
-                }
-            } else {
-                document.getElementById('diagnosis-fixed-container').style.display = 'none';
-                document.getElementById('diagnosis-select-container').style.display = 'block';
-            }
+            // 診断名復元
+    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
+    if (savedDiagnosis) {
+        document.getElementById('diagnosis-select-container').style.display = 'none';
+        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+        document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
+    }
 
-            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            const logList = document.getElementById('log-list');
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const logList
             
-            const savedStr = localStorage.getItem('last_summary_str_final');
-            if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
 
-            // 履歴リストの描画
-            logs.slice().reverse().forEach(l => {
-                const div = document.createElement('div');
-                div.className = 'log-item';
-                const itemTs = l.ts || new Date(l.date).getTime();
-                div.id = `log-${itemTs}`;
-                
-                const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
-                div.innerHTML = `<span class="log-date">${l.date}${diagBadge}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
-                logList.appendChild(div);
-            });
+            // 履歴生成
+    logs.slice().reverse().forEach(l => {
+        const div = document.createElement('div');
+        div.className = 'log-item';
+        div.id = `log-${l.ts}`;
+        div.innerHTML = `<span class="log-date">${l.date}${l.diagnosis ? `<span class="log-diagnosis">${l.diagnosis}</span>` : ''}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+        logList.appendChild(div);
+    });
 
-            // グラフの描画
-            const allLogs = logs; // 全データを使用する
-
-　　　　　　　// datasets の中身も同様に allLogs を使います
-　　　　　　　// label: '気分', data: allLogs.map(l => l.mood),
-　　　　　　　// label: '体調', data: allLogs.map(l => l.cond),
-            const ctx = document.getElementById('myChart').getContext('2d');
-    myChartInstance = new Chart(ctx, {
+    // グラフ描画
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
         type: 'line',
         data: {
             labels: logs.map(l => l.date),
             datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', pointHitRadius: 25 },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', pointHitRadius: 25 }
             ]
         },
             
@@ -318,19 +299,15 @@ function unlockDiagnosis() {
                     ]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: { padding: { left: 10, right: 20, bottom: 20 } },
-                    interaction: { mode: 'index', intersect: false },
-                    onClick: (evt, elements, chart) => {
-                        const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                        if (activePoints.length > 0) {
-                            const index = activePoints[0].index;
-                            const logData = last10[index];
-                            const targetTimestamp = logData.ts || new Date(logData.date).getTime();
-                            scrollToLog(targetTimestamp);
-                        }
-                    },
+            responsive: true,
+            maintainAspectRatio: false,
+            onClick: (evt, elements, chart) => {
+                const active = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                if (active.length > 0) scrollToLog(logs[active[0].index].ts);
+            }
+        }
+    });
+};
                     scales: {
                         x: { 
                             ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
