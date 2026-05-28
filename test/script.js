@@ -147,16 +147,15 @@ window.onload = () => {
 
         // その他入力欄の切り替え
         function toggleOtherDiagnosis() {
-            const select = document.getElementById('diagnosis-select');
-            const otherInput = document.getElementById('diagnosis-other');
-            if (select.value === 'その他') {
-                otherInput.style.display = 'block';
-                otherInput.focus();
-            } else {
-                otherInput.style.display = 'none';
-                otherInput.value = '';
-            }
-        }
+    const select = document.getElementById('diagnosis-select');
+    const otherInput = document.getElementById('diagnosis-other');
+    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
+}
+
+function unlockDiagnosis() {
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+}
 
         // 変更ボタン押下時
         function enableDiagnosisChange() {
