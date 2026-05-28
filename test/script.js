@@ -27,18 +27,43 @@ function renderChart(logs) {
     });
 }
 
-// --- ページ読み込み時に実行 ---
 window.onload = () => {
-    // 診断名やログの復元（既存の処理）
-    // ...
-
-    // グラフ描画（既存の処理）
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    renderChart(logs);
-
-    // ★ボタンをここで確実に生成！
+    // 1. ボタンを確実に生成
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
+
+    // 2. ログデータの取得
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+    // 3. 診断名の復元（以前のロジック）
+    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
+    if (savedDiagnosis) {
+        document.getElementById('diagnosis-select-container').style.display = 'none';
+        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+        document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
+        const select = document.getElementById('diagnosis-select');
+        select.value = savedDiagnosis.startsWith("その他 (") ? "その他" : savedDiagnosis;
+    } else {
+        document.getElementById('diagnosis-fixed-container').style.display = 'none';
+        document.getElementById('diagnosis-select-container').style.display = 'block';
+    }
+
+    // 4. ログリストの描画（以前のロジック）
+    const logList = document.getElementById('log-list');
+    if (logList) {
+        logs.slice().reverse().forEach(l => {
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            const itemTs = l.ts || new Date(l.date).getTime();
+            div.id = `log-${itemTs}`;
+            const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
+            div.innerHTML = `<span class="log-date">${l.date}${diagBadge}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+            logList.appendChild(div);
+        });
+    }
+
+    // 5. グラフの描画（一番最後）
+    renderChart(logs);
 };
 
 // --- ボタン生成関数 ---
