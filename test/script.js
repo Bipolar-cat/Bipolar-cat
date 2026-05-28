@@ -1,38 +1,9 @@
-// グラフ描画用インスタンスを保持する変数
-let myChartInstance = null;
-
-// ページ読み込み時にグラフを確実に描画する処理
-function initChart() {
-    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
-    const canvas = document.getElementById('myChart');
-    if (!canvas) return; // canvasタグが見つからないなら何もしない
-
-    const ctx = canvas.getContext('2d');
-    
-    // 既存のグラフがあれば削除してリセット
-    if (myChartInstance) {
-        myChartInstance.destroy();
-    }
-
-    myChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: logs.map(l => l.date),
-            datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6' },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
-            ]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
-}
-// ファイルの一番上の変数定義エリア
+// --- 1. グローバル変数 ---
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
-let myChartInstance = null; // ★これを追加
+let myChartInstance = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
-
 
 // --- 2. グラフ描画関数 ---
 function renderChart(logs) {
@@ -40,28 +11,8 @@ function renderChart(logs) {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     
+    // 既存のグラフを破棄
     if (myChartInstance) myChartInstance.destroy();
-
-    myChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: logs.map(l => l.date),
-            datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
-            ]
-        },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
-}
-
-// ★この関数を丸ごと挿入
-function renderChart(logs) {
-    const canvas = document.getElementById('myChart');
-    if (!canvas) return; 
-    const ctx = canvas.getContext('2d');
-    
-    if (myChartInstance) myChartInstance.destroy(); // 古いグラフを削除
 
     myChartInstance = new Chart(ctx, {
         type: 'line',
@@ -74,29 +25,20 @@ function renderChart(logs) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            onClick: (evt, elements, chart) => {
+                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                if (activePoints.length > 0) {
+                    const index = activePoints[0].index;
+                    const logData = logs[index];
+                    scrollToLog(logData.ts || new Date(logData.date).getTime());
+                }
+            }
         }
     });
 }
 
-// --- 3. ページ読み込み時 ---
-window.onload = () => {
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    
-    // グラフ描画を実行
-    renderChart(logs);
-    
-    // ... 他のリスト生成処理など ...
-};
-
-// --- 4. その他の関数（saveDataなど）は一番下にそのまま置く ---
-function createCircleButtons(...) { ... }
-function toggleOtherDiagnosis(...) { ... }
-function enableDiagnosisChange(...) { ... }
-function saveData(...) { ... }
-function scrollToLog(...) { ...
-    
-// --- 初期化 ---
+// --- 3. ページ読み込み時の初期化 ---
 window.onload = () => {
     // 診断名の復元
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
@@ -124,35 +66,14 @@ window.onload = () => {
         logList.appendChild(div);
     });
 
-    // グラフの描画
-    const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: logs.map(l => l.date),
-            datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            onClick: (evt, elements, chart) => {
-                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                if (activePoints.length > 0) {
-                    const index = activePoints[0].index;
-                    const logData = logs[index];
-                    scrollToLog(logData.ts || new Date(logData.date).getTime());
-                }
-            }
-        }
-    });
+    // グラフ描画の呼び出し
+    renderChart(logs);
 };
 
-// --- 関数群 ---
+// --- 4. その他の関数 ---
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
+    if (!container) return;
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
@@ -171,7 +92,7 @@ createCircleButtons('cond-btns', 'cond');
 function toggleOtherDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const otherInput = document.getElementById('diagnosis-other');
-    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
+    if (select && otherInput) otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
 }
 
 function enableDiagnosisChange() {
@@ -202,12 +123,9 @@ function scrollToLog(timestamp) {
     const target = document.getElementById(`log-${timestamp}`);
     if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
-        // クラスを一度削除してから付与することでアニメーションを再発火させる
         target.classList.remove('highlight');
-        void target.offsetWidth; // 強制リフロー
+        void target.offsetWidth;
         target.classList.add('highlight');
-        
         clearTimeout(highlightTimeout);
         highlightTimeout = setTimeout(() => target.classList.remove('highlight'), 3000);
     }
