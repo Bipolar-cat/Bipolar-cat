@@ -12,21 +12,26 @@
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div class="diagnosis-area">
-            <div id="diagnosis-select-container">
-                <select id="diagnosis-select" onchange="toggleOtherDiagnosis()">
-                    <option value="">主な診断名を選択</option>
-                    <option value="未診断（健常者）">未診断（健常者）</option>
-                    <option value="うつ病">うつ病</option>
-                    <option value="双極症">双極症</option>
-                    <option value="その他">その他</option>
-                </select>
-                <input type="text" id="diagnosis-other" class="other-diagnosis-input" placeholder="診断名を入力">
-            </div>
-            <div id="diagnosis-fixed-container" class="diagnosis-fixed-box" style="display:none;">
-                <span id="diagnosis-text"></span>
-                <button class="change-btn" onclick="unlockDiagnosis()">変更</button>
-            </div>
+        <div class="diagnosis-container">
+    <div id="diagnosis-fixed-container" class="diagnosis-fixed-container" style="display: none;">
+        <span id="diagnosis-text" class="diagnosis-text">主な診断名: </span>
+        <button type="button" onclick="enableDiagnosisChange()" class="change-btn">変更</button>
+    </div>
+
+    <div id="diagnosis-select-container" class="diagnosis-select-container">
+        <label for="diagnosis-select" class="label-text">主な診断名を選択</label>
+        <div class="diagnosis-input-group">
+            <select id="diagnosis-select" onchange="toggleOtherDiagnosis()" class="diagnosis-select">
+                <option value="指定なし">指定なし</option>
+                <option value="双極症">双極症</option>
+                <option value="うつ病">うつ病</option>
+                <option value="統合失調症">統合失調症</option>
+                <option value="不安症">不安症</option>
+                <option value="その他">その他 (入力する)</option>
+            </select>
+            <input type="text" id="diagnosis-other" placeholder="診断名を入力..." class="diagnosis-other-input" style="display: none;">
+        </div>
+    </div>
         </div>
 
         <div class="input-section">
