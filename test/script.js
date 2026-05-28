@@ -1,55 +1,16 @@
-// --- グローバル変数 ---
-let selectedMood = 5, selectedCond = 5;
-let myChartInstance = null;
-let highlightTimeout = null;
-const STORAGE_KEY = 'innernote_vfinal_400_logs';
-const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
-
-// --- 各種関数 ---
-function toggleOtherDiagnosis() {
-    const select = document.getElementById('diagnosis-select');
-    const otherInput = document.getElementById('diagnosis-other');
-    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
-}
-
-function unlockDiagnosis() {
-    document.getElementById('diagnosis-fixed-container').style.display = 'none';
-    document.getElementById('diagnosis-select-container').style.display = 'block';
-}
-
-function createCircleButtons(containerId, type) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = '';
-    for (let i = 1; i <= 10; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        btn.type = "button";
-        if (i === 5) btn.className = 'active';
-        btn.onclick = function() {
-            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            if (type === 'mood') selectedMood = i;
-            else selectedCond = i;
-        };
-        container.appendChild(btn);
-    }
-}
-
-// 【採用】横スクロール対応のグラフ描画関数
+// --- グラフ描画関数（スクロール対応・Y軸固定） ---
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
     const container = document.getElementById('chart-wrapper');
     if (!canvas || !container) return;
     
-    // データ数に合わせて幅を計算
-    const newWidth = Math.max(window.innerWidth, logs.length * 50);
+    const newWidth = Math.max(window.innerWidth, logs.length * 60);
     container.style.width = newWidth + 'px';
 
-    if (myChartInstance) myChartInstance.destroy();
+    if (window.myChartInstance) window.myChartInstance.destroy();
 
     const ctx = canvas.getContext('2d');
-    myChartInstance = new Chart(ctx, {
+    window.myChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
             labels: logs.map(l => l.date),
@@ -59,45 +20,21 @@ function renderScrollableChart(logs) {
             ]
         },
         options: {
-            responsive: false, // 横幅固定のためfalse
-            maintainAspectRatio: false
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                y: { min: 1, max: 10, ticks: { stepSize: 1 } } // Y軸を1〜10に固定
+            }
         }
     });
 }
 
-function scrollToLog(timestamp) {
-    const targetElement = document.getElementById(`log-${timestamp}`);
-    if (highlightTimeout) clearTimeout(highlightTimeout);
-    document.querySelectorAll('.log-item').forEach(item => item.classList.remove('highlight'));
-    if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        targetElement.classList.add('highlight');
-        highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
-    }
-}
-
-function saveData() {
-    const note = document.getElementById('note').value;
-    let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
-    if (document.getElementById('diagnosis-select-container').style.display !== 'none') {
-        const select = document.getElementById('diagnosis-select');
-        diagnosisVal = select.value === 'その他' ? `その他 (${document.getElementById('diagnosis-other').value.trim()})` : select.value;
-        localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
-    }
-
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    logs.push({ ts: Date.now(), date: new Date().toLocaleString(), diagnosis: diagnosisVal, mood: selectedMood, cond: selectedCond, note: note });
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-    alert("記録しました！");
-    location.reload();
-}
-
-// --- ページ初期化 ---
+// --- ページ初期化（診断名の復元とグラフ表示） ---
 window.onload = () => {
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 診断名の復元
+    // 診断名の復元処理
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     if (savedDiagnosis) {
         document.getElementById('diagnosis-select-container').style.display = 'none';
@@ -105,10 +42,9 @@ window.onload = () => {
         document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
     }
 
+    // ログの読み込みと表示
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const logList = document.getElementById('log-list');
-
-    // 履歴生成
     if (logList) {
         logList.innerHTML = '';
         logs.slice().reverse().forEach(l => {
@@ -120,6 +56,6 @@ window.onload = () => {
         });
     }
 
-    // 採用したグラフ描画関数の実行
+    // グラフ描画を実行
     renderScrollableChart(logs);
 };
