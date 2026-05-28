@@ -4,40 +4,18 @@ let myChartInstance = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// --- 診断名管理機能 ---
-function toggleOtherDiagnosis() {
-    const select = document.getElementById('diagnosis-select');
-    const otherInput = document.getElementById('diagnosis-other');
-    if (!select || !otherInput) return;
-    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
-}
-
-function enableDiagnosisChange() {
-    document.getElementById('diagnosis-fixed-container').style.display = 'none';
-    document.getElementById('diagnosis-select-container').style.display = 'block';
-}
-
-// 診断名の取得・保存を統合
-function getFinalDiagnosis() {
-    const fixedContainer = document.getElementById('diagnosis-fixed-container');
-    if (fixedContainer && fixedContainer.style.display !== 'none') {
-        return document.getElementById('diagnosis-text').innerText.replace('主な診断名: ', '');
-    }
-    const select = document.getElementById('diagnosis-select');
-    const val = (select.value === 'その他') ? document.getElementById('diagnosis-other').value.trim() : select.value;
-    localStorage.setItem(DIAGNOSIS_KEY, val);
-    return val;
-}
-
-// --- UI・グラフ機能 ---
+// --- ボタン生成処理 ---
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
     if (!container) return;
-    container.innerHTML = '';
+    
+    // 中身を一度空にしてから再生成
+    container.innerHTML = ''; 
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.className = (i === 5) ? 'active' : '';
+        btn.type = "button";
+        btn.className = (i === 5) ? 'active' : ''; // 初期値は5
         btn.onclick = function() {
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
@@ -48,6 +26,7 @@ function createCircleButtons(containerId, type) {
     }
 }
 
+// --- グラフ描画（1-10固定） ---
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
     const container = document.getElementById('chart-wrapper');
@@ -73,7 +52,25 @@ function renderScrollableChart(logs) {
     });
 }
 
-// --- データ処理 ---
+// --- 診断名管理 ---
+function enableDiagnosisChange() {
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+}
+
+function getFinalDiagnosis() {
+    const fixed = document.getElementById('diagnosis-fixed-container');
+    if (fixed && fixed.style.display !== 'none') {
+        return document.getElementById('diagnosis-text').innerText.replace('主な診断名: ', '');
+    }
+    const select = document.getElementById('diagnosis-select');
+    const other = document.getElementById('diagnosis-other');
+    const val = (select.value === 'その他') ? other.value : select.value;
+    localStorage.setItem(DIAGNOSIS_KEY, val);
+    return val;
+}
+
+// --- データ保存 ---
 function saveData() {
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     logs.push({ 
@@ -85,16 +82,16 @@ function saveData() {
         note: document.getElementById('note').value 
     });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-    alert("記録しました！");
     location.reload();
 }
 
-// --- ページ初期化 ---
+// --- 初期化処理 ---
 window.onload = () => {
+    // ボタンの再生成
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 診断名の復元表示
+    // 診断名の復元
     const saved = localStorage.getItem(DIAGNOSIS_KEY);
     if (saved) {
         document.getElementById('diagnosis-select-container').style.display = 'none';
@@ -102,7 +99,7 @@ window.onload = () => {
         document.getElementById('diagnosis-text').innerText = `主な診断名: ${saved}`;
     }
 
-    // 履歴生成
+    // 履歴とグラフ
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const logList = document.getElementById('log-list');
     if (logList) {
@@ -114,6 +111,5 @@ window.onload = () => {
             logList.appendChild(div);
         });
     }
-
     renderScrollableChart(logs);
 };
