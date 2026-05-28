@@ -36,13 +36,13 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-// 採用したグラフ描画関数（横スクロール対応版）
+// 【採用】横スクロール対応のグラフ描画関数
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
     const container = document.getElementById('chart-wrapper');
     if (!canvas || !container) return;
     
-    // データ数に合わせてコンテナの幅を計算
+    // データ数に合わせて幅を計算
     const newWidth = Math.max(window.innerWidth, logs.length * 50);
     container.style.width = newWidth + 'px';
 
@@ -92,12 +92,12 @@ function saveData() {
     location.reload();
 }
 
-// --- ページ初期化（ここですべてを一括実行） ---
+// --- ページ初期化 ---
 window.onload = () => {
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 診断名復元ロジック
+    // 診断名の復元
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     if (savedDiagnosis) {
         document.getElementById('diagnosis-select-container').style.display = 'none';
@@ -120,6 +120,6 @@ window.onload = () => {
         });
     }
 
-    // 採用したグラフ描画関数を呼び出し
+    // 採用したグラフ描画関数の実行
     renderScrollableChart(logs);
 };
