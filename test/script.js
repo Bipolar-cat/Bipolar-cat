@@ -89,3 +89,17 @@ function createCircleButtons(containerId, type) {
         container.appendChild(btn);
     }
 }
+// 診断名を変更するための関数
+function enableDiagnosisChange() {
+    // 診断名表示エリアを隠す
+    const fixedContainer = document.getElementById('diagnosis-fixed-container');
+    if (fixedContainer) {
+        fixedContainer.style.display = 'none';
+    }
+    
+    // プルダウンエリアを表示する
+    const selectContainer = document.getElementById('diagnosis-select-container');
+    if (selectContainer) {
+        selectContainer.style.display = 'block';
+    }
+}
