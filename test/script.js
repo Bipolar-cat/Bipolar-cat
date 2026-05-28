@@ -31,8 +31,6 @@ window.onload = () => {
     renderScrollableChart(logs);
 };
 
-
-
 // --- グローバル変数 ---
 let selectedMood = 5, selectedCond = 5;
 let myChartInstance = null;
@@ -59,8 +57,7 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-// --- グラフの強調スクロール機能 ---
-// --- グラフとスクロール機能 ---
+// --- グラフの強調スクロール機能 --
 function scrollToLog(timestamp) {
     const targetElement = document.getElementById(`log-${timestamp}`);
     if (highlightTimeout) clearTimeout(highlightTimeout);
@@ -100,9 +97,6 @@ function renderChart(logs) {
 window.onload = () => {
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
-    
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const logList = document.getElementById('log-list');
     
     // 履歴表示
     if (logList) {
