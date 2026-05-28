@@ -121,7 +121,7 @@ function renderScrollableChart(logs) {
 
 function saveData() {
     const note = document.getElementById('note').value;
-    let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
+    let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "主な診断名";
     const selectContainer = document.getElementById('diagnosis-select-container');
     
     if (selectContainer && selectContainer.style.display !== 'none') {
@@ -162,6 +162,31 @@ window.onload = () => {
         fixedContainer.style.display = 'none';
     }
 };
+
+// --- データの保存処理 (saveData) ---
+function saveData() {
+    const mood = selectedMood; // 選択された気分の値
+    const cond = selectedCond; // 選択された調子の値
+    const note = document.getElementById('note').value; // メモの内容
+
+    // 今回の修正ポイント：診断名を取得（必要なら保存も行う）
+    const diagnosis = getFinalDiagnosis();
+
+    // 既存の保存処理
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const newLog = {
+        ts: Date.now(),
+        date: new Date().toLocaleString(),
+        diagnosis: diagnosis, // ここに診断名が入る
+        mood: mood,
+        cond: cond,
+        note: note
+    };
+    logs.push(newLog);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    alert("記録しました！");
+    location.reload(); // ページをリロードして反映
+}
 
     // --- 履歴表示とグラフ描画 ---
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
