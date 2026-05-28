@@ -1,5 +1,4 @@
-            /* 全体の背景とフォント、パディングを最適化 */
-        body {
+body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
@@ -10,26 +9,21 @@
 
         /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
         .container {
-    max-width: 450px;
-    width: 100%;
-    background: white;
-    padding: 20px 0;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    text-align: center;
-    overflow: hidden; /* ここに含めるのが正解です */
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
         }
 
-/* タイトルとサブタイトルのスタイル（念のため確認） */
-h1 {
+        h1 {
             color: #5C6BC0;
             font-size: 28px;
             margin: 5px 0 0 0;
         }
-
-p {
-    margin: 0 0 20px 0; /* 下の余白を調整して間隔をあける */
-} 
 
         .subtitle {
             color: #888;
@@ -38,50 +32,61 @@ p {
             margin-bottom: 15px;
         }
 
-.diagnosis-area {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 0 20px;
-    box-sizing: border-box;
-}
+        /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
+        .diagnosis-area {
+            width: 66.6%;
+            margin: 0 auto 20px auto;
+            text-align: left;
+            box-sizing: border-box;
+        }
 
-.diagnosis-fixed-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-size: 14px;
-    color: #333;
-    border: 1px solid #e0e0e0;
-}
+        .diagnosis-fixed-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            box-sizing: border-box;
+        }
 
-.change-btn {
-    background: none;
-    border: none;
-    color: #4A90E2;
-    font-weight: bold;
-    cursor: pointer;
-}
+        .change-btn {
+            background: none;
+            border: none;
+            color: #4A90E2;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+        }
 
-.select-box {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-}
+        .select-box {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            font-size: 13px;
+            color: #333;
+            outline: none;
+            box-sizing: border-box;
+        }
 
-.other-diagnosis-input {
-    display: none;
-    width: 100%;
-    margin-top: 8px;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #4A90E2;
-    box-sizing: border-box;
-}
+        .other-diagnosis-input {
+            display: none;
+            width: 100%;
+            margin-top: 6px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #4A90E2;
+            background-color: #fff;
+            font-size: 13px;
+            box-sizing: border-box;
+            color: #333;
+        }
+        /* ----------------------------------------------- */
 
         .input-section {
             padding: 0 20px;
@@ -105,11 +110,13 @@ p {
 
         .scroll-wrapper::-webkit-scrollbar { display: none; }
 
+        /* 10段階ボタンの横並びgapと配置 */
         .btn-group-circle {
             display: inline-flex;
             gap: 12px;
         }
 
+        /* ボタンの大きさ（52px正円）とフォント・カラー */
         .btn-group-circle button {
             width: 52px;
             height: 52px;
@@ -124,6 +131,8 @@ p {
             display: flex;
             align-items: center;
             justify-content: center;
+            box-sizing: border-box;
+            padding: 0;
         }
 
         #mood-btns button.active {
@@ -140,6 +149,7 @@ p {
             font-weight: bold;
         }
 
+        /* 今の気持ちメモの大きさ（高さ50px、角丸12px、背景色） */
         textarea {
             width: 100%;
             height: 50px;
@@ -168,6 +178,7 @@ p {
             display: block;
         }
 
+        /* グラフエリア（高さ350px、直結ボーダー、余白） */
         .chart-container {
             width: 100%;
             height: 350px;
@@ -175,7 +186,7 @@ p {
             padding-top: 15px;
         }
 
-          /* Summary機能用レイアウトスタイル */
+        /* Summary機能用レイアウトスタイル */
         .summary-section {
             padding: 0 20px;
             margin-top: 20px;
@@ -258,4 +269,3 @@ p {
             font-weight: bold;
             margin-left: 8px;
         }
-
