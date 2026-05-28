@@ -60,19 +60,17 @@ function createCircleButtons(containerId, type) {
 }
 
 // --- グラフの強調スクロール機能 ---
+// --- グラフとスクロール機能 ---
 function scrollToLog(timestamp) {
     const targetElement = document.getElementById(`log-${timestamp}`);
     if (highlightTimeout) clearTimeout(highlightTimeout);
-    
     document.querySelectorAll('.log-item').forEach(item => item.classList.remove('highlight'));
-    
     if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         targetElement.classList.add('highlight');
         highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
     }
 }
-
 // --- グラフ描画関数 ---
 function renderChart(logs) {
     const canvas = document.getElementById('myChart');
