@@ -10,14 +10,15 @@
 
         /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
         .container {
-            max-width: 450px;
-            width: 100%;
-            background: white;
-            padding: 20px 0;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            overflow: hidden;
+    max-width: 450px !important;
+    width: 100% !important; /* 画面幅に応じて伸縮 */
+    margin: 10px auto !important; /* 中央揃え */
+    background: white;
+    padding: 20px 15px !important; /* 左右のパディングを適度に入れる */
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    overflow: hidden !important; /* はみ出しを強制カット */
         }
 
         h1 {
