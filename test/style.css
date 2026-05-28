@@ -102,36 +102,39 @@
             font-size: 15px;
         }
 
-        /* ボタン群を横一列に並べ、はみ出した分をスクロールさせる */
-/* 1. スクロール用の枠組み */
-.scroll-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 10px 0;
-    -webkit-overflow-scrolling: touch;
-}
+        .scroll-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 2px 0 10px 5px;
+            -webkit-overflow-scrolling: touch;
+        }
 
-/* 2. ボタンを横並びにする枠 */
-.btn-group-circle {
-    display: inline-flex;
-    gap: 12px;
-}
+        .scroll-wrapper::-webkit-scrollbar { display: none; }
 
-/* 3. ボタンの形状とサイズ（重要！） */
-.btn-group-circle button {
-    flex: 0 0 52px; /* 幅を52pxで固定（四角くなるのを防ぐ） */
-    width: 52px;
-    height: 52px;
-    border-radius: 50%; /* 丸くする */
-    border: 1px solid #e5e7eb;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-}
+        /* 10段階ボタンの横並びgapと配置 */
+        .btn-group-circle {
+            display: inline-flex;
+            gap: 12px;
+        }
+
+        /* ボタンの大きさ（52px正円）とフォント・カラー */
+        .btn-group-circle button {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 0;
+        }
 
         #mood-btns button.active {
             border: 2px solid #bfdbfe;
