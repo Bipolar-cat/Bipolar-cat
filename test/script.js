@@ -102,21 +102,29 @@ window.onload = () => {
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 診断名復元
+    // --- 診断名デザインの復元処理 ---
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     const fixedContainer = document.getElementById('diagnosis-fixed-container');
     const selectContainer = document.getElementById('diagnosis-select-container');
     const diagnosisText = document.getElementById('diagnosis-text');
 
+    // 保存された診断名があれば、「選択」ではなく「表示（固定）」状態にする
     if (savedDiagnosis && fixedContainer && selectContainer) {
-        selectContainer.style.display = 'none';
-        fixedContainer.style.display = 'flex';
-        if (diagnosisText) diagnosisText.innerText = `主な診断名: ${savedDiagnosis}`;
+        selectContainer.style.display = 'none'; // 選択肢を隠す
+        fixedContainer.style.display = 'flex';  // 固定表示を表示
+        if (diagnosisText) {
+            diagnosisText.innerText = `主な診断名: ${savedDiagnosis}`;
+        }
+    } else {
+        // 保存がない場合は初期状態（選択肢を表示）
+        if (selectContainer) selectContainer.style.display = 'block';
+        if (fixedContainer) fixedContainer.style.display = 'none';
     }
 
+    // --- 履歴表示とグラフ描画 ---
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const logList = document.getElementById('log-list');
-
+    
     if (logList) {
         logList.innerHTML = '';
         logs.slice().reverse().forEach(l => {
@@ -127,5 +135,7 @@ window.onload = () => {
         });
     }
 
+    renderScrollableChart(logs);
+};
     renderScrollableChart(logs);
 };
