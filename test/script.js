@@ -23,9 +23,15 @@ function renderChart(logs) {
                 { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
         },
-        options: { responsive: true, maintainAspectRatio: false }
-    });
-}
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // これをfalseにすることで、親のdivのサイズに従うようになります
+            scales: {
+                x: {
+                    ticks: { maxRotation: 45, minRotation: 45 } // 日付が重ならないよう斜めに表示
+                }
+            }
+        }
 
 window.onload = () => {
     // 1. ボタンを確実に生成
