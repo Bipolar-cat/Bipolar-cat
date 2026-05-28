@@ -1,5 +1,25 @@
  /* 全体の背景とフォント、パディングを最適化 */
         body {
+         /* レイアウト崩れを防止する最優先設定 */
+*, *::before, *::after {
+    box-sizing: border-box !important;
+}
+
+/* containerの幅とマージンを強制的に整える */
+.container {
+    max-width: 450px !important;
+    width: 95% !important; /* 画面幅いっぱいにさせず少し余裕を持つ */
+    margin: 10px auto !important; /* 中央寄せ */
+    padding: 20px 0 !important;
+    overflow: hidden !important;
+}
+
+/* 各セクションの余白を強制的に統一 */
+.input-section, .diagnosis-container {
+    width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
