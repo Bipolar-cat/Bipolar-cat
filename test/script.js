@@ -61,15 +61,20 @@ function renderScrollableChart(logs) {
             ]
         },
         options: {
-            responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    min: 1, 
-                    max: 10,
-                    ticks: { stepSize: 1 } // 1刻みで表示
-                }
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        y: {
+            min: 1,      // 最小値を1に固定
+            max: 10,     // 最大値を10に固定
+            ticks: {
+                stepSize: 1 // 1刻みで表示
             }
+        },
+        x: {
+            ticks: { maxRotation: 45 }
+        }
+    }
         }
     });
 }
