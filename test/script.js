@@ -103,6 +103,7 @@ function enableDiagnosisChange() {
         selectContainer.style.display = 'block';
     }
 }
+console.log("Mood:", selectedMood, "Cond:", selectedCond);
 function saveData() {
     // IDがHTMLと一致しているか確認
     const diagnosis = document.getElementById('diagnosis-select').value;
