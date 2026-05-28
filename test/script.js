@@ -36,6 +36,7 @@ window.onload = () => {
 // --- グローバル変数 ---
 let selectedMood = 5, selectedCond = 5;
 let myChartInstance = null;
+let highlightTimeout = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
@@ -56,6 +57,20 @@ function createCircleButtons(containerId, type) {
             else selectedCond = i;
         };
         container.appendChild(btn);
+    }
+}
+
+// --- グラフの強調スクロール機能 ---
+function scrollToLog(timestamp) {
+    const targetElement = document.getElementById(`log-${timestamp}`);
+    if (highlightTimeout) clearTimeout(highlightTimeout);
+    
+    document.querySelectorAll('.log-item').forEach(item => item.classList.remove('highlight'));
+    
+    if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetElement.classList.add('highlight');
+        highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
     }
 }
 
@@ -86,9 +101,26 @@ function renderChart(logs) {
 
 // --- ページ初期化 ---
 window.onload = () => {
-    // ボタン生成
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
+    
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const logList = document.getElementById('log-list');
+    
+    // 履歴表示
+    if (logList) {
+        logList.innerHTML = '';
+        logs.slice().reverse().forEach(l => {
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            const itemTs = l.ts || new Date(l.date).getTime();
+            div.id = `log-${itemTs}`;
+            
+            const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
+            div.innerHTML = `<span class="log-date">${l.date}${diagBadge}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+            logList.appendChild(div);
+        });
+    }
     
     // ログリスト表示
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -284,6 +316,15 @@ window.onload = () => {
 　　　　　　　// label: '気分', data: allLogs.map(l => l.mood),
 　　　　　　　// label: '体調', data: allLogs.map(l => l.cond),
             const ctx = document.getElementById('myChart').getContext('2d');
+    myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date),
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+            ]
+        },
             
             new Chart(ctx, {
                 type: 'line',
