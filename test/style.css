@@ -149,10 +149,11 @@ body {
         }
 
         .scroll-wrapper {
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 2px 0 10px 5px;
-            -webkit-overflow-scrolling: touch;
+    width: 100% !important; /* コンテナの幅いっぱいに制限 */
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    padding: 10px 20px !important;
+    box-sizing: border-box !important; /* これが重要 */
         }
 
         .scroll-wrapper::-webkit-scrollbar { display: none; }
