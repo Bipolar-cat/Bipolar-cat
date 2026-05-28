@@ -26,6 +26,33 @@ function enableDiagnosisChange() {
     document.getElementById('diagnosis-select-container').style.display = 'block';
 }
 
+// 記録保存時に診断名を処理する (saveData関数に追加)
+function getFinalDiagnosis() {
+    const fixedContainer = document.getElementById('diagnosis-fixed-container');
+    const selectContainer = document.getElementById('diagnosis-select-container');
+    let finalDiagnosis = '指定なし';
+
+    // もし固定表示されている（既に保存されている）なら、そのテキストを使う
+    if (fixedContainer.style.display !== 'none') {
+        const fullText = document.getElementById('diagnosis-text').innerText;
+        finalDiagnosis = fullText.replace('主な診断名: ', '');
+    } 
+    // もし選択エリアが表示されているなら、選択された値を採用し、保存する
+    else if (selectContainer.style.display !== 'none') {
+        const select = document.getElementById('diagnosis-select');
+        if (select.value === 'その他') {
+            const otherInput = document.getElementById('diagnosis-other');
+            finalDiagnosis = otherInput.value.trim() || 'その他 (未入力)';
+        } else {
+            finalDiagnosis = select.value;
+        }
+        // 選択された新しい診断名をLocalStorageに保存
+        localStorage.setItem(DIAGNOSIS_KEY, finalDiagnosis);
+    }
+
+    return finalDiagnosis;
+}
+
 function unlockDiagnosis() {
     const fixed = document.getElementById('diagnosis-fixed-container');
     const select = document.getElementById('diagnosis-select-container');
@@ -112,27 +139,29 @@ function saveData() {
 
 // --- ページ初期化 ---
 window.onload = () => {
+    // グラフ描画など、既存の処理
+    renderChart();
+    // 10段階ボタン生成など、既存の処理
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // --- 診断名デザインの復元処理 ---
+    // --- 診断名表示の初期化 ---
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     const fixedContainer = document.getElementById('diagnosis-fixed-container');
     const selectContainer = document.getElementById('diagnosis-select-container');
     const diagnosisText = document.getElementById('diagnosis-text');
 
-    // 保存された診断名があれば、「選択」ではなく「表示（固定）」状態にする
-    if (savedDiagnosis && fixedContainer && selectContainer) {
-        selectContainer.style.display = 'none'; // 選択肢を隠す
-        fixedContainer.style.display = 'flex';  // 固定表示を表示
-        if (diagnosisText) {
-            diagnosisText.innerText = `主な診断名: ${savedDiagnosis}`;
-        }
+    if (savedDiagnosis) {
+        // 1. 保存されている場合: 固定表示にする
+        selectContainer.style.display = 'none';
+        fixedContainer.style.display = 'flex'; // ボタンと並べるためにflexにする
+        diagnosisText.innerText = `主な診断名: ${savedDiagnosis}`;
     } else {
-        // 保存がない場合は初期状態（選択肢を表示）
-        if (selectContainer) selectContainer.style.display = 'block';
-        if (fixedContainer) fixedContainer.style.display = 'none';
+        // 2. 保存されていない場合: 選択エリアを表示
+        selectContainer.style.display = 'block';
+        fixedContainer.style.display = 'none';
     }
+};
 
     // --- 履歴表示とグラフ描画 ---
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
