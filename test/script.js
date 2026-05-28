@@ -131,3 +131,39 @@ function saveData() {
     alert('記録しました');
     location.reload(); // 再読み込み
 }
+
+function saveData() {
+    // 1. 診断名の取得（表示されている方を選択）
+    let diagnosisVal = "";
+    const isSelectVisible = document.getElementById('diagnosis-select-container').style.display !== 'none';
+    
+    if (isSelectVisible) {
+        const select = document.getElementById('diagnosis-select');
+        const otherInput = document.getElementById('diagnosis-other');
+        diagnosisVal = (select.value === 'その他') ? `その他 (${otherInput.value.trim()})` : select.value;
+        // 診断名を保存
+        localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
+    } else {
+        diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "未診断";
+    }
+
+    // 2. ログデータの作成
+    const note = document.getElementById('note').value;
+    const newLog = {
+        ts: Date.now(),
+        date: new Date().toLocaleString(),
+        diagnosis: diagnosisVal,
+        mood: selectedMood,
+        cond: selectedCond,
+        note: note
+    };
+
+    // 3. ローカルストレージへの保存
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    logs.push(newLog);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+
+    // 4. 反映（ページ更新）
+    alert('記録しました');
+    location.reload();
+}
