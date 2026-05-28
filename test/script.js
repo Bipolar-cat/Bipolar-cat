@@ -20,12 +20,10 @@ let myChartInstance = null; // グラフを管理する変数
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// --- グラフ描画関数 ---
 function renderChart(logs) {
-    <div class="scroll-container" style="overflow-x: auto; width: 100%;">
-    <div style="min-width: 600px; height: 350px;"> <canvas id="myChart"></canvas>
-    </div>
-</div>
+    const canvas = document.getElementById('myChart');
+    if (!canvas) return; // キャンバスがなければ何もしない
+    const ctx = canvas.getContext('2d');
     
     // 既存のグラフがあれば破棄
     if (myChartInstance) myChartInstance.destroy();
@@ -41,56 +39,10 @@ function renderChart(logs) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false, // これをfalseにすることで、親のdivのサイズに従うようになります
+            maintainAspectRatio: false,
             scales: {
-                x: {
-                    ticks: { maxRotation: 45, minRotation: 45 } // 日付が重ならないよう斜めに表示
-                }
+                x: { ticks: { maxRotation: 45, minRotation: 45 } }
             }
         }
-
-window.onload = () => {
-    // 1. まず診断名の表示処理（最優先）
-    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-    const fixedContainer = document.getElementById('diagnosis-fixed-container');
-    const selectContainer = document.getElementById('diagnosis-select-container');
-    
-    if (fixedContainer && selectContainer) {
-        if (savedDiagnosis) {
-            fixedContainer.style.display = 'flex';
-            selectContainer.style.display = 'none';
-            document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
-        } else {
-            fixedContainer.style.display = 'none';
-            selectContainer.style.display = 'block';
-        }
-    }
-
-    // 2. ボタン生成
-    try {
-        createCircleButtons('mood-btns', 'mood');
-        createCircleButtons('cond-btns', 'cond');
-    } catch (e) {
-        console.error("ボタン生成エラー:", e);
-    }
-
-    // 3. データ取得とリスト描画
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const logList = document.getElementById('log-list');
-    if (logList) {
-        logList.innerHTML = ''; 
-        logs.slice().reverse().forEach(l => {
-            const div = document.createElement('div');
-            div.className = 'log-item';
-            div.innerHTML = `<span>${l.date}</span> 気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
-            logList.appendChild(div);
-        });
-    }
-
-    // 4. グラフ描画（最新10件）
-    try {
-        renderChart(logs.slice(-10));
-    } catch (e) {
-        console.error("グラフ描画エラー:", e);
-    }
-};
+    });
+}
