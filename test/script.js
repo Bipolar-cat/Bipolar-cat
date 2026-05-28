@@ -7,9 +7,10 @@ const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
 // --- グラフ描画関数 ---
 function renderChart(logs) {
-    const canvas = document.getElementById('myChart');
-    if (!canvas) return; // canvasタグがない場合は処理を抜ける
-    const ctx = canvas.getContext('2d');
+    <div class="scroll-container" style="overflow-x: auto; width: 100%;">
+    <div style="min-width: 600px; height: 350px;"> <canvas id="myChart"></canvas>
+    </div>
+</div>
     
     // 既存のグラフがあれば破棄
     if (myChartInstance) myChartInstance.destroy();
