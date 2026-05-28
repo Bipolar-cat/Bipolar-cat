@@ -4,12 +4,19 @@ let myChartInstance = null;
 let highlightTimeout = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis'; // 診断名保存用
+
 // --- 各種関数 ---
 function toggleOtherDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const otherInput = document.getElementById('diagnosis-other');
-    if (!select || !otherInput) return;
-    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
+    if (select.value === 'その他') {
+        otherInput.style.display = 'block';
+        otherInput.focus(); // 入力欄にフォーカスを合わせる
+    } else {
+        otherInput.style.display = 'none';
+        otherInput.value = ''; // 値をクリア
+    }
+}Input.style.display = (select.value === 'その他') ? 'block' : 'none';
 }
 
 function unlockDiagnosis() {
