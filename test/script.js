@@ -3,8 +3,7 @@ let selectedMood = 5, selectedCond = 5;
 let myChartInstance = null;
 let highlightTimeout = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
-const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
-
+const DIAGNOSIS_KEY = 'innernote_saved_diagnosis'; // 診断名保存用
 // --- 各種関数 ---
 function toggleOtherDiagnosis() {
     const select = document.getElementById('diagnosis-select');
