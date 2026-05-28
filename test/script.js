@@ -105,32 +105,41 @@ function enableDiagnosisChange() {
 }
 console.log("Mood:", selectedMood, "Cond:", selectedCond);
 function saveData() {
-    // IDがHTMLと一致しているか確認
-    const diagnosis = document.getElementById('diagnosis-select').value;
-    const note = document.getElementById('note').value;
+    // 1. 診断名の取得
+    let diagnosisVal = "";
+    const isSelectVisible = document.getElementById('diagnosis-select-container').style.display !== 'none';
     
-    // データがあるかチェック
-    if (!diagnosis) {
-        alert('診断名を選択してください');
-        return;
+    if (isSelectVisible) {
+        const select = document.getElementById('diagnosis-select');
+        const otherInput = document.getElementById('diagnosis-other');
+        diagnosisVal = (select.value === 'その他') ? `その他 (${otherInput.value.trim()})` : select.value;
+        localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
+    } else {
+        diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "未診断";
     }
 
+    // 2. ★ここを修正：ボタンが押されていない時のデフォルト値（5）を補う
+    const finalMood = (typeof selectedMood !== 'undefined') ? selectedMood : 5;
+    const finalCond = (typeof selectedCond !== 'undefined') ? selectedCond : 5;
+
+    // 3. ログデータの作成
+    const note = document.getElementById('note').value;
     const newLog = {
+        ts: Date.now(),
         date: new Date().toLocaleString(),
-        mood: selectedMood, // グローバル変数から取得
-        cond: selectedCond, // グローバル変数から取得
-        note: note,
-        diagnosis: diagnosis
+        diagnosis: diagnosisVal,
+        mood: finalMood, // 修正後の値を使用
+        cond: finalCond, // 修正後の値を使用
+        note: note
     };
 
-    // 保存処理
-    let logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    // 4. 保存と更新
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     logs.push(newLog);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-    localStorage.setItem(DIAGNOSIS_KEY, diagnosis);
 
     alert('記録しました');
-    location.reload(); // 再読み込み
+    location.reload();
 }
 
 function saveData() {
