@@ -9,12 +9,15 @@ const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 function toggleOtherDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const otherInput = document.getElementById('diagnosis-other');
+    if (!select || !otherInput) return;
     otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
 }
 
 function unlockDiagnosis() {
-    document.getElementById('diagnosis-fixed-container').style.display = 'none';
-    document.getElementById('diagnosis-select-container').style.display = 'block';
+    const fixed = document.getElementById('diagnosis-fixed-container');
+    const select = document.getElementById('diagnosis-select-container');
+    if (fixed) fixed.style.display = 'none';
+    if (select) select.style.display = 'block';
 }
 
 function createCircleButtons(containerId, type) {
@@ -36,14 +39,13 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-// 採用したグラフ描画関数（横スクロール対応版）
+// 【改善】Y軸を1〜10に固定したグラフ描画関数
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
     const container = document.getElementById('chart-wrapper');
     if (!canvas || !container) return;
     
-    // データ数に合わせてコンテナの幅を計算
-    const newWidth = Math.max(window.innerWidth, logs.length * 50);
+    const newWidth = Math.max(window.innerWidth, logs.length * 60);
     container.style.width = newWidth + 'px';
 
     if (myChartInstance) myChartInstance.destroy();
@@ -59,27 +61,25 @@ function renderScrollableChart(logs) {
             ]
         },
         options: {
-            responsive: false, // 横幅固定のためfalse
-            maintainAspectRatio: false
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    min: 1, 
+                    max: 10,
+                    ticks: { stepSize: 1 } // 1刻みで表示
+                }
+            }
         }
     });
-}
-
-function scrollToLog(timestamp) {
-    const targetElement = document.getElementById(`log-${timestamp}`);
-    if (highlightTimeout) clearTimeout(highlightTimeout);
-    document.querySelectorAll('.log-item').forEach(item => item.classList.remove('highlight'));
-    if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        targetElement.classList.add('highlight');
-        highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
-    }
 }
 
 function saveData() {
     const note = document.getElementById('note').value;
     let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
-    if (document.getElementById('diagnosis-select-container').style.display !== 'none') {
+    const selectContainer = document.getElementById('diagnosis-select-container');
+    
+    if (selectContainer && selectContainer.style.display !== 'none') {
         const select = document.getElementById('diagnosis-select');
         diagnosisVal = select.value === 'その他' ? `その他 (${document.getElementById('diagnosis-other').value.trim()})` : select.value;
         localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
@@ -92,34 +92,35 @@ function saveData() {
     location.reload();
 }
 
-// --- ページ初期化（ここですべてを一括実行） ---
+// --- ページ初期化 ---
 window.onload = () => {
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 診断名復元ロジック
+    // 診断名復元
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-    if (savedDiagnosis) {
-        document.getElementById('diagnosis-select-container').style.display = 'none';
-        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
-        document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
+    const fixedContainer = document.getElementById('diagnosis-fixed-container');
+    const selectContainer = document.getElementById('diagnosis-select-container');
+    const diagnosisText = document.getElementById('diagnosis-text');
+
+    if (savedDiagnosis && fixedContainer && selectContainer) {
+        selectContainer.style.display = 'none';
+        fixedContainer.style.display = 'flex';
+        if (diagnosisText) diagnosisText.innerText = `主な診断名: ${savedDiagnosis}`;
     }
 
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const logList = document.getElementById('log-list');
 
-    // 履歴生成
     if (logList) {
         logList.innerHTML = '';
         logs.slice().reverse().forEach(l => {
             const div = document.createElement('div');
             div.className = 'log-item';
-            div.id = `log-${l.ts}`;
             div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
             logList.appendChild(div);
         });
     }
 
-    // 採用したグラフ描画関数を呼び出し
     renderScrollableChart(logs);
 };
