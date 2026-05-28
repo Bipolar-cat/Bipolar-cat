@@ -1,36 +1,3 @@
-function renderScrollableChart(logs) {
-    const canvas = document.getElementById('myChart');
-    const container = document.getElementById('chart-wrapper');
-    
-    // データ数に合わせて幅を計算
-    const newWidth = Math.max(window.innerWidth, logs.length * 50);
-    container.style.width = newWidth + 'px';
-
-    if (window.myChartInstance) window.myChartInstance.destroy();
-
-    const ctx = canvas.getContext('2d');
-    window.myChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: logs.map(l => l.date),
-            datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6' },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
-            ]
-        },
-        options: {
-            responsive: false,
-            maintainAspectRatio: false
-        }
-    });
-}
-
-// 3. 実行（ページ読み込み時に実行する）
-window.onload = () => {
-    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
-    renderScrollableChart(logs);
-};
-
 // --- グローバル変数 ---
 let selectedMood = 5, selectedCond = 5;
 let myChartInstance = null;
@@ -38,10 +5,22 @@ let highlightTimeout = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// --- ボタン・診断・履歴処理 ---
+// --- 各種関数 ---
+function toggleOtherDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    const otherInput = document.getElementById('diagnosis-other');
+    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
+}
+
+function unlockDiagnosis() {
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+}
+
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
     if (!container) return;
+    container.innerHTML = '';
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
@@ -57,25 +36,19 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-// --- グラフの強調スクロール機能 --
-function scrollToLog(timestamp) {
-    const targetElement = document.getElementById(`log-${timestamp}`);
-    if (highlightTimeout) clearTimeout(highlightTimeout);
-    document.querySelectorAll('.log-item').forEach(item => item.classList.remove('highlight'));
-    if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        targetElement.classList.add('highlight');
-        highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
-    }
-}
-// --- グラフ描画関数 ---
-function renderChart(logs) {
+// 採用したグラフ描画関数（横スクロール対応版）
+function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('chart-wrapper');
+    if (!canvas || !container) return;
     
+    // データ数に合わせてコンテナの幅を計算
+    const newWidth = Math.max(window.innerWidth, logs.length * 50);
+    container.style.width = newWidth + 'px';
+
     if (myChartInstance) myChartInstance.destroy();
 
+    const ctx = canvas.getContext('2d');
     myChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -86,97 +59,24 @@ function renderChart(logs) {
             ]
         },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: { x: { ticks: { maxRotation: 45, minRotation: 45 } } }
+            responsive: false, // 横幅固定のためfalse
+            maintainAspectRatio: false
         }
     });
 }
 
-// --- ページ初期化 ---
-window.onload = () => {
-    createCircleButtons('mood-btns', 'mood');
-    createCircleButtons('cond-btns', 'cond');
-
-    // 履歴表示
-    if (logList) {
-        logList.innerHTML = '';
-        logs.slice().reverse().forEach(l => {
-            const div = document.createElement('div');
-            div.className = 'log-item';
-            const itemTs = l.ts || new Date(l.date).getTime();
-            div.id = `log-${itemTs}`;
-            
-            const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
-            div.innerHTML = `<span class="log-date">${l.date}${diagBadge}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
-            logList.appendChild(div);
-        });
+function scrollToLog(timestamp) {
+    const targetElement = document.getElementById(`log-${timestamp}`);
+    if (highlightTimeout) clearTimeout(highlightTimeout);
+    document.querySelectorAll('.log-item').forEach(item => item.classList.remove('highlight'));
+    if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        targetElement.classList.add('highlight');
+        highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
     }
-    
-    // ログリスト表示
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const logList = document.getElementById('log-list');
-    if (logList) {
-        logList.innerHTML = '';
-        logs.slice().reverse().forEach(l => {
-            const div = document.createElement('div');
-            div.className = 'log-item';
-            div.innerHTML = `<span>${l.date}</span> 気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
-            logList.appendChild(div);
-        });
-    }
-    
-    // グラフ描画（最新10件）
-    renderChart(logs.slice(-10));
-};
-
- let selectedMood = 5, selectedCond = 5;
-        let highlightTimeout = null;
-        
-        // ローカルストレージキーの定義
-        const STORAGE_KEY = 'innernote_vfinal_400_logs';
-        const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
-
-        // その他入力欄の切り替え
-        function toggleOtherDiagnosis() {
-    const select = document.getElementById('diagnosis-select');
-    const otherInput = document.getElementById('diagnosis-other');
-    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
 }
 
-function unlockDiagnosis() {
-    document.getElementById('diagnosis-fixed-container').style.display = 'none';
-    document.getElementById('diagnosis-select-container').style.display = 'block';
-}
-
-        // 変更ボタン押下時
-        function enableDiagnosisChange() {
-            document.getElementById('diagnosis-fixed-container').style.display = 'none';
-            document.getElementById('diagnosis-select-container').style.display = 'block';
-        }
-
-        // 10段階サークルスクロールボタンの生成
-        function createCircleButtons(containerId, type) {
-            const container = document.getElementById(containerId);
-            for (let i = 1; i <= 10; i++) {
-                const btn = document.createElement('button');
-                btn.innerText = i;
-                if (i === 5) btn.className = 'active';
-                btn.onclick = function() {
-                    container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    if (type === 'mood') selectedMood = i;
-                    else selectedCond = i;
-                };
-                container.appendChild(btn);
-            }
-        }
-
-        createCircleButtons('mood-btns', 'mood');
-        createCircleButtons('cond-btns', 'cond');
-
-        // データの保存処理
-        function saveData() {
+function saveData() {
     const note = document.getElementById('note').value;
     let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症";
     if (document.getElementById('diagnosis-select-container').style.display !== 'none') {
@@ -190,63 +90,14 @@ function unlockDiagnosis() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     alert("記録しました！");
     location.reload();
-        }
+}
 
-        // summary (一定期間まとめ) 生成ロジック
-        function generateSummary() {
-            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            if (logs.length === 0) return alert("まとめを作成するための記録がありません。");
+// --- ページ初期化（ここですべてを一括実行） ---
+window.onload = () => {
+    createCircleButtons('mood-btns', 'mood');
+    createCircleButtons('cond-btns', 'cond');
 
-            const lastSummaryTs = parseInt(localStorage.getItem('last_summary_ts_final') || '0');
-            let targets = logs.filter(l => (l.ts || new Date(l.date).getTime()) > lastSummaryTs);
-            
-            if (targets.length === 0) {
-                if(confirm("前回作成以降の新しい記録がありません。直近のデータを再集計しますか？")) {
-                    targets = logs.slice(-10); 
-                } else {
-                    return;
-                }
-            }
-            
-            const avgMood = (targets.reduce((acc, curr) => acc + curr.mood, 0) / targets.length).toFixed(1);
-            const avgCond = (targets.reduce((acc, curr) => acc + curr.cond, 0) / targets.length).toFixed(1);
-            
-            // 最も多く記録されていた診断名を集計抽出
-            const diagCounts = {};
-            targets.forEach(t => {
-                const d = t.diagnosis || '指定なし';
-                diagCounts[d] = (diagCounts[d] || 0) + 1;
-            });
-            const topDiagnosis = Object.keys(diagCounts).reduce((a, b) => diagCounts[a] > diagCounts[b] ? a : b, '指定なし');
-
-            const notesList = targets.filter(l => l.note && l.note.trim() !== '').map(l => `・ ${l.note}`).join('<br>');
-            const periodStr = `${targets[0].date.split(' ')[0]} ～ ${targets[targets.length-1].date.split(' ')[0]}`;
-
-            document.getElementById('summary-card').style.display = 'block';
-            document.getElementById('summary-content').innerHTML = `
-                <div class="report-item"><span class="report-label">対象期間:</span> ${periodStr} (${targets.length}件の記録)</div>
-                <div class="report-item"><span class="report-label">主な診断名:</span> ${topDiagnosis}</div>
-                <div class="report-item"><span class="report-label">平均気分:</span> ${avgMood} / 10.0 (${getEvaluationLabel(avgMood)})</div>
-                <div class="report-item"><span class="report-label">平均体調:</span> ${avgCond} / 10.0 (${getEvaluationLabel(avgCond)})</div>
-                <div class="report-item" style="margin-top: 8px;"><span class="report-label">期間中のメモ:</span></div>
-                <div class="report-notes">${notesList || '（この期間のメモはありません）'}</div>
-            `;
-
-            const now = new Date();
-            const nowStr = `${now.getFullYear()}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-            localStorage.setItem('last_summary_ts_final', now.getTime());
-            localStorage.setItem('last_summary_str_final', nowStr);
-            document.getElementById('summary-ts').innerText = `前回まとめ作成：${nowStr}`;
-        }
-
-        function getEvaluationLabel(val) {
-            if (val >= 7.5) return '良好';
-            if (val >= 4.5) return '普通';
-            return '低下気味';
-        }
-
-        window.onload = () => {
-            // 診断名復元
+    // 診断名復元ロジック
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
     if (savedDiagnosis) {
         document.getElementById('diagnosis-select-container').style.display = 'none';
@@ -255,87 +106,20 @@ function unlockDiagnosis() {
     }
 
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const logList
-            
+    const logList = document.getElementById('log-list');
 
-            // 履歴生成
-    logs.slice().reverse().forEach(l => {
-        const div = document.createElement('div');
-        div.className = 'log-item';
-        div.id = `log-${l.ts}`;
-        div.innerHTML = `<span class="log-date">${l.date}${l.diagnosis ? `<span class="log-diagnosis">${l.diagnosis}</span>` : ''}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
-        logList.appendChild(div);
-    });
+    // 履歴生成
+    if (logList) {
+        logList.innerHTML = '';
+        logs.slice().reverse().forEach(l => {
+            const div = document.createElement('div');
+            div.className = 'log-item';
+            div.id = `log-${l.ts}`;
+            div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+            logList.appendChild(div);
+        });
+    }
 
-    // グラフ描画
-    const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: logs.map(l => l.date),
-            datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', pointHitRadius: 25 },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', pointHitRadius: 25 }
-            ]
-        },
-            
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: allLogs.map(l => l.date),
-                    datasets: [
-                        { 
-                            label: '気分', data: allLogs.map(l => l.mood), // allLogs
-                            borderColor: '#3b82f6', backgroundColor: '#3b82f6',
-                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6',
-                            pointHitRadius: 25
-                        },
-                        { 
-                            label: '体調', data: allLogs.map(l => l.cond), // allLogs に変更
-                            borderColor: '#f59e0b', backgroundColor: '#f59e0b',
-                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b',
-                            pointHitRadius: 25
-                        }
-                    ]
-                },
-                options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            onClick: (evt, elements, chart) => {
-                const active = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                if (active.length > 0) scrollToLog(logs[active[0].index].ts);
-            }
-        }
-    });
+    // 採用したグラフ描画関数を呼び出し
+    renderScrollableChart(logs);
 };
-                    scales: {
-                        x: { 
-                            ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 },
-                            grid: { display: false }
-                        },
-                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
-                    },
-                    plugins: { legend: { position: 'top' } }
-                }
-            });
-
-            function scrollToLog(timestamp) {
-                const logItems = document.querySelectorAll('.log-item');
-                const targetElement = document.getElementById(`log-${timestamp}`);
-                
-                if (highlightTimeout) clearTimeout(highlightTimeout);
-                
-                logItems.forEach(item => {
-                    item.style.transition = 'none';
-                    item.classList.remove('highlight');
-                    item.offsetHeight;
-                    item.style.transition = '';
-                });
-
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    setTimeout(() => { targetElement.classList.add('highlight'); }, 10);
-                    highlightTimeout = setTimeout(() => { targetElement.classList.remove('highlight'); }, 3000);
-                }
-            }
-        };
