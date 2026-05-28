@@ -103,3 +103,31 @@ function enableDiagnosisChange() {
         selectContainer.style.display = 'block';
     }
 }
+function saveData() {
+    // IDがHTMLと一致しているか確認
+    const diagnosis = document.getElementById('diagnosis-select').value;
+    const note = document.getElementById('note').value;
+    
+    // データがあるかチェック
+    if (!diagnosis) {
+        alert('診断名を選択してください');
+        return;
+    }
+
+    const newLog = {
+        date: new Date().toLocaleString(),
+        mood: selectedMood, // グローバル変数から取得
+        cond: selectedCond, // グローバル変数から取得
+        note: note,
+        diagnosis: diagnosis
+    };
+
+    // 保存処理
+    let logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    logs.push(newLog);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    localStorage.setItem(DIAGNOSIS_KEY, diagnosis);
+
+    alert('記録しました');
+    location.reload(); // 再読み込み
+}
