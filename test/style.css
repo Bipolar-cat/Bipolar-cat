@@ -1,51 +1,5 @@
- /* 全体の背景とフォント、パディングを最適化 */
+       /* 全体の背景とフォント、パディングを最適化 */
         body {
-
-         /* リセット：レイアウト崩れ防止 */
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    overflow-x: hidden; /* 横はみ出しを禁止 */
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    background-color: #f8f9fa;
-}
-
-.container {
-    width: 100%;
-    max-width: 450px;
-    background: white;
-    padding: 20px 0;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    text-align: center;
-    margin: 10px; /* 少しだけ隙間を作る */
-}
-         
-         /* レイアウト崩れを防止する最優先設定 */
-*, *::before, *::after {
-    box-sizing: border-box !important;
-}
-
-/* containerの幅とマージンを強制的に整える */
-.container {
-    max-width: 450px !important;
-    width: 95% !important; /* 画面幅いっぱいにさせず少し余裕を持つ */
-    margin: 10px auto !important; /* 中央寄せ */
-    padding: 20px 0 !important;
-    overflow: hidden !important;
-}
-
-/* 各セクションの余白を強制的に統一 */
-.input-section, .diagnosis-container {
-    width: 100% !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-}
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
@@ -149,11 +103,10 @@ body {
         }
 
         .scroll-wrapper {
-    width: 100% !important; /* コンテナの幅いっぱいに制限 */
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    padding: 10px 20px !important;
-    box-sizing: border-box !important; /* これが重要 */
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 2px 0 10px 5px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .scroll-wrapper::-webkit-scrollbar { display: none; }
