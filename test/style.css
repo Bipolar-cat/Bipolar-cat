@@ -88,6 +88,31 @@ body {
             color: #333;
         }
 
+/* 診断名、入力ボタン群、メモ、記録ボタンを含む親コンテナに余白を設定 */
+.diagnosis-container, /* 診断名エリア */
+.mood-container,      /* 「今の気分」全体 */
+.cond-container,      /* 「体の調子」全体 */
+.memo-container,      /* メモ入力欄 */
+.save-btn-container { /* 記録ボタン */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* メモ入力欄の横幅を100%から調整して余白をより強調する場合 */
+#note {
+    width: calc(100% - 40px); /* 左右のpadding分を引く */
+    margin: 0 auto;
+    display: block;
+}
+
+/* ボタン群の親要素にも少し余裕を持たせる */
+#mood-btns, #cond-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center; /* 中央寄せにする場合 */
+}
+
 　　　　　　/* 診断名コンテナ全体 */
 .diagnosis-container {
     background-color: #f3f4f6; /* 薄いグレーの背景 */
