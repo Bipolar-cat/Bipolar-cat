@@ -40,11 +40,10 @@ let highlightTimeout = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// --- ボタン生成関数 ---
+// --- ボタン・診断・履歴処理 ---
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
     if (!container) return;
-    container.innerHTML = '';
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
