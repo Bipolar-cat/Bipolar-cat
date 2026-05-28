@@ -102,27 +102,28 @@
             font-size: 15px;
         }
 
-        .scroll-wrapper {
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 2px 0 10px 5px;
-            -webkit-overflow-scrolling: touch;
-        }
+        /* ボタン群を横一列に並べ、はみ出した分をスクロールさせる */
+.scroll-wrapper {
+    width: 100%;             /* 横幅いっぱいに */
+    overflow-x: auto;        /* はみ出したら横スクロール */
+    white-space: nowrap;     /* 中身を折り返さない */
+    padding: 10px 20px;      /* 左右の余白を確保 */
+    -webkit-overflow-scrolling: touch; /* iPhoneでのスクロールを滑らかに */
+    box-sizing: border-box;
+}
 
-        .scroll-wrapper::-webkit-scrollbar { display: none; }
+/* ボタン群の親要素：inline-flexにすることで横並びを強制 */
+.btn-group-circle {
+    display: inline-flex;    /* 横並びにする */
+    gap: 12px;               /* ボタン同士の間隔 */
+}
 
-        /* 10段階ボタンの横並びgapと配置 */
-        .btn-group-circle {
-            display: inline-flex;
-            gap: 12px;
-        }
-
-        /* ボタンの大きさ（52px正円）とフォント・カラー */
+        /* ボタン自体のサイズ定義（ボタンが縮まないように） */
         .btn-group-circle button {
+            flex: 0 0 52px;          /* 縮小させず、必ず幅52pxを維持 */
             width: 52px;
             height: 52px;
-            min-width: 52px;
-            border-radius: 50%;
+            border-radius: 50%
             border: 1px solid #e5e7eb;
             background: #ffffff;
             color: #9ca3af;
