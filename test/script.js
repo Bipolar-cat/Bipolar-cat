@@ -27,15 +27,40 @@ function renderChart(logs) {
     });
 }
 
-// --- ページ読み込み時に全て実行 ---
+// --- ページ読み込み時に実行 ---
 window.onload = () => {
-    // 診断名やログリストの復元処理をここに記述
-    // ...（既存の診断名復元ロジック）...
-    // ...（既存のログリスト描画ロジック）...
+    // 診断名やログの復元（既存の処理）
+    // ...
 
-    // 最後にグラフを描画
+    // グラフ描画（既存の処理）
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     renderChart(logs);
+
+    // ★ボタンをここで確実に生成！
+    createCircleButtons('mood-btns', 'mood');
+    createCircleButtons('cond-btns', 'cond');
 };
 
-// --- 関数群（createCircleButtonsなど）をここに配置 ---
+// --- ボタン生成関数 ---
+function createCircleButtons(containerId, type) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    // ボタン生成前に中身を空にする（重複防止）
+    container.innerHTML = '';
+    
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = i;
+        // 5番をデフォルトでアクティブにする
+        if (i === 5) btn.className = 'active';
+        
+        btn.onclick = function() {
+            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            if (type === 'mood') selectedMood = i; 
+            else selectedCond = i;
+        };
+        container.appendChild(btn);
+    }
+}
