@@ -35,42 +35,38 @@ function renderChart(logs) {
         }
 
 window.onload = () => {
-    // 1. ボタンを確実に生成
+    // 1. ボタン生成（確実に実行）
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // 2. ログデータの取得
+    // 2. データの取得
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 
-    // 3. 診断名の復元（以前のロジック）
+    // 3. 診断名の復元処理（これが消えると診断名が表示されません）
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-    if (savedDiagnosis) {
-        document.getElementById('diagnosis-select-container').style.display = 'none';
-        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+    const fixedContainer = document.getElementById('diagnosis-fixed-container');
+    const selectContainer = document.getElementById('diagnosis-select-container');
+    
+    if (savedDiagnosis && fixedContainer && selectContainer) {
+        fixedContainer.style.display = 'flex';
+        selectContainer.style.display = 'none';
         document.getElementById('diagnosis-text').innerText = `主な診断名: ${savedDiagnosis}`;
-        const select = document.getElementById('diagnosis-select');
-        select.value = savedDiagnosis.startsWith("その他 (") ? "その他" : savedDiagnosis;
-    } else {
-        document.getElementById('diagnosis-fixed-container').style.display = 'none';
-        document.getElementById('diagnosis-select-container').style.display = 'block';
     }
 
-    // 4. ログリストの描画（以前のロジック）
+    // 4. 最近の記録リストの描画（これが消えるとリストが表示されません）
     const logList = document.getElementById('log-list');
     if (logList) {
+        logList.innerHTML = ''; // 一度クリア
         logs.slice().reverse().forEach(l => {
             const div = document.createElement('div');
             div.className = 'log-item';
-            const itemTs = l.ts || new Date(l.date).getTime();
-            div.id = `log-${itemTs}`;
-            const diagBadge = l.diagnosis && l.diagnosis !== '未診断（健常者）' ? `<span class="log-diagnosis">${l.diagnosis}</span>` : '';
-            div.innerHTML = `<span class="log-date">${l.date}${diagBadge}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+            div.innerHTML = `<span>${l.date}</span> 気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
             logList.appendChild(div);
         });
     }
 
-    // 5. グラフの描画（一番最後）
-    renderChart(logs);
+    // 5. グラフの描画（最後に最新10件だけを表示）
+    renderChart(logs.slice(-10));
 };
 
 // --- ボタン生成関数 ---
