@@ -1,5 +1,31 @@
  /* 全体の背景とフォント、パディングを最適化 */
         body {
+
+         /* リセット：レイアウト崩れ防止 */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* 横はみ出しを禁止 */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #f8f9fa;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    padding: 20px 0;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    margin: 10px; /* 少しだけ隙間を作る */
+}
+         
          /* レイアウト崩れを防止する最優先設定 */
 *, *::before, *::after {
     box-sizing: border-box !important;
