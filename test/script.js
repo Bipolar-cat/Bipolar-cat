@@ -19,6 +19,13 @@ function toggleOtherDiagnosis() {
 }Input.style.display = (select.value === 'その他') ? 'block' : 'none';
 }
 
+// 「変更」ボタンが押された時の処理
+function enableDiagnosisChange() {
+    // 固定表示エリアを隠し、選択エリアを表示する
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+}
+
 function unlockDiagnosis() {
     const fixed = document.getElementById('diagnosis-fixed-container');
     const select = document.getElementById('diagnosis-select-container');
