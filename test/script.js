@@ -1,65 +1,35 @@
 // --- グローバル変数 ---
 let selectedMood = 5, selectedCond = 5;
 let myChartInstance = null;
-let highlightTimeout = null;
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
-const DIAGNOSIS_KEY = 'innernote_saved_diagnosis'; // 診断名保存用
+const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 
-// --- 各種関数 ---
+// --- 診断名管理機能 ---
 function toggleOtherDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const otherInput = document.getElementById('diagnosis-other');
-    if (select.value === 'その他') {
-        otherInput.style.display = 'block';
-        otherInput.focus(); // 入力欄にフォーカスを合わせる
-    } else {
-        otherInput.style.display = 'none';
-        otherInput.value = ''; // 値をクリア
-    }
-}Input.style.display = (select.value === 'その他') ? 'block' : 'none';
+    if (!select || !otherInput) return;
+    otherInput.style.display = (select.value === 'その他') ? 'block' : 'none';
 }
 
-// 「変更」ボタンが押された時の処理
 function enableDiagnosisChange() {
-    // 固定表示エリアを隠し、選択エリアを表示する
     document.getElementById('diagnosis-fixed-container').style.display = 'none';
     document.getElementById('diagnosis-select-container').style.display = 'block';
 }
 
-// 記録保存時に診断名を処理する (saveData関数に追加)
+// 診断名の取得・保存を統合
 function getFinalDiagnosis() {
     const fixedContainer = document.getElementById('diagnosis-fixed-container');
-    const selectContainer = document.getElementById('diagnosis-select-container');
-    let finalDiagnosis = '指定なし';
-
-    // もし固定表示されている（既に保存されている）なら、そのテキストを使う
-    if (fixedContainer.style.display !== 'none') {
-        const fullText = document.getElementById('diagnosis-text').innerText;
-        finalDiagnosis = fullText.replace('主な診断名: ', '');
-    } 
-    // もし選択エリアが表示されているなら、選択された値を採用し、保存する
-    else if (selectContainer.style.display !== 'none') {
-        const select = document.getElementById('diagnosis-select');
-        if (select.value === 'その他') {
-            const otherInput = document.getElementById('diagnosis-other');
-            finalDiagnosis = otherInput.value.trim() || 'その他 (未入力)';
-        } else {
-            finalDiagnosis = select.value;
-        }
-        // 選択された新しい診断名をLocalStorageに保存
-        localStorage.setItem(DIAGNOSIS_KEY, finalDiagnosis);
+    if (fixedContainer && fixedContainer.style.display !== 'none') {
+        return document.getElementById('diagnosis-text').innerText.replace('主な診断名: ', '');
     }
-
-    return finalDiagnosis;
+    const select = document.getElementById('diagnosis-select');
+    const val = (select.value === 'その他') ? document.getElementById('diagnosis-other').value.trim() : select.value;
+    localStorage.setItem(DIAGNOSIS_KEY, val);
+    return val;
 }
 
-function unlockDiagnosis() {
-    const fixed = document.getElementById('diagnosis-fixed-container');
-    const select = document.getElementById('diagnosis-select-container');
-    if (fixed) fixed.style.display = 'none';
-    if (select) select.style.display = 'block';
-}
-
+// --- UI・グラフ機能 ---
 function createCircleButtons(containerId, type) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -67,8 +37,7 @@ function createCircleButtons(containerId, type) {
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.type = "button";
-        if (i === 5) btn.className = 'active';
+        btn.className = (i === 5) ? 'active' : '';
         btn.onclick = function() {
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
@@ -79,19 +48,15 @@ function createCircleButtons(containerId, type) {
     }
 }
 
-// 【改善】Y軸を1〜10に固定したグラフ描画関数
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
     const container = document.getElementById('chart-wrapper');
     if (!canvas || !container) return;
     
-    const newWidth = Math.max(window.innerWidth, logs.length * 60);
-    container.style.width = newWidth + 'px';
-
+    container.style.width = Math.max(window.innerWidth, logs.length * 60) + 'px';
     if (myChartInstance) myChartInstance.destroy();
 
-    const ctx = canvas.getContext('2d');
-    myChartInstance = new Chart(ctx, {
+    myChartInstance = new Chart(canvas.getContext('2d'), {
         type: 'line',
         data: {
             labels: logs.map(l => l.date),
@@ -101,37 +66,24 @@ function renderScrollableChart(logs) {
             ]
         },
         options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-        y: {
-            min: 1,      // 最小値を1に固定
-            max: 10,     // 最大値を10に固定
-            ticks: {
-                stepSize: 1 // 1刻みで表示
-            }
-        },
-        x: {
-            ticks: { maxRotation: 45 }
-        }
-    }
+            responsive: false,
+            maintainAspectRatio: false,
+            scales: { y: { min: 1, max: 10, ticks: { stepSize: 1 } } }
         }
     });
 }
 
+// --- データ処理 ---
 function saveData() {
-    const note = document.getElementById('note').value;
-    let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "主な診断名";
-    const selectContainer = document.getElementById('diagnosis-select-container');
-    
-    if (selectContainer && selectContainer.style.display !== 'none') {
-        const select = document.getElementById('diagnosis-select');
-        diagnosisVal = select.value === 'その他' ? `その他 (${document.getElementById('diagnosis-other').value.trim()})` : select.value;
-        localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
-    }
-
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    logs.push({ ts: Date.now(), date: new Date().toLocaleString(), diagnosis: diagnosisVal, mood: selectedMood, cond: selectedCond, note: note });
+    logs.push({ 
+        ts: Date.now(), 
+        date: new Date().toLocaleString(), 
+        diagnosis: getFinalDiagnosis(), 
+        mood: selectedMood, 
+        cond: selectedCond, 
+        note: document.getElementById('note').value 
+    });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     alert("記録しました！");
     location.reload();
@@ -139,59 +91,20 @@ function saveData() {
 
 // --- ページ初期化 ---
 window.onload = () => {
-    // グラフ描画など、既存の処理
-    renderChart();
-    // 10段階ボタン生成など、既存の処理
     createCircleButtons('mood-btns', 'mood');
     createCircleButtons('cond-btns', 'cond');
 
-    // --- 診断名表示の初期化 ---
-    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-    const fixedContainer = document.getElementById('diagnosis-fixed-container');
-    const selectContainer = document.getElementById('diagnosis-select-container');
-    const diagnosisText = document.getElementById('diagnosis-text');
-
-    if (savedDiagnosis) {
-        // 1. 保存されている場合: 固定表示にする
-        selectContainer.style.display = 'none';
-        fixedContainer.style.display = 'flex'; // ボタンと並べるためにflexにする
-        diagnosisText.innerText = `主な診断名: ${savedDiagnosis}`;
-    } else {
-        // 2. 保存されていない場合: 選択エリアを表示
-        selectContainer.style.display = 'block';
-        fixedContainer.style.display = 'none';
+    // 診断名の復元表示
+    const saved = localStorage.getItem(DIAGNOSIS_KEY);
+    if (saved) {
+        document.getElementById('diagnosis-select-container').style.display = 'none';
+        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+        document.getElementById('diagnosis-text').innerText = `主な診断名: ${saved}`;
     }
-};
 
-// --- データの保存処理 (saveData) ---
-function saveData() {
-    const mood = selectedMood; // 選択された気分の値
-    const cond = selectedCond; // 選択された調子の値
-    const note = document.getElementById('note').value; // メモの内容
-
-    // 今回の修正ポイント：診断名を取得（必要なら保存も行う）
-    const diagnosis = getFinalDiagnosis();
-
-    // 既存の保存処理
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const newLog = {
-        ts: Date.now(),
-        date: new Date().toLocaleString(),
-        diagnosis: diagnosis, // ここに診断名が入る
-        mood: mood,
-        cond: cond,
-        note: note
-    };
-    logs.push(newLog);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-    alert("記録しました！");
-    location.reload(); // ページをリロードして反映
-}
-
-    // --- 履歴表示とグラフ描画 ---
+    // 履歴生成
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const logList = document.getElementById('log-list');
-    
     if (logList) {
         logList.innerHTML = '';
         logs.slice().reverse().forEach(l => {
@@ -202,7 +115,5 @@ function saveData() {
         });
     }
 
-    renderScrollableChart(logs);
-};
     renderScrollableChart(logs);
 };
