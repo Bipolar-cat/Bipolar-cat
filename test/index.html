@@ -1,20 +1,12 @@
-/* 全体をシンプルにリセット */
-* { box-sizing: border-box; }
-body { margin: 0; padding: 20px 10px; background: #fff; }
-
-.container {
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/* 全セクションを縦積みで統一 */
-h1, .subtitle, #diagnosis-container, .input-section, .chart-container, .summary-section, .log-section {
-    width: 100%;
-    margin-bottom: 20px;
-    display: block; /* 横並びを禁止して縦積みに */
-}
-
-/* タイトル設定 */
-h1 { color: #5C6BC0; }
+<div id="diagnosis-container" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+    <div id="diagnosis-fixed-container" style="display: flex; justify-content: space-between; align-items: center;">
+        <span id="diagnosis-text">主な診断名: 未設定</span>
+        <button onclick="unlockDiagnosis()" style="color: blue; border: none; background: none;">変更</button>
+    </div>
+    <div id="diagnosis-select-container" style="display: none;">
+        <select id="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%;">
+            <option value="双極症">双極症</option>
+            <option value="うつ病">うつ病</option>
+        </select>
+    </div>
+</div>
