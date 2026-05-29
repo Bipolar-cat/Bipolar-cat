@@ -6,8 +6,13 @@
     <title>InnerNote - Perfect Sync 350 (Diagnosis & Summary Ver)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
- <div id="diagnosis-container" style="display: block;">
-        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
+ <div id="diagnosis-container" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px;">
+    <div id="diagnosis-fixed-container" style="display: flex; justify-content: space-between; align-items: center;">
+        <span id="diagnosis-text">主な診断名: 未設定</span>
+        <button onclick="unlockDiagnosis()" style="color: blue; border: none; background: none;">変更</button>
+    </div>
+    <div id="diagnosis-select-container" style="display: none;">
+        <select id="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%;">
             <option value="">主な診断名を選択</option>
             <option value="未診断（健常者）">未診断（健常者）</option>
             <option value="うつ病">うつ病</option>
