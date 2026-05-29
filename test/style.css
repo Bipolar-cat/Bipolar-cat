@@ -1,22 +1,4 @@
-/* 全体を真っ白・縦積みで固定 */
-* { box-sizing: border-box; }
-body {
-    margin: 0;
-    padding: 20px;
-    background-color: #ffffff;
-    display: block !important;
-}
-
-.container {
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-    display: block !important;
-}
-
-/* 各セクションを強制的に縦に並べる */
-#diagnosis-container, .input-section, .chart-container, .log-section {
-    width: 100%;
-    display: block !important;
-    margin-bottom: 20px;
-}
+body { margin: 0; padding: 20px; background: #fff; font-family: sans-serif; }
+.container { max-width: 450px; margin: 0 auto; text-align: center; }
+h1 { color: #5C6BC0; }
+#content { border: 1px solid #ccc; padding: 20px; margin-top: 20px; }
