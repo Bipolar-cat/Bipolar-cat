@@ -1,38 +1,49 @@
- /* bodyの背景（外側のグレー）を白に変更 */
+/* ベースリセット：画面幅にフィットさせる */
 body {
     margin: 0;
     padding: 10px;
-    background-color: white; */
+    background-color: #ffffff;
+    display: block; /* 横並びを防ぐ */
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+}
+
+/* タイトルとサブタイトル */
+h1 { color: #5C6BC0; text-align: center; }
+.subtitle { text-align: center; color: #888; margin-bottom: 20px; }
+
+/* 診断名エリア（グレー枠を透明に変更） */
+.diagnosis-area {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* スクロールボタンと各セクションを縦積みに */
+.input-section, .chart-container, .summary-section, .log-section {
+    width: 100%;
     display: block;
+    margin-bottom: 20px;
 }
 
-/* 1. コンテナ内を幅いっぱいに揃える */
-.container {
+/* 横スクロール枠 */
+.scroll-wrapper {
     width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px; /* 全体の内側余白 */
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-/* 1. コンテナ内を幅いっぱいに揃える */
-.container {
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px; /* 全体の内側余白 */
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-/* タイトルとサブタイトルの設定 */
-h1 {
-    color: #5C6BC0 !important; /* タイトルを青く */
-    text-align: center;         /* 中央寄せ */
-    margin: 10px 0 5px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
 }
 
 .subtitle {
