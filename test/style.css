@@ -104,14 +104,17 @@ h1 {
             box-sizing: border-box;
         }
 
-        .change-btn {
-    margin-left: auto;          /* 自動的に右端に寄る */
-    color: #007bff;
+
+        /* 青い変更ボタンのデザイン */
+.change-btn {
+    color: #007bff; /* 青色 */
     background: none;
     border: none;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
-        }: 0;
-        }
+    padding: 0;
+}
 
         .select-box {
             width: 100%;
