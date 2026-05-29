@@ -49,10 +49,18 @@ h1 {
             margin-bottom: 15px;
         }
 
-       /* 4. 診断エリアの幅調整 */
-.diagnosis-area {
-    display: block;
-    width: 100%;
+       /* 全セクションの幅をコンテナと一致させる */
+.diagnosis-area, .input-section, .chart-container, .summary-section, .log-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    margin: 0 auto 20px auto !important;
+    padding: 0 !important;
+}
+
+/* グラフの枠を広げる */
+#chart-wrapper {
+    width: 100% !important;
 }
 
         .diagnosis-fixed-box {
