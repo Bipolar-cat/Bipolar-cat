@@ -1,33 +1,23 @@
-body { background-color: #f0f0f0; margin: 0; padding: 20px; font-family: sans-serif; }
-
-.wrapper {
-    max-width: 450px;
-    margin: 0 auto;
-    background-color: #d1d5db; /* 大枠のグレー */
-    padding: 20px;
-    border-radius: 16px;
-}
-
-.box {
-    background-color: #ffffff; /* 中身の白背景 */
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-
-.diagnosis-box {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 12px 16px;
-    width: 66.6%;
-    margin-bottom: 15px;
+body {
+    font-family: sans-serif;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
 }
 
-.change-btn { color: #007bff; background: none; border: none; font-weight: bold; cursor: pointer; }
+.header-container {
+    text-align: center;
+}
 
-.btn-group { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; margin-bottom: 15px; }
+.main-title {
+    color: #4a6fa5; /* 青色 */
+    font-size: 32px;
+    margin-bottom: 5px;
+}
 
-.mood-btn, .body-btn { width: 35px; height: 35px; border-radius: 50%; border: 1px solid #007bff; background: white; cursor: pointer; }
+.sub-title {
+    color: #777777; /* グレー */
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 0;
+}
