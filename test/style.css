@@ -1,9 +1,9 @@
-      /* --- レイアウトのベース --- */
+ /* bodyの背景（外側のグレー）を白に変更 */
 body {
     margin: 0;
     padding: 10px;
-    background-color: #f8f9fa;
-    display: block; /* 横並び解除 */
+    background-color: #ffffff; */
+    display: block;
 }
 
 /* 1. コンテナ内を幅いっぱいに揃える */
