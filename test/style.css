@@ -1,28 +1,34 @@
-       /* 1. 全体を中央に寄せる */
+       /* リセットと全体レイアウト */
+* { box-sizing: border-box; }
 body {
     margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+    padding: 20px 10px;
     background-color: #f8f9fa;
-    font-family: sans-serif;
+    display: flex;
+    justify-content: center; /* 全体を中央へ */
 }
 
 .container {
     width: 100%;
-    max-width: 450px;
+    max-width: 450px; /* スマホ幅を上限にする */
     background: white;
     padding: 20px;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center; /* 中身をすべて中央に */
 }
 
-        /* 2. タイトルを青くする */
+/* タイトルを青く */
 h1 {
-    color: #5C6BC0; /* 青色 */
-    font-size: 28px;
-    margin: 5px 0;
+    color: #5C6BC0;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* グラフ・ログの幅を強制的にコンテナ内に収める */
+.chart-container, .summary-section, .log-list {
+    width: 100%;
+    overflow: hidden; /* 横はみ出しを禁止 */
 }
 
         .subtitle {
