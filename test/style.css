@@ -6,19 +6,27 @@ body {
     display: block; /* 横並び解除 */
 }
 
+/* 1. コンテナ内を幅いっぱいに揃える */
 .container {
     width: 100%;
     max-width: 450px;
-    margin: 0 auto; /* 中央寄せ */
+    margin: 0 auto;
     background: white;
-    padding: 20px;
+    padding: 20px; /* 全体の内側余白 */
     border-radius: 20px;
-    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-/* タイトルを青く */
+/* 2. セクション（タイトル、診断名、入力、グラフ、ログ）を一括制御 */
+h1, .subtitle, .diagnosis-area, .input-section, .chart-container, .summary-section, .log-section {
+    width: 100%;       /* 幅を100%に */
+    margin-bottom: 20px; /* 下側の間隔を均等に */
+}
+
+/* 3. タイトルの装飾 */
 h1 {
     color: #5C6BC0;
+    margin-bottom: 5px;
 }
 
 /* 各セクションを縦積み（ブロック化） */
@@ -41,13 +49,11 @@ h1 {
             margin-bottom: 15px;
         }
 
-        /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
-        .diagnosis-area {
-            width: 66.6%;
-            margin: 0 auto 20px auto;
-            text-align: left;
-            box-sizing: border-box;
-        }
+       /* 4. 診断エリアの幅調整 */
+.diagnosis-area {
+    display: block;
+    width: 100%;
+}
 
         .diagnosis-fixed-box {
             display: flex;
