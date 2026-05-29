@@ -110,7 +110,7 @@ h1 {
             font-size: 15px;
         }
 
-        /* 3. ボタンの横スクロール用（崩れ防止） */
+        /* ボタンのスクロール枠（ここだけ横並びを維持） */
 .scroll-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -118,12 +118,10 @@ h1 {
     padding: 10px 0;
 }
 
-        .scroll-wrapper::-webkit-scrollbar { display: none; }
-
-        .btn-group-circle {
+.btn-group-circle {
     display: inline-flex;
     gap: 10px;
-        }
+}
 
         /* ボタンの大きさ（52px正円）とフォント・カラー */
         .btn-group-circle button {
