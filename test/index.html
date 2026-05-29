@@ -11,9 +11,20 @@
         <h1>InnerNote</h1>
         <p class="subtitle">気分と調子の変化を記録</p>
 
-        <div id="diagnosis-container" class="box">
-            <span>主な診断名: 双極症</span>
-            <button>変更</button>
+        <div id="diagnosis-container" class="diagnosis-box">
+    <div id="diagnosis-fixed-container">
+        <span id="diagnosis-text">主な診断名: 未設定</span>
+        <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
+    </div>
+
+    <div id="diagnosis-select-container" style="display: none;">
+        <select id="diagnosis-select" onchange="lockDiagnosis()">
+            <option value="">診断名を選択してください</option>
+            <option value="双極症">双極症</option>
+            <option value="うつ病">うつ病</option>
+            <option value="不安障害">不安障害</option>
+        </select>
+    </div>
         </div>
 
         <div class="box">
