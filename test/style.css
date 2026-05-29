@@ -1,5 +1,10 @@
 /* 全体の背景 */
-body { background-color: #f0f0f0; margin: 0; padding: 20px; }
+body { 
+    background-color: #f0f0f0; 
+    margin: 0; 
+    padding: 20px; 
+    font-family: sans-serif;
+}
 
 /* 大枠のグレーボックス */
 .wrapper {
@@ -18,7 +23,7 @@ body { background-color: #f0f0f0; margin: 0; padding: 20px; }
     margin-bottom: 15px;
 }
 
-/* 診断名エリア（左詰め2/3幅） */
+/* 診断名エリア */
 .diagnosis-box {
     background-color: #ffffff;
     border-radius: 12px;
@@ -26,8 +31,12 @@ body { background-color: #f0f0f0; margin: 0; padding: 20px; }
     width: 66.6%;
     margin-bottom: 15px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+/* 変更ボタン */
 .change-btn {
     color: #007bff; /* 青い変更文字 */
     background: none;
@@ -35,15 +44,21 @@ body { background-color: #f0f0f0; margin: 0; padding: 20px; }
     font-weight: bold;
     cursor: pointer;
 }
-/* 気分ボタン（青） */
-.mood-btn:active { background: #007bff; color: white; }
 
-/* 体調ボタン（オレンジ） */
-.body-btn:active { background: #f39c12; color: white; }
-
+/* ボタンのスタイル */
 .btn-group {
     display: flex;
-    justify-content: center; /* 中央寄せ */
-    flex-wrap: wrap;        /* 折り返し */
+    justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 15px;
+    gap: 5px;
+}
+
+.mood-btn, .body-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #007bff;
+    background: white;
+    cursor: pointer;
 }
