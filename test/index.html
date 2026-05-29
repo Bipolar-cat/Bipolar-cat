@@ -1,74 +1,20 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnerNote</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-   <div class="container">
-    <h1>InnerNote</h1>
-    <p class="subtitle">気分と調子の変化を記録</p>
-    
-    <div id="diagnosis-container" class="diagnosis-container">
-    </div>
-        
-    <div class="diagnosis-area" style="margin-bottom: 20px;">
-    <div id="diagnosis-select-container" style="display: block;">
-        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">？その他</option>
-        </select>
-    </div>
+/* 全体をシンプルにリセット */
+* { box-sizing: border-box; }
+body { margin: 0; padding: 20px 10px; background: #fff; }
 
-    <div id="diagnosis-fixed-container" style="display: none; width: 100%; padding: 10px; background: #efefef;">
-        <span id="diagnosis-text">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
-    </div>
+.container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-         <div class="input-section">
-        <label class="label">今の気分？ (1〜10)</label>
-        <div class="scroll-wrapper">
-            <div id="mood-btns" class="btn-group-circle"></div>
-        </div>
+/* 全セクションを縦積みで統一 */
+h1, .subtitle, #diagnosis-container, .input-section, .chart-container, .summary-section, .log-section {
+    width: 100%;
+    margin-bottom: 20px;
+    display: block; /* 横並びを禁止して縦積みに */
+}
 
-        <label class="label">体の調子？ (1〜10)</label>
-        <div class="scroll-wrapper">
-            <div id="cond-btns" class="btn-group-circle"></div>
-        </div>
-        
-        <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-        <button class="save-btn" onclick="saveData()">記録する</button>
-    </div>
-
-    <div class="chart-container">
-        <div id="chart-wrapper" style="width: 100%; height: 350px;">
-            <canvas id="myChart"></canvas>
-        </div>
-    </div>
-
-    <div class="summary-section">
-        <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
-        <div id="summary-ts">前回まとめ作成：なし</div>
-        <div id="summary-card">...</div>
-    </div>
-
-    <div class="log-section">
-        <div class="log-title">最近の記録</div>
-        <div id="log-list" class="log-list"></div>
-    </div>
-</div>
-            
-    <script src="script.js"></script>
-</body>
-</html>
-
+/* タイトル設定 */
+h1 { color: #5C6BC0; }
