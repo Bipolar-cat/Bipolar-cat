@@ -26,3 +26,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+window.onload = function() {
+    const moodContainer = document.getElementById('mood-btns');
+    
+    if (moodContainer) {
+        // 既存のボタンを消去（念のため）
+        moodContainer.innerHTML = '';
+        
+        // 1から10のボタンを作成
+        for (let i = 1; i <= 10; i++) {
+            const btn = document.createElement('button');
+            btn.innerText = i;
+            // スタイルをJSから直接適用して、表示を確実にする
+            btn.style.width = '35px';
+            btn.style.height = '35px';
+            btn.style.borderRadius = '50%';
+            btn.style.border = '1px solid #007bff';
+            btn.style.background = 'white';
+            btn.style.color = '#007bff';
+            
+            btn.onclick = function() {
+                alert(i + ' が選択されました');
+            };
+            moodContainer.appendChild(btn);
+        }
+    } else {
+        console.error("mood-btns が見つかりません！HTMLを確認してください。");
+    }
+};
