@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnerNote - Perfect Sync 350 (Diagnosis & Summary Ver)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<div class="diagnosis-container">
+    <div id="display-area">
+        <span id="diagnosis-text">診断名を選択してください</span>
+        <button onclick="toggleEdit()" class="edit-btn">変更</button>
+    </div>
+    <div id="edit-area" style="display: none;">
+        <select id="diagnosis-select">
+            <option value="双極症">双極症</option>
+            <option value="うつ病">うつ病</option>
+            <option value="適応障害">適応障害</option>
+        </select>
+        <button onclick="saveDiagnosis()">保存</button>
+    </div>
+</div>
+    
 <script>
 function renderScrollableChart(logs) {
     const canvas = document.getElementById('myChart');
