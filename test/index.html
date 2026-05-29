@@ -2,48 +2,16 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnerNote</title>
     <link rel="stylesheet" href="style.css">
+    <title>InnerNote</title>
 </head>
 <body>
-    <div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">気分と調子の変化を記録</p>
 
-        <div class="wrapper">
-    <div id="diagnosis-container" class="diagnosis-box">
-        <div id="diagnosis-fixed-container">
-            <span id="diagnosis-text">主な診断名: 未設定</span>
-            <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
-        </div>
-        <div id="diagnosis-select-container" style="display: none;">
-            <select id="diagnosis-select" onchange="lockDiagnosis()">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
+    <div class="header-container">
+        <h1 class="main-title">InnerNote</h1>
+        <p class="sub-title">**気分と調子の変化を記録**</p>
     </div>
 
-       <div class="box"> <p>今の気分？ (1〜10)</p>
-        <div id="mood-btns" class="btn-group"></div>
-        <p>体の調子？ (1〜10)</p>
-        <div id="body-condition-btns" class="btn-group"></div>
-    </div>
-
-    <div class="box">
-        <p>今の気持ちをメモ...</p>
-        <textarea style="width:100%;"></textarea>
-        <button style="width:100%;">記録する</button>
-    </div>
-    </div>
-            
     <script src="script.js"></script>
 </body>
 </html>
