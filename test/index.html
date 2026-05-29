@@ -9,10 +9,23 @@
 <body>
     <div class="container">
         <h1>InnerNote</h1>
-        <div id="content">
-            <p>ページを読み込んでいます...</p>
+        <p class="subtitle">気分と調子の変化を記録</p>
+
+        <div id="diagnosis-container" class="box">
+            <span>主な診断名: 双極症</span>
+            <button>変更</button>
+        </div>
+
+        <div class="box">
+            <p>今の気分？ (1〜10)</p>
+            <div class="btn-group">1 2 3 4 5 6 7 8 9 10</div>
+        </div>
+
+        <div class="box">
+            <p>今の気持ちをメモ...</p>
+            <textarea style="width:100%;"></textarea>
+            <button style="width:100%;">記録する</button>
         </div>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
