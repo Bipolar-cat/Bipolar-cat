@@ -69,13 +69,22 @@ h1 {
             margin-bottom: 15px;
         }
 
-/* 全セクションの幅をコンテナと一致させる */
-.diagnosis-area, .input-section, .chart-container, .summary-section, .log-section {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
-    margin: 0 auto 20px auto !important;
-    padding: 0 !important;
+/* 診断名エリア（変更ボタンを右端へ） */
+.diagnosis-area {
+    display: flex;              /* 横並びにする */
+    justify-content: space-between; /* 両端に寄せる */
+    align-items: center;        /* 縦方向の中央揃え */
+    width: 100%;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* 変更ボタンを右端へ押し出すための調整 */
+#diagnosis-select-container {
+    flex-grow: 1;               /* 左側の領域を確保 */
 }
 
 /* グラフの枠を広げる */
@@ -96,13 +105,12 @@ h1 {
         }
 
         .change-btn {
-            background: none;
-            border: none;
-            color: #4A90E2;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0;
+    margin-left: auto;          /* 自動的に右端に寄る */
+    color: #007bff;
+    background: none;
+    border: none;
+    cursor: pointer;
+        }: 0;
         }
 
         .select-box {
