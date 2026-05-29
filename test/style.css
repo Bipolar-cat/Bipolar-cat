@@ -1,28 +1,31 @@
-       /* リセットと全体レイアウト */
-* { box-sizing: border-box; }
+      /* --- レイアウトのベース --- */
 body {
     margin: 0;
-    padding: 20px 10px;
+    padding: 10px;
     background-color: #f8f9fa;
-    display: flex;
-    justify-content: center; /* 全体を中央へ */
+    display: block; /* 横並び解除 */
 }
 
 .container {
     width: 100%;
-    max-width: 450px; /* スマホ幅を上限にする */
+    max-width: 450px;
+    margin: 0 auto; /* 中央寄せ */
     background: white;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    text-align: center; /* 中身をすべて中央に */
+    text-align: center;
 }
 
 /* タイトルを青く */
 h1 {
     color: #5C6BC0;
-    font-size: 24px;
-    margin-bottom: 10px;
+}
+
+/* 各セクションを縦積み（ブロック化） */
+.input-section, .chart-container, .summary-section, .log-section {
+    width: 100%;
+    display: block; /* Flexboxを解除して縦積みに */
+    margin-bottom: 20px;
 }
 
 /* グラフ・ログの幅を強制的にコンテナ内に収める */
