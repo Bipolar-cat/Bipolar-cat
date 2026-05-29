@@ -1,6 +1,4 @@
-/* 1. レイアウトの基準（一番上に記述） */
-body {
-    margin: 0;
+margin: 0;
     padding: 0;
     display: flex;
     justify-content: center; /* 画面中央に配置 */
@@ -15,6 +13,8 @@ body {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* ほんのり影をつけるときれい */
+}
+2px 10px rgba(0,0,0,0.1); /* ほんのり影をつけるときれい */
 }
 
 /* 2. 各パーツの設定（ここから下に書いていく） */
