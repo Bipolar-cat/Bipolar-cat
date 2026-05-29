@@ -5,3 +5,14 @@ h1 { color: #5C6BC0; text-align: center; }
 .box { border: 1px solid #ccc; padding: 15px; margin-top: 15px; border-radius: 10px; }
 .btn-group { display: flex; justify-content: space-between; }
 
+.mood-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #007bff;
+    background: white;
+    color: #007bff;
+    margin: 2px;
+    cursor: pointer;
+}
+.mood-btn:active { background: #007bff; color: white; }
