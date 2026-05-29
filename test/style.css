@@ -17,14 +17,6 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-      /* --- レイアウトのベース --- */
-body {
-    margin: 0;
-    padding: 10px;
-    background-color: #f8f9fa;
-    display: block; /* 横並び解除 */
-}
-
 /* 1. コンテナ内を幅いっぱいに揃える */
 .container {
     width: 100%;
@@ -69,11 +61,10 @@ h1 {
             margin-bottom: 15px;
         }
 
-/* 薄いグレーのボックス全体 */
 /* 診断名エリアのグレー背景を消去 */
 .diagnosis-box {
     width: 100%;
-    background-color: transparent; /* または #ffffff */
+    background-color: white;; 
     border: 1px solid #e5e7eb;      /* 背景を消す代わりに枠線を薄く入れると綺麗です */
     border-radius: 12px;
     padding: 12px 16px;
