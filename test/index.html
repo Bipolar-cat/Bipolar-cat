@@ -10,9 +10,8 @@
 <body>
     <div class="container">
         <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
-    <div id="diagnosis-container" class="diagnosis-container">
-    </div>
+        <p class="subtitle">**気分と調子の変化を記録**</p>　　
+        <div id="diagnosis-container" class="diagnosis-container"></div
         
         div class="diagnosis-area" style="margin-bottom: 20px;">
         <div id="diagnosis-select-container" style="display: block;">
@@ -36,19 +35,12 @@
     </div>
 
         <div class="input-section">
-        <label class="label">今の気分？ (1〜10)</label>
-        <div class="scroll-wrapper">
-            <div id="mood-btns" class="btn-group-circle"></div>
-        </div>
+            <label class="label">今の気分？ (1〜10)</label>
+            <div class="scroll-wrapper"><div id="mood-btns" class="btn-group-circle"></div></div>
 
-        <label class="label">体の調子？ (1〜10)</label>
-        <div class="scroll-wrapper">
-            <div id="cond-btns" class="btn-group-circle"></div>
+            <label class="label">体の調子？ (1〜10)</label>
+            <div class="scroll-wrapper"><div id="cond-btns" class="btn-group-circle"></div></div>
         </div>
-
-        <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-        <button class="save-btn" onclick="saveData()">記録する</button>
-    </div>
 
     <div class="chart-container">
         <div id="chart-wrapper" style="width: 100%; height: 350px;">
