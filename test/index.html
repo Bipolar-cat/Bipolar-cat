@@ -11,14 +11,14 @@
         <h1>InnerNote</h1>
         <p class="subtitle">気分と調子の変化を記録</p>
 
-        <div id="diagnosis-container" class="diagnosis-box">
-    <div id="diagnosis-fixed-container">
-        <span id="diagnosis-text">主な診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
-    </div>
-
-    <div id="diagnosis-select-container" style="display: none;">
-        <select id="diagnosis-select" onchange="lockDiagnosis()">
+        <div class="wrapper">
+    <div id="diagnosis-container" class="diagnosis-box">
+        <div id="diagnosis-fixed-container">
+            <span id="diagnosis-text">主な診断名: 未設定</span>
+            <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
+        </div>
+        <div id="diagnosis-select-container" style="display: none;">
+            <select id="diagnosis-select" onchange="lockDiagnosis()">
             <option value="">主な診断名を選択</option>
             <option value="未診断（健常者）">未診断（健常者）</option>
             <option value="うつ病">うつ病</option>
