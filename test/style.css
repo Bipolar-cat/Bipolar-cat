@@ -1,31 +1,29 @@
-       /* 全体の背景とフォント、パディングを最適化 */
-        body {
-            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-        }
+       /* 1. 全体を中央に寄せる */
+body {
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: #f8f9fa;
+    font-family: sans-serif;
+}
 
-        /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
-        .container {
-    max-width: 450px !important;
-    width: 100% !important; /* 画面幅に応じて伸縮 */
-    margin: 10px auto !important; /* 中央揃え */
+.container {
+    width: 100%;
+    max-width: 450px;
     background: white;
-    padding: 20px 15px !important; /* 左右のパディングを適度に入れる */
+    padding: 20px;
     border-radius: 25px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     text-align: center;
-    overflow: hidden !important; /* はみ出しを強制カット */
-        }
+}
 
-        h1 {
-            color: #5C6BC0;
-            font-size: 28px;
-            margin: 5px 0 0 0;
-        }
+        /* 2. タイトルを青くする */
+h1 {
+    color: #5C6BC0; /* 青色 */
+    font-size: 28px;
+    margin: 5px 0;
+}
 
         .subtitle {
             color: #888;
@@ -103,19 +101,19 @@
             font-size: 15px;
         }
 
-        .scroll-wrapper {
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 2px 0 10px 5px;
-            -webkit-overflow-scrolling: touch;
-        }
+        /* 3. ボタンの横スクロール用（崩れ防止） */
+.scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+}
 
         .scroll-wrapper::-webkit-scrollbar { display: none; }
 
-        /* 10段階ボタンの横並びgapと配置 */
         .btn-group-circle {
-            display: inline-flex;
-            gap: 12px;
+    display: inline-flex;
+    gap: 10px;
         }
 
         /* ボタンの大きさ（52px正円）とフォント・カラー */
