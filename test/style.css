@@ -70,9 +70,11 @@ h1 {
         }
 
 /* 薄いグレーのボックス全体 */
+/* 診断名エリアのグレー背景を消去 */
 .diagnosis-box {
     width: 100%;
-    background-color: #f9f9f9; /* 薄いグレー */
+    background-color: transparent; /* または #ffffff */
+    border: 1px solid #e5e7eb;      /* 背景を消す代わりに枠線を薄く入れると綺麗です */
     border-radius: 12px;
     padding: 12px 16px;
     margin-bottom: 20px;
