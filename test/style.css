@@ -1,15 +1,10 @@
-/* リセット */
-* { box-sizing: border-box; }
-
 body {
-    margin: 0;
-    padding: 10px;
     background-color: #f8f9fa;
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
 
-/* 全体を囲む箱 */
 .container {
     max-width: 450px;
     width: 100%;
@@ -20,7 +15,6 @@ body {
     text-align: center;
 }
 
-/* タイトル・サブタイトル */
 h1 {
     color: #5C6BC0;
     font-size: 28px;
