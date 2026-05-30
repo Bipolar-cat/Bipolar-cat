@@ -21,4 +21,21 @@ body {
 .header-container {
     text-align: center;
 }
-/* ...以下、診断名やボタンなどの設定... */
+/* 診断名エリアのスタイル */
+.diagnosis-container {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.edit-btn { color: #007bff; border: none; background: none; cursor: pointer; }
+
+/* ラベルとボタンのスタイル */
+.label { font-size: 14px; margin: 15px 0 5px 0; }
+.button-group { display: flex; flex-wrap: wrap; gap: 5px; }
+button { 
+    width: 35px; height: 35px; border-radius: 50%; 
+    border: 1px solid #ccc; background: white; cursor: pointer; 
+}
