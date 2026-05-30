@@ -30,43 +30,31 @@ function loadDiagnosis() {
     // 診断名を表示する場所を作った場合、ここにDOM操作を書く
 }
 
-function createButtons(containerId, color) {
+// ボタン生成関数
+function createButtons(containerId, className) {
     const container = document.getElementById(containerId);
+    container.innerHTML = ''; // クリア
+    
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.style.borderColor = color;
-        btn.style.color = color;
+        btn.className = className;
+        
+        btn.onclick = () => {
+            // 他の選択を解除
+            container.querySelectorAll('.' + className).forEach(b => b.classList.remove('selected'));
+            // 自分を選択
+            btn.classList.add('selected');
+        };
         container.appendChild(btn);
     }
 }
 
+// ページ読み込み時に実行
 window.addEventListener('DOMContentLoaded', () => {
-    // 1. 診断名の復元
-    const saved = localStorage.getItem('userDiagnosis');
-    if (saved) {
-        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + saved;
-    }
+    // 診断名の読み込み...（既存の処理）
 
-    // 2. ボタンの自動生成（ここが抜けているとボタンが表示されません）
-    // 下記のように、HTMLのidを引数に渡して呼び出してください
-    if (document.getElementById('mood-btns')) {
-        createButtons('mood-btns', '#007bff');
-    }
+    // ボタンの生成
+    createButtons('mood-btns', 'mood-btn');
+    createButtons('physical-btns', 'mood-btn');
 });
-
-function unlockDiagnosis() {
-    document.getElementById('display-mode').style.display = 'none';
-    document.getElementById('edit-mode').style.display = 'block';
-}
-
-function saveAndLock() {
-    const select = document.getElementById('diagnosis-select');
-    const value = select.value;
-    if (value) {
-        localStorage.setItem('userDiagnosis', value);
-        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + value;
-        document.getElementById('display-mode').style.display = 'flex';
-        document.getElementById('edit-mode').style.display = 'none';
-    }
-}
