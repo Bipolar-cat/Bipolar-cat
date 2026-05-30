@@ -11,12 +11,13 @@
     <h1>InnerNote</h1>
     <p class="subtitle">**気分と調子の変化を記録**</p>
 
- <div class="diagnosis-area">
+ "diagnosis-area">
     <div id="diagnosis-box" class="diagnosis-fixed-box">
         <div id="display-mode" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <span id="diagnosis-text">主な診断名: 未設定</span>
             <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
         </div>
+
         <div id="edit-mode" style="display: none; width: 100%;">
             <select id="diagnosis-select" class="select-box" onchange="saveAndLock()">
              <option value="">主な診断名を選択</option>
