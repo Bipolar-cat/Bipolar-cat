@@ -59,6 +59,8 @@ h1 {
 }
 
 .diagnosis-fixed-box {
+    position: relative;
+    z-index: 10;
     background-color: #f5f5f5;
     padding: 10px 15px;
     border-radius: 12px;
