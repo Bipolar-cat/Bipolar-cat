@@ -41,31 +41,33 @@ function createButtons(containerId, color) {
     }
 }
 
-// ページ読み込み時に保存データがあれば表示
+// ページ読み込み時の処理
 window.onload = () => {
     const saved = localStorage.getItem('userDiagnosis');
     if (saved) {
-        document.getElementById('diagnosis-text').innerText = '診断名: ' + saved;
-        // 表示エリアを固定表示にする
-        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
-        document.getElementById('diagnosis-select-container').style.display = 'none';
+        updateDiagnosisDisplay(saved);
     }
 };
 
-// 「変更」ボタン押下時
+// 「変更」ボタン押下：編集エリアを表示
 function unlockDiagnosis() {
     document.getElementById('diagnosis-fixed-container').style.display = 'none';
     document.getElementById('diagnosis-select-container').style.display = 'block';
 }
 
-// プルダウン選択時
-function lockDiagnosis() {
+// プルダウン選択：保存して固定エリアに戻す
+function saveAndLock() {
     const select = document.getElementById('diagnosis-select');
     const value = select.value;
     if (value) {
         localStorage.setItem('userDiagnosis', value);
-        document.getElementById('diagnosis-text').innerText = '診断名: ' + value;
-        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
-        document.getElementById('diagnosis-select-container').style.display = 'none';
+        updateDiagnosisDisplay(value);
     }
+}
+
+// 表示の切り替え関数
+function updateDiagnosisDisplay(value) {
+    document.getElementById('diagnosis-text').innerText = '診断名: ' + value;
+    document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+    document.getElementById('diagnosis-select-container').style.display = 'none';
 }
