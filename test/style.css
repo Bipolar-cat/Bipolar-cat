@@ -154,3 +154,23 @@ h1 {
     background-color: #fffbeb;
     font-weight: bold;
 }
+
+/* ボタンのスタイル（ボタンが画面に表示されるために必要です） */
+.mood-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid #e5e7eb;
+    background: white;
+    color: #9ca3af;
+    cursor: pointer;
+    flex-shrink: 0; /* 横並び維持 */
+}
+
+/* 選択された時の色 */
+.mood-btn.selected {
+    border: 2px solid #bfdbfe;
+    color: #3b82f6;
+    background-color: #eff6ff;
+    font-weight: bold;
+}
