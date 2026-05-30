@@ -50,11 +50,34 @@ function createButtons(containerId, className) {
     }
 }
 
-// ページ読み込み時に実行
+// ページ読み込み時に、保存されている診断名があれば表示する
 window.addEventListener('DOMContentLoaded', () => {
-    // 診断名の読み込み...（既存の処理）
-
-    // ボタンの生成
-    createButtons('mood-btns', 'mood-btn');
-    createButtons('physical-btns', 'mood-btn');
+    const savedDiagnosis = localStorage.getItem('userDiagnosis');
+    if (savedDiagnosis) {
+        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + savedDiagnosis;
+    }
 });
+
+// 「変更」ボタンが押されたとき：編集モードを表示
+function unlockDiagnosis() {
+    document.getElementById('display-mode').style.display = 'none';
+    document.getElementById('edit-mode').style.display = 'block';
+}
+
+// プルダウンで診断名を選んだとき：保存して表示モードに戻す
+function saveAndLock() {
+    const select = document.getElementById('diagnosis-select');
+    const selectedValue = select.value;
+
+    if (selectedValue !== "") {
+        // ローカルストレージに保存
+        localStorage.setItem('userDiagnosis', selectedValue);
+        
+        // 画面のテキストを更新
+        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + selectedValue;
+        
+        // 表示を切り替え
+        document.getElementById('display-mode').style.display = 'flex';
+        document.getElementById('edit-mode').style.display = 'none';
+    }
+}
