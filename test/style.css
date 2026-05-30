@@ -84,3 +84,32 @@ h1 {
     border: 1px solid #ccc;
     font-size: 13px;
 }
+
+/* ボタンエリアの背景を白に設定 */
+.mood-container {
+    background-color: #ffffff;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    display: flex;
+    gap: 8px; /* ボタン同士の間隔 */
+}
+
+/* ボタンのデザイン */
+.mood-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    color: #888;
+    cursor: pointer;
+    flex-shrink: 0; /* 横並びを維持 */
+}
+
+/* 選択された時のスタイル（JSでクラスを付与します） */
+.mood-btn.selected {
+    border-color: #4A90E2;
+    background-color: #E8F4FD;
+    color: #4A90E2;
+}
