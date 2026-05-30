@@ -52,31 +52,37 @@ h1 {
 
 .diagnosis-area {
     width: 66.6%;
-    margin: 0 0 20px 20px;
+    margin: 0 0 20px 20px; /* 左詰め */
     text-align: left;
-    box-sizing: border-box;
 }
 
-/* ボックスの高さと背景の調整 */
 .diagnosis-fixed-box {
     display: flex;
-    justify-content: space-between; /* 文字とボタンを左右に配置 */
-    align-items: center;            /* 縦位置を中央に揃える */
+    justify-content: space-between; /* 両端寄せ */
+    align-items: center;
     background-color: #f5f5f5;
-    padding: 6px 12px;              /* 上下パディングを減らして高さを抑える */
+    padding: 6px 12px;
     border-radius: 8px;
     font-size: 13px;
     color: #333;
+    width: 100%; /* 親の幅に合わせる */
 }
 
-/* 「変更」ボタンのスタイル */
 .change-btn {
     background: none;
     border: none;
-    color: #4A90E2;                /* 青色に変更 */
-    font-size: 12px;
+    color: #4A90E2; /* 青色 */
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
-    padding: 0;
-    margin-left: 10px;             /* 診断名とボタンの間に少し隙間を作る */
+    white-space: nowrap; /* ボタンが改行されないようにする */
+    margin-left: 10px;
+}
+
+.select-box {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 13px;
 }
