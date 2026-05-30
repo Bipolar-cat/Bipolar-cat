@@ -52,37 +52,35 @@ h1 {
 
 .diagnosis-area {
     width: 66.6%;
-    margin: 0 0 20px 20px; /* 左詰め */
+    margin: 0 0 20px 20px;
     text-align: left;
 }
 
 .diagnosis-fixed-box {
-    display: flex;
-    justify-content: space-between; /* 両端寄せ */
-    align-items: center;
     background-color: #f5f5f5;
-    padding: 6px 12px;
+    padding: 8px 12px;
     border-radius: 8px;
     font-size: 13px;
     color: #333;
-    width: 100%; /* 親の幅に合わせる */
+    display: flex;
+    align-items: center;
+    box-sizing: border-box; /* サイズ計算を正確に */
 }
 
 .change-btn {
     background: none;
     border: none;
-    color: #4A90E2; /* 青色 */
+    color: #4A90E2;
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
-    white-space: nowrap; /* ボタンが改行されないようにする */
-    margin-left: 10px;
+    padding: 0 0 0 10px;
 }
 
 .select-box {
     width: 100%;
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
     font-size: 13px;
 }
