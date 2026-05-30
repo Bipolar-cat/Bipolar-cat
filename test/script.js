@@ -41,26 +41,34 @@ function createButtons(containerId, color) {
     }
 }
 
-// ページ読み込み時に実行
-window.addEventListener('load', () => {
+// ページ読み込み時に保存された診断名をチェック
+window.onload = () => {
     const saved = localStorage.getItem('userDiagnosis');
     if (saved) {
-        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + saved;
+        // 保存済みなら固定表示モードへ
+        showFixedDiagnosis(saved);
     }
-});
+};
 
-function toggleEdit() {
-    document.getElementById('display-area').style.display = 'none';
-    document.getElementById('edit-area').style.display = 'block';
-}
-
-function saveDiagnosis() {
+// 選択時に実行（自動保存と固定）
+function lockDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const value = select.value;
-    
-    localStorage.setItem('userDiagnosis', value);
-    document.getElementById('diagnosis-text').innerText = '主な診断名: ' + value;
-    
-    document.getElementById('display-area').style.display = 'block';
-    document.getElementById('edit-area').style.display = 'none';
+    if (value) {
+        localStorage.setItem('userDiagnosis', value);
+        showFixedDiagnosis(value);
+    }
+}
+
+// 変更ボタン押下時（編集モードに戻す）
+function unlockDiagnosis() {
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+}
+
+// 表示の切り替え関数
+function showFixedDiagnosis(value) {
+    document.getElementById('diagnosis-text').innerText = '診断名: ' + value;
+    document.getElementById('diagnosis-select-container').style.display = 'none';
+    document.getElementById('diagnosis-fixed-container').style.display = 'flex'; // blockからflexに変更
 }
