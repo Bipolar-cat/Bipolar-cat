@@ -41,11 +41,17 @@ function createButtons(containerId, color) {
     }
 }
 
-// ページ読み込み時に初期状態を整える
 window.addEventListener('DOMContentLoaded', () => {
+    // 1. 診断名の復元
     const saved = localStorage.getItem('userDiagnosis');
     if (saved) {
         document.getElementById('diagnosis-text').innerText = '主な診断名: ' + saved;
+    }
+
+    // 2. ボタンの自動生成（ここが抜けているとボタンが表示されません）
+    // 下記のように、HTMLのidを引数に渡して呼び出してください
+    if (document.getElementById('mood-btns')) {
+        createButtons('mood-btns', '#007bff');
     }
 });
 
