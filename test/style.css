@@ -40,9 +40,15 @@ button {
     border: 1px solid #ccc; background: white; cursor: pointer; 
 }
 
-.main-title {
-    color: #4a6fa5; /* 青色に変更 */
-    font-size: 24px;
-    margin: 0;
-    text-align: center;
-}
+ h1 {
+            color: #5C6BC0;
+            font-size: 28px;
+            margin: 5px 0 0 0;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
