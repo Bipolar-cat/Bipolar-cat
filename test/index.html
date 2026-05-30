@@ -12,18 +12,20 @@
     <p class="subtitle">**気分と調子の変化を記録**</p>
 
    <div class="diagnosis-container">
-    <div id="display-area">
-        <span id="diagnosis-text">主な診断名を選択してください</span>
-        <button class="edit-btn" onclick="toggleEdit()">変更</button>
+    <div class="diagnosis-area">
+    <div id="diagnosis-fixed-container" class="diagnosis-fixed-box">
+        <span id="diagnosis-text">診断名: 未設定</span>
+        <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
     </div>
-    <div id="edit-area" style="display: none;">
-        <select id="diagnosis-select">
+    
+    <div id="diagnosis-select-container" style="display: none;">
+        <select id="diagnosis-select" class="select-box" onchange="lockDiagnosis()">
+            <option value="">診断名を選択</option>
             <option value="双極症">双極症</option>
             <option value="うつ病">うつ病</option>
             <option value="適応障害">適応障害</option>
         </select>
-        <button class="save-btn" onclick="saveDiagnosis()">保存</button>
     </div>
-   </div>
+    </div>
 </body>
 </html>
