@@ -17,9 +17,9 @@
         <span id="diagnosis-text">診断名: 未設定</span>
         <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
     </div>
-    
-    <div id="diagnosis-select-container" style="display: none;">
-        <select id="diagnosis-select" class="select-box" onchange="lockDiagnosis()">
+
+    <div id="diagnosis-select-container" style="display: none; margin-top: 6px;">
+        <select id="diagnosis-select" class="select-box" onchange="saveAndLock()">
             <option value="">診断名を選択</option>
             <option value="双極症">双極症</option>
             <option value="うつ病">うつ病</option>
