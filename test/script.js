@@ -30,29 +30,20 @@ function loadDiagnosis() {
     // 診断名を表示する場所を作った場合、ここにDOM操作を書く
 }
 
-window.onload = function() {
-    // ボタンを生成
-    createButtons('mood-btns', '#007bff', 'mood-btn');
-    createButtons('body-condition-btns', '#f39c12', 'body-btn');
-};
-
-function createButtons(containerId, color, className) {
+function createButtons(containerId, color) {
     const container = document.getElementById(containerId);
-    if (!container) return;
-
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
-        btn.style.width = '35px';
-        btn.style.height = '35px';
-        btn.style.borderRadius = '50%';
-        btn.style.border = `1px solid ${color}`;
-        btn.style.background = 'white';
+        btn.style.borderColor = color;
         btn.style.color = color;
-        btn.style.margin = '3px';
-        btn.style.cursor = 'pointer';
-        
-        btn.onclick = () => alert(i + ' が選択されました');
         container.appendChild(btn);
     }
 }
+
+window.onload = () => {
+    createButtons('mood-btns', '#007bff');
+    createButtons('body-condition-btns', '#f39c12');
+};
+}
+
