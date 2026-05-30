@@ -1,26 +1,26 @@
-/* 1. 全体設定 */
+/* リセット */
+* { box-sizing: border-box; }
+
 body {
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #f8f9fa;
     margin: 0;
     padding: 10px;
+    background-color: #f8f9fa;
     display: flex;
     justify-content: center;
 }
 
-/* 2. 大枠のコンテナ（全体を囲む箱） */
+/* 全体を囲む箱 */
 .container {
     max-width: 450px;
     width: 100%;
     background: white;
-    padding: 20px 0;
+    padding: 20px;
     border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     text-align: center;
-    overflow: hidden;
 }
 
-/* 3. 各パーツのスタイル（h1やsubtitleはここから下に書く） */
+/* タイトル・サブタイトル */
 h1 {
     color: #5C6BC0;
     font-size: 28px;
