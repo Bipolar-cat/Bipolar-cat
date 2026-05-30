@@ -50,36 +50,35 @@ function createButtons(containerId, className) {
     }
 }
 
-// ページ読み込み時に、保存されている診断名があれば表示する
+// ページ読み込み時に保存内容を反映
 window.addEventListener('DOMContentLoaded', () => {
-    const savedDiagnosis = localStorage.getItem('userDiagnosis');
-    if (savedDiagnosis) {
-        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + savedDiagnosis;
+    const saved = localStorage.getItem('userDiagnosis');
+    if (saved) {
+        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + saved;
     }
 });
 
-// 変更ボタン：表示を隠して、プルダウンを表示
+// 「変更」ボタン：表示を隠し、プルダウンを出す
 function unlockDiagnosis() {
-    const displayMode = document.getElementById('display-mode');
-    const editMode = document.getElementById('edit-mode');
+    document.getElementById('display-mode').style.display = 'none';
+    document.getElementById('edit-mode').style.display = 'block';
     
-    displayMode.style.display = 'none';
-    editMode.style.display = 'block';
-    
-    // プルダウンを自動で開く（スマホでの操作性向上）
+    // スマホでプルダウンを自動展開させる工夫
     const select = document.getElementById('diagnosis-select');
     select.focus();
 }
 
-// 選択時：保存して表示に戻す
+// プルダウン選択時：保存して表示に戻す
 function saveAndLock() {
     const select = document.getElementById('diagnosis-select');
     const value = select.value;
     
     if (value !== "") {
+        // 保存
         localStorage.setItem('userDiagnosis', value);
+        // 表示更新
         document.getElementById('diagnosis-text').innerText = '主な診断名: ' + value;
-        
+        // モード切替
         document.getElementById('display-mode').style.display = 'flex';
         document.getElementById('edit-mode').style.display = 'none';
     }
