@@ -39,3 +39,10 @@ button {
     width: 35px; height: 35px; border-radius: 50%; 
     border: 1px solid #ccc; background: white; cursor: pointer; 
 }
+
+.main-title {
+    color: #4a6fa5; /* 青色に変更 */
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
