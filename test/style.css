@@ -33,25 +33,18 @@ h1 {
     padding: 10px 15px;
     border-radius: 12px;
     margin: 20px 0;
-    width: 66.6%;      /* 幅2/3 */
-    text-align: left;  /* 左詰め */
+    width: 66.6%;
+    text-align: left;
     font-size: 14px;
+    display: block; /* 確実に表示する */
 }
 
-.edit-btn {
-    color: #5C6BC0;
-    background: none;
-    border: none;
+/* ボタンを押しやすくする */
+.edit-btn, .save-btn {
     cursor: pointer;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-.save-btn {
-    background-color: #5C6BC0;
-    color: white;
+    padding: 5px 10px;
+    background: #e0e0e0;
     border: none;
-    padding: 2px 8px;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 5px;
 }
+.edit-btn { color: #5C6BC0; }
