@@ -50,23 +50,25 @@ h1 {
 }
 .edit-btn { color: #5C6BC0; }
 
+/* 外枠の余白だけを管理 */
 .diagnosis-area {
-    width: 66.6%;
-    margin: 0 0 20px 20px;
-    text-align: left;
+    width: 100%; /* 必要に応じて調整 */
+    margin-bottom: 20px;
 }
 
+/* 診断名ボックスのスタイル（これが残るグレーボックスです） */
 .diagnosis-fixed-box {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5; /* 診断名ボックスの背景色 */
     padding: 8px 12px;
     border-radius: 8px;
     font-size: 13px;
     color: #333;
     display: flex;
     align-items: center;
-    box-sizing: border-box; /* サイズ計算を正確に */
+    box-sizing: border-box;
 }
 
+/* ボタンのデザイン */
 .change-btn {
     background: none;
     border: none;
@@ -74,42 +76,13 @@ h1 {
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
-    padding: 0 0 0 10px;
+    padding-left: 10px;
 }
 
-.select-box {
-    width: 100%;
-    padding: 4px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 13px;
-}
-
-/* ボタンエリアの背景を白に設定 */
-.mood-container {
-    background-color: #ffffff;
-    padding: 10px 0;
-    margin-bottom: 15px;
-    border-radius: 12px;
+/* 気分ボタンエリア（背景なし） */
+.scroll-wrapper {
     display: flex;
-    gap: 8px; /* ボタン同士の間隔 */
-}
-
-/* ボタンのデザイン */
-.mood-btn {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background: white;
-    color: #888;
-    cursor: pointer;
-    flex-shrink: 0; /* 横並びを維持 */
-}
-
-/* 選択された時のスタイル（JSでクラスを付与します） */
-.mood-btn.selected {
-    border-color: #4A90E2;
-    background-color: #E8F4FD;
-    color: #4A90E2;
+    gap: 8px;
+    padding: 10px 0;
+    overflow-x: auto;
 }
