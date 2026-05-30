@@ -50,9 +50,21 @@ h1 {
 }
 .edit-btn { color: #5C6BC0; }
 
-             .diagnosis-area {
-            width: 66.6%;
-            margin: 0 0 20px 20px; /* 左側に20pxの余白を設けて左詰めにする */
-            text-align: left;
-            box-sizing: border-box;
-             }
+ .diagnosis-area {
+    width: 66.6%;
+    margin: 0 0 20px 20px; /* 左側に余白 */
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* 表示エリアを flex にして、文字とボタンを横並びにする */
+.diagnosis-fixed-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #333;
+}
