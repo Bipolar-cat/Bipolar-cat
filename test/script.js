@@ -41,9 +41,29 @@ function createButtons(containerId, color) {
     }
 }
 
+// ページ読み込み時に保存された診断名を表示
 window.onload = () => {
-    createButtons('mood-btns', '#007bff');
-    createButtons('body-condition-btns', '#f39c12');
+    const savedDiagnosis = localStorage.getItem('userDiagnosis');
+    if (savedDiagnosis) {
+        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + savedDiagnosis;
+    }
 };
+
+// 編集モードへの切り替え
+function toggleEdit() {
+    document.getElementById('display-area').style.display = 'none';
+    document.getElementById('edit-area').style.display = 'block';
+}
+
+// 診断名を保存して表示を更新
+function saveDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    const selectedValue = select.value;
+    
+    localStorage.setItem('userDiagnosis', selectedValue); // ブラウザに保存
+    document.getElementById('diagnosis-text').innerText = '主な診断名: ' + selectedValue;
+    
+    document.getElementById('display-area').style.display = 'block';
+    document.getElementById('edit-area').style.display = 'none';
 }
 
