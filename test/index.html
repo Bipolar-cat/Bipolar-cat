@@ -11,14 +11,12 @@
     <h1>InnerNote</h1>
     <p class="subtitle">**気分と調子の変化を記録**</p>
 
-   <div class="diagnosis-container">
-  <div class="diagnosis-area">
+ <div class="diagnosis-area">
     <div id="diagnosis-box" class="diagnosis-fixed-box">
         <div id="display-mode" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
             <span id="diagnosis-text">主な診断名: 未設定</span>
             <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
         </div>
-
         <div id="edit-mode" style="display: none; width: 100%;">
             <select id="diagnosis-select" class="select-box" onchange="saveAndLock()">
                 <option value="">診断名を選択</option>
@@ -28,15 +26,14 @@
             </select>
         </div>
     </div>
-  </div>
+</div>
 
-<div class="input-section">
+<div class="input-section" style="margin-top: 20px;">
     <div class="label">今の気分？ (1〜10)</div>
     <div id="mood-btns" class="scroll-wrapper"></div>
 
-    <div class="label">体の調子？ (1〜10)</div>
+    <div class="label" style="margin-top: 15px;">体の調子？ (1〜10)</div>
     <div id="physical-btns" class="scroll-wrapper"></div>
-</div>
-       
+</div> 
 </body>
 </html>
