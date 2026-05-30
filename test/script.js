@@ -50,36 +50,15 @@ function createButtons(containerId, className) {
     }
 }
 
-// ページ読み込み時に保存内容を反映
+// ページ読み込み時に初期状態を整える
 window.addEventListener('DOMContentLoaded', () => {
+    // 1. 診断名の復元
     const saved = localStorage.getItem('userDiagnosis');
     if (saved) {
         document.getElementById('diagnosis-text').innerText = '主な診断名: ' + saved;
     }
+
+    // 2. ボタンを実際に生成する（追加してください）
+    createButtons('mood-btns', 'mood-btn');
+    createButtons('physical-btns', 'mood-btn');
 });
-
-// 「変更」ボタン：表示を隠し、プルダウンを出す
-function unlockDiagnosis() {
-    document.getElementById('display-mode').style.display = 'none';
-    document.getElementById('edit-mode').style.display = 'block';
-    
-    // スマホでプルダウンを自動展開させる工夫
-    const select = document.getElementById('diagnosis-select');
-    select.focus();
-}
-
-// プルダウン選択時：保存して表示に戻す
-function saveAndLock() {
-    const select = document.getElementById('diagnosis-select');
-    const value = select.value;
-    
-    if (value !== "") {
-        // 保存
-        localStorage.setItem('userDiagnosis', value);
-        // 表示更新
-        document.getElementById('diagnosis-text').innerText = '主な診断名: ' + value;
-        // モード切替
-        document.getElementById('display-mode').style.display = 'flex';
-        document.getElementById('edit-mode').style.display = 'none';
-    }
-}
