@@ -50,14 +50,12 @@ h1 {
 }
 .edit-btn { color: #5C6BC0; }
 
- .diagnosis-area {
+.diagnosis-area {
     width: 66.6%;
-    margin: 0 0 20px 20px; /* 左側に余白 */
+    margin: 0 0 20px 20px; /* 左詰め */
     text-align: left;
-    box-sizing: border-box;
 }
 
-/* 表示エリアを flex にして、文字とボタンを横並びにする */
 .diagnosis-fixed-box {
     display: flex;
     justify-content: space-between;
@@ -67,4 +65,21 @@ h1 {
     border-radius: 8px;
     font-size: 13px;
     color: #333;
+}
+
+.change-btn {
+    background: none;
+    border: none;
+    color: #4A90E2;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.select-box {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 13px;
 }
