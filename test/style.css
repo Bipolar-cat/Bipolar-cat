@@ -48,3 +48,10 @@ h1 {
     border-radius: 5px;
 }
 .edit-btn { color: #5C6BC0; }
+
+        .diagnosis-area {
+            width: 66.6%;
+            margin: 0 0 20px 20px; /* 左側に20pxの余白を設けて左詰めにする */
+            text-align: left;
+            box-sizing: border-box;
+        }
