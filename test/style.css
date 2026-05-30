@@ -29,10 +29,13 @@ h1 {
 }
 
 .diagnosis-container {
-    background-color: #f8f9fa; /* 薄グレーの背景 */
-    padding: 15px;
+    background-color: #f8f9fa; /* 薄グレー背景 */
+    padding: 10px 15px;      /* 内側の余白 */
     border-radius: 12px;
-    margin: 20px 0;
+    margin: 20px 0;          /* 上下のマージン */
+    width: 66.6%;            /* 幅を2/3に指定 */
+    margin-left: 0;          /* 左詰めに指定 */
+    margin-right: auto;      /* 左詰めに指定 */
     text-align: left;
     font-size: 14px;
 }
