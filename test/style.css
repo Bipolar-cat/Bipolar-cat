@@ -86,3 +86,13 @@ h1 {
     padding: 10px 0;
     overflow-x: auto;
 }
+
+.select-box {
+    width: 100%;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    background-color: white;
+    cursor: pointer;
+}
