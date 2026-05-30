@@ -41,29 +41,32 @@ function createButtons(containerId, color) {
     }
 }
 
-// ページ読み込み時に保存された内容を反映
-window.onload = () => {
+// ページ読み込み時の処理
+window.onload = function() {
     const saved = localStorage.getItem('userDiagnosis');
     if (saved) {
         document.getElementById('diagnosis-text').innerText = '主な診断名: ' + saved;
     }
 };
 
-// 編集画面の切り替え
+// 編集モードへの切り替え
 function toggleEdit() {
     document.getElementById('display-area').style.display = 'none';
     document.getElementById('edit-area').style.display = 'block';
 }
 
-// 選択した診断名を保存
+// 保存処理
 function saveDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const value = select.value;
     
+    // ブラウザに保存
     localStorage.setItem('userDiagnosis', value);
+    
+    // 表示を更新
     document.getElementById('diagnosis-text').innerText = '主な診断名: ' + value;
     
+    // 表示を元に戻す
     document.getElementById('display-area').style.display = 'block';
     document.getElementById('edit-area').style.display = 'none';
 }
-
