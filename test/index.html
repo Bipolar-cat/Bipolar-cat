@@ -10,20 +10,19 @@
     <h1>InnerNote</h1>
     <p class="subtitle">**気分と調子の変化を記録**</p>
 
-    <div class="diagnosis-container">
-        <div id="display-area">
-            <span id="diagnosis-text">診断名を選択してください</span>
-            <button class="edit-btn" onclick="toggleEdit()">変更</button>
-        </div>
-        <div id="edit-area" style="display: none;">
-            <select id="diagnosis-select">
-                <option value="双極症">双極症</option>
-                <option value="うつ病">うつ病</option>
-                <option value="適応障害">適応障害</option>
-            </select>
-            <button class="save-btn" onclick="saveDiagnosis()">保存</button>
-        </div>
+   <div class="diagnosis-container">
+    <div id="display-area">
+        <span id="diagnosis-text">主な診断名を選択してください</span>
+        <button class="edit-btn" onclick="toggleEdit()">変更</button>
     </div>
+    <div id="edit-area" style="display: none;">
+        <select id="diagnosis-select">
+            <option value="双極症">双極症</option>
+            <option value="うつ病">うつ病</option>
+            <option value="適応障害">適応障害</option>
+        </select>
+        <button class="save-btn" onclick="saveDiagnosis()">保存</button>
     </div>
+   </div>
 </body>
 </html>
