@@ -508,32 +508,41 @@
         .report-notes { background: white; padding: 10px 14px; border-radius: 10px; border: 1px solid #E8F5E9; margin-top: 6px; max-height: 100px; overflow-y: auto; font-size: 13px; color: #555; }
 
         .log-title { text-align: center; font-size: 18px; font-weight: bold; color: #444; margin: 30px 0 15px; }
-        .log-list { padding: 0 20px; }
-        
-        .log-item {
-            text-align: left;
-            padding: 15px;
-            margin-bottom: 12px;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 15px;
-            font-size: 14px;
-            transition: background-color 0.4s, border-color 0.4s;
-            box-sizing: border-box;
-        }
+        .log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.log-item {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
 
         .log-item.highlight {
             background-color: #fff9c4 !important;
             border-color: #fbc02d !important;
         }
 
-        .log-date {
-            color: #4b5563;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 4px;
-            font-size: 13px;
-        }
+    .log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.log-item {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+               
         .log-diagnosis {
             display: inline-block;
             background-color: #e8eaf6;
