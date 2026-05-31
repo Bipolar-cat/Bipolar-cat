@@ -78,3 +78,20 @@ body {
     padding: 10px 0;
     font-size: 16px;
 }
+
+.container { width: 90%; max-width: 400px; margin: 0 auto; text-align: center; }
+.diagnosis-card {
+    background-color: #f4f4f4;
+    padding: 15px 20px;
+    border-radius: 16px;
+    margin: 20px auto;
+    cursor: pointer;
+    text-align: left;
+}
+.diagnosis-content { display: flex; justify-content: space-between; align-items: center; }
+.change-btn { color: #4A90E2; background: none; border: none; font-weight: bold; }
+
+/* メニューの見た目 */
+.diagnosis-menu { margin-top: 15px; border-top: 1px solid #ddd; padding-top: 10px; }
+.menu-item { padding: 12px 0; font-size: 16px; border-bottom: 1px solid #eee; }
+.menu-item:last-child { border: none; }
