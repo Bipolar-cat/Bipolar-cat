@@ -28,7 +28,6 @@ function updateUI() {
     renderChart(logs);
 }
 
-// --- 記録保存処理（リロードを廃止してUI更新を呼び出す） ---
 function saveData() {
     const note = document.getElementById('note').value;
     const diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "未設定";
@@ -36,6 +35,7 @@ function saveData() {
     const now = new Date();
     const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     
+    // データを保存
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     logs.push({ 
         ts: now.getTime(), 
@@ -49,9 +49,9 @@ function saveData() {
     
     alert("記録しました！");
     
-    // リロードの代わりにUIを更新
-    updateUI();
-    document.getElementById('note').value = ''; // メモをクリア
+    // リロードせず、UI更新関数を呼ぶ
+    document.getElementById('note').value = ''; // メモを空にする
+    updateUI(); 
 }
 
 // --- 以下、既存関数 ---
