@@ -7,60 +7,8 @@
     <title>InnerNote</title>
 </head>
 <body>
-<div class="inner-note-container">
-    <h1>InnerNote</h1>
-    <p class="subtitle">**気分と調子の変化を記録**</p>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <div class="diagnosis-section">
-        <div id="diagnosis-display">
-            <span>主な診断名: <strong id="selected-diagnosis">未選択</strong></span>
-            <button onclick="App.toggleEdit()" class="edit-btn">変更</button>
-        </div>
-        
-        <div id="diagnosis-edit" style="display: none;">
-            <select id="diagnosis-select">
-                <option value="双極症">双極症</option>
-                <option value="うつ病">うつ病</option>
-                <option value="適応障害">適応障害</option>
-                <option value="その他">その他</option>
-            </select>
-            <button onclick="App.saveDiagnosis()" class="save-btn">決定</button>
-        </div>
-    </div>
-</div>
-
-</div>
-
-    <div class="comment-section">
-        <textarea id="memo-input" placeholder="今の気持ちをメモ…"></textarea>
-    </div>
-    
-    <button id="save-record-btn" class="record-btn">記録</button>
-</div>
-        </select>
-    </div>
-
-    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
-    </div>
-        </div>
-
-        <div class="input-group">
-            <label>今の気分？ (1~10)</label>
-            <div class="scale-buttons" id="mood-scale"></div>
-        </div>
-
-        <div class="input-group">
-            <label>体の調子？ (1~10)</label>
-            <div class="scale-buttons" id="physical-scale"></div>
-        </div>
-
-        <textarea placeholder="今の気持ちをメモ..."></textarea>
-
-        <button class="record-btn">記録する</button>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
