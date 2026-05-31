@@ -2,30 +2,34 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnerNote - Perfect Sync 350</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>InnerNote</title>
 </head>
 <body>
- <div class="container">
-    <h1>InnerNote</h1>
-    <p>**気分と調子の変化を記録**</p>
+    <div class="inner-note-container">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
 
-    <div id="diagnosisCard" class="card">
-        <div id="displayArea" onclick="toggleMenu()">
-            主な診断名: <strong id="diagnosisName">未設定</strong>
-            <button id="editBtn" style="display: none;">変更</button>
+        <div class="diagnosis-section">
+            <span>主な診断名: 双極症</span>
+            <button class="change-btn">変更</button>
         </div>
 
-        <div id="menuArea" style="display: none; margin-top: 10px;">
-            <div onclick="selectDiagnosis('未診断（健常者）')">未診断（健常者）</div>
-            <div onclick="selectDiagnosis('うつ病')">うつ病</div>
-            <div onclick="selectDiagnosis('双極症')">双極症</div>
-            <div onclick="selectDiagnosis('その他')">その他</div>
+        <div class="input-group">
+            <label>今の気分？ (1~10)</label>
+            <div class="scale-buttons" id="mood-scale"></div>
         </div>
+
+        <div class="input-group">
+            <label>体の調子？ (1~10)</label>
+            <div class="scale-buttons" id="physical-scale"></div>
+        </div>
+
+        <textarea placeholder="今の気持ちをメモ..."></textarea>
+
+        <button class="record-btn">記録する</button>
     </div>
- </div>
+
     <script src="script.js"></script>
 </body>
 </html>
