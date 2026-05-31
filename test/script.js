@@ -110,3 +110,14 @@ function createRatingButtons(containerId, groupName) {
         container.appendChild(btn);
     }
 }
+
+// グラフ描画を少し遅らせる（HTMLの描画完了を待つ）
+function safeRenderChart(logs) {
+    setTimeout(() => {
+        renderChart(logs);
+    }, 500); // 0.5秒待ってから描画
+}
+
+// 既存の updateUI 内の renderChart(logs) を以下に書き換える
+// 旧: renderChart(logs);
+// 新: safeRenderChart(logs);
