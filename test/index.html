@@ -7,15 +7,14 @@
     <title>InnerNote</title>
 </head>
 <body>
-    <div class="inner-note-container">
+<div class="inner-note-container">
     <h1>InnerNote</h1>
+    
     <p class="subtitle">**気分と調子の変化を記録**</p>
     
     <div class="diagnosis-section">
-        <span>主な診断名: <span id="diagnosis-text">未選択</span></span>
-        <button onclick="changeDiagnosis()">変更</button>
-    </div>
-    
+        <span>主な診断名: <strong id="selected-diagnosis">未選択</strong></span>
+        <button onclick="App.toggleEdit()" class="edit-btn">変更</button>
     </div>
     
     <div id="diagnosis-edit" style="display: none;">
@@ -27,10 +26,13 @@
         </select>
         <button onclick="App.saveDiagnosis()" class="save-btn">決定</button>
     </div>
-       </div>
-        <button onclick="saveDiagnosis()" class="save-btn">決定</button>
+
+    <div class="comment-section">
+        <textarea id="memo-input" placeholder="今の気持ちをメモ…"></textarea>
     </div>
-        </div>
+    
+    <button id="save-record-btn" class="record-btn">記録する</button>
+</div>
         </select>
     </div>
 
