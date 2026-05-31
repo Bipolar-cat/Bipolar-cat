@@ -66,31 +66,25 @@ function generateRatingButtons(containerId, groupName) {
     }
 }
 
-// ページ読み込み時に実行
 document.addEventListener('DOMContentLoaded', () => {
-    generateRatingButtons('mood-btns', 'mood');
-    generateRatingButtons('cond-btns', 'condition');
+    // ボタン生成関数を呼び出す
+    createButtons('mood-btns', 'mood');
+    createButtons('cond-btns', 'cond');
 });
 
-// ボタンクリック時のJS処理の例
-const buttons = document.querySelectorAll('#mood-btns button');
-buttons.forEach(btn => {
-    btn.addEventListener('click', function() {
-        // すべてのボタンからactiveを外す
-        buttons.forEach(b => b.classList.remove('active'));
-        // 押したボタンにactiveをつける
-        this.classList.add('active');
-    });
-});
-
-function setupButtons(containerId) {
+function createButtons(containerId, prefix) {
     const container = document.getElementById(containerId);
-    container.addEventListener('click', (e) => {
-        if (e.target.tagName === 'BUTTON') {
-            // そのグループ内の他のボタンから active を外す
-            container.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
-            // 押したボタンに active を付ける
-            e.target.classList.add('active');
-        }
-    });
+    if (!container) return; // コンテナが見つからない場合の安全策
+
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = i;
+        btn.type = 'button';
+        btn.onclick = function() {
+            // .activeクラスの付け替え処理
+            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        };
+        container.appendChild(btn);
+    }
 }
