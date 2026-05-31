@@ -61,19 +61,21 @@ function saveData() {
     updateUI();
 }
 
-// --- グラフ描画関数 ---
 function renderChart(logs) {
     const canvas = document.getElementById('myChart');
-    const ctx = canvas.getContext('2d');
+    if (!canvas) return; // 念のため、キャンバスが存在するか確認
     
-    // グラフのコンテナ幅を調整
+    const ctx = canvas.getContext('2d');
     const wrapper = document.getElementById('chart-wrapper');
-    wrapper.style.width = Math.max(window.innerWidth - 40, logs.length * 50) + 'px';
+    
+    // 幅を確実に設定
+    const dynamicWidth = Math.max(window.innerWidth - 40, logs.length * 50);
+    wrapper.style.width = dynamicWidth + 'px';
+    wrapper.style.display = 'block'; // 念のため表示をブロックに
+    canvas.style.display = 'block';   // キャンバスも明示的に表示
 
-    // 古いグラフを破棄
     if (myChartInstance) myChartInstance.destroy();
     
-    // 新しくグラフを描画
     myChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -85,8 +87,7 @@ function renderChart(logs) {
         },
         options: { 
             responsive: true, 
-            maintainAspectRatio: false,
-            scales: { x: { ticks: { autoSkip: false } } } 
+            maintainAspectRatio: false // これが重要
         }
     });
 }
