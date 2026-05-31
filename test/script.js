@@ -110,22 +110,15 @@ window.onload = () => {
 
 function renderLogList(logs) {
     const logList = document.getElementById('log-list');
-    logList.innerHTML = ''; // 一度クリア
+    logList.innerHTML = ''; // クリア
 
-    // 新しい順（降順）に表示するために slice().reverse() を使用
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
-        div.className = 'log-item'; // CSSでカードデザインを適用するためのクラス
-        
-        // 日付、気分、体調、メモを整形して表示
+        div.className = 'log-item'; // CSSでデザイン適用
         div.innerHTML = `
-            <div class="log-header">
-                <span class="log-date">${l.date}</span>
-            </div>
-            <div class="log-body">
-                気分: <span class="val">${l.mood}</span> | 体調: <span class="val">${l.cond}</span>
-                <p class="log-note">${l.note ? l.note : ''}</p>
-            </div>
+            <div class="log-date" style="font-size:0.8rem; color:#888;">${l.date}</div>
+            <div class="log-summary">気分: ${l.mood} | 体調: ${l.cond}</div>
+            ${l.note ? `<div class="log-note">${l.note}</div>` : ''}
         `;
         logList.appendChild(div);
     });
