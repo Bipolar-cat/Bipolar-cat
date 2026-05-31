@@ -13,23 +13,21 @@
 
         <div class="diagnosis-section">
     <div id="diagnosis-display">
-        <span>主な診断名: <span id="selected-diagnosis">未選択</span></span>
-        <button onclick="toggleEdit()">変更</button>
+        <span>主な診断名: <strong id="selected-diagnosis">未選択</strong></span>
+        <button onclick="toggleEdit()" class="edit-btn">変更</button>
     </div>
     
     <div id="diagnosis-edit" style="display: none;">
         <select id="diagnosis-select">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
             <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
+            <option value="うつ病">うつ病</option>
             <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
             <option value="その他">その他</option>
         </select>
-        <button onclick="saveDiagnosis()">決定</button>
+        <button onclick="saveDiagnosis()" class="save-btn">決定</button>
+    </div>
+        </div>
+        </select>
     </div>
 
     <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
