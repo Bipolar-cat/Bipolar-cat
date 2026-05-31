@@ -1,52 +1,83 @@
 body {
     font-family: sans-serif;
     background-color: #f5f7fa;
-    display: flex;
-    justify-content: center; /* 左右の中央揃え */
-    align-items: center;     /* 上下の中央揃え（画面中央にしたい場合） */
-    min-height: 100vh;       /* 画面の高さいっぱいに広げる */
     margin: 0;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 上寄せにする */
 }
 
-/* メインコンテナの幅と中央配置の微調整 */
 .inner-note-container {
     background: white;
     padding: 20px;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 400px; /* 横幅を制限してスマホでも見やすく */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    text-align: center; /* 中身のテキストを中央寄せ */
+    width: 100%; /* 横幅を画面一杯に */
+    max-width: 600px; /* ただし最大幅を設定して大きすぎないように */
+    min-height: 100vh; /* 縦も画面一杯に */
+    box-sizing: border-box; /* パディングを幅に含める */
+    text-align: center;
 }
 
-/* その他要素の調整 */
+h1 { 
+    text-align: center; 
+    color: #4299e1; /* 青色に変更 */
+    margin-bottom: 5px; 
+}
+
+.subtitle { 
+    text-align: center; 
+    font-size: 0.8em; 
+    color: #718096; 
+    margin-bottom: 20px; 
+}
+
+/* 診断名セクション */
 .diagnosis-section {
     display: flex;
-    justify-content: center; /* コンテンツ自体を中央に */
-    gap: 10px;               /* 項目間の隙間 */
+    justify-content: space-between;
+    align-items: center;
+    background: #f7fafc;
+    padding: 10px;
+    border-radius: 8px;
     margin-bottom: 20px;
 }
 
-.input-group { 
-    margin-bottom: 20px;
-    text-align: left; /* 入力項目ラベルは左揃えが見やすい場合もあります */
-}
-
+/* ボタン群の配置 */
 .scale-buttons { 
     display: flex; 
-    justify-content: center; /* ボタン群を中央に */
-    flex-wrap: wrap;         /* 折り返し対応 */
-    gap: 5px; 
-    margin-top: 10px; 
+    justify-content: center; 
+    gap: 8px; 
+    margin: 10px 0 20px 0; 
 }
 
+.circle {
+    width: 30px; height: 30px;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+/* メモ欄と記録ボタン */
 textarea {
-    width: 100%; 
-    max-width: 350px; /* textareaの幅を調整 */
-    height: 80px;
-    margin: 0 auto 20px auto; /* 自動マージンで中央へ */
-    display: block;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
     box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.record-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }
