@@ -29,7 +29,6 @@ body {
     margin: 0 0 20px 0;
 }
 
-/* 既存の設定に加え、以下を調整 */
 .diagnosis-card {
     width: 90%;
     max-width: 360px;
@@ -37,55 +36,30 @@ body {
     padding: 15px 20px;
     border-radius: 16px;
     margin: 20px auto;
-    box-sizing: border-box;
+    cursor: pointer;
 }
 
 .diagnosis-content {
     display: flex;
-    justify-content: space-between; /* 左詰めと右詰めボタンの配置 */
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
 }
 
-#editBtn, .save-btn {
+#editBtn {
     color: #4A90E2;
     background: none;
     border: none;
     font-weight: bold;
     cursor: pointer;
-    margin-left: 10px;
 }
 
-#diagnosisSelect {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    flex-grow: 1; /* プルダウンが余白を埋める */
-}
-
-.diagnosis-card {
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 16px;
-    cursor: pointer; /* タップできることを強調 */
-}
-
-/* 診断名一覧（メニュー）のスタイル */
 .diagnosis-menu {
-    margin-top: 10px;
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
     padding-top: 10px;
-    border-top: 1px solid #ddd; /* ボックスとの境界線 */
 }
 
-.diagnosis-menu div {
+.menu-item {
     padding: 10px 0;
     font-size: 16px;
-    border-bottom: 1px solid #eee;
-}
-
-#diagnosisSelect, #otherInput {
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    margin-right: 5px;
 }
