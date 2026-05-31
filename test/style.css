@@ -35,15 +35,32 @@ h1 {
 }
 
 .diagnosis-section {
-    background: #f7fafc; /* 薄いグレー */
+    background: #f7fafc;
     padding: 15px;
     border-radius: 12px;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #4a5568;
-    font-size: 14px;
+    flex-wrap: wrap; /* 👈 重要：はみ出たら折り返す設定 */
+    gap: 10px;       /* 要素同士の隙間を確保 */
+    min-height: 50px; /* 高さを一定に保つ */
+}
+
+/* プルダウンとボタンのグループ化 */
+#diagnosis-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;       /* 親の中で広がるようにする */
+    justify-content: flex-end; /* 右寄せ */
+}
+
+/* プルダウンが大きくなりすぎないようにする */
+#diagnosis-select {
+    flex: 1;           /* 余白を埋めるように伸縮 */
+    max-width: 150px;  /* 飛び出さない最大幅 */
+    padding: 4px;
 }
 
 .edit-btn, .save-btn {
