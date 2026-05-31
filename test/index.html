@@ -8,18 +8,24 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <h1 class="main-title">InnerNote</h1>
-            <p class="sub-title">**気分と調子の変化を記録**</p>
-            
-            <div id="chart-scroll-area" class="scroll-container">
-                <div id="chart-wrapper">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
+  <div class="container">
+    <h1 class="main-title">InnerNote</h1>
+    <p class="sub-title">気分と調子の変化を記録</p>
+
+    <div class="diagnosis-card" id="diagnosisCard">
+        <div id="displayArea" class="diagnosis-content" onclick="toggleMenu()">
+            <span id="diagnosisLabel">主な診断名: <strong id="diagnosisName">未設定</strong></span>
+            <button id="editBtn" class="change-btn" style="display: none;">変更</button>
+        </div>
+
+        <div id="menuArea" class="diagnosis-menu" style="display: none;">
+            <div class="menu-item" onclick="selectDiagnosis('未診断（健常者）')">未診断（健常者）</div>
+            <div class="menu-item" onclick="selectDiagnosis('うつ病')">うつ病</div>
+            <div class="menu-item" onclick="selectDiagnosis('双極症')">双極症</div>
+            <div class="menu-item" onclick="selectDiagnosis('その他')">その他</div>
         </div>
     </div>
+  </div>
     <script src="script.js"></script>
 </body>
 </html>
