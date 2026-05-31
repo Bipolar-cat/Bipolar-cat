@@ -54,6 +54,7 @@ h1 {
     font-weight: bold;
     cursor: pointer;
     font-size: 12px;
+    margin-left: 10px;
 }
 
 select {
