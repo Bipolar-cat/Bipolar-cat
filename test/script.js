@@ -31,7 +31,36 @@ window.onload = () => {
     renderScrollableChart(logs);
 };
     
-   
+   const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
+
+// 診断名を決定した時
+function lockDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    if (select.value === "") return;
+
+    localStorage.setItem(DIAGNOSIS_KEY, select.value);
+    document.getElementById('diagnosis-text').innerText = `診断名: ${select.value}`;
+    
+    document.getElementById('diagnosis-select-container').style.display = 'none';
+    document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+}
+
+// 変更ボタンを押した時
+function unlockDiagnosis() {
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+}
+
+// 起動時に診断名があれば固定表示にする
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem(DIAGNOSIS_KEY);
+    if (saved) {
+        document.getElementById('diagnosis-text').innerText = `診断名: ${saved}`;
+        document.getElementById('diagnosis-select-container').style.display = 'none';
+        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+    }
+});
+
         let selectedMood = 5, selectedCond = 5;
         let highlightTimeout = null;
         
