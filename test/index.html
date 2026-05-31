@@ -11,19 +11,18 @@
     <h1 class="main-title">InnerNote</h1>
     <p class="sub-title">**気分と調子の変化を記録**</p>
 
-    <div class="diagnosis-card" id="diagnosisWrapper">
-    <div id="displayArea" class="diagnosis-content">
+  <div class="diagnosis-card" id="diagnosisWrapper">
+    <div id="displayArea" class="diagnosis-content" onclick="toggleMenu()">
         <span id="diagnosisLabel">主な診断名: <strong id="diagnosisName">未設定</strong></span>
-        <button id="editBtn" onclick="toggleEdit()">変更</button>
+        <button>変更</button>
     </div>
 
-    <div id="editArea" class="diagnosis-content" style="display: none;">
-        <select id="diagnosisSelect" onchange="checkOther(this)">
-            <option value="">主な診断名を選択</option>
-            <option value="双極症">双極症</option>
-            <option value="うつ病">うつ病</option>
-            <option value="適応障害">適応障害</option>
-            <option value="その他">その他</option>
+    <div id="menuArea" class="diagnosis-menu" style="display: none;">
+        <div onclick="selectDiagnosis('未診断（健常者）')">未診断（健常者）</div>
+        <div onclick="selectDiagnosis('うつ病')">うつ病</div>
+        <div onclick="selectDiagnosis('双極症')">双極症</div>
+        <div onclick="selectDiagnosis('その他')">その他</div>
+    </div>
         </select>
         
         <input type="text" id="otherInput" placeholder="診断名を入力" style="display: none;">
