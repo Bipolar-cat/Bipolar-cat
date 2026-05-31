@@ -14,6 +14,23 @@
         
         </div>
 
+    <div class="diagnosis-section" id="diagnosis-container">
+    <div id="diagnosis-display">
+        <span>主な診断名: <strong id="diagnosis-text">未選択</strong></span>
+        <button onclick="App.toggleEdit()" class="edit-btn">変更</button>
+    </div>
+    
+    <div id="diagnosis-edit" style="display: none;">
+        <select id="diagnosis-select">
+            <option value="双極症">双極症</option>
+            <option value="うつ病">うつ病</option>
+            <option value="適応障害">適応障害</option>
+            <option value="その他">その他</option>
+        </select>
+        <button onclick="App.saveDiagnosis()" class="save-btn">決定</button>
+    </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
