@@ -3,6 +3,7 @@ const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 let selectedMood = 5, selectedCond = 5;
 let myChartInstance = null;
 
+// --- ページ読み込み時 ---
 window.onload = () => {
     createRatingButtons('mood-btns', 'mood');
     createRatingButtons('cond-btns', 'cond');
@@ -13,14 +14,14 @@ window.onload = () => {
         document.getElementById('diagnosis-fixed-container').style.display = 'flex';
         document.getElementById('diagnosis-text').innerText = `診断名: ${saved}`;
     }
-    updateUI(); // 初期描画
+    updateUI(); 
 };
 
-// 修正：updateUIは1つに統合
+// --- UI更新関数（履歴とグラフを同時に更新） ---
 function updateUI() {
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     
-    // 履歴描画
+    // 1. 履歴リストの更新
     const logList = document.getElementById('log-list');
     logList.innerHTML = '';
     logs.slice().reverse().forEach(l => {
@@ -30,10 +31,11 @@ function updateUI() {
         logList.appendChild(div);
     });
 
-    // グラフ描画
+    // 2. グラフの更新
     renderChart(logs);
 }
 
+// --- 記録保存処理 ---
 function saveData() {
     const note = document.getElementById('note').value;
     const diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "未設定";
@@ -42,25 +44,36 @@ function saveData() {
     const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    logs.push({ ts: now.getTime(), date: dateStr, diagnosis: diagnosisVal, mood: selectedMood, cond: selectedCond, note: note });
+    logs.push({ 
+        ts: now.getTime(), 
+        date: dateStr, 
+        diagnosis: diagnosisVal,
+        mood: selectedMood, 
+        cond: selectedCond, 
+        note: note 
+    });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     
     alert("記録しました！");
     document.getElementById('note').value = '';
-    updateUI(); // 画面更新
+    
+    // UIを更新
+    updateUI();
 }
 
+// --- グラフ描画関数 ---
 function renderChart(logs) {
     const canvas = document.getElementById('myChart');
     const ctx = canvas.getContext('2d');
     
-    // 横スクロール用：幅をデータ数に合わせて広げる
+    // グラフのコンテナ幅を調整
     const wrapper = document.getElementById('chart-wrapper');
-    const dynamicWidth = Math.max(window.innerWidth - 40, logs.length * 50);
-    wrapper.style.width = dynamicWidth + 'px';
+    wrapper.style.width = Math.max(window.innerWidth - 40, logs.length * 50) + 'px';
 
+    // 古いグラフを破棄
     if (myChartInstance) myChartInstance.destroy();
     
+    // 新しくグラフを描画
     myChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
@@ -78,6 +91,7 @@ function renderChart(logs) {
     });
 }
 
+// --- ボタン生成関数 ---
 function createRatingButtons(containerId, groupName) {
     const container = document.getElementById(containerId);
     if (!container) return;
