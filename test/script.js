@@ -1,19 +1,19 @@
-// ページ読み込み時に保存された診断名を表示
+// 画面読み込み時に保存された診断名を表示
 document.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('myDiagnosis');
     if (saved) document.getElementById('diagnosisName').innerText = saved;
 });
 
-// 編集画面の切り替え
+// 表示・編集の切り替え
 function toggleEdit() {
     document.getElementById('diagnosisDisplay').style.display = 'none';
-    document.getElementById('diagnosisEdit').style.display = 'block';
+    document.getElementById('diagnosisEdit').style.display = 'flex';
 }
 
-// 保存して画面更新
+// 選択した診断名を保存して表示を戻す
 function saveDiagnosis() {
     const selected = document.getElementById('diagnosisSelect').value;
-    localStorage.setItem('myDiagnosis', selected);
+    localStorage.setItem('myDiagnosis', selected); // ブラウザに保存
     document.getElementById('diagnosisName').innerText = selected;
     
     document.getElementById('diagnosisDisplay').style.display = 'flex';
