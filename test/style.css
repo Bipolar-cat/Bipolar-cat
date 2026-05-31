@@ -1,4 +1,4 @@
-/* 全体の背景とフォント、パディングを最適化 */
+       /* 全体の背景とフォント、パディングを最適化 */
         body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f8f9fa;
@@ -53,37 +53,6 @@
             box-sizing: border-box;
         }
 
-.diagnosis-section {
-    background: #f7fafc; /* グレーボックス */
-    padding: 12px 16px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    width: 100%;
-    box-sizing: border-box; /* はみ出し防止 */
-}
-
-/* 内部要素を横並び・右詰めにする設定 */
-.diagnosis-content {
-    display: flex;
-    justify-content: space-between; /* 両端寄せ */
-    align-items: center;
-    width: 100%;
-}
-
-/* 決定ボタンの右寄せ用 */
-#diagnosis-edit {
-    justify-content: flex-end; /* 右詰め */
-    gap: 10px;
-}
-
-.edit-btn, .save-btn {
-    background: none;
-    border: none;
-    color: #4299e1;
-    font-weight: bold;
-    cursor: pointer;
-}
-
         .change-btn {
             background: none;
             border: none;
@@ -118,7 +87,7 @@
             box-sizing: border-box;
             color: #333;
         }
-    /* ----------------------------------------------- */
+        /* ----------------------------------------------- */
 
         .input-section {
             padding: 0 20px;
@@ -144,8 +113,8 @@
 
         /* 10段階ボタンの横並びgapと配置 */
         .btn-group-circle {
-    display: flex; 
-    gap: 12px;
+            display: inline-flex;
+            gap: 12px;
         }
 
         /* ボタンの大きさ（52px正円）とフォント・カラー */
