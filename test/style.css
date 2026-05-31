@@ -18,12 +18,13 @@ body {
     align-items: center;    /* 子要素（タイトル等）を横方向の中央に配置 */
 }
 
-/* 青色のタイトル */
 .main-title {
     font-size: 28px;
+    /* 青色に変更しました */
     color: #4A90E2; 
     margin: 0 0 5px 0;
-    text-align: center; /* 万が一の保険 */
+    text-align: center;
+    font-weight: bold;
 }
 
 /* サブタイトル */
