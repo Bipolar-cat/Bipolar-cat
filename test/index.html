@@ -7,27 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="diagnosis-wrapper" id="diagnosisWrapper">
-    <div id="displayArea">
-        <span>主な診断名: <strong id="diagnosisName">未設定</strong></span>
-        <button id="editBtn" onclick="toggleEdit()">変更</button>
-    </div>
+<div class="wrapper">
+    <h1 class="main-title">InnerNote</h1>
+    <p class="sub-title">**気分と調子の変化を記録**</p>
 
-    <div id="editArea" style="display: none;">
-        <select id="diagnosisSelect">
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
-        <button onclick="saveDiagnosis()">保存</button>
+    <div class="diagnosis-card" id="diagnosisWrapper">
+        <div id="displayArea" class="diagnosis-content">
+            <span>主な診断名: <strong id="diagnosisName">未設定</strong></span>
+            <button id="editBtn" onclick="toggleEdit()">変更</button>
+        </div>
+
+        <div id="editArea" class="diagnosis-content" style="display: none;">
+            <select id="diagnosisSelect">
+                <option value="双極症">双極症</option>
+                <option value="うつ病">うつ病</option>
+                <option value="適応障害">適応障害</option>
+                <option value="その他">その他</option>
+            </select>
+            <button onclick="saveDiagnosis()">保存</button>
+        </div>
     </div>
 </div>
-    
     <script src="script.js"></script>
 </body>
 </html>
