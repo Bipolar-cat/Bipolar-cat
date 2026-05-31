@@ -32,11 +32,26 @@ body {
 .diagnosis-card {
     width: 90%;
     max-width: 360px;
-    background-color: #f4f4f4;
-    padding: 15px 20px;
-    border-radius: 16px;
     margin: 20px auto;
+}
+
+#diagnosisSelect {
+    width: 100%;
+    background-color: #f4f4f4; /* ご希望のグレー背景 */
+    padding: 15px 20px;
+    border: none;
+    border-radius: 16px;      /* 角丸 */
+    font-size: 16px;
+    color: #333;
     cursor: pointer;
+    appearance: none;         /* ブラウザ標準の矢印を消す場合 */
+    text-align: left;
+}
+
+/* 選択肢が選ばれた後の見た目制御 */
+#diagnosisSelect:valid {
+    color: #000;
+    font-weight: bold;
 }
 
 .diagnosis-content {
