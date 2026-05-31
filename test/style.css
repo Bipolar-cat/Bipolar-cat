@@ -1,50 +1,36 @@
 body {
-    font-family: sans-serif;
     background-color: #f5f7fa;
     margin: 0;
     padding: 10px;
     display: flex;
-    justify-content: center; /* 画面中央に配置 */
+    justify-content: center;
 }
 
-/* メインコンテナの設定：幅をスマホサイズに固定 */
 .inner-note-container {
     background: white;
     padding: 20px;
     width: 100%;
-    max-width: 400px; /* 右の完成形のように幅を制限 */
+    max-width: 400px;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    box-sizing: border-box; /* paddingを幅に含める */
+    box-sizing: border-box;
     display: flex;
-    flex-direction: column; /* 要素を縦に並べる */
-    gap: 15px; /* 要素間の隙間 */
+    flex-direction: column; /* 上から順に配置 */
+    gap: 15px;
 }
 
-/* タイトルエリア */
-h1 {
-    color: #5C6BC0;
-    text-align: center;
-    margin: 0;
-}
+h1 { color: #5C6BC0; text-align: center; margin: 0; font-size: 24px; }
+.subtitle { color: #888; text-align: center; margin: 0; font-size: 12px; }
 
-/* 診断名セクションを縦並び対応 */
 .diagnosis-section {
     background: #f7fafc;
     padding: 12px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 12px;
+    text-align: center;
+    color: #4a5568;
 }
 
-/* 記録ボタン */
-.record-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #4299e1;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
+.edit-btn, .save-btn {
+    background: none; border: none; color: #4299e1;
+    font-weight: bold; cursor: pointer; margin-left: 8px;
 }
