@@ -59,3 +59,32 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
+.diagnosis-card {
+    width: 90%;
+    max-width: 360px;
+    background-color: #f4f4f4; /* 薄いグレー */
+    padding: 15px 20px;
+    border-radius: 16px;       /* しっかり角丸 */
+    margin: 20px auto;         /* 中央寄せ */
+    box-sizing: border-box;
+}
+
+.diagnosis-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-btn {
+    color: #4A90E2;
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.diagnosis-edit {
+    display: flex;
+    justify-content: space-between;
+}
