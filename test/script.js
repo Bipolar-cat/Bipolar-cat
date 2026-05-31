@@ -1,21 +1,30 @@
-// 画面読み込み時に保存された診断名を表示
+// ページ読み込み時に保存された診断名があれば表示
 document.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('myDiagnosis');
-    if (saved) document.getElementById('diagnosisName').innerText = saved;
+    const savedDiagnosis = localStorage.getItem('userDiagnosis');
+    if (savedDiagnosis) {
+        document.getElementById('diagnosisName').textContent = savedDiagnosis;
+    } else {
+        // 初回未設定時は編集エリアを表示
+        toggleEdit();
+    }
 });
 
-// 表示・編集の切り替え
+// 表示と編集エリアの切り替え
 function toggleEdit() {
-    document.getElementById('diagnosisDisplay').style.display = 'none';
-    document.getElementById('diagnosisEdit').style.display = 'flex';
+    document.getElementById('displayArea').style.display = 'none';
+    document.getElementById('editArea').style.display = 'block';
 }
 
-// 選択した診断名を保存して表示を戻す
+// 診断名を保存して表示を更新
 function saveDiagnosis() {
-    const selected = document.getElementById('diagnosisSelect').value;
-    localStorage.setItem('myDiagnosis', selected); // ブラウザに保存
-    document.getElementById('diagnosisName').innerText = selected;
+    const select = document.getElementById('diagnosisSelect');
+    const selectedValue = select.value;
     
-    document.getElementById('diagnosisDisplay').style.display = 'flex';
-    document.getElementById('diagnosisEdit').style.display = 'none';
+    // localStorageに保存
+    localStorage.setItem('userDiagnosis', selectedValue);
+    
+    // UIの更新
+    document.getElementById('diagnosisName').textContent = selectedValue;
+    document.getElementById('displayArea').style.display = 'flex';
+    document.getElementById('editArea').style.display = 'none';
 }
