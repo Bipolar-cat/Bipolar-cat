@@ -1,26 +1,31 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("HTMLとJSが正しく連結されました！");
+function renderScrollableChart(logs) {
+    const canvas = document.getElementById('myChart');
+    const container = document.getElementById('chart-wrapper');
     
-    // ここに診断名の処理などを書いていきます
-});
-    const saved = localStorage.getItem('userDiagnosis');
-    if (saved) {
-        document.getElementById('diagnosisName').textContent = saved;
-        document.getElementById('editBtn').style.display = 'block'; // 記録があれば「変更」を表示
-    }
-});
+    // データ数に合わせて幅を計算
+    const newWidth = Math.max(350, logs.length * 50);
+    container.style.width = newWidth + 'px';
 
-// メニューの開閉
-function toggleMenu() {
-    const menu = document.getElementById('menuArea');
-    menu.style.display = (menu.style.display === 'none') ? 'block' : 'none';
+    if (window.myChartInstance) window.myChartInstance.destroy();
+
+    const ctx = canvas.getContext('2d');
+    window.myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date),
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
 }
 
-// 診断名の選択と保存
-function selectDiagnosis(name) {
-    document.getElementById('diagnosisName').textContent = name;
-    localStorage.setItem('userDiagnosis', name);
-    
-    document.getElementById('editBtn').style.display = 'block'; // 決定後に「変更」を表示
-    toggleMenu();
-}
+window.onload = () => {
+    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+    renderScrollableChart(logs);
+};
