@@ -1,49 +1,56 @@
+/* 画面全体 */
 body {
     font-family: sans-serif;
     background-color: #f5f7fa;
     margin: 0;
-    padding: 0;
+    padding: 20px; /* 余白を追加 */
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* 上寄せにする */
 }
 
+/* メインコンテナ：カード状に表示する設定 */
 .inner-note-container {
     background: white;
-    padding: 20px;
-    width: 100%; /* 横幅を画面一杯に */
-    max-width: 600px; /* ただし最大幅を設定して大きすぎないように */
-    min-height: 100vh; /* 縦も画面一杯に */
-    box-sizing: border-box; /* パディングを幅に含める */
+    padding: 24px;
+    width: 100%;
+    max-width: 400px; /* スマホで見やすい幅に制限 */
+    height: auto;     /* 高さを固定せず内容に合わせる */
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 影を少し柔らかく */
+    box-sizing: border-box;
     text-align: center;
 }
 
+/* タイトルの青色と余白 */
 h1 {
-            color: #5C6BC0;
-            font-size: 28px;
-            margin: 5px 0 0 0;
-        }
+    color: #5C6BC0;
+    font-size: 24px;
+    margin: 0 0 5px 0;
+}
 
-        .subtitle {
-            color: #888;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
+.subtitle {
+    font-size: 0.85em;
+    color: #888;
+    margin-bottom: 25px;
+}
 
+/* 診断名セクションをカード内に収める */
 .diagnosis-section {
     background: #f7fafc;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: center;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-#diagnosis-edit select {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #cbd5e0;
+/* 選択ボタン等の微調整 */
+select, button {
+    cursor: pointer;
+    padding: 5px 10px;
 }
 
 /* ボタン群の配置 */
