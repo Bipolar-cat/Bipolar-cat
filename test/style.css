@@ -53,6 +53,37 @@
             box-sizing: border-box;
         }
 
+.diagnosis-section {
+    background: #f7fafc; /* グレーボックス */
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box; /* はみ出し防止 */
+}
+
+/* 内部要素を横並び・右詰めにする設定 */
+.diagnosis-content {
+    display: flex;
+    justify-content: space-between; /* 両端寄せ */
+    align-items: center;
+    width: 100%;
+}
+
+/* 決定ボタンの右寄せ用 */
+#diagnosis-edit {
+    justify-content: flex-end; /* 右詰め */
+    gap: 10px;
+}
+
+.edit-btn, .save-btn {
+    background: none;
+    border: none;
+    color: #4299e1;
+    font-weight: bold;
+    cursor: pointer;
+}
+
         .change-btn {
             background: none;
             border: none;
