@@ -41,3 +41,18 @@
     padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
+
+.card {
+    background-color: #f4f4f4; /* グレーの背景 */
+    padding: 15px;
+    border-radius: 10px;      /* 角丸 */
+    cursor: pointer;
+    margin: 20px 0;
+}
+#editBtn {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    font-size: 0.9em;
+}
