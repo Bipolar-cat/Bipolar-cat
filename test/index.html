@@ -2,55 +2,15 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <!-- スマホサイズに対応するための設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnerNote</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
-
-        <div class="diagnosis-area">
-            <div id="diagnosis-select-container">
-                <select id="diagnosis-select" class="select-box" onchange="toggleOtherDiagnosis()">
-                    <option value="双極症">双極症</option>
-                    <option value="うつ病">うつ病</option>
-                    <option value="その他">その他</option>
-                </select>
-                <input type="text" id="diagnosis-other" class="other-diagnosis-input" placeholder="診断名を入力">
-            </div>
-            <div id="diagnosis-fixed-container" class="diagnosis-fixed-box" style="display:none;">
-                <span id="diagnosis-text"></span>
-                <button class="change-btn" onclick="enableDiagnosisChange()">変更</button>
-            </div>
-        </div>
-
-        <div class="input-section">
-            <label class="label">今の気分？ (1～10)</label>
-            <div class="scroll-wrapper"><div id="mood-btns" class="btn-group-circle"></div></div>
-            
-            <label class="label">体の調子？ (1～10)</label>
-            <div class="scroll-wrapper"><div id="cond-btns" class="btn-group-circle"></div></div>
-            
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            <button class="save-btn" onclick="saveData()">記録する</button>
-        </div>
-
-        <div class="chart-container" id="chart-wrapper">
-            <canvas id="myChart"></canvas>
-        </div>
-
-        <div class="summary-section">
-            <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
-            <div id="summary-ts"></div>
-            <div id="summary-card"></div>
-        </div>
-
-        <div class="log-title">最近の記録</div>
-        <div id="log-list" class="log-list"></div>
+    <div class="app-container">
+        <h1 class="main-title">InnerNote</h1>
+        <p class="sub-title">**気分と調子の変化を記録**</p>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
