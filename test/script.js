@@ -1,49 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('userDiagnosis');
     if (saved) {
+        // 保存済みなら診断名を表示し、変更ボタンを出す
         document.getElementById('diagnosisName').textContent = saved;
-    } else {
-        // 初回は編集エリアを強制表示
-        toggleEdit();
-        document.getElementById('editBtn').style.display = 'none'; // 初回は「変更」不要
+        document.getElementById('editBtn').style.display = 'block';
     }
 });
 
-// 「その他」が選ばれたらテキストボックスを表示
-function checkOther(select) {
-    const otherInput = document.getElementById('otherInput');
-    otherInput.style.display = (select.value === 'その他') ? 'inline-block' : 'none';
-}
-
-function toggleEdit() {
-    document.getElementById('displayArea').style.display = 'none';
-    document.getElementById('editArea').style.display = 'flex';
-}
-
-function saveDiagnosis() {
-    const select = document.getElementById('diagnosisSelect');
-    const otherInput = document.getElementById('otherInput');
-    
-    let val = (select.value === 'その他') ? otherInput.value : select.value;
-    
-    if (!val) return alert('診断名を選択または入力してください');
-
-    localStorage.setItem('userDiagnosis', val);
-    document.getElementById('diagnosisName').textContent = val;
-    document.getElementById('displayArea').style.display = 'flex';
-    document.getElementById('editArea').style.display = 'none';
-    document.getElementById('editBtn').style.display = 'block';
-}
-
-// メニューの表示・非表示を切り替え
 function toggleMenu() {
     const menu = document.getElementById('menuArea');
     menu.style.display = (menu.style.display === 'none') ? 'block' : 'none';
 }
 
-// 診断名を選択して表示を更新
 function selectDiagnosis(name) {
     document.getElementById('diagnosisName').textContent = name;
-    localStorage.setItem('userDiagnosis', name); // 保存
+    document.getElementById('editBtn').style.display = 'block'; // 選択後に変更ボタン表示
+    localStorage.setItem('userDiagnosis', name);
     toggleMenu(); // メニューを閉じる
 }
