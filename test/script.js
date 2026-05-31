@@ -85,7 +85,7 @@ function renderChart(logs) {
                 { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
         },
-        options: { 
+     options: { 
     responsive: true, 
     maintainAspectRatio: false,
     scales: { 
@@ -93,18 +93,15 @@ function renderChart(logs) {
             ticks: { autoSkip: false } 
         },
         y: { 
-            min: 1,    // Y軸の最小値を1に固定
-            max: 10,   // Y軸の最大値を10に固定
+            beginAtZero: false, // 0から開始しない
+            min: 1,             // 確実に1から表示
+            max: 10,            // 確実に10まで表示
             ticks: { 
-                stepSize: 1, // 目盛りを1刻みにする
-                precision: 0 // 小数点以下を表示しない
-            },
-            grid: {
-                color: '#e5e7eb' // グリッド線の色（必要に応じて調整）
+                stepSize: 1     // メモリを1ずつ表示
             }
         }
     }
-        }
+     }
 
 // --- ボタン生成関数 ---
 function createRatingButtons(containerId, groupName) {
