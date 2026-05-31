@@ -1,95 +1,89 @@
-body {
-    font-family: sans-serif;
-    background-color: #f5f7fa; /* 全体の背景色 */
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center; /* 画面中央寄せ */
-}
+/* 全体の背景とフォント、パディングを最適化 */
+        body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-/* ホワイトボックスのデザイン */
-.inner-note-container {
-    background: white;        /* 白い背景 */
-    width: 100%;
-    max-width: 400px;         /* スマホに合わせた最大幅 */
-    padding: 30px;
-    border-radius: 20px;      /* 丸みを帯びた角 */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 柔らかい影 */
-    box-sizing: border-box;
-}
+        /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
 
-/* タイトルの設定 */
-h1 {
-    color: #5C6BC0;           /* 指定の青色 */
-    text-align: center;
-    margin: 0 0 10px 0;
-    font-size: 28px;
-}
+        h1 {
+            color: #5C6BC0;
+            font-size: 28px;
+            margin: 5px 0 0 0;
+        }
 
-/* サブタイトルの設定 */
-.subtitle {
-    text-align: center;
-    color: #888;
-    font-size: 14px;
-    margin: 0 0 30px 0;
-}
+        .subtitle {
+            color: #888;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-.diagnosis-section {
-    background: #f7fafc;
-    padding: 12px 16px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    /* 左右に配置する設定 */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box; /* パディングを含めて幅を計算 */
-}
+        /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
+        .diagnosis-area {
+            width: 66.6%;
+            margin: 0 auto 20px auto;
+            text-align: left;
+            box-sizing: border-box;
+        }
 
-/* 表示エリア（左寄せ部分） */
-#diagnosis-display {
-    display: flex;
-    align-items: center;
-    flex-grow: 1; /* 残りのスペースを埋める */
-}
+        .diagnosis-fixed-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            box-sizing: border-box;
+        }
 
-/* 編集エリア（右寄せ部分） */
-#diagnosis-edit {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* 右詰め */
-    gap: 8px;
-    width: 100%;
-}
+        .change-btn {
+            background: none;
+            border: none;
+            color: #4A90E2;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+        }
 
-/* プルダウンとボタンのグループ化 */
-#diagnosis-edit {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;       /* 親の中で広がるようにする */
-    justify-content: flex-end; /* 右寄せ */
-}
+        .select-box {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            font-size: 13px;
+            color: #333;
+            outline: none;
+            box-sizing: border-box;
+        }
 
-/* プルダウンが大きくなりすぎないようにする */
-#diagnosis-select {
-    flex: 1;           /* 余白を埋めるように伸縮 */
-    max-width: 150px;  /* 飛び出さない最大幅 */
-    padding: 4px;
-}
-
-.edit-btn, .save-btn {
-    background: none;
-    border: none;
-    color: #4299e1; /* 青色 */
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-select {
-    padding: 5px;
-    border-radius: 6px;
-    border: 1px solid #cbd5e0;
-}
+        .other-diagnosis-input {
+            display: none;
+            width: 100%;
+            margin-top: 6px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #4A90E2;
+            background-color: #fff;
+            font-size: 13px;
+            box-sizing: border-box;
+            color: #333;
+        }
