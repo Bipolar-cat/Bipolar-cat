@@ -3,44 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>InnerNote</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-    <h1>InnerNote</h1>
-    <p class="subtitle">**気分と調子の変化を記録**</p>
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
 
-<div class="diagnosis-area" style="padding: 0 20px; margin-bottom: 20px;">
-    <div id="diagnosis-box" class="diagnosis-fixed-box" style="background-color: #f5f5f5; padding: 10px 15px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; min-height: 40px;">
-        
-        <div id="display-mode" style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-            <span id="diagnosis-text" style="font-size: 14px; color: #333;">主な診断名: 未設定</span>
-            <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #4A90E2; font-weight: bold; cursor: pointer;">変更</button>
+        <div class="diagnosis-area">
+            <div id="diagnosis-select-container">
+                <select id="diagnosis-select" class="select-box" onchange="toggleOtherDiagnosis()">
+                    <option value="双極症">双極症</option>
+                    <option value="うつ病">うつ病</option>
+                    <option value="その他">その他</option>
+                </select>
+                <input type="text" id="diagnosis-other" class="other-diagnosis-input" placeholder="診断名を入力">
+            </div>
+            <div id="diagnosis-fixed-container" class="diagnosis-fixed-box" style="display:none;">
+                <span id="diagnosis-text"></span>
+                <button class="change-btn" onclick="enableDiagnosisChange()">変更</button>
+            </div>
         </div>
 
-        <div id="edit-mode" style="display: none; width: 100%;">
-            <select id="diagnosis-select" class="select-box" onchange="saveAndLock()" style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #4A90E2;">
-                <option value="">主な診断名を選択</option>
-                <option value="未診断（健常者）">未診断（健常者）</option>
-                <option value="うつ病">うつ病</option>
-                <option value="双極症">双極症</option>
-                <option value="統合失調症">統合失調症</option>
-                <option value="不安障害">不安障害</option>
-                <option value="適応障害">適応障害</option>
-                <option value="発達障害">発達障害</option>
-                <option value="その他">その他</option>
-            </select>
+        <div class="input-section">
+            <label class="label">今の気分？ (1～10)</label>
+            <div class="scroll-wrapper"><div id="mood-btns" class="btn-group-circle"></div></div>
+            
+            <label class="label">体の調子？ (1～10)</label>
+            <div class="scroll-wrapper"><div id="cond-btns" class="btn-group-circle"></div></div>
+            
+            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+            <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
+
+        <div class="chart-container" id="chart-wrapper">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="summary-section">
+            <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
+            <div id="summary-ts"></div>
+            <div id="summary-card"></div>
+        </div>
+
+        <div class="log-title">最近の記録</div>
+        <div id="log-list" class="log-list"></div>
     </div>
-</div>
-
-<div class="input-section" style="margin-top: 20px;">
-    <div class="label">今の気分？ (1〜10)</div>
-    <div id="mood-btns" class="scroll-wrapper"></div>
-
-    <div class="label" style="margin-top: 15px;">体の調子？ (1〜10)</div>
-    <div id="physical-btns" class="scroll-wrapper"></div>
-</div> 
+    <script src="script.js"></script>
 </body>
 </html>
