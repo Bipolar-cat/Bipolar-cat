@@ -34,3 +34,16 @@ function saveDiagnosis() {
     document.getElementById('editArea').style.display = 'none';
     document.getElementById('editBtn').style.display = 'block';
 }
+
+// メニューの表示・非表示を切り替え
+function toggleMenu() {
+    const menu = document.getElementById('menuArea');
+    menu.style.display = (menu.style.display === 'none') ? 'block' : 'none';
+}
+
+// 診断名を選択して表示を更新
+function selectDiagnosis(name) {
+    document.getElementById('diagnosisName').textContent = name;
+    localStorage.setItem('userDiagnosis', name); // 保存
+    toggleMenu(); // メニューを閉じる
+}
