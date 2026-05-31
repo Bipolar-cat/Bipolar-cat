@@ -144,8 +144,8 @@
 
         /* 10段階ボタンの横並びgapと配置 */
         .btn-group-circle {
-            display: inline-flex;
-            gap: 12px;
+    display: flex; 
+    gap: 12px;
         }
 
         /* ボタンの大きさ（52px正円）とフォント・カラー */
