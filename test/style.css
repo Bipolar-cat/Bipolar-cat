@@ -62,3 +62,20 @@ body {
     border: 1px solid #ccc;
     flex-grow: 1; /* プルダウンが余白を埋める */
 }
+
+.diagnosis-card {
+    width: 90%;
+    max-width: 360px;
+    background-color: #f4f4f4;
+    padding: 15px 20px;
+    border-radius: 16px;
+    margin: 20px auto;
+    cursor: pointer; /* タップできることを示唆 */
+}
+
+#diagnosisSelect, #otherInput {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+}
