@@ -37,18 +37,30 @@ function unlockDiagnosis() {
     document.getElementById('diagnosis-fixed-container').style.display = 'none';
 }
 
-// --- 保存処理 ---
+// saveData 関数をこれに差し替えてください
 function saveData() {
     const note = document.getElementById('note').value;
     const diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "未設定";
+    
     const now = new Date();
     const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    logs.push({ ts: now.getTime(), date: dateStr, diagnosis: diagnosisVal, mood: selectedMood, cond: selectedCond, note: note });
+    logs.push({ 
+        ts: now.getTime(), 
+        date: dateStr, 
+        diagnosis: diagnosisVal,
+        mood: selectedMood, 
+        cond: selectedCond, 
+        note: note 
+    });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    
     alert("記録しました！");
-    location.reload();
+
+    // リロードせずに画面を更新する
+    renderLogList(logs); 
+    renderChart(logs);
 }
 
 window.onload = () => {
