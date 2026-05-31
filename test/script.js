@@ -54,6 +54,23 @@ function saveData() {
     updateUI(); 
 }
 
+function updateUI() {
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    
+    // 履歴を描画
+    const logList = document.getElementById('log-list');
+    logList.innerHTML = '';
+    logs.slice().reverse().forEach(l => {
+        const div = document.createElement('div');
+        div.className = 'log-item';
+        div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+        logList.appendChild(div);
+    });
+
+    // グラフを描画（Chartインスタンスの再生成）
+    renderChart(logs);
+}
+
 // --- 以下、既存関数 ---
 function createRatingButtons(containerId, groupName) {
     const container = document.getElementById(containerId);
