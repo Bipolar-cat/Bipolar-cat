@@ -1,43 +1,44 @@
+/* ルート変数を定義して色を管理 */
+:root {
+    --primary-blue: #4A90E2;
+    --light-gray: #f4f4f4;
+}
+
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
+    font-family: sans-serif;
     background-color: #f9f9f9;
-    min-height: 100vh;
-}
-
-.wrapper {
-    width: 100%;
-    max-width: 400px;
-    background-color: white;
+    color: #333;
+    margin: 0;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.main-title {
-    font-size: 28px;
-    color: #4A90E2;
-    text-align: center;
-    margin: 0 0 5px 0;
+/* タイトルを青にする */
+.container h1 {
+    color: var(--primary-blue);
+    font-size: 24px;
 }
 
-.sub-title {
-    font-size: 14px;
-    color: #718096;
-    margin: 0 0 20px 0;
-}
+/* グレーボックスの縁を薄い青に調整可能 */
 .diagnosis-card {
-    background-color: #f4f4f4;
-    padding: 15px;
-    border-radius: 12px;
-    margin: 20px 0;
+    background-color: var(--light-gray);
+    border: 1px solid #e0e0e0;
+    padding: 15px 20px;
+    border-radius: 16px;
+    margin: 20px auto;
+    cursor: pointer;
 }
 
-/* メニュー部分の余白と境界線 */
-.diagnosis-menu {
-    margin-top: 10px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
+/* 「変更」ボタンを青で統一 */
+.change-btn {
+    color: var(--primary-blue);
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 診断名メニューの選択時などを青くする */
+.menu-item:hover {
+    color: var(--primary-blue);
+    font-weight: bold;
 }
