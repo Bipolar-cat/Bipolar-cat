@@ -52,21 +52,26 @@
             <canvas id="myChart"></canvas>
         </div>
 
-        <div class="summary-section">
-            <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
-            <div id="summary-ts">前回まとめ作成：なし</div>
-            
-            <div id="summary-card">
-                <span class="report-header">【一定期間まとめレポート】</span>
-                <div id="summary-content"></div>
-            </div>
-        </div>
+       <div id="diagnosis-fixed-container" style="display:none; align-items:center; justify-content:center; gap:10px; margin-bottom:20px;">
+    <span id="diagnosis-text" style="font-weight:bold;"></span>
+    <button onclick="changeDiagnosis()" style="font-size:0.8rem;">変更</button>
+</div>
 
-       <div class="log-container">
-    <div class="log-title">最近の記録</div>
+<div class="summary-section">
+    <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
+    <div id="summary-ts" style="font-size:0.8rem; color:#666; margin-top:5px;">前回まとめ作成 : なし</div>
+    
+    <div id="summary-card" style="margin-top:15px; display:none;">
+        <span class="report-header">【一定期間まとめレポート】</span>
+        <div id="summary-content" style="background:#f9f9f9; padding:10px; border-radius:8px; margin-top:5px;"></div>
+    </div>
+</div>
+
+<div class="log-container" style="margin-top:20px;">
+    <div class="log-title" style="font-weight:bold; margin-bottom:10px;">最近の記録</div>
     <div id="log-list" class="log-list">
         </div>
-       </div>
+</div>
     
     <script src="script.js"></script>
 </body>
