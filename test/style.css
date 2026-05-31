@@ -1,9 +1,7 @@
-/* 画面全体をFlexboxで管理し、中央寄せを強制します */
 body {
     margin: 0;
-    padding: 0;
     display: flex;
-    justify-content: center; /* 横方向の中央寄せ */
+    justify-content: center;
     background-color: #f9f9f9;
     min-height: 100vh;
 }
@@ -14,31 +12,33 @@ body {
     background-color: white;
     padding: 20px;
     display: flex;
-    flex-direction: column; /* 要素を縦に並べる */
-    align-items: center;    /* 子要素（タイトル等）を横方向の中央に配置 */
+    flex-direction: column;
+    align-items: center;
 }
 
-/* style.css */
 .main-title {
-    font-size: 28px !important; /* !importantで強制的に適用させる */
-    color: #4A90E2 !important;  /* 強制的に青色にする */
+    font-size: 28px;
+    color: #4A90E2;
     text-align: center;
+    margin: 0 0 5px 0;
 }
 
-/* サブタイトル */
 .sub-title {
     font-size: 14px;
     color: #718096;
     margin: 0 0 20px 0;
-    text-align: center;
 }
 
-.diagnosis-wrapper {
+/* 診断名カードのデザイン */
+.diagnosis-card {
+    width: 90%;
     background-color: #f4f4f4;
     padding: 15px;
     border-radius: 15px;
-    margin: 20px auto;
-    max-width: 350px;
+    box-sizing: border-box;
+}
+
+.diagnosis-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,51 +47,7 @@ body {
 #editBtn {
     background: none;
     border: none;
-    color: #007bff;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.diagnosis-info {
-    display: flex;
-    justify-content: space-between; /* 診断名とボタンを左右に分ける */
-    align-items: center;
-    width: 100%;
-}
-
-.diagnosis-info button {
     color: #4A90E2;
-    background: none;
-    border: none;
     font-weight: bold;
     cursor: pointer;
-}
-
-.diagnosis-card {
-    width: 90%;
-    max-width: 360px;
-    background-color: #f4f4f4; /* 薄いグレー */
-    padding: 15px 20px;
-    border-radius: 16px;       /* しっかり角丸 */
-    margin: 20px auto;         /* 中央寄せ */
-    box-sizing: border-box;
-}
-
-.diagnosis-display {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.edit-btn {
-    color: #4A90E2;
-    background: none;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.diagnosis-edit {
-    display: flex;
-    justify-content: space-between;
 }
