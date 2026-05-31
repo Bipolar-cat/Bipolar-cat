@@ -28,3 +28,33 @@ function unlockDiagnosis() {
     document.getElementById('diagnosis-fixed-container').style.display = 'none';
     document.getElementById('diagnosis-edit').style.display = 'block';
 }
+
+// ボタンを自動生成する関数
+function generateRatingButtons(containerId, groupName) {
+    const container = document.getElementById(containerId);
+    
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerText = i;
+        btn.className = 'rate-btn';
+        
+        // ボタンクリック時の処理
+        btn.addEventListener('click', function() {
+            // 同じグループ内の選択を解除
+            container.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('selected'));
+            // 選択状態にする
+            this.classList.add('selected');
+            // ここに選択した値を保持する処理を追加可能
+            console.log(groupName + "が" + i + "に設定されました");
+        });
+        
+        container.appendChild(btn);
+    }
+}
+
+// ページ読み込み時に実行
+document.addEventListener('DOMContentLoaded', () => {
+    generateRatingButtons('mood-btns', 'mood');
+    generateRatingButtons('cond-btns', 'condition');
+});
