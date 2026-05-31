@@ -1,57 +1,37 @@
-/* スマホ画面用にコンテナを制限 */
+/* 画面全体を中央揃えの起点にする */
 body {
     margin: 0;
-    padding: 0;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* 横方向の中央揃え */
     background-color: #f9f9f9;
 }
 
-.app-container {
-    width: 100%;
-    max-width: 400px; /* スマホの一般的な幅を想定 */
-    padding: 20px;
-    background-color: white;
-}
-
-/* タイトル設定 */
-.main-title {
-    font-size: 28px;
-    color: #4a5568; /* 画像に近い濃いグレー */
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-/* サブタイトル設定 */
-.sub-title {
-    font-size: 14px;
-    color: #718096; /* 少し薄いグレー */
-    text-align: center;
-} 
-
-/* コンテナ内の要素を中央に配置する設定 */
-.app-container {
+/* コンテナ（スマホの枠） */
+.wrapper {
     width: 100%;
     max-width: 400px;
-    padding: 20px;
     background-color: white;
-    /* ここを追加・確認 */
+    min-height: 100vh; /* 画面の高さいっぱいにする */
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    text-align: center;
+    align-items: center; /* 子要素を中央に配置する */
 }
 
-/* タイトル設定 */
+/* ヘッダーの中身も中央に */
+.header {
+    text-align: center;
+    width: 100%;
+}
+
 .main-title {
     font-size: 28px;
     color: #4a5568;
-    margin: 0 0 5px 0; /* 余白を調整 */
+    margin: 0 0 5px 0;
 }
 
-/* サブタイトル設定 */
 .sub-title {
     font-size: 14px;
     color: #718096;
-    margin: 0 0 20px 0; /* 下側にしっかり余白を作る */
+    margin: 0 0 20px 0;
 }
