@@ -175,6 +175,7 @@
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
+               
        /* 全体の背景とフォント、パディングを最適化 */
         body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
@@ -468,19 +469,15 @@
             text-align: center;
         }
 
-        .summary-action-btn {
-            background-color: #00C853;
-            color: white;
-            border: none;
-            padding: 13px 35px;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 200, 83, 0.15);
-            transition: 0.2s;
-            display: inline-block;
-        }
+      .summary-action-btn {
+    background-color: #00c853; /* 緑色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+      }
 
         .summary-action-btn:active { transform: scale(0.98); }
 
@@ -515,32 +512,18 @@
     margin-top: 10px;
 }
 
-.log-item {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-        .log-item.highlight {
-            background-color: #fff9c4 !important;
-            border-color: #fbc02d !important;
-        }
-
-    .log-list {
+.log-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
 }
 
 .log-item {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
+    background: #fff;
+    border: 1px solid #e0e0e0;
     border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
                
         .log-diagnosis {
@@ -553,3 +536,9 @@
             font-weight: bold;
             margin-left: 8px;
         }
+
+.log-note {
+    font-size: 0.9rem;
+    color: #444;
+}
+               
