@@ -64,13 +64,23 @@ body {
 }
 
 .diagnosis-card {
-    width: 90%;
-    max-width: 360px;
     background-color: #f4f4f4;
-    padding: 15px 20px;
+    padding: 15px;
     border-radius: 16px;
-    margin: 20px auto;
-    cursor: pointer; /* タップできることを示唆 */
+    cursor: pointer; /* タップできることを強調 */
+}
+
+/* 診断名一覧（メニュー）のスタイル */
+.diagnosis-menu {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd; /* ボックスとの境界線 */
+}
+
+.diagnosis-menu div {
+    padding: 10px 0;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
 }
 
 #diagnosisSelect, #otherInput {
