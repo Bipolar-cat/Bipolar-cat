@@ -186,9 +186,12 @@
 }
 
 #chart-wrapper {
-    /* 記録データ数に応じてJSから幅が指定されます */
-    height: 300px;
-    min-width: 100%; 
+    height: 300px; /* ここが空だとグラフが消えます */
+    width: 100%;
+}
+#myChart {
+    width: 100%;
+    height: 100%;
 }
 
         /* Summary機能用レイアウトスタイル */
