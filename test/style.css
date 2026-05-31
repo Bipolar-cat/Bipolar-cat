@@ -1,38 +1,34 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: #f9f9f9;
+    font-family: sans-serif;
     display: flex;
     justify-content: center; /* 画面の横中央 */
-    background-color: #f9f9f9;
     min-height: 100vh;
 }
 
+/* 外枠（コンテナ）の設定 */
 .container {
     width: 100%;
-    max-width: 400px;
+    max-width: 400px; /* スマホの幅に合わせる */
+    background-color: white;
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05); /* ほんのり影をつけて外枠を強調 */
     display: flex;
     flex-direction: column;
-    align-items: center; /* 中身を全て中央寄せ */
+    align-items: center; /* 子要素を中央寄せ */
 }
 
+/* タイトルとサブタイトルのデザイン */
 .main-title {
-    color: #4A90E2;
+    color: #4A90E2; /* 青色 */
     font-size: 28px;
-    margin: 20px 0 5px 0;
+    margin: 10px 0 5px 0;
 }
 
 .sub-title {
-    color: #718096;
+    color: #718096; /* グレー */
     font-size: 14px;
     margin-bottom: 20px;
-}
-
-.diagnosis-card {
-    width: 100%; /* containerの幅いっぱいに広げる */
-    background-color: #f4f4f4;
-    padding: 15px 20px;
-    border-radius: 16px;
-    box-sizing: border-box; /* 枠線を幅に含める */
-    cursor: pointer;
 }
