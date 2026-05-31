@@ -7,27 +7,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <div class="container">
-    <h1 class="main-title">InnerNote</h1>
-    <p class="sub-title">気分と調子の変化を記録</p>
-
-    <div class="diagnosis-card" onclick="toggleMenu()">
-        <div id="displayArea" class="diagnosis-content">
-            <span id="diagnosisLabel">主な診断名: <strong id="diagnosisName">未設定</strong></span>
-            <button id="editBtn" class="change-btn" style="display: none;">変更</button>
+    <div class="container">
+        <h1 class="main-title">InnerNote</h1>
+        <p class="sub-title">気分と調子の変化を記録</p>
+        
         </div>
-
-        <div id="menuArea" class="diagnosis-menu" style="display: none;">
-            <div class="menu-item" onclick="selectDiagnosis('未診断（健常者）')">未診断（健常者）</div>
-            <div class="menu-item" onclick="selectDiagnosis('うつ病')">うつ病</div>
-            <div class="menu-item" onclick="selectDiagnosis('双極症')">双極症</div>
-            <div class="menu-item" onclick="selectDiagnosis('その他')">その他</div>
-        </div>
-    </div>
-   </div>
-
-    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
-    </div>
-</div>
+</body>
+</html>
