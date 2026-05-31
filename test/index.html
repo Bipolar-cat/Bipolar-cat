@@ -30,6 +30,11 @@
         </select>
         <button onclick="saveDiagnosis()">決定</button>
     </div>
+
+    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
+        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
+        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
+    </div>
         </div>
 
         <div class="input-group">
