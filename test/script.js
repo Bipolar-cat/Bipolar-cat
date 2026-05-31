@@ -77,6 +77,14 @@ window.onload = () => {
         logList.appendChild(div);
     });
 
+    // グラフ描画の前に追加
+const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+const wrapper = document.getElementById('chart-wrapper');
+
+// データ数×50pxで幅を計算し、最低でも画面幅は確保
+const dynamicWidth = Math.max(window.innerWidth - 40, logs.length * 50);
+wrapper.style.width = dynamicWidth + 'px';
+
     // グラフ描画
     const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
