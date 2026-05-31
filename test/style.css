@@ -12,10 +12,27 @@ body {
     padding: 20px;
 }
 
-/* タイトルを青にする */
+/* タイトルとサブタイトルの親要素の整理 */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 左右中央揃え */
+    text-align: center;  /* テキスト自体も中央揃え */
+    width: 100%;
+}
+
+/* タイトルを青色に設定 */
 .container h1 {
-    color: var(--primary-blue);
-    font-size: 24px;
+    color: #4A90E2;      /* ここで青色を指定 */
+    font-size: 28px;
+    margin-bottom: 5px;  /* タイトルとサブタイトルの間隔 */
+}
+
+/* サブタイトル */
+.subtitle {
+    color: #718096;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
 /* グレーボックスの縁を薄い青に調整可能 */
