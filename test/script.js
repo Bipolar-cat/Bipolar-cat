@@ -69,3 +69,15 @@ buttons.forEach(btn => {
         this.classList.add('active');
     });
 });
+
+function setupButtons(containerId) {
+    const container = document.getElementById(containerId);
+    container.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            // そのグループ内の他のボタンから active を外す
+            container.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            // 押したボタンに active を付ける
+            e.target.classList.add('active');
+        }
+    });
+}
