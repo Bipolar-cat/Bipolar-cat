@@ -11,10 +11,10 @@
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div class="diagnosis-section">
+       <div class="diagnosis-section">
     <div id="diagnosis-display">
         <span>主な診断名: <strong id="selected-diagnosis">未選択</strong></span>
-        <button onclick="toggleEdit()" class="edit-btn">変更</button>
+        <button onclick="App.toggleEdit()" class="edit-btn">変更</button>
     </div>
     
     <div id="diagnosis-edit" style="display: none;">
@@ -24,6 +24,9 @@
             <option value="適応障害">適応障害</option>
             <option value="その他">その他</option>
         </select>
+        <button onclick="App.saveDiagnosis()" class="save-btn">決定</button>
+    </div>
+       </div>
         <button onclick="saveDiagnosis()" class="save-btn">決定</button>
     </div>
         </div>
