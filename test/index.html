@@ -8,13 +8,14 @@
 </head>
 <body>
     <div class="inner-note-container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
-
-       <div class="diagnosis-section">
-    <div id="diagnosis-display">
-        <span>主な診断名: <strong id="selected-diagnosis">未選択</strong></span>
-        <button onclick="App.toggleEdit()" class="edit-btn">変更</button>
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
+    
+    <div class="diagnosis-section">
+        <span>主な診断名: <span id="diagnosis-text">未選択</span></span>
+        <button onclick="changeDiagnosis()">変更</button>
+    </div>
+    
     </div>
     
     <div id="diagnosis-edit" style="display: none;">
