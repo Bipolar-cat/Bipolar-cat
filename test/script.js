@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("HTMLとJSが正しく連結されました！");
+    
+    // ここに診断名の処理などを書いていきます
+});
     const saved = localStorage.getItem('userDiagnosis');
     if (saved) {
         document.getElementById('diagnosisName').textContent = saved;
