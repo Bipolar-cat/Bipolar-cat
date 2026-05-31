@@ -15,4 +15,10 @@ body {
         align-items: center; /* これが中央配置の決め手です */
         text-align: center;
     }
-</style>
+
+.main-title {
+    font-size: 28px;
+    color: #4A90E2; /* ここを青色に変更しました */
+    margin: 0 0 5px 0;
+    text-align: center; /* ここでも念のため指定 */
+}
