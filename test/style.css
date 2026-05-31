@@ -1,93 +1,53 @@
-/* 画面全体 */
-body {
-    font-family: sans-serif;
-    background-color: #f5f7fa;
-    margin: 0;
-    padding: 20px; /* 余白を追加 */
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-}
+ body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-/* メインコンテナ：カード状に表示する設定 */
-.inner-note-container {
-    background: white;
-    padding: 24px;
-    width: 100%;
-    max-width: 400px; /* スマホで見やすい幅に制限 */
-    height: auto;     /* 高さを固定せず内容に合わせる */
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 影を少し柔らかく */
-    box-sizing: border-box;
-    text-align: center;
-}
+        /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
 
-/* タイトルの青色と余白 */
-h1 {
-    color: #5C6BC0;
-    font-size: 24px;
-    margin: 0 0 5px 0;
-}
+        h1 {
+            color: #5C6BC0;
+            font-size: 28px;
+            margin: 5px 0 0 0;
+        }
 
-.subtitle {
-    font-size: 0.85em;
-    color: #888;
-    margin-bottom: 25px;
-}
+        .subtitle {
+            color: #888;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-/* 診断名セクションをカード内に収める */
-.diagnosis-section {
-    background: #f7fafc;
-    padding: 12px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+        /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
+        .diagnosis-area {
+            width: 66.6%;
+            margin: 0 auto 20px auto;
+            text-align: left;
+            box-sizing: border-box;
+        }
 
-/* 選択ボタン等の微調整 */
-select, button {
-    cursor: pointer;
-    padding: 5px 10px;
-}
-
-/* ボタン群の配置 */
-.scale-buttons { 
-    display: flex; 
-    justify-content: center; 
-    gap: 8px; 
-    margin: 10px 0 20px 0; 
-}
-
-.circle {
-    width: 30px; height: 30px;
-    border: 1px solid #e2e8f0;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-/* メモ欄と記録ボタン */
-textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-}
-
-.record-btn {
-    width: 100%;
-    padding: 15px;
-    background-color: #4299e1;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        .diagnosis-fixed-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            box-sizing: border-box;
+        }
