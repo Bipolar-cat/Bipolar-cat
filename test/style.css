@@ -32,3 +32,27 @@ body {
     margin: 0 0 20px 0;
     text-align: center;
 }
+
+.diagnosis-wrapper {
+    width: 100%;
+    max-width: 360px;
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+
+.diagnosis-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.diagnosis-info button {
+    color: #4A90E2;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
