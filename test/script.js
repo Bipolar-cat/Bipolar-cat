@@ -118,6 +118,20 @@ function safeRenderChart(logs) {
     }, 500); // 0.5秒待ってから描画
 }
 
-// 既存の updateUI 内の renderChart(logs) を以下に書き換える
-// 旧: renderChart(logs);
-// 新: safeRenderChart(logs);
+// renderChart 関数内の options を以下に書き換えます
+options: { 
+    responsive: true, 
+    maintainAspectRatio: false,
+    scales: { 
+        x: { 
+            ticks: { autoSkip: false } 
+        },
+        y: { 
+            min: 1,    // 最小値を1に固定
+            max: 10,   // 最大値を10に固定
+            ticks: { 
+                stepSize: 1 // 1刻みで表示
+            }
+        }
+    }
+}
