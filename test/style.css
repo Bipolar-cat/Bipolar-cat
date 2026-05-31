@@ -1,36 +1,35 @@
 body {
-    background-color: #f5f7fa;
+    font-family: sans-serif;
+    background-color: #f5f7fa; /* 全体の背景色 */
     margin: 0;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-.inner-note-container {
-    background: white;
     padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    box-sizing: border-box;
     display: flex;
-    flex-direction: column; /* 上から順に配置 */
-    gap: 15px;
+    justify-content: center; /* 画面中央寄せ */
 }
 
-h1 { color: #5C6BC0; text-align: center; margin: 0; font-size: 24px; }
-.subtitle { color: #888; text-align: center; margin: 0; font-size: 12px; }
+/* ホワイトボックスのデザイン */
+.inner-note-container {
+    background: white;        /* 白い背景 */
+    width: 100%;
+    max-width: 400px;         /* スマホに合わせた最大幅 */
+    padding: 30px;
+    border-radius: 20px;      /* 丸みを帯びた角 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 柔らかい影 */
+    box-sizing: border-box;
+}
 
-.diagnosis-section {
-    background: #f7fafc;
-    padding: 12px;
-    border-radius: 12px;
+/* タイトルの設定 */
+h1 {
+    color: #5C6BC0;           /* 指定の青色 */
     text-align: center;
-    color: #4a5568;
+    margin: 0 0 10px 0;
+    font-size: 28px;
 }
 
-.edit-btn, .save-btn {
-    background: none; border: none; color: #4299e1;
-    font-weight: bold; cursor: pointer; margin-left: 8px;
+/* サブタイトルの設定 */
+.subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin: 0 0 30px 0;
 }
