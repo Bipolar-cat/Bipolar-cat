@@ -86,11 +86,25 @@ function renderChart(logs) {
             ]
         },
         options: { 
-            responsive: true, 
-            maintainAspectRatio: false // これが重要
+    responsive: true, 
+    maintainAspectRatio: false,
+    scales: { 
+        x: { 
+            ticks: { autoSkip: false } 
+        },
+        y: { 
+            min: 1,    // Y軸の最小値を1に固定
+            max: 10,   // Y軸の最大値を10に固定
+            ticks: { 
+                stepSize: 1, // 目盛りを1刻みにする
+                precision: 0 // 小数点以下を表示しない
+            },
+            grid: {
+                color: '#e5e7eb' // グリッド線の色（必要に応じて調整）
+            }
         }
-    });
-}
+    }
+        }
 
 // --- ボタン生成関数 ---
 function createRatingButtons(containerId, groupName) {
