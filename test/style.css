@@ -33,3 +33,30 @@ h1 {
     font-size: 14px;
     margin: 0 0 30px 0;
 }
+
+.diagnosis-section {
+    background: #f7fafc; /* 薄いグレー */
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+.edit-btn, .save-btn {
+    background: none;
+    border: none;
+    color: #4299e1; /* 青色 */
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+select {
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e0;
+}
