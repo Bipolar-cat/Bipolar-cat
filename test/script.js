@@ -72,19 +72,25 @@ document.addEventListener('DOMContentLoaded', () => {
     createButtons('cond-btns', 'cond');
 });
 
-function createButtons(containerId, prefix) {
+function createButtons(containerId, activeClass) {
     const container = document.getElementById(containerId);
-    if (!container) return; // コンテナが見つからない場合の安全策
-
+    
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.type = 'button';
         btn.onclick = function() {
-            // .activeクラスの付け替え処理
+            // 同じグループ内の他のボタンから active を消す
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            // 押したボタンに active をつける
             this.classList.add('active');
         };
         container.appendChild(btn);
     }
 }
+
+// 読み込み時に実行
+document.addEventListener('DOMContentLoaded', () => {
+    createButtons('mood-btns');
+    createButtons('cond-btns');
+});
