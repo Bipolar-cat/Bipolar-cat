@@ -33,26 +33,29 @@ body {
     text-align: center;
 }
 
+/* 診断名エリアのスタイル */
 .diagnosis-wrapper {
-    width: 100%;
+    width: 90%;          /* 横幅を少し抑える */
     max-width: 360px;
-    background-color: #f7f7f7;
-    padding: 15px;
-    border-radius: 12px;
-    margin: 20px 0;
-    box-sizing: border-box;
+    background-color: #f4f4f4; /* 薄いグレー */
+    padding: 12px 16px;
+    border-radius: 12px;       /* 角丸 */
+    margin: 20px auto;         /* 上下20px、左右は自動で中央寄せ */
+    display: flex;
+    flex-direction: column;
 }
 
 .diagnosis-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* 診断名とボタンを左右に分ける */
     align-items: center;
+    width: 100%;
 }
 
 .diagnosis-info button {
     color: #4A90E2;
     background: none;
     border: none;
-    cursor: pointer;
     font-weight: bold;
+    cursor: pointer;
 }
