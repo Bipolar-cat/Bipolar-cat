@@ -28,70 +28,16 @@ body {
     color: #718096;
     margin: 0 0 20px 0;
 }
-
 .diagnosis-card {
-    width: 90%;
-    max-width: 360px;
-    margin: 20px auto;
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 20px 0;
 }
 
-#diagnosisSelect {
-    width: 100%;
-    background-color: #f4f4f4; /* ご希望のグレー背景 */
-    padding: 15px 20px;
-    border: none;
-    border-radius: 16px;      /* 角丸 */
-    font-size: 16px;
-    color: #333;
-    cursor: pointer;
-    appearance: none;         /* ブラウザ標準の矢印を消す場合 */
-    text-align: left;
-}
-
-/* 選択肢が選ばれた後の見た目制御 */
-#diagnosisSelect:valid {
-    color: #000;
-    font-weight: bold;
-}
-
-.diagnosis-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#editBtn {
-    color: #4A90E2;
-    background: none;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
+/* メニュー部分の余白と境界線 */
 .diagnosis-menu {
-    margin-top: 15px;
+    margin-top: 10px;
     border-top: 1px solid #ddd;
     padding-top: 10px;
 }
-
-.menu-item {
-    padding: 10px 0;
-    font-size: 16px;
-}
-
-.container { width: 90%; max-width: 400px; margin: 0 auto; text-align: center; }
-.diagnosis-card {
-    background-color: #f4f4f4;
-    padding: 15px 20px;
-    border-radius: 16px;
-    margin: 20px auto;
-    cursor: pointer;
-    text-align: left;
-}
-.diagnosis-content { display: flex; justify-content: space-between; align-items: center; }
-.change-btn { color: #4A90E2; background: none; border: none; font-weight: bold; }
-
-/* メニューの見た目 */
-.diagnosis-menu { margin-top: 15px; border-top: 1px solid #ddd; padding-top: 10px; }
-.menu-item { padding: 12px 0; font-size: 16px; border-bottom: 1px solid #eee; }
-.menu-item:last-child { border: none; }
