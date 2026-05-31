@@ -58,3 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
     generateRatingButtons('mood-btns', 'mood');
     generateRatingButtons('cond-btns', 'condition');
 });
+
+// ボタンクリック時のJS処理の例
+const buttons = document.querySelectorAll('#mood-btns button');
+buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+        // すべてのボタンからactiveを外す
+        buttons.forEach(b => b.classList.remove('active'));
+        // 押したボタンにactiveをつける
+        this.classList.add('active');
+    });
+});
