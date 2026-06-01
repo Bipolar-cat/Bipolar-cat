@@ -48,9 +48,10 @@
   <button onclick="handleRecord()">記録する</button>
 </div>
 
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            <button class="save-btn" onclick="saveData()">記録する</button>
-        </div>
+            <input type="text" id="note" placeholder="今の気持ちをメモ...">
+<button onclick="saveData()">記録する</button>
+
+<div id="log-list"></div>
 
         <div style="width: 100%; overflow-x: auto;">
   <div style="width: 800px;"> <canvas id="myChart"></canvas>
