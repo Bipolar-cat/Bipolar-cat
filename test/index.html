@@ -34,16 +34,19 @@
     </div>
 </div>
 
-        <div class="input-section">
-            <label class="label">今の気分？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="mood-btns" class="btn-group-circle"></div>
-            </div>
-
-            <label class="label">体の調子？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="cond-btns" class="btn-group-circle"></div>
-            </div>
+       <div class="input-area">
+  <div>
+    <label>気分 (1-10): </label>
+    <input type="range" id="moodInput" min="1" max="10" value="5" oninput="document.getElementById('moodVal').innerText = this.value">
+    <span id="moodVal">5</span>
+  </div>
+  <div>
+    <label>体調 (1-10): </label>
+    <input type="range" id="condInput" min="1" max="10" value="5" oninput="document.getElementById('condVal').innerText = this.value">
+    <span id="condVal">5</span>
+  </div>
+  <button onclick="handleRecord()">記録する</button>
+</div>
 
             <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
             <button class="save-btn" onclick="saveData()">記録する</button>
