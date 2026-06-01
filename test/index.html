@@ -9,98 +9,43 @@
 </head>
 <body>
 <div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div class="diagnosis-area" style="margin-bottom: 20px;">
-    <div id="diagnosis-select-container" style="display: block;">
-        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
- 
-     </div>
-
-    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
+    <div class="diagnosis-area" style="margin-bottom: 20px;">
+        <div id="diagnosis-select-container" style="display: block;">
+            <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()">
+                <option value="">主な診断名を選択</option>
+                <option value="未診断（健常者）">未診断（健常者）</option>
+                <option value="うつ病">うつ病</option>
+                <option value="双極症">双極症</option>
+                <option value="統合失調症">統合失調症</option>
+                <option value="不安障害">不安障害</option>
+                <option value="適応障害">適応障害</option>
+                <option value="発達障害">発達障害</option>
+            </select>
+        </div>
+        <div id="diagnosis-fixed-container" style="display: none;">
+            <span id="diagnosis-text">診断名: 未設定</span>
+            <button type="button" onclick="unlockDiagnosis()">変更</button>
+        </div>
     </div>
+
+    <div class="input-area">
+        <div id="mood-btns">気分(1-10): </div>
+        <div id="cond-btns">体調(1-10): </div>
+        <input type="text" id="note" placeholder="今の気持ちをメモ...">
+        <button onclick="saveData()">記録する</button>
+    </div>
+
+    <div style="width: 100%; overflow-x: auto;">
+        <div style="width: 800px;"> <canvas id="myChart"></canvas> </div>
+    </div>
+
+    <div class="log-title">最近の記録</div>
+    <div id="log-list" class="log-list"></div>
 </div>
 
-       <div class="input-area">
-  <div>
-    <label>気分 (1-10): </label>
-    <input type="range" id="moodInput" min="1" max="10" value="5" oninput="document.getElementById('moodVal').innerText = this.value">
-    <span id="moodVal">5</span>
-  </div>
-  <div>
-    <label>体調 (1-10): </label>
-    <input type="range" id="condInput" min="1" max="10" value="5" oninput="document.getElementById('condVal').innerText = this.value">
-    <span id="condVal">5</span>
-  </div>
-  <button onclick="handleRecord()">記録する</button>
-</div>
-
-            <input type="text" id="note" placeholder="今の気持ちをメモ...">
-<button onclick="saveData()">記録する</button>
-
-<div id="log-list"></div>
-
-        <div style="width: 100%; overflow-x: auto;">
-  <div style="width: 800px;"> <canvas id="myChart"></canvas>
-  </div>
-        </div>
-
-        <div class="summary-section">
-            <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
-            <div id="summary-ts">前回まとめ作成：なし</div>
-            
-            <div id="summary-card">
-                <span class="report-header">【一定期間まとめレポート】</span>
-                <div id="summary-content"></div>
-            </div>
-        </div>
-
-        <div class="log-title">最近の記録</div>
-        <div id="log-list" class="log-list"></div>
-    </div>
-    
-    <script src="script.js"></script>
-        <button onclick="addRecord(8, 7)">記録する（気分:8, 体調:7）</button>
-
-    <script>
-        // 1. 変数の初期化
-        let logs = [];
-        const ctx = document.getElementById('myChart').getContext('2d');
-
-        // 2. グラフの初期化
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: { labels: [], datasets: [{label: '気分', data: [], borderColor: '#3b82f6'}, {label: '体調', data: [], borderColor: '#f59e0b'}] },
-            options: { /* 以前の設定を入れる */ }
-        });
-
-        // 3. 記録用関数
-        function addRecord(moodVal, conditionVal) {
-            const now = new Date();
-            const formattedDate = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-            logs.push({ timestamp: formattedDate, mood: moodVal, condition: conditionVal });
-            if (logs.length > 50) logs.shift();
-
-            const latest10 = logs.slice(-10);
-            myChart.data.labels = latest10.map(item => item.timestamp);
-            myChart.data.datasets[0].data = latest10.map(item => item.mood);
-            myChart.data.datasets[1].data = latest10.map(item => item.condition);
-            myChart.update();
-        }
-    </script>
+<script src="script.js"></script>
 </body>
 </html>
