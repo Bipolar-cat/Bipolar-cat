@@ -1,28 +1,31 @@
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 let selectedMood = 5, selectedCond = 5;
-let highlightTimeout = null;
-let logs = []; 
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, { ... }); // 変数名 myChart をつけておく
+let myChart; // グラフのインスタンスを保持
 
-// --- ボタン生成ロジック（統合版） ---
-function createRatingButtons(containerId, groupName) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    for (let i = 1; i <= 10; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        btn.type = 'button';
-        if (i === 5) btn.classList.add('active'); // 初期値5
-        btn.onclick = function() {
-            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            if (groupName === 'mood') selectedMood = i;
-            else selectedCond = i;
-        };
-        container.appendChild(btn);
-    }
+// --- グラフの初期化と更新 ---
+function initChart(data) {
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const displayData = data.slice(-10); // 最新10件のみ表示
+
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: displayData.map(l => l.date),
+            datasets: [
+                { label: '気分', data: displayData.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
+                { label: '体調', data: displayData.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { min: 1, max: 10, ticks: { stepSize: 1 } },
+                x: { ticks: { maxRotation: 45, minRotation: 45 } }
+            }
+        }
+    });
 }
 
 // --- 診断名管理 ---
@@ -40,23 +43,44 @@ function unlockDiagnosis() {
     document.getElementById('diagnosis-fixed-container').style.display = 'none';
 }
 
+// --- ボタン生成 ---
+function createRatingButtons(containerId, groupName) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = i;
+        btn.type = 'button';
+        if (i === 5) btn.classList.add('active');
+        btn.onclick = function() {
+            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            if (groupName === 'mood') selectedMood = i;
+            else selectedCond = i;
+        };
+        container.appendChild(btn);
+    }
+}
+
 // --- 保存処理 ---
 function saveData() {
     const note = document.getElementById('note').value;
     const diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "未設定";
     const now = new Date();
-    const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    const dateStr = `${now.getFullYear()}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    let logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     logs.push({ ts: now.getTime(), date: dateStr, diagnosis: diagnosisVal, mood: selectedMood, cond: selectedCond, note: note });
+    
+    if (logs.length > 50) logs.shift(); // 過去ログ50件制限
+    
     localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
     alert("記録しました！");
     location.reload();
 }
 
-// --- 初期化処理 ---
+// --- 初期化 ---
 window.onload = () => {
-    // ボタン生成
     createRatingButtons('mood-btns', 'mood');
     createRatingButtons('cond-btns', 'cond');
 
@@ -68,96 +92,16 @@ window.onload = () => {
         document.getElementById('diagnosis-text').innerText = `診断名: ${savedDiagnosis}`;
     }
 
+    // 履歴とグラフの表示
     const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
     const logList = document.getElementById('log-list');
 
-    // 履歴描画
     logs.slice().reverse().forEach(l => {
         const div = document.createElement('div');
         div.className = 'log-item';
-        div.id = `log-${l.ts}`;
-        div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
+        div.innerHTML = `<span class="log-date">${l.date}</span> 気分: ${l.mood} | 体調: ${l.cond}<br>${l.note || ''}`;
         logList.appendChild(div);
     });
 
-   const ctx = document.getElementById('myChart').getContext('2d');
-
-// サンプルデータ: 過去50件の中から最新10件を想定
-const allData = [ /* ここに過去50件のデータが入る想定 */ ];
-const displayData = allData.slice(-10); // 最新10件を取得
-
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: displayData.map(item => item.timestamp), // 西暦日時
-        datasets: [
-            {
-                label: '気分',
-                data: displayData.map(item => item.mood),
-                borderColor: '#3b82f6',
-                tension: 0.3
-            },
-            {
-                label: '体調',
-                data: displayData.map(item => item.condition),
-                borderColor: '#f59e0b',
-                tension: 0.3
-            }
-        ]
-    },
-
-<script>
-    // 1. 変数の初期化
-    let logs = [];
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, { /* グラフの設定 */ });
-
-    // 2. データを追加してグラフを更新する関数
-    function addRecord(moodVal, conditionVal) {
-        const now = new Date();
-        const formattedDate = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-
-        logs.push({ timestamp: formattedDate, mood: moodVal, condition: conditionVal });
-        if (logs.length > 50) logs.shift();
-
-    // グラフ更新
-    const latest10 = logs.slice(-10);
-    myChart.data.labels = latest10.map(item => item.timestamp);
-    myChart.data.datasets[0].data = latest10.map(item => item.mood);
-    myChart.data.datasets[1].data = latest10.map(item => item.condition);
-    myChart.update();
-}
-
-        // 3. ボタンから呼び出される「仲介役」の関数（★ここに追加！）
-    function handleRecord() {
-        const moodVal = document.getElementById('moodInput').value;
-        const condVal = document.getElementById('condInput').value;
-        function handleRecord() {
-    // スライダーの値を取得
-    const moodVal = document.getElementById('moodInput').value;
-    const condVal = document.getElementById('condInput').value;
-    
-    // 既存の記録関数を呼び出す
-    addRecord(parseInt(moodVal), parseInt(condVal));
-        }
-</script>
-
-    options: {
-        responsive: true,
-        maintainAspectRatio: false, // 縦横比を固定せずコンテナに従う
-        scales: {
-            y: {
-                min: 1,
-                max: 10,
-                ticks: { stepSize: 1 }
-            },
-            x: {
-                ticks: {
-                    maxRotation: 45, // 日時を斜めにする設定
-                    minRotation: 45
-                }
-            }
-        }
-    }
-});
+    initChart(logs); // グラフ描画
 };
