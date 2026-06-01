@@ -2,6 +2,9 @@ const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
+let logs = []; 
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, { ... }); // 変数名 myChart をつけておく
 
 // --- ボタン生成ロジック（統合版） ---
 function createRatingButtons(containerId, groupName) {
