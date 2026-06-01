@@ -132,10 +132,14 @@ new Chart(ctx, {
     function handleRecord() {
         const moodVal = document.getElementById('moodInput').value;
         const condVal = document.getElementById('condInput').value;
-        
-        // 記録関数を呼び出す
-        addRecord(parseInt(moodVal), parseInt(condVal));
-    }
+        function handleRecord() {
+    // スライダーの値を取得
+    const moodVal = document.getElementById('moodInput').value;
+    const condVal = document.getElementById('condInput').value;
+    
+    // 既存の記録関数を呼び出す
+    addRecord(parseInt(moodVal), parseInt(condVal));
+        }
 </script>
 
     options: {
