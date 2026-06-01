@@ -102,6 +102,29 @@ new Chart(ctx, {
             }
         ]
     },
+
+    // 2. その直後に記録用の関数を定義
+function addRecord(moodVal, conditionVal) {
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+    logs.push({
+        timestamp: formattedDate,
+        mood: moodVal,
+        condition: conditionVal
+    });
+    
+    // 50件制限
+    if (logs.length > 50) logs.shift();
+
+    // グラフ更新
+    const latest10 = logs.slice(-10);
+    myChart.data.labels = latest10.map(item => item.timestamp);
+    myChart.data.datasets[0].data = latest10.map(item => item.mood);
+    myChart.data.datasets[1].data = latest10.map(item => item.condition);
+    myChart.update();
+}
+    
     options: {
         responsive: true,
         maintainAspectRatio: false, // 縦横比を固定せずコンテナに従う
