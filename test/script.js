@@ -3,15 +3,14 @@ const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
 
-// --- ボタン生成ロジック（統合版） ---
 function createRatingButtons(containerId, groupName) {
     const container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container) return; // コンテナがない場合は終了
     for (let i = 1; i <= 10; i++) {
         const btn = document.createElement('button');
         btn.innerText = i;
         btn.type = 'button';
-        if (i === 5) btn.classList.add('active'); // 初期値5
+        if (i === 5) btn.classList.add('active'); // デフォルトで5を選択
         btn.onclick = function() {
             container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
