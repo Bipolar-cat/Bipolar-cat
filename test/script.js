@@ -106,19 +106,19 @@ new Chart(ctx, {
         ]
     },
 
-    // 2. その直後に記録用の関数を定義
-function addRecord(moodVal, conditionVal) {
-    const now = new Date();
-    const formattedDate = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+<script>
+    // 1. 変数の初期化
+    let logs = [];
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, { /* グラフの設定 */ });
 
-    logs.push({
-        timestamp: formattedDate,
-        mood: moodVal,
-        condition: conditionVal
-    });
-    
-    // 50件制限
-    if (logs.length > 50) logs.shift();
+    // 2. データを追加してグラフを更新する関数
+    function addRecord(moodVal, conditionVal) {
+        const now = new Date();
+        const formattedDate = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        logs.push({ timestamp: formattedDate, mood: moodVal, condition: conditionVal });
+        if (logs.length > 50) logs.shift();
 
     // グラフ更新
     const latest10 = logs.slice(-10);
@@ -127,7 +127,17 @@ function addRecord(moodVal, conditionVal) {
     myChart.data.datasets[1].data = latest10.map(item => item.condition);
     myChart.update();
 }
-    
+
+        // 3. ボタンから呼び出される「仲介役」の関数（★ここに追加！）
+    function handleRecord() {
+        const moodVal = document.getElementById('moodInput').value;
+        const condVal = document.getElementById('condInput').value;
+        
+        // 記録関数を呼び出す
+        addRecord(parseInt(moodVal), parseInt(condVal));
+    }
+</script>
+
     options: {
         responsive: true,
         maintainAspectRatio: false, // 縦横比を固定せずコンテナに従う
