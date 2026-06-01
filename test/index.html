@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <button onclick="addRecord(5, 5)">記録する（気分:5, 体調:5）</button>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></scri
     <title>InnerNote</title>
 </head>
 <body>
@@ -68,6 +67,36 @@
         <div class="log-title">最近の記録</div>
         <div id="log-list" class="log-list"></div>
     </div>
+    
     <script src="script.js"></script>
+        <button onclick="addRecord(5, 5)">記録する（気分:5, 体調:5）</button>
+
+    <script>
+        // 1. 変数の初期化
+        let logs = [];
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        // 2. グラフの初期化
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: { labels: [], datasets: [{label: '気分', data: [], borderColor: '#3b82f6'}, {label: '体調', data: [], borderColor: '#f59e0b'}] },
+            options: { /* 以前の設定を入れる */ }
+        });
+
+        // 3. 記録用関数
+        function addRecord(moodVal, conditionVal) {
+            const now = new Date();
+            const formattedDate = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+            logs.push({ timestamp: formattedDate, mood: moodVal, condition: conditionVal });
+            if (logs.length > 50) logs.shift();
+
+            const latest10 = logs.slice(-10);
+            myChart.data.labels = latest10.map(item => item.timestamp);
+            myChart.data.datasets[0].data = latest10.map(item => item.mood);
+            myChart.data.datasets[1].data = latest10.map(item => item.condition);
+            myChart.update();
+        }
+    </script>
 </body>
 </html>
