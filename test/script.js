@@ -87,36 +87,23 @@ window.onload = () => {
                 { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
                 { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
-        },options: { 
-    responsive: true, 
-    maintainAspectRatio: false,
-    scales: { 
-        x: { 
-            ticks: { autoSkip: false } 
         },
-        y: { 
-            min: 1,      // Y軸の最小値を1に固定
-            max: 10,     // Y軸の最大値を10に固定
-            ticks: { 
-                stepSize: 1, // 目盛りを1刻みに設定
-                precision: 0 // 小数点以下を表示しない
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            onClick: (evt, elements, chart) => {
+                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+                if (activePoints.length > 0) {
+                    const index = activePoints[0].index;
+                    const logData = logs[index]; // last10をlogsに修正
+                    const target = document.getElementById(`log-${logData.ts}`);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.classList.add('highlight');
+                        setTimeout(() => target.classList.remove('highlight'), 3000);
+                    }
+                }
             }
         }
-    }
-        }
-
-function renderLogList(logs) {
-    const logList = document.getElementById('log-list');
-    logList.innerHTML = ''; // クリア
-
-    logs.slice().reverse().forEach(l => {
-        const div = document.createElement('div');
-        div.className = 'log-item'; // CSSでデザイン適用
-        div.innerHTML = `
-            <div class="log-date" style="font-size:0.8rem; color:#888;">${l.date}</div>
-            <div class="log-summary">気分: ${l.mood} | 体調: ${l.cond}</div>
-            ${l.note ? `<div class="log-note">${l.note}</div>` : ''}
-        `;
-        logList.appendChild(div);
     });
-}
+};
