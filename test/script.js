@@ -77,33 +77,57 @@ window.onload = () => {
         logList.appendChild(div);
     });
 
-    // グラフ描画
+    const STORAGE_KEY = 'innernote_vfinal_400_logs';
+let myChart; // グラフ用変数
+
+// グラフを初期化・更新する関数
+function updateChart() {
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const displayData = logs.slice(-10); // 最新10件を取得
+    
     const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
+    
+    // 既にグラフがあれば破棄してから作り直す（再描画のため）
+    if (myChart) myChart.destroy();
+    
+    myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: logs.map(l => l.date),
+            labels: displayData.map(l => l.date.split(' ')[1]), // 時刻のみ表示
             datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
+                { label: '気分', data: displayData.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
+                { label: '体調', data: displayData.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            onClick: (evt, elements, chart) => {
-                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                if (activePoints.length > 0) {
-                    const index = activePoints[0].index;
-                    const logData = logs[index]; // last10をlogsに修正
-                    const target = document.getElementById(`log-${logData.ts}`);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        target.classList.add('highlight');
-                        setTimeout(() => target.classList.remove('highlight'), 3000);
-                    }
-                }
+            scales: {
+                y: { min: 1, max: 10, ticks: { stepSize: 1 } },
+                x: { ticks: { maxRotation: 45, minRotation: 45 } }
             }
         }
     });
+}
+
+// 既存の window.onload の最後で呼び出す
+window.onload = () => {
+    // ...（既存のボタン生成処理などはそのまま）
+    createRatingButtons('mood-btns', 'mood');
+    createRatingButtons('cond-btns', 'cond');
+    // ...（中略）
+
+    // 最後にグラフを表示！
+    updateChart();
 };
+
+// 既存の saveData 関数の最後にも追記
+function saveData() {
+    // ...（保存処理の最後）
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    alert("記録しました！");
+    
+    // グラフ更新して画面リロード
+    updateChart();
+    location.reload();
+}
