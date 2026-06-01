@@ -31,12 +31,15 @@
         </div>
     </div>
 
-    <div class="input-area">
-        <div id="mood-btns">気分(1-10): </div>
-        <div id="cond-btns">体調(1-10): </div>
-        <input type="text" id="note" placeholder="今の気持ちをメモ...">
-        <button onclick="saveData()">記録する</button>
-    </div>
+   <div class="input-area">
+    <p>気分 (1-10)</p>
+    <div id="mood-btns" class="button-group"></div>
+    <p>体調 (1-10)</p>
+    <div id="cond-btns" class="button-group"></div>
+    
+    <input type="text" id="note" placeholder="今の気持ちをメモ...">
+    <button onclick="saveData()">記録する</button>
+   </div>
 
     <div style="width: 100%; overflow-x: auto;">
         <div style="width: 800px;"> <canvas id="myChart"></canvas> </div>
