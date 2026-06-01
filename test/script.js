@@ -77,33 +77,47 @@ window.onload = () => {
         logList.appendChild(div);
     });
 
-    // グラフ描画
-    const ctx = document.getElementById('myChart').getContext('2d');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: logs.map(l => l.date),
-            datasets: [
-                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6', tension: 0.3 },
-                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            onClick: (evt, elements, chart) => {
-                const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
-                if (activePoints.length > 0) {
-                    const index = activePoints[0].index;
-                    const logData = logs[index]; // last10をlogsに修正
-                    const target = document.getElementById(`log-${logData.ts}`);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        target.classList.add('highlight');
-                        setTimeout(() => target.classList.remove('highlight'), 3000);
-                    }
+   const ctx = document.getElementById('myChart').getContext('2d');
+
+// サンプルデータ: 過去50件の中から最新10件を想定
+const allData = [ /* ここに過去50件のデータが入る想定 */ ];
+const displayData = allData.slice(-10); // 最新10件を取得
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: displayData.map(item => item.timestamp), // 西暦日時
+        datasets: [
+            {
+                label: '気分',
+                data: displayData.map(item => item.mood),
+                borderColor: '#3b82f6',
+                tension: 0.3
+            },
+            {
+                label: '体調',
+                data: displayData.map(item => item.condition),
+                borderColor: '#f59e0b',
+                tension: 0.3
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false, // 縦横比を固定せずコンテナに従う
+        scales: {
+            y: {
+                min: 1,
+                max: 10,
+                ticks: { stepSize: 1 }
+            },
+            x: {
+                ticks: {
+                    maxRotation: 45, // 日時を斜めにする設定
+                    minRotation: 45
                 }
             }
         }
-    });
+    }
+});
 };
