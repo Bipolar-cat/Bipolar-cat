@@ -117,6 +117,19 @@
             gap: 12px;
         }
 
+.button-group button {
+    padding: 10px 15px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+}
+.button-group button.active {
+    background: #3b82f6; /* 選択中の色 */
+    color: white;
+    border-color: #3b82f6;
+}
+
         /* ボタンの大きさ（52px正円）とフォント・カラー */
         .btn-group-circle button {
             width: 52px;
