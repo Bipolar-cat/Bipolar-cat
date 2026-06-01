@@ -51,11 +51,15 @@ function saveData() {
     location.reload();
 }
 
-// --- 初期化処理 ---
 window.onload = () => {
-    // ボタン生成
+    // ボタンを生成する命令がここに必要です
     createRatingButtons('mood-btns', 'mood');
     createRatingButtons('cond-btns', 'cond');
+    
+    // 既存の履歴描画やグラフ描画の処理...
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    renderChart(logs); 
+};
 
     // 診断名の復元
     const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
