@@ -1,3 +1,13 @@
+from flask import Flask, render_template
+
+# この行で 'app' という変数を作ることが重要です
+app = Flask(__name__) 
+
+# ...（以下、ルーティングなどのコードが続く）
+
+if __name__ == '__main__':
+    app.run()
+
 @app.route('/test')
 def index():
     return render_template('test/index.html')
