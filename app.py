@@ -3,10 +3,7 @@ from flask import Flask, render_template
 # この行で 'app' という変数を作ることが重要です
 app = Flask(__name__) 
 
-# ...（以下、ルーティングなどのコードが続く）
-
-if __name__ == '__main__':
-    app.run()
+@app.route('/')
 
 @app.route('/test')
 def index():
@@ -35,3 +32,6 @@ def karte_step3():
 @app.route('/karte/step10')
 def karte_step10():
     return render_template('karte/step10/index.html')
+
+if __name__ == '__main__':
+    app.run()
