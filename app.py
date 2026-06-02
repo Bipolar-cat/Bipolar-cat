@@ -9,7 +9,7 @@ if __name__ == '__main__':
 @app.route('/')
 @app.route('/test')
 def index():
-    return render_template('test/index.html')
+    return render_template('test/index.html') 
 
 @app.route('/step3')
 def step3():
