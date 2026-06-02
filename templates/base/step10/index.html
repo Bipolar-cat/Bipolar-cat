@@ -1,1 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerNote - Perfect Sync 350</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script>
+function renderScrollableChart(logs) {
+    const canvas = document.getElementById('myChart');
+    const container = document.getElementById('chart-wrapper');
+    
+    // データ数に合わせて幅を計算
+    const newWidth = Math.max(window.innerWidth, logs.length * 50);
+    container.style.width = newWidth + 'px';
+
+    if (window.myChartInstance) window.myChartInstance.destroy();
+
+    const ctx = canvas.getContext('2d');
+    window.myChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: logs.map(l => l.date),
+            datasets: [
+                { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6' },
+                { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
+            ]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: false
+        }
+    });
+}
+
+// 3. 実行（ページ読み込み時に実行する）
+window.onload = () => {
+    const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+    renderScrollableChart(logs);
+};
+</script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #5C6BC0;
+            font-size: 28px;
+            margin: 5px 0 0 0;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .input-section {
+            padding: 0 20px;
+        }
+
+        .label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 8px 0 5px 5px;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .scroll-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 2px 0 10px 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scroll-wrapper::-webkit-scrollbar { display: none; }
+
+        .btn-group-circle {
+            display: inline-flex;
+            gap: 12px;
+        }
+
+        .btn-group-circle button {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            color: #9ca3af;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #mood-btns button.active {
+            border: 2px solid #bfdbfe;
+            color: #3b82f6;
+            background-color: #eff6ff;
+            font-weight: bold;
+        }
+
+        #cond-btns button.active {
+            border: 2px solid #fde68a;
+            color: #f59e0b;
+            background-color: #fffbeb;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            height: 50px;
+            margin: 5px 0 15px 0;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: none;
+            background-color: #f3f4f6;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 350px;
+            border-top: 1px solid #f3f4f6;
+            padding-top: 15px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: #444;
+            font-size: 18px;
+            padding: 0 20px;
+        }
+
+        .log-list {
+            padding: 0 20px;
+        }
+
+        .log-item {
+            text-align: left;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            font-size: 14px;
+            transition: background-color 0.4s, border-color 0.4s;
+        }
+
+        .highlight {
+            background-color: #fff9c4 !important;
+            border-color: #fbc02d !important;
+        }
+
+        .log-date {
+            color: #4b5563;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
+
+        <div class="input-section">
+            <label class="label">今の気分？ (1～10)</label>
+            <div class="scroll-wrapper">
+                <div id="mood-btns" class="btn-group-circle"></div>
+            </div>
+
+            <label class="label">体の調子？ (1～10)</label>
+            <div class="scroll-wrapper">
+                <div id="cond-btns" class="btn-group-circle"></div>
+            </div>
+
+            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+            <button class="save-btn" onclick="saveData()">記録する</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <h3>最近の記録</h3>
+        <div id="log-list" class="log-list"></div>
+    </div>
+
+    <script>
+        let selectedMood = 5;
+        let selectedCond = 5;
+        let highlightTimeout = null; // タイマー管理用
+
+        function createCircleButtons(containerId, type) {
+            const container = document.getElementById(containerId);
+            for (let i = 1; i <= 10; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                if (i === 5) btn.className = 'active';
+                btn.onclick = function() {
+                    container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    if (type === 'mood') selectedMood = i;
+                    else selectedCond = i;
+                };
+                container.appendChild(btn);
+            }
+        }
+
+        createCircleButtons('mood-btns', 'mood');
+        createCircleButtons('cond-btns', 'cond');
+
+        function saveData() {
+            const note = document.getElementById('note').value;
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+            logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note });
+            localStorage.setItem('innernote_vfinal_400_logs', JSON.stringify(logs));
+            alert("記録しました！");
+            location.reload();
+        }
+
+        window.onload = () => {
+            const logs = JSON.parse(localStorage.getItem('innernote_vfinal_400_logs') || '[]');
+            const last10 = logs.slice(-10);
+            
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: last10.map(l => l.date),
+                    datasets: [
+                        { 
+                            label: '気分', data: last10.map(l => l.mood), 
+                            borderColor: '#3b82f6', backgroundColor: '#3b82f6',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#3b82f6'
+                        },
+                        { 
+                            label: '体調', data: last10.map(l => l.cond), 
+                            borderColor: '#f59e0b', backgroundColor: '#f59e0b',
+                            borderWidth: 2, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f59e0b'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: { padding: { left: 10, right: 20, bottom: 20 } },
+                    onClick: (evt, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const clickedDate = last10[index].date;
+                            scrollToLog(clickedDate);
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 }, autoSkip: true, maxTicksLimit: 7 } },
+                        y: { min: 1, max: 10, ticks: { stepSize: 1, font: { size: 10 } }, grid: { color: '#f3f4f6' } }
+                    },
+                    plugins: { legend: { position: 'top' } }
+                }
+            });
+
+            function scrollToLog(dateStr) {
+                const logItems = document.querySelectorAll('.log-item');
+                
+                // 1. 進行中のタイマーを停止
+                if (highlightTimeout) clearTimeout(highlightTimeout);
+                
+                // 2. 全てのハイライトを強制的に即時削除（再アニメーションを可能にする）
+                logItems.forEach(item => {
+                    item.style.transition = 'none'; // 一瞬 transition を消して即リセット
+                    item.classList.remove('highlight');
+                    item.offsetHeight; // リフローを強制してスタイルを適用
+                    item.style.transition = ''; // transition を戻す
+                });
+
+                // 3. 該当項目を探してスクロール＆ハイライト
+                logItems.forEach(item => {
+                    if (item.querySelector('.log-date').innerText === dateStr) {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // 微小な遅延を入れることでブラウザに「新しいクラスがついた」と認識させる
+                        setTimeout(() => {
+                            item.classList.add('highlight');
+                        }, 10);
+
+                        // 4. 数秒後に消去するタイマーを設定
+                        highlightTimeout = setTimeout(() => {
+                            item.classList.remove('highlight');
+                        }, 3000);
+                    }
+                });
+            }
+
+            const logList = document.getElementById('log-list');
+            logs.slice().reverse().forEach(l => {
+                const div = document.createElement('div');
+                div.className = 'log-item';
+                div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood} | 体調: ${l.cond}<br>${l.note}`;
+                logList.appendChild(div);
+            });
+        };
+    </script>
+</body>
+</html>
