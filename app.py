@@ -1,11 +1,8 @@
 from flask import Flask, render_template
 
-# この行で 'app' という変数を作ることが重要です
-app = Flask(__name__) 
+app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run()
-    
+# ルートの定義をすべて app.run() の前に移動しました
 @app.route('/')
 @app.route('/test')
 def index():
@@ -34,3 +31,6 @@ def karte_step3():
 @app.route('/karte/step10')
 def karte_step10():
     return render_template('karte/step10/index.html')
+
+if __name__ == '__main__':
+    app.run()
