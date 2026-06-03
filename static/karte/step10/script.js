@@ -1,3 +1,7 @@
+function renderScrollableChart(logs) {
+    const canvas = document.getElementById('myChart');
+    // ...ここにChartを描画する処理...
+}
 const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 let selectedMood = 5, selectedCond = 5;
