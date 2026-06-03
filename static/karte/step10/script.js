@@ -92,6 +92,19 @@ window.onload = () => {
                 { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b', tension: 0.3 }
             ]
         },
+        
+        // 記録を保存する関数
+function saveRecord(data) {
+    let records = JSON.parse(localStorage.getItem('myInnerNote') || '[]');
+    records.push(data);
+    localStorage.setItem('myInnerNote', JSON.stringify(records));
+}
+
+// 記録を読み込む関数
+function loadRecords() {
+    return JSON.parse(localStorage.getItem('myInnerNote') || '[]');
+}
+    
         options: {
             responsive: true,
             maintainAspectRatio: false,
