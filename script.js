@@ -1,15 +1,9 @@
-console.log("JavaScriptが読み込まれました！");　　
-
-window.onerror = function(message, source, lineno, colno, error) {
-    alert("エラー発生: " + message + "\nファイル: " + source + "\n行: " + lineno);
-};
-
 // --- 状態管理 ---
-let mood = null;
-let cond = null;
 let currentMode = parseInt(localStorage.getItem('innernote_mode')) || 10;
+let mood = (currentMode === 3) ? 2 : 5;
+let cond = (currentMode === 3) ? 2 : 5;
 
-// 初期化
+// --- ページ読み込み時の処理 ---
 window.onload = () => {
     renderButtons(currentMode);
     loadDiagnosis();
@@ -17,65 +11,45 @@ window.onload = () => {
     renderRecords();
 };
 
+// --- 診断名の表示切り替え ---
 function toggleEdit() {
-    const displayArea = document.getElementById('display-area');
-    const editArea = document.getElementById('edit-area');
-    
-    // 表示中なら編集へ切り替え
-    if (displayArea.style.display !== 'none') {
-        displayArea.style.display = 'none';
-        editArea.style.display = 'flex';
-    }
+    document.getElementById('display-area').style.display = 'none';
+    document.getElementById('edit-area').style.display = 'flex';
 }
 
 function saveDiagnosis(event) {
-    event.stopPropagation(); // ボックス自体のクリックと競合させない
+    if (event) event.stopPropagation(); // ボックス全体のクリックと競合させない
     
     const select = document.getElementById('diagnosis-select');
     const display = document.getElementById('current-diagnosis');
+    const editBtn = document.getElementById('edit-btn');
     
-    if (select.value) {
+    if (select.value !== "") {
         display.innerText = select.value;
         localStorage.setItem('diagnosis', select.value);
+        // 保存したら「変更」ボタンを表示
+        if(editBtn) editBtn.style.display = 'inline-block';
     }
     
     document.getElementById('display-area').style.display = 'flex';
     document.getElementById('edit-area').style.display = 'none';
 }
 
-function saveDiagnosis() {
-    const select = document.getElementById('diagnosis-select');
-    const display = document.getElementById('current-diagnosis');
-    const displayArea = document.getElementById('display-area');
-    const editArea = document.getElementById('edit-area');
-
-    // 選択された値を反映
-    if (select.value) {
-        display.innerText = select.value;
-        localStorage.setItem('diagnosis', select.value);
-    }
-
-    // 元に戻す
-    displayArea.style.display = 'flex';
-    editArea.style.display = 'none';
-}
-
 function loadDiagnosis() {
-    const saved = localStorage.getItem('myDiagnosis');
-    if (saved) document.getElementById('current-diagnosis').innerText = saved;
+    const saved = localStorage.getItem('diagnosis');
+    if (saved) {
+        document.getElementById('current-diagnosis').innerText = saved;
+        const editBtn = document.getElementById('edit-btn');
+        if(editBtn) editBtn.style.display = 'inline-block';
+    }
 }
 
-// ボタン切り替え機能
+// --- 以下の関数は既存のものをそのまま利用してください ---
 function setMode(level) {
     currentMode = level;
     localStorage.setItem('innernote_mode', level);
     renderButtons(level);
 }
-
-// 初期値の設定
-let currentMode = parseInt(localStorage.getItem('innernote_mode')) || 3;
-let mood = (currentMode === 3) ? 2 : 5; // 3段階なら普通(2)、10段階なら5
-let cond = (currentMode === 3) ? 2 : 5;
 
 function renderButtons(level) {
     const area = document.getElementById('input-area');
@@ -100,7 +74,8 @@ function createBtn(val, type, label, isActive) {
     const btn = document.createElement('button');
     btn.className = `btn-circle ${type} ${isActive ? 'active' : ''}`;
     btn.innerText = label;
-    btn.onclick = () => {
+    btn.onclick = (e) => {
+        e.stopPropagation();
         if(type === 'mood') mood = val; else cond = val;
         const parent = btn.parentElement;
         parent.querySelectorAll('.btn-circle').forEach(b => b.classList.remove('active'));
@@ -109,77 +84,4 @@ function createBtn(val, type, label, isActive) {
     return btn;
 }
 
-function saveRecord() {
-    // 既存の記録処理...
-    
-    // 記録した瞬間に「変更ボタン」を表示する
-    document.getElementById('edit-btn').style.display = 'inline-block';
-}
-
-function saveDiagnosis() {
-    const select = document.getElementById('diagnosis-select');
-    const display = document.getElementById('current-diagnosis');
-    const editBtn = document.getElementById('edit-btn');
-    
-    if (select.value !== "") {
-        display.innerText = select.value;
-        localStorage.setItem('diagnosis', select.value);
-        
-        // 初めて診断名が保存されたら、変更ボタンを表示する
-        editBtn.style.display = 'inline-block';
-    }
-    
-    // 表示の切り替え
-    document.getElementById('display-area').style.display = 'flex';
-    document.getElementById('edit-area').style.display = 'none';
-}
-
-// ページ読み込み時に、もし既に保存済みの診断名があればボタンを表示しておく
-window.onload = function() {
-    const savedDiagnosis = localStorage.getItem('diagnosis');
-    if (savedDiagnosis) {
-        document.getElementById('current-diagnosis').innerText = savedDiagnosis;
-        document.getElementById('edit-btn').style.display = 'inline-block';
-    }
-};
-
-// 記録一覧表示
-function renderRecords() {
-    const data = JSON.parse(localStorage.getItem('innernote_data') || '[]');
-    const list = document.getElementById('recent-records');
-    list.innerHTML = data.slice().reverse().map(item => `
-        <div style="border-bottom:1px solid #eee; padding:10px;">
-            <small>${new Date(item.timestamp).toLocaleString()}</small>
-            <p>気分: ${item.mood} / 体調: ${item.cond}</p>
-            <p>${item.memo}</p>
-        </div>
-    `).join('');
-}
-
-// グラフ描画
-let chart = null;
-function updateChart() {
-    const data = JSON.parse(localStorage.getItem('innernote_data') || '[]');
-    const ctx = document.getElementById('myChart').getContext('2d');
-    
-    if(chart) chart.destroy();
-    chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: data.map(d => new Date(d.timestamp).toLocaleDateString()),
-            datasets: [
-                { label: '気分', data: data.map(d => d.mood), borderColor: '#3b82f6' },
-                { label: '体調', data: data.map(d => d.cond), borderColor: '#f59e0b' }
-            ]
-        }
-    });
-}
-
-// テスト用コード
-function toggleEdit() {
-    alert("ボタンが押されました！"); // ボタンが押されたら画面に通知が出るはず
-    const displayArea = document.getElementById('display-area');
-    const editArea = document.getElementById('edit-area');
-    displayArea.style.display = 'none';
-    editArea.style.display = 'flex';
-}
+// 他の saveRecord, renderRecords, updateChart 等はそのまま残してください
