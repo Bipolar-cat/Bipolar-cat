@@ -7,45 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="container">
-    <h1>InnerNote</h1>
-    <p>**気分と調子の変化を記録**</p>
-
-    <div class="diagnosis-box" id="diagnosis-container">
-        <div id="display-area">
-            <span>主な診断名: </span>
-            <span id="current-diagnosis" style="font-weight: bold; color: #5C6BC0;">未選択</span>
-            <button onclick="toggleEdit()" class="edit-btn">変更</button>
-        </div>
-        <div id="edit-area" style="display: none;">
-            <select id="diagnosis-select">
-                <option value="">-- 診断名を選択 --</option>
-                <option value="双極症">双極症</option>
-                <option value="うつ病">うつ病</option>
-                <option value="適応障害">適応障害</option>
-                <option value="その他">その他</option>
-            </select>
-            <button onclick="saveDiagnosis()">保存</button>
-        </div>
+    <div class="container">
+        <h1>InnerNote</h1>
+        <p>気分と調子の変化を記録</p>
+        <div id="content">正常に読み込まれています</div>
     </div>
-
-    <div class="mode-selector">
-        <button onclick="setMode(3)">3段階</button>
-        <button onclick="setMode(10)">10段階</button>
-    </div>
-
-    <div id="input-area"></div>
-    <textarea id="memo" placeholder="今の気持ちをメモ..."></textarea>
-    <button id="record-btn" onclick="saveRecord()">記録する</button>
-
-    <canvas id="myChart"></canvas>
-    <button onclick="generateSummary()">summary（一定期間まとめ）</button>
-    
-    <div id="recent-records"></div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
