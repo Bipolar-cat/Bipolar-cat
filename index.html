@@ -13,12 +13,12 @@
         <p>**気分と調子の変化を記録**</p>
 
 <div class="diagnosis-box" id="diagnosis-container">
-    <div id="display-area">
+    <div id="display-area" style="display: flex; justify-content: space-between; align-items: center;">
         <span>主な診断名: <span id="current-diagnosis">未選択</span></span>
         <button id="edit-btn" onclick="toggleEdit()" class="edit-btn" style="display: none;">変更</button>
     </div>
     
-    <div id="edit-area" style="display: none;">
+    <div id="edit-area" style="display: none; justify-content: space-between; align-items: center;">
         <select id="diagnosis-select">
             <option value="">-- 診断名を選択 --</option>
             <option value="双極症">双極症</option>
