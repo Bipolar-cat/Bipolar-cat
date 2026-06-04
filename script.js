@@ -58,3 +58,8 @@ function updateDiagnosisUI() {
         document.getElementById('diagnosis-text').innerText = "診断名: " + saved;
     }
 }
+
+window.onload = () => {
+    // ...他の初期化処理
+    updateDiagnosisUI();
+};
