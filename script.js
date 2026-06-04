@@ -49,27 +49,36 @@ function setMode(level) {
     renderButtons(level);
 }
 
+// 初期値の設定
+let currentMode = parseInt(localStorage.getItem('innernote_mode')) || 3;
+let mood = (currentMode === 3) ? 2 : 5; // 3段階なら普通(2)、10段階なら5
+let cond = (currentMode === 3) ? 2 : 5;
+
 function renderButtons(level) {
     const area = document.getElementById('input-area');
-    area.innerHTML = `<h3>気分 (1-${level})</h3><div class="scroll-wrapper"><div class="btn-group-circle" id="mood-btns"></div></div>` +
-                     `<h3>体調 (1-${level})</h3><div class="scroll-wrapper"><div class="btn-group-circle" id="cond-btns"></div></div>`;
-    
+    const moodLabels = level === 3 ? ["低い", "普通", "良い"] : Array.from({length: 10}, (_, i) => i + 1);
+    const condLabels = level === 3 ? ["悪い", "普通", "良い"] : Array.from({length: 10}, (_, i) => i + 1);
+
+    area.innerHTML = `
+        <h3>今の気分は？</h3><div class="scroll-wrapper"><div class="btn-group-circle" id="mood-btns"></div></div>
+        <h3>体の調子は？</h3><div class="scroll-wrapper"><div class="btn-group-circle" id="cond-btns"></div></div>
+    `;
+
     const moodBtns = document.getElementById('mood-btns');
     const condBtns = document.getElementById('cond-btns');
 
     for (let i = 1; i <= level; i++) {
-        moodBtns.appendChild(createBtn(i, 'mood'));
-        condBtns.appendChild(createBtn(i, 'cond'));
+        moodBtns.appendChild(createBtn(i, 'mood', moodLabels[i-1], mood === i));
+        condBtns.appendChild(createBtn(i, 'cond', condLabels[i-1], cond === i));
     }
 }
 
-function createBtn(val, type) {
+function createBtn(val, type, label, isActive) {
     const btn = document.createElement('button');
-    btn.className = 'btn-circle';
-    btn.innerText = val;
+    btn.className = `btn-circle ${type} ${isActive ? 'active' : ''}`;
+    btn.innerText = label;
     btn.onclick = () => {
         if(type === 'mood') mood = val; else cond = val;
-        // アクティブ表示の更新
         const parent = btn.parentElement;
         parent.querySelectorAll('.btn-circle').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
