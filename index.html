@@ -12,15 +12,22 @@
         <h1>InnerNote</h1>
         <p>気分と調子の変化を記録</p>
         
-      <div class="diagnosis-container">
-    <select id="diagnosis-select" onchange="saveDiagnosis(this.value)">
-        <option value="">主な診断名を選択</option>
-        <option value="うつ病">うつ病</option>
-        <option value="双極症">双極症</option>
-        <option value="適応障害">適応障害</option>
-        <option value="その他">その他</option>
-    </select>
-      </div>
+    <div class="diagnosis-area" id="diagnosis-container">
+    <div id="diagnosis-display" style="display: none; justify-content: space-between; align-items: center; background: #f5f5f5; padding: 10px; border-radius: 8px;">
+        <span id="diagnosis-label">主な診断名: 未選択</span>
+        <button class="change-btn" onclick="toggleEdit(true)">変更</button>
+    </div>
+
+    <div id="diagnosis-edit" style="display: block;">
+        <select id="diagnosis-select" style="width: 100%; padding: 10px; border-radius: 8px;" onchange="saveAndLockDiagnosis()">
+            <option value="">主な診断名を選択</option>
+            <option value="うつ病">うつ病</option>
+            <option value="双極症">双極症</option>
+            <option value="適応障害">適応障害</option>
+            <option value="その他">その他</option>
+        </select>
+    </div>
+    </div>
 
         <div class="mode-selector">
             <button onclick="setMode(3)">3段階</button>
