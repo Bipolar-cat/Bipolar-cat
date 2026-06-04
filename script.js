@@ -16,28 +16,33 @@ window.onload = () => {
     renderRecords();
 };
 
-// --- 診断名の表示切り替え ---
+// 編集エリアの表示切り替え
 function toggleEdit() {
-    document.getElementById('display-area').style.display = 'none';
-    document.getElementById('edit-area').style.display = 'flex';
+    const displayArea = document.getElementById('display-area');
+    const editArea = document.getElementById('edit-area');
+    
+    // 表示中なら編集へ切り替え（あるいはその逆）
+    if (editArea.style.display === 'none') {
+        displayArea.style.display = 'none';
+        editArea.style.display = 'flex';
+    }
 }
 
-function saveDiagnosis(event) {
-    if (event) event.stopPropagation(); // ボックス全体のクリックと競合させない
-    
+// 診断名の保存処理
+function saveDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const display = document.getElementById('current-diagnosis');
-    const editBtn = document.getElementById('edit-btn');
-    
-    if (select.value !== "") {
+    const displayArea = document.getElementById('display-area');
+    const editArea = document.getElementById('edit-area');
+
+    if (select.value) {
         display.innerText = select.value;
         localStorage.setItem('diagnosis', select.value);
-        // 保存したら「変更」ボタンを表示
-        if(editBtn) editBtn.style.display = 'inline-block';
     }
-    
-    document.getElementById('display-area').style.display = 'flex';
-    document.getElementById('edit-area').style.display = 'none';
+
+    // 表示を戻す
+    displayArea.style.display = 'block';
+    editArea.style.display = 'none';
 }
 
 function loadDiagnosis() {
