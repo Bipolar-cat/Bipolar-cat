@@ -63,7 +63,3 @@ window.onload = () => {
     // ...他の初期化処理
     updateDiagnosisUI();
 };
-
-// saveData()内の記述例
-const diagnosis = localStorage.getItem('innernote_saved_diagnosis') || "未設定";
-logs.push({ ..., diagnosis: diagnosis });
