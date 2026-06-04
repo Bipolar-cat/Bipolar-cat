@@ -14,20 +14,21 @@
         <h1>InnerNote</h1>
         <p>**気分と調子の変化を記録**</p>
 
-<div class="diagnosis-box" id="diagnosis-container" onclick="openDiagnosis()">
-    <!-- 普段表示されているテキスト -->
-    <div id="display-text">
-        主な診断名: <span id="current-diagnosis">未選択</span>
+<div class="diagnosis-area">
+    <div id="diagnosis-select-container">
+        <select id="diagnosis-select" style="width: 100%; padding: 10px; border-radius: 8px;" onchange="lockDiagnosis()">
+            <option value="">主な診断名を選択</option>
+            <option value="うつ病">うつ病</option>
+            <option value="双極症">双極症</option>
+            <option value="適応障害">適応障害</option>
+            <option value="その他">その他</option>
+        </select>
     </div>
-
-    <!-- タップ時に制御するプルダウン（普段は非表示） -->
-    <select id="diagnosis-select" style="display:none;" onchange="saveDiagnosis(this)">
-        <option value="">-- 診断名を選択 --</option>
-        <option value="双極症">双極症</option>
-        <option value="うつ病">うつ病</option>
-        <option value="適応障害">適応障害</option>
-        <option value="その他">その他</option>
-    </select>
+    <div id="diagnosis-fixed-container" style="display: none; background: #efefef; padding: 10px; border-radius: 8px; justify-content: space-between; align-items: center;">
+        <span id="diagnosis-text" style="font-weight: bold;"></span>
+        <button onclick="unlockDiagnosis()" style="border:none; background:none; color:blue;">変更</button>
+    </div>
+</div>
     
     <!-- 「その他」用入力欄（普段は非表示） -->
     <input type="text" id="other-input" style="display:none;" placeholder="診断名を入力" onblur="saveOther(this)">
