@@ -1,61 +1,32 @@
-// --- 初期設定とエラーハンドリング ---
-window.onerror = function(message, source, lineno, colno, error) {
-    console.error("エラー発生: " + message + " (行: " + lineno + ")");
-    return true; 
-};
+// 「その他」が選択されたら入力欄を表示
+function checkOther(select) {
+    const otherInput = document.getElementById('other-diagnosis');
+    otherInput.style.display = (select.value === "その他") ? "block" : "none";
+}
 
-// 診断名切り替え
+// 編集の切り替え
 function toggleEdit() {
     const displayArea = document.getElementById('display-area');
     const editArea = document.getElementById('edit-area');
-    
-    // 表示中なら編集へ、編集中なら表示へ
-    if (displayArea.style.display !== 'none') {
-        displayArea.style.display = 'none';
-        editArea.style.display = 'flex';
-    } else {
-        displayArea.style.display = 'flex';
-        editArea.style.display = 'none';
-    }
+    displayArea.style.display = (displayArea.style.display === 'none') ? 'flex' : 'none';
+    editArea.style.display = (editArea.style.display === 'none') ? 'flex' : 'none';
 }
 
-// 診断名保存
+// 診断名の保存
 function saveDiagnosis() {
     const select = document.getElementById('diagnosis-select');
+    const otherInput = document.getElementById('other-diagnosis');
     const display = document.getElementById('current-diagnosis');
     
-    if (select.value) {
-        display.innerText = select.value;
-        localStorage.setItem('diagnosis', select.value);
+    let valueToSave = select.value;
+    if (select.value === "その他") {
+        valueToSave = otherInput.value || "その他";
+    }
+
+    if (valueToSave) {
+        display.innerText = valueToSave;
+        localStorage.setItem('diagnosis', valueToSave);
     }
     
-    document.getElementById('display-area').style.display = 'flex';
-    document.getElementById('edit-area').style.display = 'none';
+    toggleEdit(); // 保存後に元の表示に戻す
 }
-
-// エラー回避用：グラフがないページでも動くようにする
-function updateChart() {
-    const ctx = document.getElementById('myChart');
-    if (!ctx) return; // グラフがなければ処理を終了
-    // ...グラフ描画処理
-}
-
-function renderRecords() {
-    console.log("記録一覧を表示します");
-}
-
-function loadDiagnosis() {
-    const saved = localStorage.getItem('diagnosis');
-    if (saved) {
-        document.getElementById('current-diagnosis').innerText = saved;
-    }
-}
-
-// --- ページ読み込み時に実行 ---
-window.onload = () => {
-    // 関数がすべて定義された後に呼び出す
-    if (typeof renderButtons === 'function') renderButtons(10);
-    loadDiagnosis();
-    updateChart();
-    renderRecords();
-};
