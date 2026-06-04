@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>InnerNote</title>
-</head>
-<body>
-<div class="container">
+    <div class="container">
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
@@ -24,27 +15,31 @@
             <option value="発達障害">発達障害</option>
             <option value="その他">その他</option>
         </select>
- 
-     </div>
+    </div>
 
     <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
         <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
         <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
     </div>
-</div>
+        </div>
 
         <div class="input-section">
-            <label class="label">今の気分？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="mood-btns" class="btn-group-circle"></div>
+            <label class="label">今の気分は？</label>
+            <div id="mood-btns" class="btn-group">
+                <button onclick="setVal('mood', 1, this)">低い</button>
+                <button onclick="setVal('mood', 2, this)" class="active">普通</button>
+                <button onclick="setVal('mood', 3, this)">良い</button>
             </div>
 
-            <label class="label">体の調子？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="cond-btns" class="btn-group-circle"></div>
+            <label class="label">体の調子は？</label>
+            <div id="cond-btns" class="btn-group">
+                <button onclick="setVal('cond', 1, this)">悪い</button>
+                <button onclick="setVal('cond', 2, this)" class="active">普通</button>
+                <button onclick="setVal('cond', 3, this)">良い</button>
             </div>
 
             <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+            
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
@@ -54,17 +49,12 @@
 
         <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
-            <div id="summary-ts">前回まとめ作成：なし</div>
+            <div id="summary-ts" class="summary-ts">前回まとめ作成：なし</div>
             
-            <div id="summary-card">
+            <div id="summary-card" class="summary-card">
                 <span class="report-header">【一定期間まとめレポート】</span>
                 <div id="summary-content"></div>
             </div>
         </div>
 
-        <div class="log-title">最近の記録</div>
-        <div id="log-list" class="log-list"></div>
-    </div>
     <script src="script.js"></script>
-</body>
-</html>
