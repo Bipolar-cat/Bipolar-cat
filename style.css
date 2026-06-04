@@ -52,6 +52,13 @@ h1 {
     align-items: center;
 }
 
+#edit-area {
+    display: flex;
+    justify-content: center; /* 中央に寄せる */
+    align-items: center;
+    gap: 8px; /* 要素の間隔を少し詰める */
+}
+
 #edit-area select, #edit-area button {
     padding: 5px 10px;
     border-radius: 5px;
