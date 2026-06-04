@@ -13,20 +13,22 @@
         <p>**気分と調子の変化を記録**</p>
         
         <div class="diagnosis-box" id="diagnosis-container">
-            <div id="display-area">
-                <span>主な診断名: </span>
-                <span id="current-diagnosis">未選択</span>
-                <button onclick="toggleEdit()">変更</button>
-            </div>
-            <div id="edit-area" style="display: none;">
-                <select id="diagnosis-select">
-                    <option value="">-- 診断名を選択 --</option>
-                    <option value="双極症">双極症</option>
-                    <option value="うつ病">うつ病</option>
-                    <option value="適応障害">適応障害</option>
-                </select>
-                <button onclick="saveDiagnosis()">保存</button>
-            </div>
+    <div id="display-area">
+        <span>主な診断名: </span>
+        <span id="current-diagnosis" style="font-weight: bold;">未選択</span>
+        <button onclick="toggleEdit()" class="edit-btn">変更</button>
+    </div>
+
+    <div id="edit-area" style="display: none;">
+        <select id="diagnosis-select">
+            <option value="">-- 診断名を選択 --</option>
+            <option value="双極症">双極症</option>
+            <option value="うつ病">うつ病</option>
+            <option value="適応障害">適応障害</option>
+            <option value="その他">その他</option>
+        </select>
+        <button onclick="saveDiagnosis()">保存</button>
+    </div>
         </div>
 
         <div class="mode-selector">
