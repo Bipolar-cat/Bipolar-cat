@@ -16,12 +16,13 @@ window.onload = () => {
 };
 
 function toggleEdit() {
+    // 要素を取得
     const displayArea = document.getElementById('display-area');
     const editArea = document.getElementById('edit-area');
-    
-    // 表示と非表示を切り替え
+
+    // 表示を切り替え
     displayArea.style.display = 'none';
-    editArea.style.display = 'flex';
+    editArea.style.display = 'flex'; // 編集エリアを表示
 }
 
 function saveDiagnosis() {
@@ -29,13 +30,14 @@ function saveDiagnosis() {
     const display = document.getElementById('current-diagnosis');
     const displayArea = document.getElementById('display-area');
     const editArea = document.getElementById('edit-area');
-    
+
+    // 選択された値を反映
     if (select.value) {
         display.innerText = select.value;
         localStorage.setItem('diagnosis', select.value);
     }
-    
-    // 元の表示に戻す
+
+    // 元に戻す
     displayArea.style.display = 'flex';
     editArea.style.display = 'none';
 }
