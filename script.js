@@ -16,33 +16,34 @@ window.onload = () => {
     renderRecords();
 };
 
-// 編集エリアの表示切り替え
+// グレーボックス全体をタップして切り替える
 function toggleEdit() {
     const displayArea = document.getElementById('display-area');
     const editArea = document.getElementById('edit-area');
     
-    // 表示中なら編集へ切り替え（あるいはその逆）
+    // 表示中なら編集へ、編集中なら表示へ切り替え
     if (editArea.style.display === 'none') {
         displayArea.style.display = 'none';
         editArea.style.display = 'flex';
+    } else {
+        displayArea.style.display = 'block';
+        editArea.style.display = 'none';
     }
 }
 
-// 診断名の保存処理
+// 選択して保存する
 function saveDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const display = document.getElementById('current-diagnosis');
-    const displayArea = document.getElementById('display-area');
-    const editArea = document.getElementById('edit-area');
-
+    
     if (select.value) {
         display.innerText = select.value;
         localStorage.setItem('diagnosis', select.value);
     }
-
-    // 表示を戻す
-    displayArea.style.display = 'block';
-    editArea.style.display = 'none';
+    
+    // 表示を元に戻す
+    document.getElementById('display-area').style.display = 'block';
+    document.getElementById('edit-area').style.display = 'none';
 }
 
 function loadDiagnosis() {
