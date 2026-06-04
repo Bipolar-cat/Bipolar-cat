@@ -102,14 +102,27 @@ function createBtn(val, type, label, isActive) {
     return btn;
 }
 
-// 記録保存
 function saveRecord() {
-    if (!mood || !cond) return alert("気分と体調を選択してください");
-    const data = JSON.parse(localStorage.getItem('innernote_data') || '[]');
-    data.push({ mood, cond, memo: document.getElementById('memo').value, timestamp: new Date().toISOString() });
-    localStorage.setItem('innernote_data', JSON.stringify(data));
-    renderRecords();
-    updateChart();
+    // 既存の記録処理...
+    
+    // 記録した瞬間に「変更ボタン」を表示する
+    document.getElementById('edit-btn').style.display = 'inline-block';
+}
+
+function saveDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    const display = document.getElementById('current-diagnosis');
+    
+    if (select.value) {
+        display.innerText = select.value;
+        localStorage.setItem('diagnosis', select.value);
+        // 保存したらボタンを表示
+        document.getElementById('edit-btn').style.display = 'inline-block';
+    }
+    
+    // 表示の切り替え
+    document.getElementById('display-area').style.display = 'flex';
+    document.getElementById('edit-area').style.display = 'none';
 }
 
 // 記録一覧表示
