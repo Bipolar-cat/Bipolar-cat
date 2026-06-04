@@ -1,3 +1,7 @@
+window.onerror = function(message, source, lineno, colno, error) {
+    alert("エラー発生: " + message + "\nファイル: " + source + "\n行: " + lineno);
+};
+
 // --- 状態管理 ---
 let mood = null;
 let cond = null;
