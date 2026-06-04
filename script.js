@@ -59,7 +59,27 @@ function updateDiagnosisUI() {
     }
 }
 
+// モード切替関数
+function toggleEdit(isEdit) {
+    document.getElementById('diagnosis-display').style.display = isEdit ? 'none' : 'flex';
+    document.getElementById('diagnosis-edit').style.display = isEdit ? 'block' : 'none';
+}
+
+// 診断名を選択した時の保存とUI切り替え
+function saveAndLockDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    if (select.value) {
+        localStorage.setItem('saved_diagnosis', select.value);
+        document.getElementById('diagnosis-label').innerText = "主な診断名: " + select.value;
+        toggleEdit(false); // 表示モードへ
+    }
+}
+
+// ページ読み込み時に状態を復元
 window.onload = () => {
-    // ...他の初期化処理
-    updateDiagnosisUI();
+    const saved = localStorage.getItem('saved_diagnosis');
+    if (saved) {
+        document.getElementById('diagnosis-label').innerText = "主な診断名: " + saved;
+        toggleEdit(false); // 保存済みなら表示モードから開始
+    }
 };
