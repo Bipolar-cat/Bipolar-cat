@@ -34,3 +34,27 @@ function updateLabel(val) {
     document.getElementById('diagnosis-select').style.display = 'none';
     document.getElementById('other-input').style.display = 'none';
 }
+
+// 診断名をロック（保存）する
+function lockDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    if(!select.value) return;
+    localStorage.setItem('innernote_saved_diagnosis', select.value);
+    updateDiagnosisUI();
+}
+
+// 変更ボタンでロックを解除する
+function unlockDiagnosis() {
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
+}
+
+// UIの状態を同期させる（初期読み込み時にも呼び出す）
+function updateDiagnosisUI() {
+    const saved = localStorage.getItem('innernote_saved_diagnosis');
+    if(saved) {
+        document.getElementById('diagnosis-select-container').style.display = 'none';
+        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+        document.getElementById('diagnosis-text').innerText = "診断名: " + saved;
+    }
+}
