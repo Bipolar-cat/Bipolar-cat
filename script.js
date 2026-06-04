@@ -19,12 +19,10 @@ function toggleEdit() {
     const display = document.getElementById('display-area');
     const edit = document.getElementById('edit-area');
     
+    // 表示状態を反転させる
     if (edit.style.display === 'none') {
         display.style.display = 'none';
-        edit.style.display = 'block';
-        // 現在の診断名をプルダウンの初期値にセットする
-        const current = document.getElementById('current-diagnosis').innerText;
-        document.getElementById('diagnosis-select').value = (current === "未選択") ? "" : current;
+        edit.style.display = 'flex'; // blockではなくflexにするとCSSが適用されやすい
     } else {
         display.style.display = 'block';
         edit.style.display = 'none';
