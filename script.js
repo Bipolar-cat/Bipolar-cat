@@ -112,18 +112,29 @@ function saveRecord() {
 function saveDiagnosis() {
     const select = document.getElementById('diagnosis-select');
     const display = document.getElementById('current-diagnosis');
+    const editBtn = document.getElementById('edit-btn');
     
-    if (select.value) {
+    if (select.value !== "") {
         display.innerText = select.value;
         localStorage.setItem('diagnosis', select.value);
-        // 保存したらボタンを表示
-        document.getElementById('edit-btn').style.display = 'inline-block';
+        
+        // 初めて診断名が保存されたら、変更ボタンを表示する
+        editBtn.style.display = 'inline-block';
     }
     
     // 表示の切り替え
     document.getElementById('display-area').style.display = 'flex';
     document.getElementById('edit-area').style.display = 'none';
 }
+
+// ページ読み込み時に、もし既に保存済みの診断名があればボタンを表示しておく
+window.onload = function() {
+    const savedDiagnosis = localStorage.getItem('diagnosis');
+    if (savedDiagnosis) {
+        document.getElementById('current-diagnosis').innerText = savedDiagnosis;
+        document.getElementById('edit-btn').style.display = 'inline-block';
+    }
+};
 
 // 記録一覧表示
 function renderRecords() {
