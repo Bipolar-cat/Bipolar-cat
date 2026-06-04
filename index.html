@@ -14,12 +14,13 @@
         <h1>InnerNote</h1>
         <p>**気分と調子の変化を記録**</p>
 
-<div class="diagnosis-box" id="diagnosis-container" onclick="toggleEdit()">
-    <div id="display-area">
-        <span id="label-text">主な診断名: <span id="current-diagnosis">未選択</span></span>
+<div class="diagnosis-box" id="diagnosis-container">
+    <div id="display-area" onclick="toggleEdit()">
+        <span>主な診断名: <span id="current-diagnosis">未選択</span></span>
+        <button id="edit-btn" style="display:none;" onclick="toggleEdit()">変更</button>
     </div>
     
-    <div id="edit-area" style="display: none;" onclick="event.stopPropagation()">
+    <div id="edit-area" style="display: none;">
         <select id="diagnosis-select" onchange="checkOther(this)">
             <option value="">-- 診断名を選択 --</option>
             <option value="双極症">双極症</option>
@@ -27,7 +28,7 @@
             <option value="適応障害">適応障害</option>
             <option value="その他">その他</option>
         </select>
-        <input type="text" id="other-diagnosis" placeholder="診断名を入力" style="display:none; margin-top:5px;">
+        <input type="text" id="other-diagnosis" placeholder="診断名を入力" style="display:none;">
         <button onclick="saveDiagnosis()">保存</button>
     </div>
 </div>
