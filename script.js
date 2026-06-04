@@ -1,3 +1,8 @@
+window.onerror = function(message, source, lineno, colno, error) {
+    alert("【エラー内容】\n" + message + "\n行番号: " + lineno);
+    return true; // ブラウザのデフォルトのエラーを抑制
+};
+
 // --- 状態管理 ---
 let currentMode = parseInt(localStorage.getItem('innernote_mode')) || 10;
 let mood = (currentMode === 3) ? 2 : 5;
