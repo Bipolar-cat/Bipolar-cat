@@ -4,13 +4,40 @@ window.onerror = function(message, source, lineno, colno, error) {
     return true; 
 };
 
-// 必要な関数を先に定義する
-function updateChart() {
-    const canvas = document.getElementById('myChart');
-    if (!canvas) return; // キャンバスがなければ何もしない
+// 診断名切り替え
+function toggleEdit() {
+    const displayArea = document.getElementById('display-area');
+    const editArea = document.getElementById('edit-area');
     
-    // ここにグラフ描画の処理を書く
-    console.log("グラフを更新します");
+    // 表示中なら編集へ、編集中なら表示へ
+    if (displayArea.style.display !== 'none') {
+        displayArea.style.display = 'none';
+        editArea.style.display = 'flex';
+    } else {
+        displayArea.style.display = 'flex';
+        editArea.style.display = 'none';
+    }
+}
+
+// 診断名保存
+function saveDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    const display = document.getElementById('current-diagnosis');
+    
+    if (select.value) {
+        display.innerText = select.value;
+        localStorage.setItem('diagnosis', select.value);
+    }
+    
+    document.getElementById('display-area').style.display = 'flex';
+    document.getElementById('edit-area').style.display = 'none';
+}
+
+// エラー回避用：グラフがないページでも動くようにする
+function updateChart() {
+    const ctx = document.getElementById('myChart');
+    if (!ctx) return; // グラフがなければ処理を終了
+    // ...グラフ描画処理
 }
 
 function renderRecords() {
