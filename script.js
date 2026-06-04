@@ -1,3 +1,5 @@
+console.log("JavaScriptが読み込まれました！");　　
+
 window.onerror = function(message, source, lineno, colno, error) {
     alert("エラー発生: " + message + "\nファイル: " + source + "\n行: " + lineno);
 };
