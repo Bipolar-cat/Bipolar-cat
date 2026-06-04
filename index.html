@@ -1,52 +1,146 @@
-<!DOCTYPE html>
+<!DOCTYPE ht<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InnerNote</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
+    <title>InnerNote - Perfect Sync</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* CSSはそのまま維持して問題ありません */
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 10px; display: flex; justify-content: center; }
+        .container { max-width: 450px; width: 100%; background: white; padding: 20px 0; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; overflow: hidden; }
+        h1 { color: #5C6BC0; font-size: 28px; margin: 5px 0 0 0; }
+        .subtitle { color: #888; font-size: 0.75rem; font-weight: bold; margin-bottom: 15px; }
+        .diagnosis-area { width: 85%; margin: 0 auto 20px auto; text-align: left; }
+        .scroll-wrapper { overflow-x: auto; white-space: nowrap; padding: 2px 0 10px 5px; -webkit-overflow-scrolling: touch; }
+        .btn-group-circle { display: inline-flex; gap: 12px; }
+        .btn-group-circle button { width: 52px; height: 52px; min-width: 52px; border-radius: 50%; border: 1px solid #e5e7eb; background: #ffffff; color: #9ca3af; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .btn-group-circle button.active { border: 2px solid #bfdbfe; color: #3b82f6; background-color: #eff6ff; font-weight: bold; }
+        textarea { width: 90%; height: 50px; margin: 5px 0 15px 0; padding: 10px 15px; border-radius: 12px; border: none; background-color: #f3f4f6; resize: none; }
+        .save-btn { width: 90%; padding: 12px; background-color: #4A90E2; color: white; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; }
+        .chart-container { width: 100%; height: 300px; padding: 20px 10px; box-sizing: border-box; }
+        .log-item { text-align: left; padding: 15px; margin: 0 20px 12px 20px; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 15px; font-size: 14px; }
+        .log-item.highlight { background-color: #fff9c4 !important; border-color: #fbc02d !important; }
+    </style>
 </head>
 <body>
-
     <div class="container">
         <h1>InnerNote</h1>
-        <p>**気分と調子の変化を記録**</p>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
 
-<div class="diagnosis-area">
-    <div id="diagnosis-select-container">
-        <select id="diagnosis-select" style="width: 100%; padding: 10px; border-radius: 8px;" onchange="lockDiagnosis()">
-            <option value="">主な診断名を選択</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="適応障害">適応障害</option>
-            <option value="その他">その他</option>
-        </select>
-    </div>
-    <div id="diagnosis-fixed-container" style="display: none; background: #efefef; padding: 10px; border-radius: 8px; justify-content: space-between; align-items: center;">
-        <span id="diagnosis-text" style="font-weight: bold;"></span>
-        <button onclick="unlockDiagnosis()" style="border:none; background:none; color:blue;">変更</button>
-    </div>
-</div>
-    
-    <!-- 「その他」用入力欄（普段は非表示） -->
-    <input type="text" id="other-input" style="display:none;" placeholder="診断名を入力" onblur="saveOther(this)">
-</div>
-
-        <div class="mode-selector">
-            <button onclick="setMode(3)">3段階</button>
-            <button onclick="setMode(10)">10段階</button>
+        <div class="diagnosis-area">
+            <div id="diagnosis-select-container">
+                <select id="diagnosis-select" style="width: 100%; padding: 10px; border-radius: 8px;">
+                    <option value="">主な診断名を選択</option>
+                    <option value="うつ病">うつ病</option>
+                    <option value="双極症">双極症</option>
+                    <option value="適応障害">適応障害</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
+            <div id="diagnosis-fixed-container" style="display: none; background: #efefef; padding: 10px; border-radius: 8px; justify-content: space-between; align-items: center;">
+                <span id="diagnosis-text" style="font-weight: bold;"></span>
+                <button onclick="unlockDiagnosis()" style="border:none; background:none; color:blue;">変更</button>
+            </div>
         </div>
 
-        <div id="input-area"></div>
-        <textarea id="memo" placeholder="今の気持ちをメモ..."></textarea>
-        <button id="record-btn" onclick="saveRecord()">記録する</button>
-        <canvas id="myChart"></canvas>
-        <div id="recent-records"></div>
+        <div id="mood-btns" class="scroll-wrapper btn-group-circle"></div>
+        <div id="cond-btns" class="scroll-wrapper btn-group-circle"></div>
+        <textarea id="note" placeholder="メモ..."></textarea>
+        <button class="save-btn" onclick="saveData()">記録する</button>
+
+        <div class="chart-container"><canvas id="myChart"></canvas></div>
+        <div id="log-list"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+    <script>
+        let selectedMood = 5, selectedCond = 5;
+        const STORAGE_KEY = 'innernote_vfinal_400_logs', DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
+
+        function lockDiagnosis() {
+            const select = document.getElementById('diagnosis-select');
+            if(!select.value) return;
+            localStorage.setItem(DIAGNOSIS_KEY, select.value);
+            updateDiagnosisUI();
+        }
+
+        function unlockDiagnosis() {
+            document.getElementById('diagnosis-select-container').style.display = 'block';
+            document.getElementById('diagnosis-fixed-container').style.display = 'none';
+        }
+
+        function updateDiagnosisUI() {
+            const saved = localStorage.getItem(DIAGNOSIS_KEY);
+            if(saved) {
+                document.getElementById('diagnosis-select-container').style.display = 'none';
+                document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+                document.getElementById('diagnosis-text').innerText = "診断名: " + saved;
+            }
+        }
+
+        function createButtons(id, type) {
+            const container = document.getElementById(id);
+            for(let i=1; i<=10; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                if(i===5) btn.className = 'active';
+                btn.onclick = function() {
+                    container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    if(type==='mood') selectedMood = i; else selectedCond = i;
+                };
+                container.appendChild(btn);
+            }
+        }
+
+        function saveData() {
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            logs.push({ ts: Date.now(), date: new Date().toLocaleString(), mood: selectedMood, cond: selectedCond, note: document.getElementById('note').value, diagnosis: localStorage.getItem(DIAGNOSIS_KEY) });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+            location.reload();
+        }
+
+        window.onload = () => {
+            createButtons('mood-btns', 'mood');
+            createButtons('cond-btns', 'cond');
+            updateDiagnosisUI();
+
+            const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: logs.map(l => l.date),
+                    datasets: [
+                        { label: '気分', data: logs.map(l => l.mood), borderColor: '#3b82f6' },
+                        { label: '体調', data: logs.map(l => l.cond), borderColor: '#f59e0b' }
+                    ]
+                },
+                options: {
+                    onClick: (e, el) => {
+                        if(el.length > 0) {
+                            const idx = el[0].index;
+                            const target = logs[idx];
+                            const elLog = document.getElementById(`log-${target.ts}`);
+                            if(elLog) {
+                                elLog.scrollIntoView({behavior:'smooth'});
+                                elLog.classList.add('highlight');
+                                setTimeout(() => elLog.classList.remove('highlight'), 2000);
+                            }
+                        }
+                    }
+                }
+            });
+
+            const list = document.getElementById('log-list');
+            logs.slice().reverse().forEach(l => {
+                const div = document.createElement('div');
+                div.className = 'log-item';
+                div.id = `log-${l.ts}`;
+                div.innerHTML = `<b>${l.date}</b><br>気分:${l.mood} 体調:${l.cond}<br>${l.note}`;
+                list.appendChild(div);
+            });
+        };
+    </script>
 </body>
 </html>
