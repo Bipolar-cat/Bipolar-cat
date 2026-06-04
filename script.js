@@ -132,3 +132,12 @@ function updateChart() {
         }
     });
 }
+
+// テスト用コード
+function toggleEdit() {
+    alert("ボタンが押されました！"); // ボタンが押されたら画面に通知が出るはず
+    const displayArea = document.getElementById('display-area');
+    const editArea = document.getElementById('edit-area');
+    displayArea.style.display = 'none';
+    editArea.style.display = 'flex';
+}
