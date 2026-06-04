@@ -15,14 +15,25 @@ window.onload = () => {
     renderRecords();
 };
 
+// 「変更」ボタンを押した時の処理
 function toggleEdit() {
-    // 要素を取得
-    const displayArea = document.getElementById('display-area');
-    const editArea = document.getElementById('edit-area');
+    document.getElementById('display-area').style.display = 'none';
+    document.getElementById('edit-area').style.display = 'flex';
+}
 
-    // 表示を切り替え
-    displayArea.style.display = 'none';
-    editArea.style.display = 'flex'; // 編集エリアを表示
+// 「保存」ボタンを押した時の処理
+function saveDiagnosis() {
+    const select = document.getElementById('diagnosis-select');
+    const displaySpan = document.getElementById('current-diagnosis');
+    
+    if (select.value !== "") {
+        displaySpan.innerText = select.value;
+        localStorage.setItem('diagnosis', select.value);
+    }
+    
+    // 表示を元に戻す
+    document.getElementById('display-area').style.display = 'flex';
+    document.getElementById('edit-area').style.display = 'none';
 }
 
 function saveDiagnosis() {
