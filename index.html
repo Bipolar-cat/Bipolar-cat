@@ -7,30 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
       <div class="app-container">
+    <div class="app-container">
     <h1>InnerNote</h1>
     <p>気分と調子の変化を記録</p>
-    <section class="section">
-        <select id="diagnosis" class="form-control">
-            <option value="">-- 診断名を選択 --</option>
+
+    <div id="diagnosis-area">
+        <select id="diagnosis-select">
+            <option value="">主な診断名を選択</option>
             <option value="うつ病">うつ病</option>
             <option value="双極症">双極症</option>
-            </select>
-    </section>
-    <section class="section">
-        <div class="button-group">
-            <button>3段階</button>
-            <button>10段階</button>
+        </select>
+    </div>
+
+    <div class="mode-select">
+        <button onclick="setMode(3)">3段階</button>
+        <button onclick="setMode(10)">10段階</button>
+    </div>
+
+    <div id="input-fields">
         </div>
-    </section>
 
-    <section class="section">
-        <textarea placeholder="今の気持ちをメモ..." class="memo-area"></textarea>
-    </section>
+    <textarea id="memo" placeholder="一言コメント"></textarea>
 
-    <section class="section">
-        <button class="save-btn">記録する</button>
-    </section>
+    <button id="save-btn" onclick="saveRecord()">記録する</button>
+
+    <div id="result-area" style="display: none;">
+        <canvas id="moodChart"></canvas>
+        <button onclick="generateSummary()">summary（一定期間まとめ）</button>
+        <div id="history-list"></div>
+    </div>
+</div>
       </div>.js"></script>
 </body>
 </html>
