@@ -59,6 +59,33 @@ function updateDiagnosisUI() {
     }
 }
 
+// 設定パネルの表示・非表示
+function toggleSetting() {
+    const panel = document.getElementById('settings-panel');
+    panel.style.display = (panel.style.display === 'none') ? 'block' : 'none';
+}
+
+// モードを保存してボタンを再生成
+function saveSettings() {
+    const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+    localStorage.setItem('selected_mode', selectedMode);
+    
+    // パネルを閉じる
+    toggleSetting();
+    
+    // ボタンの再生成（既存の関数を呼び出し）
+    renderButtons(parseInt(selectedMode));
+}
+
+// 読み込み時にも適用
+window.onload = () => {
+    const savedMode = localStorage.getItem('selected_mode') || 3;
+    renderButtons(parseInt(savedMode));
+    
+    // ラジオボタンの初期状態も合わせる
+    document.querySelector(`input[name="mode"][value="${savedMode}"]`).checked = true;
+};
+
 // ページ読み込み時に状態を復元
 window.onload = () => {
     const saved = localStorage.getItem('saved_diagnosis');
