@@ -43,7 +43,7 @@ h1 {
 
 /* プルダウンの幅を調整 */
 #diagnosis-select {
-    max-width: 150px; /* 選択肢の幅を制限 */
+    max-width: 200px; /* 選択肢の幅を制限 */
 }
 
 .diagnosis-container {
@@ -53,7 +53,7 @@ h1 {
 
 #diagnosis-select {
     width: 100%;
-    padding: 15px;
+    padding: 20px;
     background-color: #f5f5f5; /* グレーの背景 */
     border: none;
     border-radius: 12px;       /* 角を丸く */
