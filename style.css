@@ -142,3 +142,20 @@
     border-radius: 8px;
     box-sizing: border-box;
 }
+
+/* 評価ボタンのスタイル */
+.rating-group { 
+    display: flex; gap: 8px; overflow-x: auto; padding: 10px 0;
+}
+.rating-btn {
+    min-width: 52px; height: 52px; /* ご指定の52px */
+    border-radius: 50%; border: 1px solid #ccc;
+    background: white; cursor: pointer;
+}
+.rating-btn.active {
+    background: #4A90E2; color: white; border: none;
+}
+/* 3段階用：角丸四角ボタン */
+.rating-btn.square {
+    border-radius: 12px;
+}
