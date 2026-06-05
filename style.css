@@ -115,16 +115,10 @@
     margin-bottom: 20px;
 }
 
-/* 設定バー：診断名を左寄せ、設定ボタンを右寄せにする工夫 */
 .settings-bar {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* これで両端に配置される */
-    background: #f4f4f9;
-    padding: 10px 15px;
-    border-radius: 8px;
-    box-sizing: border-box; /* パディングを幅に含める */
+    width: 90%; /* コンテナいっぱいにせず少し余白を持たせると洗練されます */
+    margin: 0 auto 20px auto; /* 中央寄せ */
+    /* ...既存の設定... */
 }
 
 /* ⚙ 設定ボタン */
