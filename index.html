@@ -8,44 +8,39 @@
 </head>
 <body>
     
-    <div class="app-container">
+<div class="app-container">
     <h1>InnerNote</h1>
-    <p class="subtitle">**気分と調子の変化を記録**</p>
-    </div>
+    <p class="subtitle">気分と調子の変化を記録</p>
 
-    <div id="diagnosis-area">
+    <div id="diagnosis-area" class="section">
         <select id="diagnosis-select">
             <option value="">主な診断名を選択</option>
             <option value="未診断（健常者）">未診断（健常者）</option>
             <option value="うつ病">うつ病</option>
             <option value="双極症">双極症</option>
             <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
             <option value="その他">その他</option>
         </select>
     </div>
-    </div>
 
-    <div class="mode-select">
+    <div class="mode-select section">
         <button onclick="setMode(3)">3段階</button>
         <button onclick="setMode(10)">10段階</button>
     </div>
 
-    <div id="input-fields">
-        </div>
+    <div id="input-fields" class="section"></div>
 
     <textarea id="memo" placeholder="一言コメント"></textarea>
 
     <button id="save-btn" onclick="saveRecord()">記録する</button>
 
-    <div id="result-area" style="display: none;">
+    <div id="result-area" class="section" style="display: none;">
         <canvas id="moodChart"></canvas>
         <button onclick="generateSummary()">summary（一定期間まとめ）</button>
         <div id="history-list"></div>
     </div>
 </div>
-<script src="script.js"></script> 
+
+<script src="script.js"></script>
 </body>
 </html>
