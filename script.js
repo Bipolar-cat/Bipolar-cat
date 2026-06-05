@@ -65,15 +65,18 @@ function toggleSetting() {
     panel.style.display = (panel.style.display === 'none') ? 'block' : 'none';
 }
 
-// モードを保存してボタンを再生成
 function saveSettings() {
+    // 1. 診断名の保存
+    const select = document.getElementById('diagnosis-select');
+    localStorage.setItem('saved_diagnosis', select.value);
+    document.getElementById('diagnosis-label').innerText = "診断名: " + select.value;
+    
+    // 2. モードの保存
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
     localStorage.setItem('selected_mode', selectedMode);
     
-    // パネルを閉じる
+    // 3. UIの更新とパネルを閉じる
     toggleSetting();
-    
-    // ボタンの再生成（既存の関数を呼び出し）
     renderButtons(parseInt(selectedMode));
 }
 
