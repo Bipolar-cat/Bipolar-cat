@@ -1,26 +1,34 @@
-     /* 全体のベース */
+/* 全体を中央寄せにする */
 body {
-    background-color: #ffffff; /* 白背景 */
-    font-family: sans-serif;
-    color: #333;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #ffffff; /* 白背景 */
 }
 
+/* コンテナの設定 */
 .app-container {
-    width: 100%;
+    width: 90%;
     max-width: 400px;
-    text-align: center;
+    text-align: center; /* 中身をすべて中央揃え */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 要素間の余白 */
 }
 
-/* ボタンやフォームの共通デザイン */
-button, select, textarea {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 12px;
+/* 記録ボタンを一番下に配置し、大きく見せる */
+#save-btn {
+    margin-top: auto; /* これでボタンが一番下に押しやられます */
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
     border-radius: 8px;
-    border: 1px solid #ddd;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 /* 記録ボタンを目立たせる */
