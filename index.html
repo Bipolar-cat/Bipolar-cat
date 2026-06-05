@@ -34,9 +34,16 @@
     </div>
 </div>
 
-    <div class="mode-selector">
-    <button onclick="setMode(3)" class="mode-btn">3段階</button>
-    <button onclick="setMode(10)" class="mode-btn">10段階</button>
+   <div id="mode-container" style="text-align: center; margin: 15px 0; padding: 10px; border: 1px solid #eee; border-radius: 8px;">
+    <div id="mode-display">
+        現在のモード: <span id="current-mode-label">3段階</span>
+        <button onclick="toggleModeEdit()" style="margin-left: 10px; font-size: 0.8rem; cursor: pointer;">変更</button>
+    </div>
+    
+    <div id="mode-edit" style="display: none;">
+        <button onclick="setMode(3)">3段階に変更</button>
+        <button onclick="setMode(10)">10段階に変更</button>
+    </div>
 </div>
 
 <div id="dynamic-inputs"></div>
