@@ -8,16 +8,25 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-<div class="app-container">
-    <h1>InnerNote</h1>
-    <p class="subtitle">**気分と調子の変化を記録**</p>
     
-    <div id="settings-header" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; background: #f4f4f9; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+<div class="app-container">
+    <div class="header-area">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
+    </div>
+    
+    <div class="settings-bar">
         <span id="diagnosis-label">診断名: 未設定</span>
-        <button onclick="toggleSetting()" style="background: none; border: none; color: #5C6BC0; font-weight: bold; cursor: pointer;">⚙ 設定</button>
+        <button onclick="toggleSetting()" class="settings-btn">⚙ 設定</button>
     </div>
 
-    <div id="settings-panel" style="display: none; width: 100%; margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+    <div id="settings-panel" class="settings-panel" style="display: none;">
+        </div>
+</div>
+
+ <div id="settings-panel" class="settings-panel" style="display: none;">
+        </div>
+</div>
     <p style="margin-top:0;">主な診断名を選択</p>
     <select id="diagnosis-select" style="width: 100%; padding: 8px; margin-bottom: 15px;">
         <option value="未診断（健常者）">未診断（健常者）</option>
