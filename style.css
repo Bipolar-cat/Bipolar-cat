@@ -86,3 +86,24 @@
             box-sizing: border-box;
             color: #333;
         }
+
+/* モード選択ボタン */
+.mode-selector { display: flex; gap: 10px; margin: 15px 0; }
+.mode-btn {
+    flex: 1; padding: 10px; border: 1px solid #5C6BC0;
+    background: white; color: #5C6BC0; border-radius: 8px; cursor: pointer;
+}
+
+/* 評価ボタン（横スクロール対応） */
+.rating-group { 
+    display: flex; gap: 8px; overflow-x: auto; padding: 10px 0;
+    scrollbar-width: none; /* スクロールバー非表示 */
+}
+.rating-btn {
+    min-width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid #ccc; background: white; cursor: pointer;
+}
+/* アクティブ時のスタイル（アクセント色） */
+.rating-btn.active {
+    background: #4A90E2; color: white; border: none;
+}
