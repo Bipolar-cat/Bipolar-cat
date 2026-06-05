@@ -1,5 +1,5 @@
-　　  * { box-sizing: border-box; }
-　　　body {
+    /* 全体の背景とフォント、パディングを最適化 */
+        body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
@@ -32,31 +32,6 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
-
-　　　　/* 中央寄せ */
-.header-area {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* 診断名と設定ボタンを左右に配置 */
-.settings-container {
-    display: flex;
-    justify-content: space-between; /* 診断名を左、ボタンを右へ */
-    align-items: center;
-    width: 100%;
-    padding: 10px 0;
-}
-
-/* 設定ボタンを強調しつつ右詰め */
-.settings-btn {
-    background: none;
-    border: none;
-    color: #4A90E2;
-    font-weight: bold;
-    cursor: pointer;
-    margin-left: auto; /* これにより右端に寄る */
-}
 
         /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
         .diagnosis-area {
@@ -112,75 +87,3 @@
             box-sizing: border-box;
             color: #333;
         }
-
-/* モード選択ボタン */
-.mode-selector { display: flex; gap: 10px; margin: 15px 0; }
-.mode-btn {
-    flex: 1; padding: 10px; border: 1px solid #5C6BC0;
-    background: white; color: #5C6BC0; border-radius: 8px; cursor: pointer;
-}
-
-/* 評価ボタン（横スクロール対応） */
-.rating-group { 
-    display: flex; gap: 8px; overflow-x: auto; padding: 10px 0;
-    scrollbar-width: none; /* スクロールバー非表示 */
-}
-.rating-btn {
-    min-width: 40px; height: 40px; border-radius: 50%;
-    border: 1px solid #ccc; background: white; cursor: pointer;
-}
-/* アクティブ時のスタイル（アクセント色） */
-.rating-btn.active {
-    background: #4A90E2; color: white; border: none;
-}
-
-/* 中央寄せのタイトル */
-.header-area {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.settings-bar {
-    width: 90%; /* コンテナいっぱいにせず少し余白を持たせると洗練されます */
-    margin: 0 auto 20px auto; /* 中央寄せ */
-    /* ...既存の設定... */
-}
-
-/* ⚙ 設定ボタン */
-.settings-btn {
-    background: none;
-    border: none;
-    color: #5C6BC0;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-/* 設定パネルの微調整 */
-.settings-panel {
-    width: 100%;
-    margin-top: 10px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-/* 評価ボタンのスタイル */
-.rating-group { 
-    display: flex; gap: 8px; overflow-x: auto; padding: 10px 0;
-}
-.rating-btn {
-    min-width: 52px; height: 52px; /* ご指定の52px */
-    border-radius: 50%; border: 1px solid #ccc;
-    background: white; cursor: pointer;
-}
-.rating-btn.active {
-    background: #4A90E2; color: white; border: none;
-}
-/* 3段階用：角丸四角ボタン */
-.rating-btn.square {
-    border-radius: 12px;
-}
