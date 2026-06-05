@@ -1,56 +1,25 @@
-/* 全体のベース */
 body {
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ffffff;
     display: flex;
     justify-content: center;
-    min-height: 100vh; /* 画面全体を使う */
+    background-color: #ffffff;
+    margin: 0;
 }
 
-/* コンテナ */
 .app-container {
     width: 90%;
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    padding: 20px 0;
-    gap: 15px;
+    align-items: center; /* 左右中央揃え */
+    padding: 20px;
 }
 
-/* 記録ボタン（重複を解消し、1つにまとめました） */
+/* 記録ボタンを一番下に押しやる設定 */
 #save-btn {
-    margin-top: auto; /* コンテナ内で一番下に配置 */
+    margin-top: auto; 
+    width: 100%;
     padding: 15px;
     background-color: #007bff;
     color: white;
-    font-weight: bold;
-    border: none;
     border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
 }
-
-/* --- タイトル関連 --- */
-h1 { color: #5C6BC0; font-size: 28px; margin: 5px 0 0 0; }
-.subtitle { color: #888; font-size: 0.75rem; font-weight: bold; margin-bottom: 15px; }
-
-/* --- 診断名エリア --- */
-.diagnosis-area {
-    width: 100%; /* 66.6%から変更: コンテナ幅に合わせた方が中央揃えが安定します */
-    margin: 0 auto 20px auto;
-    text-align: left;
-    box-sizing: border-box;
-}
-
-.diagnosis-fixed-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f5f5f5;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    color: #333;
-}
-/* 他のクラスはそのまま使用OKです */
