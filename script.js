@@ -66,18 +66,20 @@ function renderButtons(type) {
     console.log(type + "段階のボタンを生成しました");
 }
 
-// 1. 設定の適用と反映
 function applySettings() {
     const select = document.getElementById('diagnosis-select');
     const mode = document.querySelector('input[name="mode"]:checked').value;
-    const diag = (select.value === 'その他') ? document.getElementById('other-input').value : select.value;
+    const diag = select.value;
 
+    // 診断名を () にして保存・表示
+    const displayStr = `(${diag})`;
     localStorage.setItem('diag', diag);
     localStorage.setItem('mode', mode);
     
-    document.getElementById('diagnosis-label').innerText = "診断名: " + diag;
-    toggleSetting();
-    renderButtons(parseInt(mode));
+    document.getElementById('diagnosis-display').innerText = displayStr;
+    
+    toggleSetting(); // パネルを閉じる
+    renderButtons(parseInt(mode)); // ボタン生成
 }
 
 // 2. ボタン生成ロジック
@@ -109,3 +111,13 @@ function renderButtons(mode) {
         container.appendChild(row);
     });
 }
+
+
+// 読み込み時：カッコ付きで表示を復元
+window.onload = () => {
+    const savedDiag = localStorage.getItem('diag') || '未設定';
+    document.getElementById('diagnosis-display').innerText = `(${savedDiag})`;
+    
+    const savedMode = localStorage.getItem('mode') || 3;
+    renderButtons(parseInt(savedMode));
+};
