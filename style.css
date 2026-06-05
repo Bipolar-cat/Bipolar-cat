@@ -137,6 +137,13 @@ h1 {
     border-color: #2196F3;
 }
 
+.ten-scale-container {
+    display: flex;
+    overflow-x: auto; /* 横スクロール有効 */
+    white-space: nowrap;
+    gap: 5px;
+}
+
 /* フォームとボタン */
 textarea {
     width: 90%;
