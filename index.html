@@ -7,42 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="container">
-        <h1>InnerNote</h1>
-        <p>気分と調子の変化を記録</p>
-        
-    <div class="diagnosis-area" id="diagnosis-container">
-    <div id="diagnosis-display" style="display: none; justify-content: space-between; align-items: center; background: #f5f5f5; padding: 10px; border-radius: 8px;">
-        <span id="diagnosis-label">主な診断名: 未選択</span>
-        <button class="change-btn" onclick="toggleEdit(true)">変更</button>
-    </div>
-<option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
+      <div class="app-container">
+    <h1>InnerNote</h1>
+    <p>気分と調子の変化を記録</p>
+    <section class="section">
+        <select id="diagnosis" class="form-control">
+            <option value="">-- 診断名を選択 --</option>
             <option value="うつ病">うつ病</option>
             <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
-    </div>
- </div>
-
-        <div class="mode-selector">
-            <button onclick="setMode(3)">3段階</button>
-            <button onclick="setMode(10)">10段階</button>
+            </select>
+    </section>
+    <section class="section">
+        <div class="button-group">
+            <button>3段階</button>
+            <button>10段階</button>
         </div>
+    </section>
 
-        <div id="input-area"></div>
-        <textarea id="memo" placeholder="今の気持ちをメモ..."></textarea>
-        <button id="record-btn" onclick="saveRecord()">記録する</button>
-        <canvas id="myChart"></canvas>
-        <div id="recent-records"></div>
-    </div>
+    <section class="section">
+        <textarea placeholder="今の気持ちをメモ..." class="memo-area"></textarea>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="script.js"></script>
+    <section class="section">
+        <button class="save-btn">記録する</button>
+    </section>
+      </div>.js"></script>
 </body>
 </html>
