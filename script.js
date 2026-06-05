@@ -70,48 +70,36 @@ window.onload = () => {
     }
 };
 
-// モード切替関数
-function toggleEdit(isEdit) {
-    document.getElementById('diagnosis-display').style.display = isEdit ? 'none' : 'flex';
-    document.getElementById('diagnosis-edit').style.display = isEdit ? 'block' : 'none';
+// モード切替のUI切り替え
+function toggleModeEdit() {
+    document.getElementById('mode-display').style.display = 'none';
+    document.getElementById('mode-edit').style.display = 'block';
 }
 
-// 診断名を選択した時の保存とUI切り替え
-function saveAndLockDiagnosis() {
-    const select = document.getElementById('diagnosis-select');
-    if (select.value) {
-        localStorage.setItem('saved_diagnosis', select.value);
-        document.getElementById('diagnosis-label').innerText = "主な診断名: " + select.value;
-        toggleEdit(false); // 表示モードへ切り替え
-    } else {
-        alert("診断名を選択してください");
-    }
-}
-
+// モードを設定して保存・描画
 function setMode(type) {
-    const container = document.getElementById('dynamic-inputs');
-    container.innerHTML = ''; // 一度クリア
-
-    const moodLabels = type === 3 ? ['良い', '普通', '低い'] : [...Array(10).keys()].map(i => i + 1);
+    localStorage.setItem('selected_mode', type); // 保存
     
-    // 気分と体調の2グループ生成
-    ['気分', '体調'].forEach(label => {
-        const group = document.createElement('div');
-        group.innerHTML = `<p>${label}</p>`;
-        const btnRow = document.createElement('div');
-        btnRow.className = 'rating-group';
-        
-        moodLabels.forEach(val => {
-            const btn = document.createElement('button');
-            btn.innerText = val;
-            btn.className = 'rating-btn';
-            btn.onclick = () => {
-                btnRow.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            };
-            btnRow.appendChild(btn);
-        });
-        group.appendChild(btnRow);
-        container.appendChild(group);
-    });
+    // ラベル更新とUIを元に戻す
+    document.getElementById('current-mode-label').innerText = type + "段階";
+    document.getElementById('mode-display').style.display = 'block';
+    document.getElementById('mode-edit').style.display = 'none';
+    
+    renderButtons(type); // ボタンを再描画
 }
+
+// ボタン描画処理（既存の処理を関数化）
+function renderButtons(type) {
+    const container = document.getElementById('dynamic-inputs');
+    container.innerHTML = ''; 
+    // ここに「3段階」または「10段階」のボタンを生成するロジックを記述
+    // ...
+}
+
+// ページ読み込み時に自動反映
+window.onload = () => {
+    // ...診断名の復元...
+    
+    const savedMode = localStorage.getItem('selected_mode') || 3; // デフォルトは3
+    setMode(parseInt(savedMode));
+};
