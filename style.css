@@ -33,6 +33,31 @@
             margin-bottom: 15px;
         }
 
+　　　　/* 中央寄せ */
+.header-area {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 診断名と設定ボタンを左右に配置 */
+.settings-container {
+    display: flex;
+    justify-content: space-between; /* 診断名を左、ボタンを右へ */
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* 設定ボタンを強調しつつ右詰め */
+.settings-btn {
+    background: none;
+    border: none;
+    color: #4A90E2;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: auto; /* これにより右端に寄る */
+}
+
         /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
         .diagnosis-area {
             width: 66.6%;
