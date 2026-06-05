@@ -1,83 +1,88 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-}
+　　  body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-.app-container {
-    width: 90%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* これですべての要素が左右中央に揃います */
-    padding: 20px 0;
-    gap: 15px;
-}
+        /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 20px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
 
-.section, #diagnosis-select, .mode-select, #memo {
-    width: 100%; /* 全要素をコンテナ幅に合わせる */
-    max-width: 400px;
-}
+        h1 {
+            color: #5C6BC0;
+            font-size: 28px;
+            margin: 5px 0 0 0;
+        }
 
-h1 { color: #5C6BC0; font-size: 28px; margin: 5px 0; }
-.subtitle { color: #888; font-size: 0.8rem; margin-bottom: 10px; }
+        .subtitle {
+            color: #888;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-#diagnosis-container {
-    width: 100%;
-    margin-bottom: 20px;
-    text-align: center;
-}
+        /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
+        .diagnosis-area {
+            width: 66.6%;
+            margin: 0 auto 20px auto;
+            text-align: left;
+            box-sizing: border-box;
+        }
 
-#diagnosis-display {
-    justify-content: center;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
-}
+        .diagnosis-fixed-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #333;
+            box-sizing: border-box;
+        }
 
-#save-btn {
-    width: 100%;
-    max-width: 400px;
-    padding: 15px;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 20px;
-}
+        .change-btn {
+            background: none;
+            border: none;
+            color: #4A90E2;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+        }
 
-/* 10段階ボタン用の横スクロール調整 */
-.mode-select { display: flex; justify-content: center; gap: 10px; }
+        .select-box {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            font-size: 13px;
+            color: #333;
+            outline: none;
+            box-sizing: border-box;
+        }
 
-/* Summaryボタンのスタイル */
-.summary-btn {
-    width: 100%;
-    max-width: 400px;
-    padding: 12px;
-    background-color: #F1F8E9; /* 指定された黄緑色 */
-    color: #333;               /* 文字色は濃いグレーで読みやすく */
-    border: 1px solid #C5E1A5; /* 少し濃い緑の枠線で引き締める */
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    text-align: center;
-}
-
-/* 既存の記録ボタンとの整合性確保 */
-#save-btn {
-    background-color: #5C6BC0; /* メインカラー（青） */
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-}
+        .other-diagnosis-input {
+            display: none;
+            width: 100%;
+            margin-top: 6px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #4A90E2;
+            background-color: #fff;
+            font-size: 13px;
+            box-sizing: border-box;
+            color: #333;
+        }
