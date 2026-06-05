@@ -18,17 +18,20 @@
     </div>
 
     <div id="settings-panel" style="display: none; width: 100%; margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
-        <p style="margin-top:0;">主な診断名を選択</p>
-        <select id="diagnosis-select" style="width: 100%; padding: 8px; margin-bottom: 15px;">
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="その他">その他</option>
-        </select>
+    <p style="margin-top:0;">主な診断名を選択</p>
+    <select id="diagnosis-select" style="width: 100%; padding: 8px; margin-bottom: 15px;">
+        <option value="未診断（健常者）">未診断（健常者）</option>
+        <option value="うつ病">うつ病</option>
+        <option value="双極症">双極症</option>
+        <option value="その他">その他</option>
+    </select>
 
-        <p style="margin-top:0;">記録方式を選択</p>
-        <label><input type="radio" name="mode" value="3" checked> 3段階</label>
-        <label style="margin-left: 15px;"><input type="radio" name="mode" value="10"> 10段階</label>
+    <p style="margin-top:0;">記録方式を選択</p>
+    <label><input type="radio" name="mode" value="3" checked> 3段階</label>
+    <label style="margin-left: 15px;"><input type="radio" name="mode" value="10"> 10段階</label>
+    
+    <button onclick="saveSettings()" style="display: block; margin-top: 15px; width: 100%; padding: 10px; background: #5C6BC0; color: white; border: none; border-radius: 8px;">保存して適用</button>
+    </div>
         
         <button onclick="saveSettings()" style="display: block; margin-top: 15px; width: 100%; padding: 10px; background: #5C6BC0; color: white; border: none; border-radius: 8px;">保存して適用</button>
     </div>
