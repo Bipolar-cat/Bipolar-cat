@@ -1,8 +1,11 @@
 body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
-    margin: 0;
+    min-height: 100vh;
 }
 
 .app-container {
@@ -10,35 +13,31 @@ body {
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 左右中央揃え */
-    padding: 20px;
+    align-items: center; /* これですべての要素が左右中央に揃います */
+    padding: 20px 0;
+    gap: 15px;
 }
 
-/* 記録ボタンを一番下に押しやる設定 */
+.section, #diagnosis-select, .mode-select, #memo {
+    width: 100%; /* 全要素をコンテナ幅に合わせる */
+    max-width: 400px;
+}
+
+h1 { color: #5C6BC0; font-size: 28px; margin: 5px 0; }
+.subtitle { color: #888; font-size: 0.8rem; margin-bottom: 10px; }
+
 #save-btn {
-    margin-top: auto; 
     width: 100%;
+    max-width: 400px;
     padding: 15px;
     background-color: #007bff;
     color: white;
-    border-radius: 8px;
-}
-
-/* タイトルのスタイル */
-h1 {
-    color: #5C6BC0;
-    font-size: 28px;
-    margin: 5px 0;
-    text-align: center; /* 明示的に中央寄せ */
-    width: 100%;        /* コンテナの幅いっぱいに */
-}
-
-/* サブタイトルのスタイル */
-.subtitle {
-    color: #888;
-    font-size: 0.8rem;
     font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center; /* 明示的に中央寄せ */
-    width: 100%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
 }
+
+/* 10段階ボタン用の横スクロール調整 */
+.mode-select { display: flex; justify-content: center; gap: 10px; }
