@@ -1,51 +1,28 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>InnerNote</title>
-</head>
-<body>
-<div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
-
-       <!-- 診断名入力エリア -->
-<label for="diagnosis">主な診断名:</label>
-<input list="diagnosis-list" id="diagnosis" name="diagnosis" placeholder="診断名を選択または入力">
-
-<datalist id="diagnosis-list">
-  <option value="双極症">
-  <option value="うつ病">
-  <option value="統合失調症">
-  <option value="不安障害">
-  <option value="その他">
-</datalist>
- 
-     </div>
-
-    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
+<div class="app-container">
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
+    
+    <div class="settings-bar">
+        <span id="diagnosis-display">(未設定)</span>
+        <button onclick="toggleSetting()" class="settings-btn">⚙ 設定</button>
     </div>
+
+    <div id="settings-panel" class="settings-panel" style="display: none;">
+        <p>主な診断名を選択</p>
+        <select id="diagnosis-select">
+            <option value="未診断（健常者）">未診断（健常者）</option>
+            <option value="うつ病">うつ病</option>
+            <option value="双極症">双極症</option>
+            <option value="統合失調症">統合失調症</option>
+            <option value="その他">その他</option>
+        </select>
+        
+        <p style="margin-top:15px;">記録方式を選択</p>
+        <label><input type="radio" name="mode" value="3" checked> 3段階（簡単）</label>
+        <label style="margin-left:15px;"><input type="radio" name="mode" value="10"> 10段階（詳細）</label>
+        
+        <button onclick="applySettings()" class="save-btn">保存して適用</button>
+    </div>
+
+    <div id="dynamic-inputs"></div>
 </div>
-
-        <div class="input-section">
-            <label class="label">今の気分？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="mood-btns" class="btn-group-circle"></div>
-            </div>
-
-            <label class="label">体の調子？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="cond-btns" class="btn-group-circle"></div>
-            </div>
-
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            <button class="save-btn" onclick="saveData()">記録する</button>
-        </div>
-
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
-        </div>
