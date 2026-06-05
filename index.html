@@ -11,19 +11,17 @@
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div class="diagnosis-area" style="margin-bottom: 20px;">
-    <div id="diagnosis-select-container" style="display: block;">
-        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
+       <!-- 診断名入力エリア -->
+<label for="diagnosis">主な診断名:</label>
+<input list="diagnosis-list" id="diagnosis" name="diagnosis" placeholder="診断名を選択または入力">
+
+<datalist id="diagnosis-list">
+  <option value="双極症">
+  <option value="うつ病">
+  <option value="統合失調症">
+  <option value="不安障害">
+  <option value="その他">
+</datalist>
  
      </div>
 
