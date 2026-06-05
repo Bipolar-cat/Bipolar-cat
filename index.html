@@ -10,34 +10,34 @@
 <body>
     
 <body>
-    <div class="container">
     <div class="header-area">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
+    
+    <div style="margin-bottom: 10px;">
+        <span id="diagnosis-display" style="font-weight: bold; color: #555;">(未設定)</span>
+        <button onclick="toggleSetting()" class="settings-btn" style="margin-left: 10px;">⚙ 設定</button>
     </div>
+</div>
 
-    <div class="settings-bar">
-        <span id="diagnosis-label">診断名: 未設定</span>
-        <button onclick="toggleSetting()" class="settings-btn">⚙ 設定</button>
-    </div>
+<div id="settings-panel" style="display: none; padding: 15px; border: 1px solid #eee; border-radius: 12px; margin-bottom: 20px;">
+    <p style="margin-bottom: 10px;">診断名を選択</p>
+    <select id="diagnosis-select">
+        <option value="未診断（健常者）">未診断（健常者）</option>
+        <option value="うつ病">うつ病</option>
+        <option value="双極症">双極症</option>
+        <option value="統合失調症">統合失調症</option>
+        <option value="その他">その他</option>
+    </select>
+    
+    <p style="margin: 15px 0 10px 0;">記録方式を選択</p>
+    <label><input type="radio" name="mode" value="3" checked> 3段階（簡単）</label>
+    <label style="margin-left: 15px;"><input type="radio" name="mode" value="10"> 10段階（詳細）</label>
+    
+    <button onclick="applySettings()" style="display: block; margin-top: 15px; width: 100%; padding: 10px;">保存して適用</button>
+</div>
 
-    <div id="settings-panel" class="settings-panel" style="display: none;">
-        <p>主な診断名を選択</p>
-        <select id="diagnosis-select" onchange="checkOther(this)">
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="双極症">双極症</option>
-            <option value="うつ病">うつ病</option>
-            <option value="その他">その他</option>
-        </select>
-        <input type="text" id="other-input" placeholder="診断名を入力" style="display:none; margin-top:5px;">
-        
-        <p style="margin-top:15px;">記録方式を選択</p>
-        <label><input type="radio" name="mode" value="3" checked> 3段階（簡単）</label>
-        <label style="margin-left:15px;"><input type="radio" name="mode" value="10"> 10段階（詳細）</label>
-        
-        <button onclick="applySettings()" class="save-btn">保存して適用</button>
-    </div>
+<div id="dynamic-inputs"></div>
 
     <div id="dynamic-inputs"></div>
     </div>
