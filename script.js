@@ -1,31 +1,43 @@
-// --- 設定の適用・保存関数 ---
+// 設定の保存と画面更新を統合
 function applySettings() {
-    // 1. 診断名の取得・保存
     const select = document.getElementById('diagnosis-select');
-    const diag = select.value;
-    localStorage.setItem('diag', diag);
-    
-    // 画面表示をカッコ付きで更新
-    document.getElementById('diagnosis-display').innerText = `(${diag})`;
-
-    // 2. モードの取得・保存
     const mode = document.querySelector('input[name="mode"]:checked').value;
+    const diag = select.value;
+
+    // 保存
+    localStorage.setItem('diag', diag);
     localStorage.setItem('mode', mode);
     
-    // 3. 設定パネルを閉じる
-    toggleSetting();
+    // 表示更新
+    document.getElementById('diagnosis-display').innerText = `(${diag})`;
     
-    // 4. 評価ボタンの再描画
-    renderButtons(parseInt(mode));
+    toggleSetting(); // パネルを閉じる
+    renderButtons(parseInt(mode)); // ボタン生成
 }
 
-// --- 設定パネルの開閉 ---
+// パネルの表示切り替え
 function toggleSetting() {
     const panel = document.getElementById('settings-panel');
     panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
 }
 
-// --- ボタン生成ロジック ---
+// ページ読み込み時に状態を復元
+window.onload = () => {
+    // 診断名とモードの読み込み
+    const savedDiag = localStorage.getItem('diag') || '未設定';
+    const savedMode = localStorage.getItem('mode') || 3;
+    
+    // 診断名を表示
+    document.getElementById('diagnosis-display').innerText = `(${savedDiag})`;
+    
+    // ラジオボタンの状態を合わせる
+    const radio = document.querySelector(`input[name="mode"][value="${savedMode}"]`);
+    if (radio) radio.checked = true;
+    
+    renderButtons(parseInt(savedMode));
+};
+
+// ボタン生成ロジック
 function renderButtons(mode) {
     const container = document.getElementById('dynamic-inputs');
     container.innerHTML = '';
@@ -52,17 +64,3 @@ function renderButtons(mode) {
         container.appendChild(row);
     });
 }
-
-// --- ページ読み込み時の復元 ---
-window.onload = () => {
-    // 診断名の復元
-    const savedDiag = localStorage.getItem('diag') || '未設定';
-    document.getElementById('diagnosis-display').innerText = `(${savedDiag})`;
-    
-    // モードの復元（ラジオボタンの状態も合わせる）
-    const savedMode = localStorage.getItem('mode') || 3;
-    const radio = document.querySelector(`input[name="mode"][value="${savedMode}"]`);
-    if (radio) radio.checked = true;
-    
-    renderButtons(parseInt(savedMode));
-};
