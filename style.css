@@ -1,109 +1,56 @@
-/* 全体を中央寄せにする */
+/* 全体のベース */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     margin: 0;
     font-family: sans-serif;
-    background-color: #ffffff; /* 白背景 */
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh; /* 画面全体を使う */
 }
 
-/* コンテナの設定 */
+/* コンテナ */
 .app-container {
     width: 90%;
     max-width: 400px;
-    text-align: center; /* 中身をすべて中央揃え */
     display: flex;
     flex-direction: column;
-    gap: 15px; /* 要素間の余白 */
+    padding: 20px 0;
+    gap: 15px;
 }
 
-/* 記録ボタンを一番下に配置し、大きく見せる */
+/* 記録ボタン（重複を解消し、1つにまとめました） */
 #save-btn {
-    margin-top: auto; /* これでボタンが一番下に押しやられます */
+    margin-top: auto; /* コンテナ内で一番下に配置 */
     padding: 15px;
     background-color: #007bff;
     color: white;
+    font-weight: bold;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
 }
 
-/* 記録ボタンを目立たせる */
-#save-btn {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    border: none;
+/* --- タイトル関連 --- */
+h1 { color: #5C6BC0; font-size: 28px; margin: 5px 0 0 0; }
+.subtitle { color: #888; font-size: 0.75rem; font-weight: bold; margin-bottom: 15px; }
+
+/* --- 診断名エリア --- */
+.diagnosis-area {
+    width: 100%; /* 66.6%から変更: コンテナ幅に合わせた方が中央揃えが安定します */
+    margin: 0 auto 20px auto;
+    text-align: left;
+    box-sizing: border-box;
 }
 
-        h1 {
-            color: #5C6BC0;
-            font-size: 28px;
-            margin: 5px 0 0 0;
-        }
-
-        .subtitle {
-            color: #888;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
-        .diagnosis-area {
-            width: 66.6%;
-            margin: 0 auto 20px auto;
-            text-align: left;
-            box-sizing: border-box;
-        }
-
-        .diagnosis-fixed-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f5f5f5;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #333;
-            box-sizing: border-box;
-        }
-
-        .change-btn {
-            background: none;
-            border: none;
-            color: #4A90E2;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        .select-box {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            font-size: 13px;
-            color: #333;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .other-diagnosis-input {
-            display: none;
-            width: 100%;
-            margin-top: 6px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #4A90E2;
-            background-color: #fff;
-            font-size: 13px;
-            box-sizing: border-box;
-            color: #333;
-        }
-
+.diagnosis-fixed-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #333;
+}
+/* 他のクラスはそのまま使用OKです */
