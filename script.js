@@ -1,66 +1,69 @@
-// 設定の保存と画面更新を統合
-function applySettings() {
+const STORAGE_KEY = 'innernote_vfinal_400_logs';
+const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
+let selectedMood = 5, selectedCond = 5;
+let highlightTimeout = null;
+
+// --- ボタン生成ロジック（統合版） ---
+function createRatingButtons(containerId, groupName) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = i;
+        btn.type = 'button';
+        if (i === 5) btn.classList.add('active'); // 初期値5
+        btn.onclick = function() {
+            container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            if (groupName === 'mood') selectedMood = i;
+            else selectedCond = i;
+        };
+        container.appendChild(btn);
+    }
+}
+
+// --- 診断名管理 ---
+function lockDiagnosis() {
     const select = document.getElementById('diagnosis-select');
-    const mode = document.querySelector('input[name="mode"]:checked').value;
-    const diag = select.value;
-
-    // 保存
-    localStorage.setItem('diag', diag);
-    localStorage.setItem('mode', mode);
-    
-    // 表示更新
-    document.getElementById('diagnosis-display').innerText = `(${diag})`;
-    
-    toggleSetting(); // パネルを閉じる
-    renderButtons(parseInt(mode)); // ボタン生成
+    if (!select.value) return;
+    localStorage.setItem(DIAGNOSIS_KEY, select.value);
+    document.getElementById('diagnosis-text').innerText = `診断名: ${select.value}`;
+    document.getElementById('diagnosis-select-container').style.display = 'none';
+    document.getElementById('diagnosis-fixed-container').style.display = 'flex';
 }
 
-// パネルの表示切り替え
-function toggleSetting() {
-    const panel = document.getElementById('settings-panel');
-    panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
+function unlockDiagnosis() {
+    document.getElementById('diagnosis-select-container').style.display = 'block';
+    document.getElementById('diagnosis-fixed-container').style.display = 'none';
 }
 
-// ページ読み込み時に状態を復元
+// --- 保存処理 ---
+function saveData() {
+    const note = document.getElementById('note').value;
+    const diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "未設定";
+    const now = new Date();
+    const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    logs.push({ ts: now.getTime(), date: dateStr, diagnosis: diagnosisVal, mood: selectedMood, cond: selectedCond, note: note });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+    alert("記録しました！");
+    location.reload();
+}
+
+// --- 初期化処理 ---
 window.onload = () => {
-    // 診断名とモードの読み込み
-    const savedDiag = localStorage.getItem('diag') || '未設定';
-    const savedMode = localStorage.getItem('mode') || 3;
-    
-    // 診断名を表示
-    document.getElementById('diagnosis-display').innerText = `(${savedDiag})`;
-    
-    // ラジオボタンの状態を合わせる
-    const radio = document.querySelector(`input[name="mode"][value="${savedMode}"]`);
-    if (radio) radio.checked = true;
-    
-    renderButtons(parseInt(savedMode));
-};
+    // ボタン生成
+    createRatingButtons('mood-btns', 'mood');
+    createRatingButtons('cond-btns', 'cond');
 
-// ボタン生成ロジック
-function renderButtons(mode) {
-    const container = document.getElementById('dynamic-inputs');
-    container.innerHTML = '';
-    
-    ['気分', '体調'].forEach(label => {
-        const row = document.createElement('div');
-        row.innerHTML = `<p>${label}</p>`;
-        const group = document.createElement('div');
-        group.className = 'rating-group';
-        
-        const items = mode === 3 ? ['良い', '普通', '低い'] : [...Array(10).keys()].map(i => i + 1);
-        
-        items.forEach(val => {
-            const btn = document.createElement('button');
-            btn.innerText = val;
-            btn.className = `rating-btn ${mode === 3 ? 'square' : ''}`;
-            btn.onclick = () => {
-                group.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            };
-            group.appendChild(btn);
-        });
-        row.appendChild(group);
-        container.appendChild(row);
-    });
-}
+    // 診断名の復元
+    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
+    if (savedDiagnosis) {
+        document.getElementById('diagnosis-select-container').style.display = 'none';
+        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
+        document.getElementById('diagnosis-text').innerText = `診断名: ${savedDiagnosis}`;
+    }
+
+    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    const logList = document.getElementById('log-list');
