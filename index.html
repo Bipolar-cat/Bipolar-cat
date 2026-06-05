@@ -11,45 +11,35 @@
     
 <body>
     <div class="container">
-        <div class="header-area">
-            <h1>InnerNote</h1>
-            <p class="subtitle">**気分と調子の変化を記録**</p>
-        </div>
+    <div class="header-area">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
+    </div>
 
-        <div class="settings-bar">
-            <span id="diagnosis-label">診断名: 未設定</span>
-            <button onclick="toggleSetting()" class="settings-btn">⚙ 設定</button>
-        </div>
-        
-        </div>
-</body>
+    <div class="settings-bar">
+        <span id="diagnosis-label">診断名: 未設定</span>
+        <button onclick="toggleSetting()" class="settings-btn">⚙ 設定</button>
+    </div>
 
     <div id="settings-panel" class="settings-panel" style="display: none;">
-        </div>
-</div>
-
- <div id="settings-panel" class="settings-panel" style="display: none;">
-        </div>
-</div>
-    <p style="margin-top:0;">主な診断名を選択</p>
-    <select id="diagnosis-select" style="width: 100%; padding: 8px; margin-bottom: 15px;">
-        <option value="未診断（健常者）">未診断（健常者）</option>
-        <option value="うつ病">うつ病</option>
-        <option value="双極症">双極症</option>
-        <option value="その他">その他</option>
-    </select>
-
-    <p style="margin-top:0;">記録方式を選択</p>
-    <label><input type="radio" name="mode" value="3" checked> 3段階</label>
-    <label style="margin-left: 15px;"><input type="radio" name="mode" value="10"> 10段階</label>
-    
-    <button onclick="saveSettings()" style="display: block; margin-top: 15px; width: 100%; padding: 10px; background: #5C6BC0; color: white; border: none; border-radius: 8px;">保存して適用</button>
-    </div>
+        <p>主な診断名を選択</p>
+        <select id="diagnosis-select" onchange="checkOther(this)">
+            <option value="未診断（健常者）">未診断（健常者）</option>
+            <option value="統合失調症">統合失調症</option>
+            <option value="双極症">双極症</option>
+            <option value="うつ病">うつ病</option>
+            <option value="その他">その他</option>
+        </select>
+        <input type="text" id="other-input" placeholder="診断名を入力" style="display:none; margin-top:5px;">
         
-        <button onclick="saveSettings()" style="display: block; margin-top: 15px; width: 100%; padding: 10px; background: #5C6BC0; color: white; border: none; border-radius: 8px;">保存して適用</button>
+        <p style="margin-top:15px;">記録方式を選択</p>
+        <label><input type="radio" name="mode" value="3" checked> 3段階（簡単）</label>
+        <label style="margin-left:15px;"><input type="radio" name="mode" value="10"> 10段階（詳細）</label>
+        
+        <button onclick="applySettings()" class="save-btn">保存して適用</button>
     </div>
 
     <div id="dynamic-inputs"></div>
-</div>
+    </div>
 </body>
 </html>
