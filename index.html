@@ -8,9 +8,23 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-<div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
+<div class="app-container">
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
+    
+    <div id="diagnosis-container" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; background: #f4f4f9; padding: 10px; border-radius: 8px;">
+        <span id="diagnosis-label">主な診断名: 未設定</span>
+        <button onclick="toggleSetting()" style="background: none; border: none; color: #5C6BC0; font-weight: bold; cursor: pointer;">⚙ 設定</button>
+    </div>
+
+    <div id="settings-panel" style="display: none; width: 100%; margin-top: 10px; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
+        <p style="font-size: 0.9rem; margin-bottom: 10px;">記録方式を選択</p>
+        <label><input type="radio" name="mode" value="3" checked> 3段階（簡単）</label>
+        <label style="margin-left: 15px;"><input type="radio" name="mode" value="10"> 10段階（細かく記録）</label>
+        <button onclick="saveSettings()" style="display: block; margin-top: 10px; width: 100%; padding: 8px;">保存</button>
+    </div>
+</div>
+        
 
         <div class="diagnosis-area" style="margin-bottom: 20px;">
     <div id="diagnosis-select-container" style="display: block;">
