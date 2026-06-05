@@ -87,3 +87,31 @@ function saveAndLockDiagnosis() {
         alert("診断名を選択してください");
     }
 }
+
+function setMode(type) {
+    const container = document.getElementById('dynamic-inputs');
+    container.innerHTML = ''; // 一度クリア
+
+    const moodLabels = type === 3 ? ['良い', '普通', '低い'] : [...Array(10).keys()].map(i => i + 1);
+    
+    // 気分と体調の2グループ生成
+    ['気分', '体調'].forEach(label => {
+        const group = document.createElement('div');
+        group.innerHTML = `<p>${label}</p>`;
+        const btnRow = document.createElement('div');
+        btnRow.className = 'rating-group';
+        
+        moodLabels.forEach(val => {
+            const btn = document.createElement('button');
+            btn.innerText = val;
+            btn.className = 'rating-btn';
+            btn.onclick = () => {
+                btnRow.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            };
+            btnRow.appendChild(btn);
+        });
+        group.appendChild(btnRow);
+        container.appendChild(group);
+    });
+}
