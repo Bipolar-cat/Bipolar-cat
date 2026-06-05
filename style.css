@@ -41,3 +41,30 @@ h1 { color: #5C6BC0; font-size: 28px; margin: 5px 0; }
 
 /* 10段階ボタン用の横スクロール調整 */
 .mode-select { display: flex; justify-content: center; gap: 10px; }
+
+/* Summaryボタンのスタイル */
+.summary-btn {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    background-color: #F1F8E9; /* 指定された黄緑色 */
+    color: #333;               /* 文字色は濃いグレーで読みやすく */
+    border: 1px solid #C5E1A5; /* 少し濃い緑の枠線で引き締める */
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* 既存の記録ボタンとの整合性確保 */
+#save-btn {
+    background-color: #5C6BC0; /* メインカラー（青） */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+}
