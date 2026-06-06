@@ -111,7 +111,16 @@
 
 </div>
 
-<script src="script.js"></script>
+    <script>
+        function toggleSettings() {
+            const modal = document.querySelector('.settings-modal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+        }
+    </script>
 
 </body>
 </html>
