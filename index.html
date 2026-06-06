@@ -17,7 +17,7 @@
     <h1>InnerNote</h1>
     <p class="subtitle">**気分と調子の変化を記録**</p>
 
-    <button id="settings-btn" onclick="toggleSettings()">
+    <button onclick="toggleSettings()" class="settings-btn">
     ⚙ 設定
 </button>
 
@@ -25,30 +25,23 @@
 
     <h3>⚙ 設定</h3>
 
-        <label>主な診断名</label>
-        <select id="diagnosis">
-            <option>双極症</option>
-            <option>うつ病</option>
-            <option>発達障害</option>
-        </select>
+    <label>主な診断名</label>
+    <select id="diagnosis">
+        <option>双極症</option>
+        <option>うつ病</option>
+        <option>発達障害</option>
+    </select>
 
-        <label>記録方式</label>
+    <label>記録方式</label>
 
-        <input type="radio"
-               name="mode"
-               value="3">
-        3段階
+    <input type="radio" name="mode" value="3"> 3段階
+    <input type="radio" name="mode" value="10"> 10段階
 
-        <input type="radio"
-               name="mode"
-               value="10">
-        10段階
+    <button onclick="saveSettings()">
+        保存
+    </button>
 
-        <button onclick="saveSettings()">
-            保存
-        </button>
-
-    </div>
+</div>
 
     <!-- 現在の診断名エリア -->
     <div class="diagnosis-area">
