@@ -53,10 +53,15 @@ window.onload = () => {
             }
         }
 
-        // 変更ボタン押下時
-        function enableDiagnosisChange() {
-            document.getElementById('diagnosis-fixed-container').style.display = 'none';
-            document.getElementById('diagnosis-select-container').style.display = 'block';
+        function unlockDiagnosis() {
+
+    document.getElementById(
+      'diagnosis-fixed-container'
+    ).style.display = 'none';
+
+    document.getElementById(
+      'diagnosis-select-container'
+    ).style.display = 'block';
         }
 
         // 10段階サークルスクロールボタンの生成
