@@ -239,7 +239,7 @@ window.onload = () => {
                         const activePoints = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
                         if (activePoints.length > 0) {
                             const index = activePoints[0].index;
-                            const logData = last10[index];
+                            const logData = allLogs[index];
                             const targetTimestamp = logData.ts || new Date(logData.date).getTime();
                             scrollToLog(targetTimestamp);
                         }
