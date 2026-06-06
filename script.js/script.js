@@ -82,3 +82,13 @@ window.onload = () => {
             `前回まとめ作成：${savedStr}`;
     }
 };
+
+function toggleSettings() {
+    const modal = document.getElementById('settings-modal');
+
+    if (modal.style.display === 'block') {
+        modal.style.display = 'none';
+    } else {
+        modal.style.display = 'block';
+    }
+}
