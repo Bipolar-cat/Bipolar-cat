@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'innernote_vfinal_400_logs';
+const STORAGE_KEY = 'innernote_vfinal_400const STORAGE_KEY = 'innernote_vfinal_400_logs';
 const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
 let selectedMood = 5, selectedCond = 5;
 let highlightTimeout = null;
@@ -50,20 +50,3 @@ function saveData() {
     alert("記録しました！");
     location.reload();
 }
-
-// --- 初期化処理 ---
-window.onload = () => {
-    // ボタン生成
-    createRatingButtons('mood-btns', 'mood');
-    createRatingButtons('cond-btns', 'cond');
-
-    // 診断名の復元
-    const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-    if (savedDiagnosis) {
-        document.getElementById('diagnosis-select-container').style.display = 'none';
-        document.getElementById('diagnosis-fixed-container').style.display = 'flex';
-        document.getElementById('diagnosis-text').innerText = `診断名: ${savedDiagnosis}`;
-    }
-
-    const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const logList = document.getElementById('log-list');
