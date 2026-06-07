@@ -82,30 +82,67 @@
 
     <hr>
 
-    <h4>属性・環境</h4>
+  <h4>属性・環境</h4>
 
-    <select
-    id="diagnosis-select"
-    onchange="toggleDiagnosisOther()">
-    <div id="environment-list">
+<div id="environment-list">
 
-        <label><input type="checkbox" value="学生">学生</label>
-        <label><input type="checkbox" value="就労中">就労中</label>
-        <label><input type="checkbox" value="休職中">休職中</label>
-        <label><input type="checkbox" value="求職中">求職中</label>
-        <label><input type="checkbox" value="その他">その他</label>
-        
-    </div>
+    <label>
+        <input type="checkbox" value="学生">
+        学生
+    </label>
 
-    <br>
+    <label>
+        <input type="checkbox" value="就労中">
+        就労中
+    </label>
 
-    <button onclick="saveSettings()">
-        保存
-    </button>
+    <label>
+        <input type="checkbox" value="休職中">
+        休職中
+    </label>
+
+    <label>
+        <input type="checkbox" value="求職中">
+        求職中
+    </label>
+
+    <label>
+        <input type="checkbox" value="主婦・主夫">
+        主婦・主夫
+    </label>
+
+    <label>
+        <input type="checkbox" value="無職">
+        無職
+    </label>
+
+    <label>
+        <input type="checkbox" value="一人暮らし">
+        一人暮らし
+    </label>
+
+    <label>
+        <input type="checkbox" value="同居">
+        同居
+    </label>
+
+    <label>
+        <input
+            type="checkbox"
+            id="environment-other-check"
+            value="その他"
+            onchange="toggleEnvironmentOther()">
+
+        その他
+    </label>
 
 </div>
 
-    <div class="input-section">
+<input
+    type="text"
+    id="environment-other"
+    placeholder="内容を入力"
+    style="display:none;">
 
     <textarea
         id="note"
