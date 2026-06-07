@@ -1,1 +1,29 @@
+body {
+    font-family: 'Helvetica Neue', Arial,
+    "Hiragino Sans", Meiryo, sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
 
+.container {
+    max-width: 450px;
+    width: 100%;
+    background: white;
+    border-radius: 25px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+h1 {
+    color: #5C6BC0;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 12px;
+    font-weight: bold;
+}
