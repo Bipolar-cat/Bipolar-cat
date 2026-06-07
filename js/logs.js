@@ -119,3 +119,31 @@ function renderRecordForm() {
         );
     }
 }
+
+function createCircleButtons(
+    containerId
+) {
+
+    const container =
+        document.getElementById(
+            containerId
+        );
+
+    for (
+        let i = 1;
+        i <= 10;
+        i++
+    ) {
+
+        const btn =
+            document.createElement(
+                "button"
+            );
+
+        btn.innerText = i;
+
+        container.appendChild(
+            btn
+        );
+    }
+}
