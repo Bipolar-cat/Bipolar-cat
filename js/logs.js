@@ -33,3 +33,30 @@ function openRecord() {
 
     renderRecordForm();
 }
+
+function renderRecordForm() {
+
+    const settings =
+        loadSettingsData();
+
+    const area =
+        document.getElementById(
+            "record-content"
+        );
+
+    if (
+        settings.recordMode ===
+        "step3"
+    ) {
+
+        area.innerHTML = `
+            <p>Step3記録フォーム</p>
+        `;
+
+    } else {
+
+        area.innerHTML = `
+            <p>Step10記録フォーム</p>
+        `;
+    }
+}
