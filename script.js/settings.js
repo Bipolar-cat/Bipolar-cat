@@ -78,10 +78,29 @@ if (!saved) return;
 const settings =
     JSON.parse(saved);
 
-document.getElementById(
-    "diagnosis-select"
-).value =
-    settings.diagnosis || "";
+// ← ここに入れる
+    if (
+        settings.diagnosis &&
+        ![
+            "未診断（健常者）",
+            "うつ病",
+            "双極症",
+            "統合失調症",
+            "不安障害",
+            "適応障害",
+            "発達障害"
+        ].includes(settings.diagnosis)
+    ) {
+
+        document.getElementById(
+            "diagnosis-select"
+        ).value = "その他";
+
+        document.getElementById(
+            "diagnosis-other"
+        ).value = settings.diagnosis;
+
+    } else {
 
 document.getElementById(
     "age-select"
