@@ -46,6 +46,17 @@ function createCircleButtons(
 
 window.onload = () => {
 
+    loadDiagnosis();
+
+    loadAge();
+
+    loadLogs();
+
+    renderChart();
+
+};
+window.onload = () => {
+
     createCircleButtons(
         'mood-btns',
         'mood'
