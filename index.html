@@ -17,14 +17,15 @@
     <h1>InnerNote</h1>
     <p class="subtitle">**気分と調子の変化を記録**</p>
 
-    <button onclick="toggleSettings()" class="settings-btn">
-    ⚙ 設定
-</button>
+   <button onclick="toggleSettings()">⚙ 設定</button>
 
-<h2>⚙ 設定</h2>
-<h2>⚙ 設定</h2>
-
-<h3>診断名</h3>
+<div id="settings-modal" class="settings-modal">
+    <h3>診断名</h3>
+    <h3>記録方式</h3>
+    <h3>年代</h3>
+    <h3>属性・環境</h3>
+    <button onclick="saveSettings()">保存</button>
+</div>
 
 <select id="diagnosis-select">
     <option value="">選択してください</option>
