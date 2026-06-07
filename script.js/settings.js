@@ -2,14 +2,16 @@ const SETTINGS_KEY = "innernote_settings";
 
 function toggleSettings() {
 
-const modal =
-    document.getElementById("settings-modal");
+    const modal =
+        document.getElementById(
+            "settings-modal"
+        );
 
-modal.style.display =
-    modal.style.display === "block"
-        ? "none"
-        : "block";
-
+    if (modal.style.display === "block") {
+        modal.style.display = "none";
+    } else {
+        modal.style.display = "block";
+    }
 }
 
 function saveSettings() {
