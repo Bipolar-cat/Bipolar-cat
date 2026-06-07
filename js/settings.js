@@ -48,3 +48,37 @@ function saveSettings() {
 
     closeSettings();
 }
+
+function loadSettings() {
+
+    const settings =
+        loadSettingsData();
+
+    if (!settings.recordMode) {
+        return;
+    }
+
+    document.getElementById(
+        "diagnosis"
+    ).value =
+        settings.diagnosis || "";
+
+    document.getElementById(
+        "age-group"
+    ).value =
+        settings.ageGroup || "";
+
+    document.getElementById(
+        "affiliation"
+    ).value =
+        settings.affiliation || "";
+
+    document.getElementById(
+        "environment"
+    ).value =
+        settings.environment || "";
+
+    document.querySelector(
+        `input[value="${settings.recordMode}"]`
+    ).checked = true;
+}
