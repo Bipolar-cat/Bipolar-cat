@@ -57,3 +57,39 @@ h1 {
 .menu-btn:active {
     transform: scale(0.98);
 }
+
+.settings-modal {
+    display: none;
+    text-align: left;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+.settings-modal h2 {
+    margin-top: 0;
+}
+
+.settings-modal label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.settings-modal select,
+.settings-modal input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.record-mode {
+    margin-top: 10px;
+}
+
+.record-mode label {
+    display: block;
+    margin-bottom: 8px;
+}
