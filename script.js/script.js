@@ -1,9 +1,12 @@
 window.onload = () => {
 
-loadSettings();
+    createCircleButtons('mood-btns', 'mood');
+    createCircleButtons('cond-btns', 'cond');
 
-loadLogs();
+    loadSettings();
 
-renderChart();
+    loadLogs();
+
+    renderChart();
 
 };
