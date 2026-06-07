@@ -93,3 +93,13 @@ h1 {
     display: block;
     margin-bottom: 8px;
 }
+
+.record-area {
+    display: none;
+    padding: 20px;
+    text-align: left;
+}
+
+.record-area h2 {
+    margin-top: 0;
+}
