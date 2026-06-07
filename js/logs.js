@@ -24,3 +24,12 @@ function formatLog(log) {
         displayText: `${log.date} ${diagBadge} 気分:${log.mood} 体調:${log.cond}`
     };
 }
+
+function openRecord() {
+
+    document.getElementById(
+        "record-area"
+    ).style.display = "block";
+
+    renderRecordForm();
+}
