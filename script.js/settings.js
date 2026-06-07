@@ -196,22 +196,25 @@ document
 
 }
 
-function toggleEnvironmentOther() {
+function toggleDiagnosisOther() {
 
-    const check =
+    const select =
         document.getElementById(
-            "environment-other-check"
+            "diagnosis-select"
         );
 
     const input =
         document.getElementById(
-            "environment-other"
+            "diagnosis-other"
         );
 
-    input.style.display =
-        check.checked
-            ? "block"
-            : "none";
+    if (select.value === "その他") {
+
+        input.style.display = "block";
+
+    } else {
+
+        input.style.display = "none";
+        input.value = "";
+    }
 }
-
-
