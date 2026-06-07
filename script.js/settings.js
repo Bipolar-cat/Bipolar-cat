@@ -186,3 +186,21 @@ document
     });
 
 }
+
+function toggleDiagnosisOther() {
+
+    const select =
+        document.getElementById(
+            "diagnosis-select"
+        );
+
+    const other =
+        document.getElementById(
+            "diagnosis-other"
+        );
+
+    other.style.display =
+        select.value === "その他"
+            ? "block"
+            : "none";
+}
