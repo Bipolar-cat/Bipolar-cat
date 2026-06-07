@@ -22,15 +22,12 @@
 </button>
 
 <h2>⚙ 設定</h2>
+<h2>⚙ 設定</h2>
 
-<hr>
-
-<!-- 診断名 -->
-
-<h3>■ 診断名</h3>
+<h3>診断名</h3>
 
 <select id="diagnosis-select">
-    <option value="">診断名を選択</option>
+    <option value="">選択してください</option>
     <option>未診断（健常者）</option>
     <option>うつ病</option>
     <option>双極症</option>
@@ -48,93 +45,63 @@
     style="display:none;"
 >
 
-<hr>
-
-<!-- 記録方式 -->
-
-<h3>■ 記録方式</h3>
+<h3>記録方式</h3>
 
 <label>
     <input type="radio" name="recordMode" value="3">
-    3段階（簡単）
+    3段階
 </label>
-
-<br>
 
 <label>
-    <input type="radio" name="recordMode" value="10" checked>
-    10段階（詳細）
+    <input type="radio" name="recordMode" value="10">
+    10段階
 </label>
 
-<hr>
-
-<!-- 年代 -->
-
-<h3>■ 年代</h3>
+<h3>年代</h3>
 
 <select id="age-select">
-
     <option value="">年代を選択</option>
-
     <option>10代</option>
     <option>20代</option>
     <option>30代</option>
     <option>40代</option>
     <option>50代</option>
     <option>60代以上</option>
-
 </select>
 
-<hr>
+<h3>属性・環境</h3>
 
-<!-- 属性・環境 -->
+<div id="environment-list">
 
-<h3>■ 属性・環境（複数選択）</h3>
+    <label><input type="checkbox" value="学生"> 学生</label>
+    <label><input type="checkbox" value="就労中"> 就労中</label>
+    <label><input type="checkbox" value="休職中"> 休職中</label>
+    <label><input type="checkbox" value="求職中"> 求職中</label>
+    <label><input type="checkbox" value="主婦・主夫"> 主婦・主夫</label>
+    <label><input type="checkbox" value="無職"> 無職</label>
 
-<label><input type="checkbox" value="学生"> 学生</label><br>
-<label><input type="checkbox" value="就労中"> 就労中</label><br>
-<label><input type="checkbox" value="休職中"> 休職中</label><br>
-<label><input type="checkbox" value="求職中"> 求職中</label><br>
-<label><input type="checkbox" value="主婦・主夫"> 主婦・主夫</label><br>
-<label><input type="checkbox" value="無職"> 無職</label><br>
+    <label><input type="checkbox" value="一人暮らし"> 一人暮らし</label>
+    <label><input type="checkbox" value="家族と同居"> 家族と同居</label>
 
-<br>
+    <label><input type="checkbox" value="配偶者あり"> 配偶者あり</label>
+    <label><input type="checkbox" value="子どもあり"> 子どもあり</label>
 
-<label><input type="checkbox" value="一人暮らし"> 一人暮らし</label><br>
-<label><input type="checkbox" value="家族と同居"> 家族と同居</label><br>
-<label><input type="checkbox" value="配偶者あり"> 配偶者あり</label><br>
-<label><input type="checkbox" value="子どもあり"> 子どもあり</label><br>
+    <label><input type="checkbox" value="通院中"> 通院中</label>
+    <label><input type="checkbox" value="障害者手帳あり"> 障害者手帳あり</label>
 
-<br>
+    <label><input type="checkbox" value="福祉サービス利用中">
+        福祉サービス利用中
+    </label>
 
-<label><input type="checkbox" value="通院中"> 通院中</label><br>
-<label><input type="checkbox" value="障害者手帳あり"> 障害者手帳あり</label><br>
-<label><input type="checkbox" value="福祉サービス利用中"> 福祉サービス利用中</label><br>
+    <label>
+        <input type="checkbox"
+               value="親族に同じ疾患の人がいる">
+        親族に同じ疾患の人がいる
+    </label>
 
-<br>
+</div>
 
-<label>
-    <input type="checkbox" value="親族に同じ疾患の人がいる">
-    親族に同じ疾患の人がいる
-</label>
-
-<br><br>
-
-<label>
-    <input type="checkbox" id="env-other-check">
-    その他
-</label>
-
-<input
-    type="text"
-    id="env-other"
-    placeholder="内容を入力"
-    style="display:none;"
->
-
-<hr>
-
-<button class="save-btn" onclick="saveSettings()">
+<button onclick="saveSettings()">
     保存
 </button>
     
