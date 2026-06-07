@@ -5,47 +5,56 @@
 <script src="js/settings.js"></script>
 <script src="js/script.js"></script>
 
-<div class="ui-header">
-    <h1>InnerNote</h1>
-    <p class="subtitle">気分と体調の変化を記録</p>
-</div>
+<body>
+<div class="container">
 
-<div class="ui-input">
+    <!-- ① HEADER -->
+    <div class="ui-header">
+        <h1>InnerNote</h1>
+        <p class="subtitle">気分と体調の変化を記録</p>
+    </div>
 
-    <label>今の気分</label>
-    <div id="mood-btns"></div>
+    <!-- ② INPUT -->
+    <div class="ui-input">
 
-    <label>体調</label>
-    <div id="cond-btns"></div>
+        <label>今の気分</label>
+        <div id="mood-btns"></div>
 
-    <textarea id="note"></textarea>
+        <label>体調</label>
+        <div id="cond-btns"></div>
 
-    <button onclick="saveData()">記録する</button>
+        <textarea id="note" placeholder="今の気持ちをメモ"></textarea>
 
-</div>
+        <button onclick="saveData()">記録する</button>
+    </div>
 
-<div class="ui-chart">
-    <canvas id="myChart"></canvas>
-</div>
+    <!-- ③ CHART -->
+    <div class="ui-chart">
+        <canvas id="myChart"></canvas>
+    </div>
 
-<div class="ui-summary">
+    <!-- ④ SUMMARY -->
+    <div class="ui-summary">
 
-    <button onclick="generateSummary()">
-        summary（一定期間まとめ）
-    </button>
+        <button onclick="generateSummary()">
+            summary（一定期間まとめ）
+        </button>
 
-    <div id="summary-ts"></div>
+        <div id="summary-ts"></div>
 
-    <div id="summary-card">
-        <div id="summary-content"></div>
+        <div id="summary-card">
+            <div id="summary-content"></div>
+        </div>
+
+    </div>
+
+    <!-- ⑤ LOGS -->
+    <div class="ui-logs">
+
+        <h2>最近の記録</h2>
+        <div id="log-list"></div>
+
     </div>
 
 </div>
-
-<div class="ui-logs">
-
-    <h2>最近の記録</h2>
-
-    <div id="log-list"></div>
-
-</div>
+</body>
