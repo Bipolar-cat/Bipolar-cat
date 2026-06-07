@@ -70,3 +70,49 @@ function saveData() {
     alert("記録しました！");
     location.reload();
 }
+
+function createCircleButtons(
+    containerId,
+    type
+) {
+
+    const container =
+        document.getElementById(containerId);
+
+    if (!container) return;
+
+    for (let i = 1; i <= 10; i++) {
+
+        const btn =
+            document.createElement('button');
+
+        btn.innerText = i;
+
+        if (i === 5)
+            btn.classList.add('active');
+
+        btn.onclick = () => {
+
+            container
+                .querySelectorAll('button')
+                .forEach(b =>
+                    b.classList.remove('active')
+                );
+
+            btn.classList.add('active');
+
+            if (type === 'mood') {
+
+                selectedMood = i;
+
+            } else {
+
+                selectedCond = i;
+
+            }
+
+        };
+
+        container.appendChild(btn);
+    }
+}
