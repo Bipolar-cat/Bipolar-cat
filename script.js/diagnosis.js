@@ -103,3 +103,27 @@ function unlockAge() {
         "age-select-container"
     ).style.display = "block";
 }
+
+function loadAge() {
+
+    const savedAge =
+        localStorage.getItem(AGE_KEY);
+
+    if (!savedAge) return;
+
+    document.getElementById(
+        "age-select-container"
+    ).style.display = "none";
+
+    document.getElementById(
+        "age-fixed-container"
+    ).style.display = "flex";
+
+    document.getElementById(
+        "age-text"
+    ).innerText = `年代：${savedAge}`;
+
+    document.getElementById(
+        "age-select"
+    ).value = savedAge;
+}
