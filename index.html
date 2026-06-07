@@ -21,7 +21,9 @@
 
     <h4>診断名</h4>
 
-    <select id="diagnosis-select">
+    <select
+    id="diagnosis-select"
+    onchange="toggleDiagnosisOther()">
         <option value="">選択してください</option>
         <option value="未診断（健常者）">未診断（健常者）</option>
         <option value="うつ病">うつ病</option>
@@ -76,13 +78,17 @@
 
     <h4>属性・環境</h4>
 
+    <select
+    id="diagnosis-select"
+    onchange="toggleDiagnosisOther()">
     <div id="environment-list">
 
         <label><input type="checkbox" value="学生">学生</label>
         <label><input type="checkbox" value="就労中">就労中</label>
         <label><input type="checkbox" value="休職中">休職中</label>
         <label><input type="checkbox" value="求職中">求職中</label>
-
+        <label><input type="checkbox" value="その他">その他</label>
+        
     </div>
 
     <br>
