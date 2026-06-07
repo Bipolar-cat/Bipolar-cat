@@ -71,3 +71,41 @@ function calculateStability() {
 
     return Number(stability.toFixed(1));
 }
+
+function analyzeByDimension(key) {
+    const logs = getAllLogs();
+
+    const map = {};
+
+    logs.forEach(l => {
+        const k = l[key] || '未設定';
+
+        if (!map[k]) {
+            map[k] = {
+                count: 0,
+                moodSum: 0,
+                condSum: 0
+            };
+        }
+
+        map[k].count++;
+        map[k].moodSum += l.mood;
+        map[k].condSum += l.cond;
+    });
+
+    const result = {};
+
+    Object.keys(map).forEach(k => {
+        result[k] = {
+            count: map[k].count,
+            avgMood: Number((map[k].moodSum / map[k].count).toFixed(1)),
+            avgCond: Number((map[k].condSum / map[k].count).toFixed(1))
+        };
+    });
+
+    return result;
+}
+
+analyzeByDimension("diagnosis");
+analyzeByDimension("ageGroup");
+analyzeByDimension("environment");
