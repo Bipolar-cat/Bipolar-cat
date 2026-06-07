@@ -22,6 +22,64 @@
         ⚙
     </button>
 
+    <div id="settings-modal" class="settings-modal">
+
+    <h2>設定</h2>
+
+    <label>診断名</label>
+    <select id="diagnosis">
+        <option>未診断</option>
+        <option>うつ病</option>
+        <option>双極症</option>
+        <option>統合失調症</option>
+        <option>不安障害</option>
+        <option>発達障害</option>
+        <option>その他</option>
+    </select>
+
+    <label>年代</label>
+    <select id="age-group">
+        <option>10代</option>
+        <option>20代</option>
+        <option>30代</option>
+        <option>40代</option>
+        <option>50代</option>
+        <option>60代以上</option>
+    </select>
+
+    <label>所属</label>
+    <input type="text" id="affiliation">
+
+    <label>環境</label>
+    <input type="text" id="environment">
+
+    <label>記録方式</label>
+
+    <div class="record-mode">
+
+        <label>
+            <input type="radio"
+                   name="record-mode"
+                   value="step3">
+            Step3（簡単）
+        </label>
+
+        <label>
+            <input type="radio"
+                   name="record-mode"
+                   value="step10"
+                   checked>
+            Step10（詳細）
+        </label>
+
+    </div>
+
+    <button onclick="saveSettings()">
+        保存
+    </button>
+
+    </div>
+    
     <button class="menu-btn">
         記録
     </button>
