@@ -33,23 +33,21 @@ body {
             margin-bottom: 15px;
         }
 
-.settings-modal select,
-.settings-modal input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
+.settings-modal {
+    display: none;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
 }
 
 .settings-btn {
-    background: none;
     border: none;
-    font-size: 18px;
+    background: #4A90E2;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 10px;
 }
 
 #diagnosis-select,
