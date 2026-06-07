@@ -25,25 +25,27 @@
 
     <h4>診断名</h4>
 
-    <select
+<select
     id="diagnosis-select"
     onchange="toggleDiagnosisOther()">
-        <option value="">選択してください</option>
-        <option value="未診断（健常者）">未診断（健常者）</option>
-        <option value="うつ病">うつ病</option>
-        <option value="双極症">双極症</option>
-        <option value="統合失調症">統合失調症</option>
-        <option value="不安障害">不安障害</option>
-        <option value="適応障害">適応障害</option>
-        <option value="発達障害">発達障害</option>
-        <option value="その他">その他</option>
-    </select>
 
-    <input
-        type="text"
-        id="diagnosis-other"
-        placeholder="診断名を入力"
-        style="display:none;">
+    <option value="">未設定</option>
+    <option value="未診断（健常者）">未診断（健常者）</option>
+    <option value="うつ病">うつ病</option>
+    <option value="双極症">双極症</option>
+    <option value="統合失調症">統合失調症</option>
+    <option value="不安障害">不安障害</option>
+    <option value="適応障害">適応障害</option>
+    <option value="発達障害">発達障害</option>
+    <option value="その他">その他</option>
+
+</select>
+
+<input
+    type="text"
+    id="diagnosis-other"
+    placeholder="診断名を入力"
+    style="display:none;">
 
     <hr>
 
