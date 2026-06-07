@@ -1,19 +1,5 @@
 const SETTINGS_KEY = "innernote_settings";
 
-function toggleSettings() {
-
-    const modal =
-        document.getElementById(
-            "settings-modal"
-        );
-
-    if (modal.style.display === "block") {
-        modal.style.display = "none";
-    } else {
-        modal.style.display = "block";
-    }
-}
-
 function saveSettings() {
 
 let diagnosis =
@@ -64,6 +50,20 @@ alert("設定を保存しました");
 
 toggleSettings();
 
+}
+
+function toggleSettings() {
+
+    const modal =
+        document.getElementById(
+            "settings-modal"
+        );
+
+    if (modal.style.display === "block") {
+        modal.style.display = "none";
+    } else {
+        modal.style.display = "block";
+    }
 }
 
 function loadSettings() {
