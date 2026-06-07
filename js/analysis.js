@@ -109,3 +109,15 @@ function analyzeByDimension(key) {
 analyzeByDimension("diagnosis");
 analyzeByDimension("ageGroup");
 analyzeByDimension("environment");
+
+function filterLogs({ diagnosis, ageGroup, environment }) {
+    const logs = getAllLogs();
+
+    return logs.filter(l => {
+        const okDiagnosis = !diagnosis || l.diagnosis === diagnosis;
+        const okAge = !ageGroup || l.ageGroup === ageGroup;
+        const okEnv = !environment || l.environment === environment;
+
+        return okDiagnosis && okAge && okEnv;
+    });
+}
