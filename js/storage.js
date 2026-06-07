@@ -1,26 +1,15 @@
-const STORAGE_KEY = 'innernote_vfinal_400_logs';
-const DIAGNOSIS_KEY = 'innernote_saved_diagnosis';
+const SETTINGS_KEY = "innernote_settings";
 
-/* =========================
-   LOGS（記録データ）
-========================= */
-
-function loadLogsData() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+function saveSettingsData(data) {
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(data)
+    );
 }
 
-function saveLogsData(logs) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
-}
-
-/* =========================
-   DIAGNOSIS（診断・属性）
-========================= */
-
-function saveDiagnosis(value) {
-    localStorage.setItem(DIAGNOSIS_KEY, value);
-}
-
-function loadDiagnosis() {
-    return localStorage.getItem(DIAGNOSIS_KEY);
+function loadSettingsData() {
+    return JSON.parse(
+        localStorage.getItem(SETTINGS_KEY)
+        || "{}"
+    );
 }
