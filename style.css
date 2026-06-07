@@ -3,6 +3,12 @@
     margin-bottom: 10px;
 }
 
+.ui-chart {
+    height: 350px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
 /* =========================
    🧠 全体レイアウト（body）
 ========================= */
