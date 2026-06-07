@@ -24,12 +24,21 @@ const environments =
         )
     ).map(cb => cb.value);
 
-if (diagnosis === "その他") {
+if (
+    environments.includes("その他")
+) {
 
-    diagnosis =
+    const otherText =
         document.getElementById(
-            "diagnosis-other"
-        ).value;
+            "environment-other"
+        ).value.trim();
+
+    if (otherText) {
+
+        environments.push(
+            `その他(${otherText})`
+        );
+    }
 }
 
 const settings = {
@@ -187,20 +196,22 @@ document
 
 }
 
-function toggleDiagnosisOther() {
+function toggleEnvironmentOther() {
 
-    const select =
+    const check =
         document.getElementById(
-            "diagnosis-select"
+            "environment-other-check"
         );
 
-    const other =
+    const input =
         document.getElementById(
-            "diagnosis-other"
+            "environment-other"
         );
 
-    other.style.display =
-        select.value === "その他"
+    input.style.display =
+        check.checked
             ? "block"
             : "none";
 }
+
+
