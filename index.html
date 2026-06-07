@@ -27,7 +27,9 @@
 
     <!-- 診断名 -->
     <label>診断名</label>
-    <select id="diagnosis-select">
+    <select
+    id="diagnosis-select"
+    onchange="toggleDiagnosisOther()">
         <option value="">選択してください</option>
         <option value="うつ病">うつ病</option>
         <option value="双極症">双極症</option>
