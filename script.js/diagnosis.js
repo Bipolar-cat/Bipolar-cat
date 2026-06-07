@@ -68,3 +68,38 @@ function restoreDiagnosis() {
         ).style.display = 'block';
     }
 }
+
+const AGE_KEY = "innernote_age";
+
+function lockAge() {
+
+    const age =
+        document.getElementById("age-select").value;
+
+    if (!age) return;
+
+    localStorage.setItem(AGE_KEY, age);
+
+    document.getElementById(
+        "age-select-container"
+    ).style.display = "none";
+
+    document.getElementById(
+        "age-fixed-container"
+    ).style.display = "flex";
+
+    document.getElementById(
+        "age-text"
+    ).innerText = `年代：${age}`;
+}
+
+function unlockAge() {
+
+    document.getElementById(
+        "age-fixed-container"
+    ).style.display = "none";
+
+    document.getElementById(
+        "age-select-container"
+    ).style.display = "block";
+}
