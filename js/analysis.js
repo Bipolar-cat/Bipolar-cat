@@ -121,3 +121,19 @@ function filterLogs({ diagnosis, ageGroup, environment }) {
         return okDiagnosis && okAge && okEnv;
     });
 }
+
+function analyzeFiltered(filters) {
+    const logs = filterLogs(filters);
+
+    if (logs.length === 0) return null;
+
+    const moods = logs.map(l => l.mood);
+    const conds = logs.map(l => l.cond);
+
+    return {
+        count: logs.length,
+        avgMood: (moods.reduce((a,b)=>a+b,0)/moods.length).toFixed(1),
+        avgCond: (conds.reduce((a,b)=>a+b,0)/conds.length).toFixed(1),
+        raw: logs
+    };
+}
