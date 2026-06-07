@@ -199,9 +199,8 @@ function toggleDiagnosisOther() {
             "diagnosis-other"
         );
 
-    if (select.value === "その他") {
-        other.style.display = "block";
-    } else {
-        other.style.display = "none";
-    }
+    other.style.display =
+        select.value === "その他"
+            ? "block"
+            : "none";
 }
