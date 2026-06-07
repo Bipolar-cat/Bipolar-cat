@@ -84,3 +84,28 @@
     <button onclick="updateAnalysis()">分析更新</button>
 
 </div>
+
+function updateAnalysis() {
+    const filters = {
+        diagnosis: document.getElementById("filter-diagnosis").value,
+        ageGroup: document.getElementById("filter-age").value,
+        environment: document.getElementById("filter-env").value
+    };
+
+    const result = analyzeFiltered(filters);
+
+    const container = document.getElementById("analysis-dashboard");
+
+    if (!result) {
+        container.innerHTML = "データなし";
+        return;
+    }
+
+    container.innerHTML = `
+        <div style="padding:15px;">
+            <div>件数：${result.count}</div>
+            <div>平均気分：${result.avgMood}</div>
+            <div>平均体調：${result.avgCond}</div>
+        </div>
+    `;
+}
