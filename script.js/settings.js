@@ -218,3 +218,21 @@ function toggleDiagnosisOther() {
         input.value = "";
     }
 }
+
+function toggleEnvironmentOther() {
+
+    const check =
+        document.getElementById(
+            "environment-other-check"
+        );
+
+    const input =
+        document.getElementById(
+            "environment-other"
+        );
+
+    input.style.display =
+        check.checked
+            ? "block"
+            : "none";
+}
