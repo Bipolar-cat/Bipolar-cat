@@ -69,3 +69,14 @@ function scrollToLog(timestamp) {
             targetElement.classList.remove('highlight');
         }, 3000);
 }
+
+function loadLogs() {
+
+    const logs =
+        JSON.parse(
+            localStorage.getItem(STORAGE_KEY) || '[]'
+        );
+
+    renderLogs(logs);
+
+}
