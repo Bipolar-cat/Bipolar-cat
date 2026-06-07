@@ -68,7 +68,7 @@ function renderRecordForm() {
 
         <textarea
             id="note"
-            placeholder="ひとことメモ">
+            placeholder="一言メモ">
         </textarea>
 
         <button
@@ -83,14 +83,14 @@ function renderRecordForm() {
 
         area.innerHTML = `
 
-        <label>気分</label>
+        <label>今の気分？</label>
 
         <div
             id="mood-btns"
             class="circle-scroll">
         </div>
 
-        <label>体調</label>
+        <label>体の調子？</label>
 
         <div
             id="cond-btns"
@@ -99,7 +99,7 @@ function renderRecordForm() {
 
         <textarea
             id="note"
-            placeholder="ひとことメモ">
+            placeholder="一言メモ">
         </textarea>
 
         <button
