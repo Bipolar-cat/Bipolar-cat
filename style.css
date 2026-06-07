@@ -1,29 +1,39 @@
 body {
     font-family: 'Helvetica Neue', Arial,
-    "Hiragino Sans", Meiryo, sans-serif;
-    background: #f8f9fa;
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
+
+    background-color: #f8f9fa;
     margin: 0;
     padding: 10px;
+
     display: flex;
     justify-content: center;
 }
 
+/* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
 .container {
     max-width: 450px;
     width: 100%;
     background: white;
-    border-radius: 25px;
     padding: 20px 0;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     text-align: center;
+    overflow: hidden;
 }
 
 h1 {
     color: #5C6BC0;
     font-size: 28px;
+    margin: 5px 0 0 0;
 }
 
 .subtitle {
     color: #888;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: bold;
+    margin-bottom: 15px;
 }
