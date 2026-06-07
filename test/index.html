@@ -1,12 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnerNote</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
 <div class="container">
-    <div class="mode-selector">
-        <button onclick="setMode(3)">3段階</button>
-        <button onclick="setMode(10)">10段階</button>
+
+    <h1>InnerNote</h1>
+    <p class="subtitle">**気分と調子の変化を記録**</p>
+
+   <button onclick="toggleSettings()">⚙ 設定</button>
+
+<div id="settings-modal" style="display: none;">
+    <h3>診断名</h3>
+    <h3>記録方式</h3>
+    <h3>年代</h3>
+    <h3>属性・環境</h3>
+    <button onclick="saveSettings()">保存</button>
+</div>
+
+<select id="diagnosis-select">
+    <option value="">選択してください</option>
+    <option>未診断（健常者）</option>
+    <option>うつ病</option>
+    <option>双極症</option>
+    <option>統合失調症</option>
+    <option>不安障害</option>
+    <option>適応障害</option>
+    <option>発達障害</option>
+    <option>その他</option>
+</select>
+
+<input
+    type="text"
+    id="diagnosis-other"
+    placeholder="診断名を入力"
+    style="display:none;"
+>
+
+<h3>記録方式</h3>
+
+<label>
+    <input type="radio" name="recordMode" value="3">
+    3段階
+</label>
+
+<label>
+    <input type="radio" name="recordMode" value="10">
+    10段階
+</label>
+
+<h3>年代</h3>
+
+<select id="age-select">
+    <option value="">年代を選択</option>
+    <option>10代</option>
+    <option>20代</option>
+    <option>30代</option>
+    <option>40代</option>
+    <option>50代</option>
+    <option>60代</option>
+    <option>70代以上</option>
+</select>
+
+<h3>属性・環境</h3>
+
+<div id="environment-list">
+
+    <label><input type="checkbox" value="学生"> 学生</label>
+    <label><input type="checkbox" value="就労中"> 就労中</label>
+    <label><input type="checkbox" value="休職中"> 休職中</label>
+    <label><input type="checkbox" value="求職中"> 求職中</label>
+    <label><input type="checkbox" value="主婦・主夫"> 主婦・主夫</label>
+    <label><input type="checkbox" value="無職"> 無職</label>
+
+    <label><input type="checkbox" value="一人暮らし"> 一人暮らし</label>
+    <label><input type="checkbox" value="家族と同居"> 家族と同居</label>
+
+    <label><input type="checkbox" value="配偶者あり"> 配偶者あり</label>
+    <label><input type="checkbox" value="子どもあり"> 子どもあり</label>
+
+    <label><input type="checkbox" value="通院中"> 通院中</label>
+    <label><input type="checkbox" value="往診"> 往診</label>
+    <label><input type="checkbox" value="障害者手帳あり"> 障害者手帳あり</label>
+
+    <label><input type="checkbox" value="福祉サービス利用中">
+        福祉サービス利用中
+    </label>
+
+    <label>
+        <input type="checkbox"
+               value="親族に同じ疾患の人がいる">
+        親族に同じ疾患の人がいる
+    </label>
+
+    <input
+    type="text"
+    id="diagnosis-other"
+    placeholder="その他を入力"
+    style="display:none;"
+>
+
+</div>
+
+<button onclick="saveSettings()">
+    保存
+</button>
+    
+    <!-- 現在の診断名エリア -->
+    <div class="diagnosis-area">
+
+        <textarea
+            id="note"
+            placeholder="今の気持ちをメモ..."></textarea>
+
+        <button
+            class="save-btn"
+            onclick="saveData()">
+
+            記録する
+
+        </button>
+
     </div>
 
-    <div id="input-area">
+    <!-- グラフ -->
+
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Summary -->
+
+    <div class="summary-section">
+
+        <button
+            class="summary-action-btn"
+            onclick="generateSummary()">
+
+            summary (一定期間まとめ)
+
+        </button>
+
+        <div id="summary-ts">
+            前回まとめ作成：なし
         </div>
-    
-    <canvas id="myChart"></canvas>
-    <div id="recent-records"></div>
+
+        <div id="summary-card">
+
+            <span class="report-header">
+                【一定期間まとめレポート】
+            </span>
+
+            <div id="summary-content"></div>
+
+        </div>
+
+    </div>
+
+    <!-- 履歴 -->
+
+    <div class="log-title">
+        最近の記録
+    </div>
+
+    <div id="log-list" class="log-list"></div>
+
 </div>
+
+    <script>
+        function toggleSettings() {
+            const modal = document.querySelector('.settings-modal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>
