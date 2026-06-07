@@ -50,6 +50,10 @@ body {
     margin-bottom: 10px;
 }
 
+#diagnosis-select {
+    width: 100%;
+}
+
         /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
         .diagnosis-area {
             width: 66.6%;
