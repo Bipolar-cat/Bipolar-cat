@@ -78,7 +78,19 @@ if (!saved) return;
 const settings =
     JSON.parse(saved);
 
-// ← ここに入れる
+function loadSettings() {
+
+    const saved =
+        localStorage.getItem(
+            SETTINGS_KEY
+        );
+
+    if (!saved) return;
+
+    const settings =
+        JSON.parse(saved);
+
+    // 診断名復元
     if (
         settings.diagnosis &&
         ![
@@ -91,6 +103,53 @@ const settings =
             "発達障害"
         ].includes(settings.diagnosis)
     ) {
+
+        document.getElementById(
+            "diagnosis-select"
+        ).value = "その他";
+
+        document.getElementById(
+            "diagnosis-other"
+        ).value = settings.diagnosis;
+
+    } else {
+
+        document.getElementById(
+            "diagnosis-select"
+        ).value =
+            settings.diagnosis || "";
+
+    }
+
+    // 年代復元
+    document.getElementById(
+        "age-select"
+    ).value =
+        settings.age || "";
+
+    // 記録方式復元
+    const radio =
+        document.querySelector(
+            `input[name="recordMode"][value="${settings.recordMode}"]`
+        );
+
+    if (radio) radio.checked = true;
+
+    // 環境復元
+    document
+        .querySelectorAll(
+            '#environment-list input[type="checkbox"]'
+        )
+        .forEach(cb => {
+
+            cb.checked =
+                settings.environments?.includes(
+                    cb.value
+                ) || false;
+
+        });
+
+}
 
         document.getElementById(
             "diagnosis-select"
