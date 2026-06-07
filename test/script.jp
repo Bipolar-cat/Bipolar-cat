@@ -1,16 +1,22 @@
-function setMode(level) {
-    localStorage.setItem('innernote_mode', level); // 設定を保存
-    renderButtons(level); // 画面を再描画
-}
+window.onload = () => {
 
-function renderButtons(level) {
-    const area = document.getElementById('input-area');
-    area.innerHTML = ''; // 一旦クリア
-    
-    // levelが3なら3つのボタン、10なら10個のボタンを生成して追加する処理
-    for(let i=1; i<=level; i++) {
-        const btn = document.createElement('button');
-        btn.innerText = i;
-        area.appendChild(btn);
+    createCircleButtons('mood-btns', 'mood');
+    createCircleButtons('cond-btns', 'cond');
+
+    loadSettings();
+
+    loadLogs();
+
+    renderChart();
+
+};
+
+function toggleSettings() {
+    const modal = document.getElementById('settings-modal');
+    // 現在の状態を確認して切り替え
+    if (modal.style.display === 'none' || modal.style.display === '') {
+        modal.style.display = 'block';
+    } else {
+        modal.style.display = 'none';
     }
 }
