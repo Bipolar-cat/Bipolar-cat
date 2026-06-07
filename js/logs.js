@@ -36,8 +36,7 @@ function openRecord() {
 
 function renderRecordForm() {
 
-    const settings =
-        loadSettingsData();
+    const settings = loadSettingsData();
 
     const area =
         document.getElementById(
@@ -50,13 +49,73 @@ function renderRecordForm() {
     ) {
 
         area.innerHTML = `
-            <p>Step3記録フォーム</p>
+
+        <label>気分</label>
+
+        <div class="step3-group">
+            <button>良い</button>
+            <button>普通</button>
+            <button>低い</button>
+        </div>
+
+        <label>体調</label>
+
+        <div class="step3-group">
+            <button>良い</button>
+            <button>普通</button>
+            <button>悪い</button>
+        </div>
+
+        <textarea
+            id="note"
+            placeholder="ひとことメモ">
+        </textarea>
+
+        <button
+            class="save-btn">
+
+            保存
+
+        </button>
         `;
 
     } else {
 
         area.innerHTML = `
-            <p>Step10記録フォーム</p>
+
+        <label>気分</label>
+
+        <div
+            id="mood-btns"
+            class="circle-scroll">
+        </div>
+
+        <label>体調</label>
+
+        <div
+            id="cond-btns"
+            class="circle-scroll">
+        </div>
+
+        <textarea
+            id="note"
+            placeholder="ひとことメモ">
+        </textarea>
+
+        <button
+            class="save-btn">
+
+            保存
+
+        </button>
         `;
+
+        createCircleButtons(
+            "mood-btns"
+        );
+
+        createCircleButtons(
+            "cond-btns"
+        );
     }
 }
