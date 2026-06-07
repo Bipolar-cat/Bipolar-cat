@@ -103,3 +103,14 @@ h1 {
 .record-area h2 {
     margin-top: 0;
 }
+
+.step3-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.step3-group button {
+    flex: 1;
+    height: 48px;
+}
