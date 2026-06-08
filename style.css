@@ -109,6 +109,10 @@ h1 {
     box-sizing: border-box;
 }
 
+#settings-modal {
+    display: none;
+}
+
 .record-mode {
     margin-top: 10px;
 }
