@@ -43,34 +43,31 @@
      </div>
 
     <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
-    </div>
+   <div id="diagnosis-fixed-container" ...>
+    <span id="diagnosis-text">診断名: 未設定</span>
+    <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
 </div>
 
-  <div id="settings-modal" style="display:none;">
+<div id="settings-modal" style="display:none;">
     <label><input type="radio" name="recordMode" value="step3" checked> 3段階</label>
     <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
     <button onclick="saveSettings()">保存</button>
 </div>
 
-<div id="mood-btns" class="btn-group"></div>
-<div id="cond-btns" class="btn-group"></div>
+<div class="input-section">
+    <label class="label">今の気分？</label>
+    <div class="scroll-wrapper">
+        <div id="mood-btns" class="btn-group-circle"></div>
+    </div>
 
-        <div class="input-section">
-            <label class="label">今の気分？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="mood-btns" class="btn-group-circle"></div>
-            </div>
+    <label class="label">体の調子？</label>
+    <div class="scroll-wrapper">
+        <div id="cond-btns" class="btn-group-circle"></div>
+    </div>
 
-            <label class="label">体の調子？ (1～10)</label>
-            <div class="scroll-wrapper">
-                <div id="cond-btns" class="btn-group-circle"></div>
-            </div>
-
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            <button class="save-btn" onclick="saveData()">記録する</button>
-        </div>
+    <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+    <button class="save-btn" onclick="saveData()">記録する</button>
+</div>
 
         <div class="chart-container">
             <canvas id="myChart"></canvas>
