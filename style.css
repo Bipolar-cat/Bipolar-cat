@@ -24,26 +24,25 @@ body {
     overflow: hidden;
 }
 
-/* 右上に配置する⚙ボタン */
+/* 右上の設定ボタン */
 .settings-trigger-btn {
-    position: fixed;   /* 画面の右上に固定 */
-    top: 15px;         /* 上からの距離 */
-    right: 15px;       /* 右からの距離 */
-    z-index: 9999;     /* 他の要素より手前に表示 */
-    
-    background-color: #ffffff; /* 背景を白に */
-    border: 1px solid #ddd;    /* 薄い枠線 */
-    border-radius: 50%;        /* 丸い形 */
-    width: 45px;
-    height: 45px;
-    font-size: 20px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+    background: none;
+    border: none;
+    font-size: 28px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 影で立体感を出す */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #5C6BC0; /* 歯車アイコンの色 */
+    color: #555;
 }
+
+/* ボタンのデザイン */
+.btn-group { display: flex; gap: 8px; margin-bottom: 10px; }
+.mood-btn, .cond-btn { flex: 1; padding: 10px; border: 1px solid #ddd; background: white; border-radius: 8px; cursor: pointer; }
+.mood-btn.active { background-color: #4A90E2; color: white; border-color: #4A90E2; }
+.cond-btn.active { background-color: #F5A623; color: white; border-color: #F5A623; }
+
 
 h1 {
     color: #5C6BC0;
