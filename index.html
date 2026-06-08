@@ -11,60 +11,38 @@
 </head>
 <body>
 
-    <button class="settings-trigger-btn" onclick="toggleSettings()">⚙</button>
-
-    <div id="settings-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h2>設定</h2>
-            <select id="diagnosis-select" onchange="lockDiagnosis()">
-                <option value="">主な診断名を選択</option>
-                <option value="うつ病">うつ病</option>
+ <div id="settings-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>設定</h2>
+        
+        <select id="diagnosis-select">
+            <option value="">主な診断名を選択</option>
+            <option value="うつ病">うつ病</option>
             <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
-
-            <select id="age-select">
-                <option value="10">10代</option>
-                <option value="20">20代</option>
-                <option value="30">30代</option>
-                <option value="40">40代</option>
-                <option value="50">50代</option>
-                <option value="60">60代</option>
-                <option value="70">70代</option>
-                <option value="80">80代以上</option>
+            </select>
+        <select id="age-select">
+            <option value="10">10代</option>
+            <option value="20">20代</option>
             </select>
 
-            <hr>
-            <label><input type="checkbox" name="status" value="full-time"> 正社員</label><br>
-            <label><input type="checkbox" name="status" value="part-time"> パート・アルバイト</label><br>
-            <label><input type="checkbox" name="status" value="leave"> 休職中</label><br>
-            <label><input type="checkbox" name="status" value="unemployed"> 離職中</label><br>
-            <label><input type="checkbox" name="status" value="student"> 就学中</label><br>
-            <label><input type="checkbox" name="status" value="school-leave"> 休学中</label><br>
-            <label><input type="checkbox" name="status" value="none"> 無職</label><br>
+        <hr>
+        <label><input type="checkbox" name="status" value="full-time"> 正社員</label><br>
+        <label><input type="checkbox" name="status" value="part-time"> パート・アルバイト</label><br>
+        <label><input type="checkbox" name="status" value="leave"> 休職中</label><br>
 
-            <label><input type="checkbox" name="family" value="housewife"> 主婦・主夫</label><br>
-            <label><input type="checkbox" name="family" value="spouse"> 配偶者有</label><br>
-            <label><input type="checkbox" name="family" value="kids"> 子ども有</label><br>
-            <label><input type="checkbox" name="family" value="alone"> 一人暮らし</label><br>
-            <label><input type="checkbox" name="family" value="family-live"> 家族と同居（誰：<input type="text" id="family-memo" style="width: 80px;">）</label><br>
-            <label><input type="checkbox" name="family" value="other-live"> 家族以外と同居（誰：<input type="text" id="other-memo" style="width: 80px;">）</label><br>
+        <hr>
+        <label><input type="checkbox" name="family" value="alone"> 一人暮らし</label><br>
+        <label><input type="checkbox" name="family" value="family-live"> 家族と同居（誰：<input type="text" id="family-memo" placeholder="例：両親">）</label><br>
+        <label><input type="checkbox" name="family" value="other-live"> 家族以外と同居（誰：<input type="text" id="other-memo" placeholder="例：友人">）</label><br>
 
-            <label><input type="checkbox" name="other" value="hospital"> 通院中</label><br>
-            <label><input type="checkbox" name="other" value="welfare"> 福祉サービス利用中</label><br>
-            <label><input type="checkbox" name="other" value="genetic"> 親族に同じ疾患の人がいる</label><br>
+        <hr>
+        <label><input type="radio" name="recordMode" value="step3" checked> 3段階</label>
+        <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
 
-            <hr>
-            <label><input type="radio" name="recordMode" value="step3" checked> 3段階</label>
-            <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
-            <br><br>
-            <button onclick="saveSettings()">保存して閉じる</button>
-        </div>
+        <br><br>
+        <button onclick="saveSettings()">保存して閉じる</button>
     </div>
+</div>
 
     <div class="container">
         <h1>InnerNote</h1>
