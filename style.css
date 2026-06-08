@@ -138,7 +138,7 @@
 
         #mood-btns button.active {
             border: 2px solid #bfdbfe;
-            color: #3b82f6;
+            color: #f3f4f6;
             background-color: #eff6ff;
             font-weight: bold;
         }
