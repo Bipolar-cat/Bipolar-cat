@@ -31,18 +31,12 @@ function renderStep3Buttons() {
     // 体調ボタンも同様に生成
 }
 
-// 必要な機能をインポート
 import { toggleSettings } from './settings.js';
-import { saveData } from './storage.js';
 import { lockDiagnosis, unlockDiagnosis } from './settings.js';
+import { saveData } from './storage.js';
 import { DIAGNOSIS_KEY, saveData } from './storage.js';
-
-
-// HTMLから直接関数を呼べるようにwindowへ登録
+// これを忘れるとHTMLのonclickから関数が見つかりません
 window.toggleSettings = toggleSettings;
 window.saveData = saveData;
 window.lockDiagnosis = lockDiagnosis;
 window.unlockDiagnosis = unlockDiagnosis;
-
-// その他の初期化処理...
-
