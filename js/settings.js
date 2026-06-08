@@ -53,7 +53,7 @@ function saveSettings() {
 
 function openSettings() {
 
-    alert("openSettings実行");
+    alert("開く");
 
     document.getElementById(
         "settings-modal"
