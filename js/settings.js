@@ -49,6 +49,10 @@ function saveSettings() {
     closeSettings();
 }
 
+alert("設定を保存しました");
+
+location.reload();
+
 function loadSettings() {
 
     const saved =
