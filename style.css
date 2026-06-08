@@ -59,11 +59,14 @@ h1 {
 }
 
 .settings-modal {
-    display: none;
-    text-align: left;
+    display: none; /* ここが「初期は隠す」設定です */
+    background: #fff;
     padding: 20px;
-    border-top: 1px solid #eee;
+    border-radius: 15px;
+    margin-top: 10px;
+    border: 1px solid #eee;
 }
+
 
 .settings-modal h2 {
     margin-top: 0;
