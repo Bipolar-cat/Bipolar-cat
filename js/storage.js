@@ -19,3 +19,7 @@ export const getSettings = () => {
     const defaultSettings = { recordMode: 'step3', diagnosis: '未設定', age: '' };
     return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || defaultSettings;
 };
+
+// js/storage.js
+export const DIAGNOSIS_KEY = 'diagnosis_data'; // この行が必要です！
+export const saveData = () => { ... };
