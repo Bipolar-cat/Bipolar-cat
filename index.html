@@ -57,37 +57,49 @@
 
     <div class="record-mode">
 
-        <div id="step3-area" style="display:none;">
+        <!-- 3段階モード -->
+<div id="step3-area" style="display:none;">
 
-    気分
-    <button>😊</button>
-    <button>😐</button>
-    <button>😞</button>
+    <h3>気分</h3>
 
-    体調
-    <button>😊</button>
-    <button>😐</button>
-    <button>😞</button>
+    <button>😊 良い</button>
+    <button>😐 普通</button>
+    <button>😞 悪い</button>
+
+    <h3>体調</h3>
+
+    <button>😊 良い</button>
+    <button>😐 普通</button>
+    <button>😞 悪い</button>
 
 </div>
 
+<!-- 10段階モード -->
 <div id="step10-area">
 
-    <div id="mood-btns"></div>
+    <label class="label">
+        気分
+    </label>
 
-    <div id="cond-btns"></div>
+    <div class="scroll-wrapper">
+        <div
+            id="mood-btns"
+            class="btn-group-circle">
+        </div>
+    </div>
+
+    <label class="label">
+        体調
+    </label>
+
+    <div class="scroll-wrapper">
+        <div
+            id="cond-btns"
+            class="btn-group-circle">
+        </div>
+    </div>
 
 </div>
-
-        <label>
-            <input type="radio"
-                   name="record-mode"
-                   value="step10"
-                   checked>
-            Step10（詳細）
-        </label>
-
-    </div>
 
     <button onclick="saveSettings()">
         保存
