@@ -53,6 +53,8 @@ function saveSettings() {
 
 function openSettings() {
 
+    alert("openSettings実行");
+
     document.getElementById(
         "settings-modal"
     ).style.display = "block";
