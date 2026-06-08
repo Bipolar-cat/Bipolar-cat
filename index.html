@@ -51,13 +51,40 @@
             <option value="80">80代以上</option>
         </select>
 
-        <select id="environment-select">
-            <option value="work">仕事</option>
-            <option value="school">学校</option>
-        </select>
+        <div class="modal-content" style="max-height: 80vh; overflow-y: auto;">
+    <h2>詳細設定</h2>
+    
+    <div class="setting-group">
+        <h3>就労・学業状況</h3>
+        <label><input type="checkbox" name="status" value="full-time"> 正社員</label><br>
+        <label><input type="checkbox" name="status" value="part-time"> パート・アルバイト</label><br>
+        <label><input type="checkbox" name="status" value="leave"> 休職中</label><br>
+        <label><input type="checkbox" name="status" value="unemployed"> 離職中</label><br>
+        <label><input type="checkbox" name="status" value="student"> 就学中</label><br>
+        <label><input type="checkbox" name="status" value="school-leave"> 休学中</label><br>
+        <label><input type="checkbox" name="status" value="none"> 無職</label>
+    </div>
 
- 
-     </div>
+    <div class="setting-group">
+        <h3>家族・同居状況</h3>
+        <label><input type="checkbox" name="family" value="housewife"> 主婦・主夫</label><br>
+        <label><input type="checkbox" name="family" value="spouse"> 配偶者有</label><br>
+        <label><input type="checkbox" name="family" value="kids"> 子ども有</label><br>
+        <label><input type="checkbox" name="family" value="alone"> 一人暮らし</label><br>
+        <label><input type="checkbox" name="family" value="family-live"> 家族と同居（誰：<input type="text" id="family-memo" style="width: 80px;">）</label><br>
+        <label><input type="checkbox" name="family" value="other-live"> 家族以外と同居（誰：<input type="text" id="other-memo" style="width: 80px;">）</label>
+    </div>
+
+    <div class="setting-group">
+        <h3>その他</h3>
+        <label><input type="checkbox" name="other" value="hospital"> 通院中</label><br>
+        <label><input type="checkbox" name="other" value="welfare"> 福祉サービス利用中</label><br>
+        <label><input type="checkbox" name="other" value="genetic"> 親族に同じ疾患の人がいる</label>
+    </div>
+
+    <button onclick="saveSettings()">保存して閉じる</button>
+</div>
+   </div>
 
     <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
    <div id="diagnosis-fixed-container" ...>
