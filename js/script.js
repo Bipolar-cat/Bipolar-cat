@@ -6,3 +6,4 @@ window.onload = () => {
 
     renderChart();
 };
+console.log("script.js読込");
