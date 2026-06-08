@@ -48,6 +48,15 @@
     </div>
 </div>
 
+  <div id="settings-modal" style="display:none;">
+    <label><input type="radio" name="recordMode" value="step3" checked> 3段階</label>
+    <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
+    <button onclick="saveSettings()">保存</button>
+</div>
+
+<div id="mood-btns" class="btn-group"></div>
+<div id="cond-btns" class="btn-group"></div>
+
         <div class="input-section">
             <label class="label">今の気分？ (1～10)</label>
             <div class="scroll-wrapper">
