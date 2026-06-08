@@ -35,6 +35,8 @@ function renderStep3Buttons() {
 import { toggleSettings } from './settings.js';
 import { saveData } from './storage.js';
 import { lockDiagnosis, unlockDiagnosis } from './settings.js';
+import { DIAGNOSIS_KEY, saveData } from './storage.js';
+
 
 // HTMLから直接関数を呼べるようにwindowへ登録
 window.toggleSettings = toggleSettings;
