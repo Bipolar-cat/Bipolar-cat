@@ -12,6 +12,7 @@ function loadSettings() {
 const SETTINGS_KEY = "innernote_settings";
 
 function saveSettings() {
+    alert("saveSettings実行");
 
     const settings = {
 
