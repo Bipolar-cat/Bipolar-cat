@@ -14,14 +14,24 @@ export function toggleSettings() {
 // HTMLのonclickから呼ぶためにwindowへ登録
 window.toggleSettings = toggleSettings;
 
-// js/settings.js
 export function saveSettings() {
-    const mode = document.querySelector('input[name="recordMode"]:checked').value;
+    // 各値を取得
     const settings = {
-        recordMode: mode,
-        diagnosis: document.getElementById('diagnosis-select').value
-        // 他の属性・環境項目もここに追加
+        diagnosis: document.getElementById('diagnosis-select').value,
+        age: document.getElementById('age-select').value,
+        status: Array.from(document.querySelectorAll('input[name="status"]:checked')).map(el => el.value),
+        family: Array.from(document.querySelectorAll('input[name="family"]:checked')).map(el => el.value),
+        mode: document.querySelector('input[name="recordMode"]:checked').value
     };
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-    location.reload(); // 設定を反映
+    
+    // 保存
+    localStorage.setItem('user_settings', JSON.stringify(settings));
+    
+    // 診断名テキストの更新
+    document.getElementById('diagnosis-text').innerText = "診断名: " + settings.diagnosis;
+    
+    // モーダルを閉じる
+    toggleSettings();
+    location.reload(); // 設定反映のためリロード
 }
+
