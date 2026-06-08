@@ -11,3 +11,11 @@ export const Storage = {
     getDiagnosis: () => localStorage.getItem(DIAGNOSIS_KEY) || "未設定"
 };
 
+// js/storage.js
+export const SETTINGS_KEY = 'innernote_settings';
+
+export const getSettings = () => {
+    // 初期値として recordMode: 'step3' を設定
+    const defaultSettings = { recordMode: 'step3', diagnosis: '未設定', age: '' };
+    return JSON.parse(localStorage.getItem(SETTINGS_KEY)) || defaultSettings;
+};
