@@ -97,9 +97,13 @@ function loadSettings() {
 
     if (radio) radio.checked = true;
 
-    // STEP3 / STEP10 切替
-    const mode =
-        settings.recordMode || "10";
+   const mode =
+    settings.recordMode || "10";
+
+console.log(
+    "mode=",
+    mode
+);
 
     if (mode === "3") {
 
