@@ -24,6 +24,27 @@ body {
     overflow: hidden;
 }
 
+/* 右上に配置する⚙ボタン */
+.settings-trigger-btn {
+    position: fixed;   /* 画面の右上に固定 */
+    top: 15px;         /* 上からの距離 */
+    right: 15px;       /* 右からの距離 */
+    z-index: 9999;     /* 他の要素より手前に表示 */
+    
+    background-color: #ffffff; /* 背景を白に */
+    border: 1px solid #ddd;    /* 薄い枠線 */
+    border-radius: 50%;        /* 丸い形 */
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 影で立体感を出す */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5C6BC0; /* 歯車アイコンの色 */
+}
+
 h1 {
     color: #5C6BC0;
     font-size: 28px;
@@ -35,40 +56,6 @@ h1 {
     font-size: 0.75rem;
     font-weight: bold;
     margin-bottom: 15px;
-}
-
-/* ⚙ボタンのスタイル */
-.settings-trigger-btn {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 1000; /* 他の要素より上に表示 */
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* モーダルのスタイル */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 2000;
-}
-.modal-content {
-    background: white;
-    margin: 20% auto;
-    padding: 20px;
-    width: 80%;
-    border-radius: 15px;
 }
 
 .home-menu {
