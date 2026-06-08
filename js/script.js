@@ -1,49 +1,36 @@
-import { Storage, saveData, getSettings } from './storage.js';
-import { toggleSettings } from './settings.js';
-import { renderLogs } from './logs.js'; // これが必要！
-// 必要であれば initChart などもここへ
+import { Storage, saveData } from './storage.js';
+import { toggleSettings, saveSettings } from './settings.js';
+import { renderLogs } from './logs.js';
 
+// HTMLから直接関数を呼べるようにする
 window.toggleSettings = toggleSettings;
-window.saveData = saveData;
-window.setMood = (val) => { console.log("Mood set to:", val); }; // 例：setMoodの仮定義
+window.saveSettings = saveSettings; // 保存ボタン用
+window.saveData = saveData;         // 記録ボタン用
 
-window.onload = () => {
-    // ログの描画
-    const logs = Storage.getLogs();
-    if (typeof renderLogs === 'function') {
-        renderLogs(logs);
-    }
-    
-    // 設定による画面生成
-    const settings = getSettings(); // Storage.getSettings() または単体インポートした関数を使用
-    if (settings.recordMode === 'step3') {
-        renderStep3Buttons();
-    } else {
-        renderStep10Buttons();
+// 関数定義を追加
+window.renderStep3Buttons = function() {
+    const moodBtns = document.getElementById('mood-btns');
+    if (moodBtns) {
+        moodBtns.innerHTML = `
+            <button onclick="setMood(1)">低</button>
+            <button onclick="setMood(2)">普通</button>
+            <button onclick="setMood(3)">良い</button>
+        `;
     }
 };
 
-function renderStep10Buttons() {
-    const moodBtns = document.getElementById('mood-btns');
-    if (moodBtns) moodBtns.innerHTML = "10段階ボタンをここに生成";
-}
-
-// js/script.js
-export function saveData() {
-    const note = document.getElementById('note').value;
-    if (!note) {
-        alert("メモを入力してください");
-        return;
+window.onload = () => {
+    const logs = Storage.getLogs();
+    if (typeof renderLogs === 'function') renderLogs(logs);
+    
+    // Step3ボタンの呼び出し
+    if (typeof window.renderStep3Buttons === 'function') {
+        window.renderStep3Buttons();
     }
-    
-    // データの保存処理
-    const newLog = { 
-        note: note, 
-        timestamp: new Date().toLocaleString() 
-    };
-    Storage.saveLog(newLog); // storage.jsの機能を利用
-    
-    alert("記録しました！");
-    document.getElementById('note').value = ''; // 入力欄をクリア
-    location.reload(); // 画面を更新してリストを表示
-}
+};
+
+// 追加：ボタンから呼ばれる関数をwindowに登録
+window.setMood = function(val) {
+    console.log("気分がセットされました:", val);
+    // ここに記録用のロジック（または状態保持）を実装していきます
+};
