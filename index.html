@@ -48,10 +48,14 @@
     <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
 </div>
 
-<div id="settings-modal" style="display:none;">
-    <label><input type="radio" name="recordMode" value="step3" checked> 3段階</label>
-    <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
-    <button onclick="saveSettings()">保存</button>
+<div id="settings-modal" class="modal">
+    <div class="modal-content">
+        <h2>設定</h2>
+        <label><input type="radio" name="recordMode" value="step3"> 3段階</label>
+        <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
+        <button onclick="saveSettings()">保存</button>
+        <button onclick="toggleSettings()">閉じる</button>
+    </div>
 </div>
 
 <div class="input-section">
