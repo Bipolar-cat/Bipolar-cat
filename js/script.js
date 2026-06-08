@@ -1,4 +1,4 @@
-import { Storage } from './storage.js';
+import { Storage, saveData } from './storage.js';
 import { renderLogs } from './logs.js';
 import { initChart } from './chart.js';
 
