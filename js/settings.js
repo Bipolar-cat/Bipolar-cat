@@ -1,3 +1,14 @@
+function loadSettings() {
+
+    alert("loadSettings実行");
+
+    const saved =
+        localStorage.getItem(
+            SETTINGS_KEY
+        );
+
+    ...
+}
 const SETTINGS_KEY = "innernote_settings";
 
 function saveSettings() {
