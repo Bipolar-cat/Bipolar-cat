@@ -31,8 +31,10 @@ function renderStep3Buttons() {
     // 体調ボタンも同様に生成
 }
 
+import { toggleSettings } from './settings.js';
+import { saveData } from './storage.js'; // 各自のファイルからインポート
 
-// 各JSファイルで定義した関数をHTMLから呼べるようにする
-window.saveData = saveData;
+// これによりHTMLから呼び出せるようになる
 window.toggleSettings = toggleSettings;
-window.saveSettings = saveSettings;
+window.saveData = saveData;
+// 必要に応じて他の関数も追加してください
