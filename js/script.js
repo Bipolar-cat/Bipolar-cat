@@ -1,14 +1,10 @@
-// 【重要】インポートは一度だけ書く
-import { Storage, saveData as importedSaveData, getSettings } from './storage.js';
-import { renderLogs } from './logs.js';
-import { initChart } from './chart.js';
-import { toggleSettings, lockDiagnosis, unlockDiagnosis } from './settings.js';
+// js/script.js
+import { Storage, saveData, getSettings } from './storage.js';
+import { toggleSettings } from './settings.js'; // settings.js からインポート
 
-// 名前を一度だけwindowに登録（重複させない）
+// windowへの登録
 window.toggleSettings = toggleSettings;
-window.saveData = importedSaveData; // インポートした関数を登録
-window.lockDiagnosis = lockDiagnosis;
-window.unlockDiagnosis = unlockDiagnosis;
+window.saveData = saveData;
 
 window.onload = () => {
     // 既存の初期化処理
