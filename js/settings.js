@@ -1,4 +1,13 @@
-function openSettings() {
+function saveSettings() {
+
+    alert("save開始");
+
+    let diagnosis =
+        document.getElementById(
+            "diagnosis-select"
+        ).value;
+    
+    function openSettings() {
 
     document.getElementById(
         "settings-modal"
