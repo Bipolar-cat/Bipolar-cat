@@ -60,42 +60,40 @@
         <!-- 3段階モード -->
 <div id="step3-area" style="display:none;">
 
-    <h3>気分</h3>
+    <label class="label">気分</label>
 
-    <button>😊 良い</button>
-    <button>😐 普通</button>
-    <button>😞 悪い</button>
+    <div class="btn-group-3">
+        <button onclick="selectMood3(3)">😊 良い</button>
+        <button onclick="selectMood3(2)">😐 普通</button>
+        <button onclick="selectMood3(1)">😞 悪い</button>
+    </div>
 
-    <h3>体調</h3>
+    <label class="label">体調</label>
 
-    <button>😊 良い</button>
-    <button>😐 普通</button>
-    <button>😞 悪い</button>
+    <div class="btn-group-3">
+        <button onclick="selectCond3(3)">😊 良い</button>
+        <button onclick="selectCond3(2)">😐 普通</button>
+        <button onclick="selectCond3(1)">😞 悪い</button>
+    </div>
 
 </div>
 
 <!-- 10段階モード -->
 <div id="step10-area">
 
-    <label class="label">
-        気分
-    </label>
+    <label class="label">気分</label>
 
     <div class="scroll-wrapper">
-        <div
-            id="mood-btns"
-            class="btn-group-circle">
+        <div id="mood-btns"
+             class="btn-group-circle">
         </div>
     </div>
 
-    <label class="label">
-        体調
-    </label>
+    <label class="label">体調</label>
 
     <div class="scroll-wrapper">
-        <div
-            id="cond-btns"
-            class="btn-group-circle">
+        <div id="cond-btns"
+             class="btn-group-circle">
         </div>
     </div>
 
