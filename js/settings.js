@@ -1,3 +1,8 @@
+function saveSettings() {
+
+    alert("saveSettings実行");
+
+}
 function loadSettings() {
 
     alert("loadSettings実行");
