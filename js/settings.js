@@ -87,9 +87,6 @@ if (mode === "3") {
 
     if (radio) radio.checked = true;
 
-    .settings-modal button{
-    display:block;
-}
     const mode =
         settings.recordMode || "10";
 
