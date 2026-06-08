@@ -177,21 +177,33 @@ h1 {
     font-size: 18px;
 }
 
+/* メモ欄のデザイン */
 textarea {
     width: 100%;
-    height: 60px;
-    margin-top: 15px;
-    padding: 10px;
+    height: 50px;
+    margin: 5px 0 15px 0;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: none;
+    background-color: #f3f4f6;
+    font-size: 14px;
     box-sizing: border-box;
+    resize: none;
+    color: #333;
 }
 
+/* 記録するボタンのデザイン */
 .save-btn {
     width: 100%;
-    margin-top: 15px;
-    height: 48px;
-    border: none;
-    border-radius: 24px;
-    background: #4A90E2;
+    padding: 12px;
+    background-color: #4A90E2;
     color: white;
-    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: block;
 }
+
