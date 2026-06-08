@@ -22,3 +22,8 @@ window.onload = () => {
         renderStep10Buttons();
     }
 };
+
+function renderStep10Buttons() {
+    const moodBtns = document.getElementById('mood-btns');
+    if (moodBtns) moodBtns.innerHTML = "10段階ボタンをここに生成";
+}
