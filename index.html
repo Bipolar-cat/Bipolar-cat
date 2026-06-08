@@ -49,18 +49,20 @@
 
 
         <hr>
+       <label><input type="checkbox" name="family" value="housewife"> 主婦・主夫</label><br>
+        <label><input type="checkbox" name="family" value="spouse"> 配偶者有</label><br>
+        <label><input type="checkbox" name="family" value="kids"> 子ども有</label><br>
         <label><input type="checkbox" name="family" value="alone"> 一人暮らし</label><br>
-        <label><input type="checkbox" name="family" value="family-live"> 家族と同居（誰：<input type="text" id="family-memo" placeholder="例：両親">）</label><br>
-        <label><input type="checkbox" name="family" value="other-live"> 家族以外と同居（誰：<input type="text" id="other-memo" placeholder="例：友人">）</label><br>
+        <label><input type="checkbox" name="family" value="family-live"> 家族と同居（誰：<input type="text" id="family-memo" style="width: 80px;">）</label><br>
+        <label><input type="checkbox" name="family" value="other-live"> 家族以外と同居（誰：<input type="text" id="other-memo" style="width: 80px;">）</label><br>
+        <label><input type="checkbox" name="other" value="hospital"> 通院中</label><br>
+        <label><input type="checkbox" name="other" value="welfare"> 福祉サービス利用中</label><br>
+        <label><input type="checkbox" name="other" value="genetic"> 親族に同じ疾患の人がいる</label><br>
 
-        <hr>
-        <label><input type="radio" name="recordMode" value="step3" checked> 3段階</label>
-        <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
-
-        <br><br>
         <button onclick="saveSettings()">保存して閉じる</button>
     </div>
 </div>
+
 
     <div class="container">
         <h1>InnerNote</h1>
