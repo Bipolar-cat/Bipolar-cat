@@ -60,6 +60,29 @@ function loadSettings() {
 
     const settings =
         JSON.parse(saved);
+    const mode = settings.recordMode || "10";
+
+if (mode === "3") {
+
+    document.getElementById(
+        "step3-area"
+    ).style.display = "block";
+
+    document.getElementById(
+        "step10-area"
+    ).style.display = "none";
+
+} else {
+
+    document.getElementById(
+        "step3-area"
+    ).style.display = "none";
+
+    document.getElementById(
+        "step10-area"
+    ).style.display = "block";
+
+}
 
     // 診断名復元
     document.getElementById(
