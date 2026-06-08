@@ -27,3 +27,23 @@ function renderStep10Buttons() {
     const moodBtns = document.getElementById('mood-btns');
     if (moodBtns) moodBtns.innerHTML = "10段階ボタンをここに生成";
 }
+
+// js/script.js
+export function saveData() {
+    const note = document.getElementById('note').value;
+    if (!note) {
+        alert("メモを入力してください");
+        return;
+    }
+    
+    // データの保存処理
+    const newLog = { 
+        note: note, 
+        timestamp: new Date().toLocaleString() 
+    };
+    Storage.saveLog(newLog); // storage.jsの機能を利用
+    
+    alert("記録しました！");
+    document.getElementById('note').value = ''; // 入力欄をクリア
+    location.reload(); // 画面を更新してリストを表示
+}
