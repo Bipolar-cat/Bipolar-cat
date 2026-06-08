@@ -13,3 +13,15 @@ export function toggleSettings() {
 }
 // HTMLのonclickから呼ぶためにwindowへ登録
 window.toggleSettings = toggleSettings;
+
+// js/settings.js
+export function saveSettings() {
+    const mode = document.querySelector('input[name="recordMode"]:checked').value;
+    const settings = {
+        recordMode: mode,
+        diagnosis: document.getElementById('diagnosis-select').value
+        // 他の属性・環境項目もここに追加
+    };
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    location.reload(); // 設定を反映
+}
