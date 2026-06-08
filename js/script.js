@@ -11,8 +11,7 @@ window.onload = () => {
 import { getSettings } from './storage.js';
 
 window.onload = () => {
-    const settings = getSettings();
-    
+    const settings = Storage.getSettings();
     // settings.recordMode が 'step3' の場合にStep3用ボタンを表示
     if (settings.recordMode === 'step3') {
         renderStep3Buttons();
