@@ -9,7 +9,7 @@ export function lockDiagnosis() {
 
 export function toggleSettings() {
     const modal = document.getElementById('settings-modal');
-    modal.style.display = (modal.style.display === 'none' || modal.style.display === '') ? 'block' : 'none';
+    modal.style.display = (modal.style.display === 'none') ? 'block' : 'none';
 }
 // HTMLのonclickから呼ぶためにwindowへ登録
 window.toggleSettings = toggleSettings;
