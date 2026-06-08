@@ -1,3 +1,5 @@
+alert("settings.js読込");
+
 function loadSettings() {
 
     alert("loadSettings実行");
