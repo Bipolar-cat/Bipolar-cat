@@ -1,3 +1,5 @@
+const SETTINGS_KEY = "innernote_settings";
+
 function saveSettings() {
 
     const settings = {
@@ -49,4 +51,75 @@ function closeSettings() {
     document.getElementById(
         "settings-modal"
     ).style.display = "none";
+}
+
+function loadSettings() {
+
+    const saved =
+        localStorage.getItem(
+            SETTINGS_KEY
+        );
+
+    if (!saved) return;
+
+    const settings =
+        JSON.parse(saved);
+
+    // 診断名
+    document.getElementById(
+        "diagnosis-select"
+    ).value =
+        settings.diagnosis || "";
+
+    // 年代
+    document.getElementById(
+        "age-select"
+    ).value =
+        settings.age || "";
+
+    // 記録方式
+    const radio =
+        document.querySelector(
+            `input[name="recordMode"][value="${settings.recordMode}"]`
+        );
+
+    if (radio) radio.checked = true;
+
+    // STEP3 / STEP10 切替
+    const mode =
+        settings.recordMode || "10";
+
+    if (mode === "3") {
+
+        document.getElementById(
+            "step3-area"
+        ).style.display = "block";
+
+        document.getElementById(
+            "step10-area"
+        ).style.display = "none";
+
+    } else {
+
+        document.getElementById(
+            "step3-area"
+        ).style.display = "none";
+
+        document.getElementById(
+            "step10-area"
+        ).style.display = "block";
+    }
+
+    // 環境
+    document
+        .querySelectorAll(
+            '#environment-list input[type="checkbox"]'
+        )
+        .forEach(cb => {
+
+            cb.checked =
+                settings.environments?.includes(
+                    cb.value
+                ) || false;
+        });
 }
