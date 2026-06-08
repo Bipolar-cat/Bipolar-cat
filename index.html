@@ -15,117 +15,19 @@
         <p class="subtitle">
             **気分と調子の変化を記録**
         </p>
-<div class="home-menu">
+<button onclick="toggleSettings()">⚙ 設定</button>
 
-  <button
-    class="menu-btn"
-    onclick="openSettings()">
-    ⚙
-  </button>
-
-    <div id="settings-modal" class="settings-modal">
-
-    <h2>設定</h2>
-
-    <label>診断名</label>
-        <select id="diagnosis-select">
-        <option>未診断</option>
-        <option>うつ病</option>
-        <option>双極症</option>
-        <option>統合失調症</option>
-        <option>不安障害</option>
-        <option>発達障害</option>
-        <option>その他</option>
-    </select>
-
-    <label>年代</label>
-    <select id="age-group">
-        <option>10代</option>
-        <option>20代</option>
-        <option>30代</option>
-        <option>40代</option>
-        <option>50代</option>
-        <option>60代以上</option>
-    </select>
-
-    <label>所属</label>
-    <input type="text" id="affiliation">
-
-    <label>環境</label>
-    <input type="text" id="environment">
-
-    <label>記録方式</label>
-
-    <div class="record-mode">
-
-        <!-- 3段階モード -->
-<div id="step3-area" style="display:none;">
-
-    <label class="label">気分</label>
-    <div class="btn-group-3">
-        <button onclick="selectMood3(3)">😊 良い</button>
-        <button onclick="selectMood3(2)">😐 普通</button>
-        <button onclick="selectMood3(1)">😞 悪い</button>
-    </div>
-
-    <label class="label">体調</label>
-    <div class="btn-group-3">
-        <button onclick="selectCond3(3)">😊 良い</button>
-        <button onclick="selectCond3(2)">😐 普通</button>
-        <button onclick="selectCond3(1)">😞 悪い</button>
-    </div>
-
+<div id="settings-modal" class="settings-modal">
+    <h3>診断名</h3>
+    <h3>年代</h3>
+    <h3>記録方式</h3>
+    <h3>属性・環境</h3>
+    <button onclick="saveSettings()">保存</button>
 </div>
 
-<!-- 10段階モード -->
-<div id="step10-area">
+<textarea placeholder="今の気持ちをメモ…"></textarea>
+<button class="save-btn">記録する</button>
 
-    <label class="label">気分</label>
-
-    <div class="scroll-wrapper">
-        <div id="mood-btns"
-             class="btn-group-circle">
-        </div>
-    </div>
-
-    <label class="label">体調</label>
-
-    <div class="scroll-wrapper">
-        <div id="cond-btns"
-             class="btn-group-circle">
-        </div>
-    </div>
-
-</div>
-
-   
-    <button onclick="saveSettings()">
-        保存
-    </button>
-
-    </div>
-    
-    <button
-    class="menu-btn"
-    onclick="openRecord()">
-    記録
-    </button>
-
-    <button class="menu-btn">
-        グラフ
-    </button>
-
-    <button class="menu-btn">
-        Summary
-    </button>
-
-    <div id="record-area" class="record-area">
-
-    <h2>記録</h2>
-
-    <div id="record-content">
-
-    </div>
 
     <button class="menu-btn">
         最近の記録
