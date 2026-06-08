@@ -13,44 +13,20 @@ function loadSettings() {
 }
 const SETTINGS_KEY = "innernote_settings";
 
+function toggleSettings() {
+    const modal = document.getElementById('settings-modal');
+    // 開いているか閉じているかを判定
+    if (modal.style.display === 'none' || modal.style.display === '') {
+        modal.style.display = 'block'; // 開く
+    } else {
+        modal.style.display = 'none';  // 閉じる
+    }
+}
+
 function saveSettings() {
-    alert("saveSettings実行");
-
-    const settings = {
-
-        diagnosis:
-            document.getElementById(
-                "diagnosis-select"
-            ).value,
-
-        age:
-            document.getElementById(
-                "age-select"
-            ).value,
-
-        recordMode:
-            document.querySelector(
-                'input[name="recordMode"]:checked'
-            )?.value || "10",
-
-        environments:
-            Array.from(
-                document.querySelectorAll(
-                    '#environment-list input[type="checkbox"]:checked'
-                )
-            ).map(cb => cb.value)
-    };
-
-    localStorage.setItem(
-        SETTINGS_KEY,
-        JSON.stringify(settings)
-    );
-
-    alert("保存しました");
-
-    closeSettings();
-
-    loadSettings();
+    // 保存ボタンを押したら閉じる
+    document.getElementById('settings-modal').style.display = 'none';
+    alert("設定を保存しました");
 }
 
 function openSettings() {
