@@ -9,6 +9,14 @@ function toggleSettings() {
         modal.style.display = 'none';
     }
 }
+function checkDiagnosis(selectElement) {
+    const otherInput = document.getElementById('other-diagnosis');
+    if (selectElement.value === "その他") {
+        otherInput.style.display = "block"; // 表示する
+    } else {
+        otherInput.style.display = "none";  // 隠す
+    }
+}
 
 function openSettings() {
     document.getElementById("settings-modal").style.display = "block";
