@@ -7,7 +7,15 @@
     <div id="settings-modal" class="modal" style="display: none;">
     </div>
 
-    <title>InnerNote</title>    
+    <title>InnerNote</title>
+    <button class="settings-trigger-btn" onclick="toggleSettings()">⚙</button>
+
+<div id="settings-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <button onclick="saveSettings()">保存して閉じる</button>
+  </div>
+</div>
+
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
