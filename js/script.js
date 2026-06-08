@@ -30,3 +30,9 @@ function renderStep3Buttons() {
     `;
     // 体調ボタンも同様に生成
 }
+
+
+// 各JSファイルで定義した関数をHTMLから呼べるようにする
+window.saveData = saveData;
+window.toggleSettings = toggleSettings;
+window.saveSettings = saveSettings;
