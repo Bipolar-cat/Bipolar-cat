@@ -22,18 +22,20 @@ export function toggleSettings() {
 }
 
 export function saveSettings() {
-    // 画面上の全設定値を取得
     const settings = {
-        diagnosis: document.getElementById('diagnosis-select').value,
-        age: document.getElementById('age-select').value,
+        diagnosis: document.getElementById('diagnosis-select')?.value,
+        age: document.getElementById('age-select')?.value,
         recordMode: document.querySelector('input[name="recordMode"]:checked')?.value || 'step3',
         status: Array.from(document.querySelectorAll('input[name="status"]:checked')).map(el => el.value),
-        family: Array.from(document.querySelectorAll('input[name="family"]:checked')).map(el => el.value)
+        family: Array.from(document.querySelectorAll('input[name="family"]:checked')).map(el => el.value),
+        familyMemo: document.getElementById('family-memo')?.value, // 追加
+        otherMemo: document.getElementById('other-memo')?.value   // 追加
     };
     
     localStorage.setItem('innernote_settings', JSON.stringify(settings));
     
     alert("保存しました！");
     toggleSettings();
-    location.reload(); // 設定を反映させるためにリロード
+    location.reload();
 }
+
