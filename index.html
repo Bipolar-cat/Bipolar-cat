@@ -74,15 +74,12 @@
             <span id="diagnosis-text">診断名: 未設定</span>
             <button onclick="unlockDiagnosis()">変更</button>
         </div>
-
-        <div class="input-section">
-            <label class="label">今の気分？</label>
-            <div id="mood-btns" class="btn-group-circle"></div>
-            <label class="label">体の調子？</label>
-            <div id="cond-btns" class="btn-group-circle"></div>
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            <button class="save-btn" onclick="saveData()">記録する</button>
-        </div>
+<div class="input-section">
+    <div id="mood-btns" class="btn-group-circle"></div>
+    <div id="cond-btns" class="btn-group-circle"></div>
+    <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+    <button class="save-btn" onclick="saveData()">記録する</button>
+</div>
 
         <div class="chart-container">
             <canvas id="myChart"></canvas>
