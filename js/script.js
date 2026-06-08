@@ -1,18 +1,26 @@
-import { Storage, saveData } from './storage.js';
+// 1. すべてのインポートを一番上にまとめる
+import { Storage, saveData, getSettings } from './storage.js'; // getSettingsも追加
 import { renderLogs } from './logs.js';
 import { initChart } from './chart.js';
+import { toggleSettings, lockDiagnosis, unlockDiagnosis } from './settings.js';
 
+// 2. HTMLのonclickから呼べるようにwindowに登録
+window.toggleSettings = toggleSettings;
+window.saveData = saveData;
+window.lockDiagnosis = lockDiagnosis;
+window.unlockDiagnosis = unlockDiagnosis;
+
+// 3. 全ての初期化処理を1つの onload にまとめる
 window.onload = () => {
+    // ログとグラフの初期化
     const logs = Storage.getLogs();
     renderLogs(logs);
     initChart(logs, (evt, elements) => { /* グラフのクリックイベント */ });
-};
 
-import { getSettings } from './storage.js';
-
-window.onload = () => {
+    // モード切り替えの処理
     const settings = Storage.getSettings();
-    // settings.recordMode が 'step3' の場合にStep3用ボタンを表示
+    console.log("現在のモード:", settings.recordMode);
+    
     if (settings.recordMode === 'step3') {
         renderStep3Buttons();
     } else {
@@ -20,22 +28,18 @@ window.onload = () => {
     }
 };
 
+// 4. 関数定義
 function renderStep3Buttons() {
     const moodBtns = document.getElementById('mood-btns');
-    moodBtns.innerHTML = `
-        <button onclick="setMood(1)">低</button>
-        <button onclick="setMood(2)">普通</button>
-        <button onclick="setMood(3)">良い</button>
-    `;
-    // 体調ボタンも同様に生成
+    if (moodBtns) {
+        moodBtns.innerHTML = `
+            <button onclick="setMood(1)">低</button>
+            <button onclick="setMood(2)">普通</button>
+            <button onclick="setMood(3)">良い</button>
+        `;
+    }
 }
 
-import { toggleSettings } from './settings.js';
-import { lockDiagnosis, unlockDiagnosis } from './settings.js';
-import { saveData } from './storage.js';
-import { DIAGNOSIS_KEY, saveData } from './storage.js';
-// これを忘れるとHTMLのonclickから関数が見つかりません
-window.toggleSettings = toggleSettings;
-window.saveData = saveData;
-window.lockDiagnosis = lockDiagnosis;
-window.unlockDiagnosis = unlockDiagnosis;
+function renderStep10Buttons() {
+    // 10段階用の処理をここに書く
+}
