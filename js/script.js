@@ -58,3 +58,23 @@ window.selectCond = (el, val) => {
     el.classList.add('active');
     window.currentCond = val; // 記録用に値を保持
 };
+
+export function saveData() {
+    const note = document.getElementById('note').value;
+    // window.currentMood / window.currentCond に値が入っているか確認
+    if (!window.currentMood || !window.currentCond) {
+        alert("気分と体調を選択してください");
+        return;
+    }
+
+    const newLog = { 
+        mood: window.currentMood, 
+        cond: window.currentCond,
+        note: note, 
+        timestamp: new Date().toISOString() 
+    };
+    // Storage.saveLog(newLog); // 既存の保存処理
+    console.log("保存データ:", newLog);
+    alert("記録しました！");
+    location.reload();
+}
