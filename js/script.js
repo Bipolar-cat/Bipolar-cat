@@ -1,31 +1,26 @@
-// 1. すべてのインポートを一番上にまとめる
-import { Storage, saveData, getSettings } from './storage.js'; // getSettingsも追加
+// 【重要】インポートは一度だけ書く
+import { Storage, saveData as importedSaveData, getSettings } from './storage.js';
 import { renderLogs } from './logs.js';
 import { initChart } from './chart.js';
 import { toggleSettings, lockDiagnosis, unlockDiagnosis } from './settings.js';
 
-// 2. HTMLのonclickから呼べるようにwindowに登録
+// 名前を一度だけwindowに登録（重複させない）
 window.toggleSettings = toggleSettings;
-window.saveData = saveData;
+window.saveData = importedSaveData; // インポートした関数を登録
 window.lockDiagnosis = lockDiagnosis;
 window.unlockDiagnosis = unlockDiagnosis;
 
-// 3. 全ての初期化処理を1つの onload にまとめる
 window.onload = () => {
-    // ログとグラフの初期化
+    // 既存の初期化処理
     const logs = Storage.getLogs();
     renderLogs(logs);
-    initChart(logs, (evt, elements) => { /* グラフのクリックイベント */ });
-
-    // モード切り替えの処理
-    const settings = Storage.getSettings();
-    console.log("現在のモード:", settings.recordMode);
     
+    // 設定による画面生成
+    const settings = Storage.getSettings();
     if (settings.recordMode === 'step3') {
         renderStep3Buttons();
-    } else {
-        renderStep10Buttons();
     }
+    // ...
 };
 
 // 4. 関数定義
