@@ -1,9 +1,29 @@
-<div class="header">
-    <h1>InnerNote</h1>
+<div class="container">
 
-    <button
-        class="settings-btn"
-        onclick="toggleSettings()">
-        ⚙
-    </button>
-</div>
+    <div class="header">
+        <h1>InnerNote</h1>
+
+        <button
+            class="settings-btn"
+            onclick="toggleSettings()">
+            ⚙
+        </button>
+    </div>
+
+    <p class="subtitle">
+        **気分と調子の変化を記録**
+    </p>
+
+    <div id="settings-panel"
+         class="settings-panel">
+
+        <h3>設定</h3>
+
+        <label>記録方式</label>
+
+        <select id="record-mode">
+            <option value="3">3段階</option>
+            <option value="10">10段階</option>
+        </select>
+
+    </div>
