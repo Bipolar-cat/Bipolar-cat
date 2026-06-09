@@ -11,3 +11,7 @@
     font-size:28px;
     cursor:pointer;
 }
+
+.settings-panel{
+    display:none;
+}
