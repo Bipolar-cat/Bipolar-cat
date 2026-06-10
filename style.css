@@ -82,3 +82,15 @@ body{
     cursor:pointer;
     transition:0.2s;
 }
+
+.mood-btn.active{
+    background:#EFF6FF;      /* 薄い青 */
+    border-color:#60A5FA;    /* 青枠 */
+    color:#2563EB;           /* 青文字 */
+}
+
+.cond-btn.active{
+    background:#FFF7ED;      /* 薄いオレンジ */
+    border-color:#FDBA74;    /* オレンジ枠 */
+    color:#EA580C;           /* オレンジ文字 */
+}
