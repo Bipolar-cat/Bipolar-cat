@@ -1,4 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
+  console.log(document.querySelector(".active"));
+});
 
   initMoodButtons();
   initCondButtons();
