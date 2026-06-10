@@ -47,7 +47,3 @@ function loadSettings() {
         || "{}"
     );
 }
-function saveSettings() {
-    // 保存処理
-    alert("設定を保存しました");
-}
