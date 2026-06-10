@@ -2,7 +2,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   initMoodButtons();
   initCondButtons();
-  applySettings();
+
+  if (typeof applySettings === "function") {
+    applySettings();
+  }
 
 });
 
