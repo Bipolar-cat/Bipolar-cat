@@ -36,3 +36,10 @@ function initCondButtons() {
     el.appendChild(btn);
   });
 }
+
+btn.addEventListener("click", () => {
+  document.querySelectorAll(".record-btn").forEach(b => {
+    b.classList.remove("active");
+  });
+  btn.classList.add("active");
+});
