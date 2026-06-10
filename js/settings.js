@@ -1,5 +1,3 @@
-document.getElementById("mood-buttons").innerHTML = "TEST";
-
 const SETTINGS_KEY = "innernote_settings";
 
 function toggleSettings() {
