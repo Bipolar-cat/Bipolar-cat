@@ -45,3 +45,20 @@ btn.addEventListener("click", () => {
   });
   btn.classList.add("active");
 });
+
+function setupSingleSelect(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  container.addEventListener("click", (e) => {
+    if (e.target.tagName !== "BUTTON") return;
+
+    // ① そのグループだけリセット
+    container.querySelectorAll("button").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    // ② 押したものだけON
+    e.target.classList.add("active");
+  });
+}
