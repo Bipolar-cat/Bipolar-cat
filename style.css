@@ -3,26 +3,38 @@ body{
     margin:20px;
 }
 
-h1 {
-            color: #5C6BC0;
-            font-size: 28px;
-            margin: 5px 0 0 0;
-        }
-
-        .subtitle {
-            color: #888;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
 .header{
     position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    text-align:center;
     margin-bottom:10px;
 }
+
+h1{
+    color:#4A90E2;
+    font-size:32px;
+    font-weight:bold;
+    margin:0;
+}
+
+.settings-btn{
+    position:absolute;
+    right:0;
+    top:0;
+    border:none;
+    background:none;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.subtitle{
+    display:block;
+    width:100%;
+    text-align:center;
+    color:#9CA3AF;
+    font-size:14px;
+    margin-top:6px;
+    margin-bottom:20px;
+        }
 
 .settings-btn{
     position:absolute;
