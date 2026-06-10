@@ -27,19 +27,92 @@
         **気分と調子の変化を記録**
     </p>
 
-    <div id="settings-panel"
-         class="settings-panel">
+ <div id="settings-panel"
+     class="settings-panel">
 
-        <h3>設定</h3>
+    <h3>設定</h3>
 
-        <label>記録方式</label>
+    <label>記録方式</label>
 
-        <select id="record-mode">
-            <option value="3">3段階</option>
-            <option value="10">10段階</option>
-        </select>
+    <select id="record-mode">
+        <option value="3">3段階</option>
+        <option value="10">10段階</option>
+    </select>
 
-    </div>
+    <br><br>
+
+    <label>診断名</label>
+
+    <select id="diagnosis">
+        <option>未診断</option>
+        <option>うつ病</option>
+        <option>双極症</option>
+        <option>統合失調症</option>
+        <option>発達障害</option>
+        <option>不安障害</option>
+        <option>その他</option>
+    </select>
+
+    <input
+        type="text"
+        id="diagnosis-other"
+        placeholder="その他を入力">
+
+    <br><br>
+
+    <label>年代</label>
+
+    <select id="age-group">
+        <option>10代</option>
+        <option>20代</option>
+        <option>30代</option>
+        <option>40代</option>
+        <option>50代</option>
+        <option>60代</option>
+        <option>70代以上</option>
+    </select>
+
+    <br><br>
+
+    <h4>チェック項目</h4>
+
+    <label>
+        <input type="checkbox">
+        正社員
+    </label><br>
+
+    <label>
+        <input type="checkbox">
+        パート・アルバイト
+    </label><br>
+
+    <label>
+        <input type="checkbox">
+        休職中
+    </label><br>
+
+    <label>
+        <input type="checkbox">
+        離職中
+    </label><br>
+
+    <label>
+        <input type="checkbox">
+        就学中
+    </label><br>
+
+    <label>
+        <input type="checkbox">
+        休学中
+    </label><br>
+
+    <label>
+        <input type="checkbox">
+        無職
+    </label><br>
+
+</div>
+
 
     <script src="js/storage.js"></script>
     <script src="js/settings.js"></script>
