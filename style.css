@@ -30,14 +30,18 @@ body{
     margin-top:10px;
 }
 
+/* 共通ボタン */
 .record-btn{
     flex:1;
     padding:15px;
-    border:none;
     border-radius:12px;
-    background:#eeeeee;
+    background:#F3F4F6;      /* 薄いグレー */
+    color:#6B7280;           /* グレー文字 */
+    border:2px solid #E5E7EB;
     font-size:18px;
+    font-weight:bold;
     cursor:pointer;
+    transition:0.2s;
 }
 
 .record-btn.active{
