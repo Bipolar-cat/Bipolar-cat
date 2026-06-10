@@ -1,3 +1,4 @@
+document.getElementById("mood-buttons").innerHTML = "TEST";
 // ========================
 // Settings
 // ========================
