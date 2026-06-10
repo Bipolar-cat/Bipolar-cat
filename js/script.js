@@ -1,5 +1,7 @@
+// state
 let state = loadState();
 
+// 初期化
 window.addEventListener("DOMContentLoaded", () => {
 
   initMoodButtons();
@@ -10,3 +12,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   applyState();
 });
+
+// ボタン生成
+function initMoodButtons() { ... }
+function initCondButtons() { ... }
+
+// クリック制御
+function setupSingleSelect(containerId, key) { ... }
+
+// state反映
+function applyState() { ... }
