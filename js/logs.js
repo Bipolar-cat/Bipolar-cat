@@ -1,55 +1,52 @@
-// ========================
-// Logs
-// ========================
-
 let selectedMood = 2;
+let selectedCond = 2;
 
-function createMoodButtons() {
+function renderThreeButtons(containerId, type){
 
     const container =
-        document.getElementById("mood-buttons");
+        document.getElementById(containerId);
 
-    if (!container) return;
-
-    const moods = [
-        { value:1, label:"🙁 悪い" },
-        { value:2, label:"😐 普通" },
-        { value:3, label:"🙂 良い" }
-    ];
+    if(!container) return;
 
     container.innerHTML = "";
 
-    moods.forEach(mood => {
+    const labels = [
+        "良い",
+        "普通",
+        "悪い"
+    ];
+
+    labels.forEach((label,index)=>{
 
         const btn =
             document.createElement("button");
 
-        btn.className = "record-btn";
+        btn.className =
+            `record-btn ${type}-btn`;
 
-        btn.innerText = mood.label;
-
-        if(mood.value === 2){
+        if(index === 1){
             btn.classList.add("active");
         }
 
+        btn.textContent = label;
+
         btn.onclick = () => {
 
-            document
-            .querySelectorAll(".record-btn")
-            .forEach(b =>
-                b.classList.remove("active")
-            );
+            container
+                .querySelectorAll(".record-btn")
+                .forEach(b =>
+                    b.classList.remove("active")
+                );
 
             btn.classList.add("active");
 
-            selectedMood = mood.value;
+            if(type === "mood"){
+                selectedMood = index + 1;
+            }else{
+                selectedCond = index + 1;
+            }
         };
 
         container.appendChild(btn);
-
     });
-
 }
-
-btn.className = "record-btn mood-btn";
-btn.className = "record-btn cond-btn";
