@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-  console.log(document.querySelector(".active"));
+  console.log("現在の選択:", document.querySelector(".active"));
 });
 
   initMoodButtons();
