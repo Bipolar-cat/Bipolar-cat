@@ -115,3 +115,15 @@ h1{
     border:1px solid #FFA726;
     color:#FB8C00;
 }
+
+.save-settings-btn{
+    width:100%;
+    margin-top:20px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#4A90E2;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
