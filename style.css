@@ -109,14 +109,18 @@ h1{
     transition:0.2s;
 }
 
+/* 気分 */
+
 .mood-btn.active{
-    background:#EFF6FF;      /* 薄い青 */
-    border-color:#60A5FA;    /* 青枠 */
-    color:#2563EB;           /* 青文字 */
+    background:#EFF6FF;
+    border:2px solid #60A5FA;
+    color:#2563EB;
 }
 
+/* 体調 */
+
 .cond-btn.active{
-    background:#FFF7ED;      /* 薄いオレンジ */
-    border-color:#FDBA74;    /* オレンジ枠 */
-    color:#EA580C;           /* オレンジ文字 */
+    background:#FFF7ED;
+    border:2px solid #FDBA74;
+    color:#EA580C;
 }
