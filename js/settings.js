@@ -14,3 +14,7 @@ function toggleSettings() {
         panel.style.display = "block";
     }
 }
+3段階
+10段階
+診断名
+年代
