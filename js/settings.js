@@ -3,10 +3,7 @@ const SETTINGS_KEY = "innernote_settings";
 function toggleSettings() {
   const panel = document.getElementById("settings-panel");
 
-  if (!panel) {
-    console.error("settings-panelが見つからない");
-    return;
-  }
+  if (!panel) return;
 
   panel.classList.toggle("open");
 }
