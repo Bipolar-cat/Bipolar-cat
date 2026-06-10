@@ -1,18 +1,7 @@
-window.onload = () => {
-
-    renderThreeButtons(
-        "mood-buttons",
-        "mood"
-    );
-
-    renderThreeButtons(
-        "cond-buttons",
-        "cond"
-    );
-
-};
-
-// js/script.js
+window.addEventListener("DOMContentLoaded", () => {
+  renderButtons("mood-buttons", ["良い","普通","低い"]);
+  renderButtons("cond-buttons", ["良い","普通","悪い"]);
+});
 
 // グローバルスコープに各関数を割り当てる（これでonclickから呼び出せるようになります）
 window.toggleSettings = toggleSettings;
