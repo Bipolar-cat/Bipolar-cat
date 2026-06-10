@@ -16,6 +16,16 @@ h1{
     margin:0;
 }
 
+.subtitle{
+    display:block;
+    width:100%;
+    text-align:center;
+    color:#9CA3AF;
+    font-size:14px;
+    margin-top:6px;
+    margin-bottom:20px;
+}
+
 .settings-btn{
     position:absolute;
     right:0;
@@ -30,16 +40,6 @@ h1{
 .settings-btn:hover,
 .settings-btn:active{
     color:#6B7280;
-}
-
-.subtitle{
-    display:block;
-    width:100%;
-    text-align:center;
-    color:#9CA3AF;
-    font-size:14px;
-    margin-top:6px;
-    margin-bottom:20px;
 }
 
 .settings-panel{
