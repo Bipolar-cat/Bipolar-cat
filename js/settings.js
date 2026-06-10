@@ -1,10 +1,10 @@
 function toggleSettings() {
-    alert("押された");
+    alert("⚙が押されました");
 
     const panel = document.getElementById("settings-panel");
 
     if (!panel) {
-        alert("settings-panelが見つかりません");
+        alert("settings-panel が見つかりません");
         return;
     }
 
