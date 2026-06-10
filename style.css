@@ -104,18 +104,14 @@ h1{
     margin-bottom:10px;
 }
 
-/* 気分 */
-
 .mood-btn.active{
-    background:#EFF6FF;
-    border:2px solid #60A5FA;
-    color:#2563EB;
+    background:#E3F2FD;
+    border:1px solid #2196F3;
+    color:#1976D2;
 }
 
-/* 体調 */
-
 .cond-btn.active{
-    background:#FFF7ED;
-    border:2px solid #FDBA74;
-    color:#EA580C;
+    background:#FFF3E0;
+    border:1px solid #FFA726;
+    color:#FB8C00;
 }
