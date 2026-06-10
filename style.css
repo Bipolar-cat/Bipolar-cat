@@ -44,3 +44,23 @@ body{
     background:#4A90E2;
     color:white;
 }
+
+.settings-panel select,
+.settings-panel input[type="text"]{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+.settings-panel label{
+    display:block;
+    margin-top:8px;
+}
+
+.settings-panel h4{
+    margin-top:20px;
+    margin-bottom:10px;
+}
