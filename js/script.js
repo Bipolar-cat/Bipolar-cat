@@ -5,6 +5,9 @@ window.addEventListener("DOMContentLoaded", () => {
   initMoodButtons();
   initCondButtons();
 
+  setupSingleSelect("mood-buttons");
+  setupSingleSelect("cond-buttons");
+
   if (typeof applySettings === "function") {
     applySettings();
   }
