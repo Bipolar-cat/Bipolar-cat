@@ -1,38 +1,9 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>InnerNote</title>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <div class="header">
-        <h1>InnerNote</h1>
-
-        <button
-            class="settings-btn"
-            onclick="toggleSettings()">
-            ⚙
-        </button>
-    </div>
-
-    <p class="subtitle">
-        **気分と調子の変化を記録**
-    </p>
-
- <div id="settings-panel"
-     class="settings-panel">
+<div id="settings-panel" class="settings-panel">
 
     <h3>設定</h3>
 
-    <label>記録方式</label>
+    <!-- 記録方式 -->
+    <label for="record-mode">記録方式</label>
 
     <select id="record-mode">
         <option value="3">3段階</option>
@@ -41,16 +12,18 @@
 
     <br><br>
 
-    <label>診断名</label>
+    <!-- 診断名 -->
+    <label for="diagnosis">診断名</label>
 
     <select id="diagnosis">
-        <option>未診断</option>
-        <option>うつ病</option>
-        <option>双極症</option>
-        <option>統合失調症</option>
-        <option>発達障害</option>
-        <option>不安障害</option>
-        <option>その他</option>
+        <option value="">未診断</option>
+        <option value="うつ病">うつ病</option>
+        <option value="双極症">双極症</option>
+        <option value="統合失調症">統合失調症</option>
+        <option value="不安障害">不安障害</option>
+        <option value="適応障害">適応障害</option>
+        <option value="発達障害">発達障害</option>
+        <option value="その他">その他</option>
     </select>
 
     <input
@@ -60,7 +33,8 @@
 
     <br><br>
 
-    <label>年代</label>
+    <!-- 年代 -->
+    <label for="age-group">年代</label>
 
     <select id="age-group">
         <option>10代</option>
@@ -69,55 +43,69 @@
         <option>40代</option>
         <option>50代</option>
         <option>60代</option>
-        <option>70代以上</option>
+        <option>70代</option>
+        <option>80代以上</option>
     </select>
 
     <br><br>
 
+    <!-- チェック項目 -->
     <h4>チェック項目</h4>
 
+    <label><input type="checkbox" id="job-fulltime"> 正社員</label><br>
+    <label><input type="checkbox" id="job-part"> パート・アルバイト</label><br>
+    <label><input type="checkbox" id="leave"> 休職中</label><br>
+    <label><input type="checkbox" id="unemployed"> 離職中</label><br>
+    <label><input type="checkbox" id="student"> 就学中</label><br>
+    <label><input type="checkbox" id="leave-school"> 休学中</label><br>
+    <label><input type="checkbox" id="no-job"> 無職</label><br>
+
+    <br>
+
+    <label><input type="checkbox" id="housewife"> 主婦・主夫</label><br>
+    <label><input type="checkbox" id="married"> 配偶者有</label><br>
+    <label><input type="checkbox" id="children"> 子ども有</label><br>
+    <label><input type="checkbox" id="alone"> 一人暮らし</label><br>
+
+    <br>
+
     <label>
-        <input type="checkbox">
-        正社員
+        <input type="checkbox" id="family">
+        家族と同居
+    </label>
+
+    <input
+        type="text"
+        id="family-detail"
+        placeholder="誰と同居">
+
+    <br><br>
+
+    <label>
+        <input type="checkbox" id="other-person">
+        家族以外と同居
+    </label>
+
+    <input
+        type="text"
+        id="other-person-detail"
+        placeholder="誰と同居">
+
+    <br><br>
+
+    <label><input type="checkbox" id="hospital"> 通院中</label><br>
+
+    <label>
+        <input type="checkbox"
+               id="welfare">
+        福祉サービス利用中
     </label><br>
 
     <label>
-        <input type="checkbox">
-        パート・アルバイト
-    </label><br>
-
-    <label>
-        <input type="checkbox">
-        休職中
-    </label><br>
-
-    <label>
-        <input type="checkbox">
-        離職中
-    </label><br>
-
-    <label>
-        <input type="checkbox">
-        就学中
-    </label><br>
-
-    <label>
-        <input type="checkbox">
-        休学中
-    </label><br>
-
-    <label>
-        <input type="checkbox">
-        無職
-    </label><br>
-
-</div>
-    
-<div id="record-area">
-
-    <h3>気分</h3>
-
-    <div id="mood-buttons"></div>
+        <input type="checkbox"
+               id="family-history">
+        親族に同じ疾患の人がいる
+    </label>
 
 </div>
 
