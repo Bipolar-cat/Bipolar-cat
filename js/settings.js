@@ -11,30 +11,17 @@ function toggleSettings() {
   panel.classList.toggle("open");
 }
 
-// 設定保存
 function saveSettings() {
+  const settings = {
+    mode: document.getElementById("record-mode").value,
+    diagnosis: document.getElementById("diagnosis").value,
+    diagnosisOther: document.getElementById("diagnosis-other").value,
+    ageGroup: document.getElementById("age-group").value
+  };
 
-    const settings = {
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
 
-        mode:
-            document.getElementById("record-mode").value,
-
-        diagnosis:
-            document.getElementById("diagnosis").value,
-
-        diagnosisOther:
-            document.getElementById("diagnosis-other").value,
-
-        ageGroup:
-            document.getElementById("age-group").value
-    };
-
-    localStorage.setItem(
-        SETTINGS_KEY,
-        JSON.stringify(settings)
-    );
-
-    alert("設定を保存しました");
+  alert("設定を保存しました");
 }
 
 // 設定読込
