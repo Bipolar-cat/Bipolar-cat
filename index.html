@@ -31,25 +31,9 @@
 
     <div id="settings-panel" class="settings-panel">
 
-<label class="label">今の気分</label>
-<div id="mood-buttons" class="record-btns"></div>
-
-<label class="label">体の調子</label>
-<div id="cond-buttons" class="record-btns"></div>
-
-<textarea
-    id="note"
-    placeholder="今の気持ちをメモ">
-</textarea>
-
-<button id="save-btn">
-    記録する
-</button>
-
     <h3>設定</h3>
 
-    <!-- 記録方式 -->
-    <label for="record-mode">記録方式</label>
+    <label>記録方式</label>
 
     <select id="record-mode">
         <option value="3">3段階</option>
@@ -58,8 +42,7 @@
 
     <br><br>
 
-    <!-- 診断名 -->
-    <label for="diagnosis">診断名</label>
+    <label>診断名</label>
 
     <select id="diagnosis">
         <option value="">未診断</option>
@@ -73,14 +56,13 @@
     </select>
 
     <input
-    type="text"
-    id="diagnosis-other"
-    placeholder="その他を入力">
+        type="text"
+        id="diagnosis-other"
+        placeholder="その他を入力">
 
     <br><br>
 
-    <!-- 年代 -->
-    <label for="age-group">年代</label>
+    <label>年代</label>
 
     <select id="age-group">
         <option>10代</option>
@@ -92,6 +74,16 @@
         <option>70代</option>
         <option>80代以上</option>
     </select>
+
+    <br><br>
+
+    <button
+        class="save-settings-btn"
+        onclick="saveSettings()">
+        保存
+    </button>
+
+</div>
 
     <br><br>
 
