@@ -8,6 +8,8 @@ window.addEventListener("DOMContentLoaded", () => {
   setupSingleSelect("mood-buttons");
   setupSingleSelect("cond-buttons");
 
+  console.log(document.querySelector("#mood-buttons button.active"));
+
   if (typeof applySettings === "function") {
     applySettings();
   }
