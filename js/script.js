@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function initMoodButtons() {
-  const el = document.getElementById("mood-buttons");
+  const el = document.getElementById("mood-btns")
   if (!el) return;
 
   el.innerHTML = "";
@@ -24,7 +24,7 @@ function initMoodButtons() {
 }
 
 function initCondButtons() {
-  const el = document.getElementById("cond-buttons");
+  document.getElementById("cond-btns")
   if (!el) return;
 
   el.innerHTML = "";
