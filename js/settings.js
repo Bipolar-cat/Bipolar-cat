@@ -11,17 +11,14 @@ function toggleSettings() {
 const SETTINGS_KEY = "innernote_settings";
 
 function toggleSettings() {
+  const panel = document.getElementById("settings-panel");
 
-    const panel =
-        document.getElementById("settings-panel");
+  if (!panel) {
+    console.error("settings-panelが見つからない");
+    return;
+  }
 
-    if (!panel) return;
-
-    if (panel.style.display === "block") {
-        panel.style.display = "none";
-    } else {
-        panel.style.display = "block";
-    }
+  panel.classList.toggle("open");
 }
 
 // 設定保存
