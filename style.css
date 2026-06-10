@@ -59,6 +59,10 @@ h1{
     border-radius:12px;
 }
 
+.settings-panel.open {
+  display: block;
+}
+
 .record-btns{
     display:flex;
     justify-content:space-between;
