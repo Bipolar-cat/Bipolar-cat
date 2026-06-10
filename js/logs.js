@@ -50,3 +50,6 @@ function createMoodButtons() {
     });
 
 }
+
+btn.className = "record-btn mood-btn";
+btn.className = "record-btn cond-btn";
