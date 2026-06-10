@@ -52,22 +52,22 @@ h1{
 
 .record-btns{
     display:flex;
-    gap:10px;
-    margin-top:10px;
+    justify-content:space-between;
+    gap:6px;
+    margin-bottom:12px;
 }
 
-/* 共通ボタン */
 .record-btn{
     flex:1;
-    padding:15px;
-    border-radius:12px;
-    background:#F3F4F6;      /* 薄いグレー */
-    color:#6B7280;           /* グレー文字 */
-    border:2px solid #E5E7EB;
-    font-size:18px;
-    font-weight:bold;
+    padding:8px 0;
+    border-radius:8px;
+    border:1px solid #EEEEEE;
+    background:#FFFFFF;
+    color:#666666;
+    font-size:14px;
+    font-weight:500;
     cursor:pointer;
-    transition:0.2s;
+    transition:all 0.2s;
 }
 
 .record-btn.active{
@@ -93,20 +93,6 @@ h1{
 .settings-panel h4{
     margin-top:20px;
     margin-bottom:10px;
-}
-
-/* 共通ボタン */
-.record-btn{
-    flex:1;
-    padding:15px;
-    border-radius:12px;
-    background:#F3F4F6;      /* 薄いグレー */
-    color:#6B7280;           /* グレー文字 */
-    border:2px solid #E5E7EB;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.2s;
 }
 
 /* 気分 */
