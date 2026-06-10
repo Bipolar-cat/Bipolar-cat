@@ -10,11 +10,8 @@ function renderThreeButtons(containerId, type){
 
     container.innerHTML = "";
 
-    const labels = [
-        "良い",
-        "普通",
-        "悪い"
-    ];
+    const moodOptions = ["良い", "普通", "低い"];
+    const condOptions = ["良い", "普通", "悪い"];
 
     labels.forEach((label,index)=>{
 
