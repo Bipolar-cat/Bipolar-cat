@@ -1,5 +1,13 @@
 window.onload = () => {
 
-    createMoodButtons();
+    renderThreeButtons(
+        "mood-buttons",
+        "mood"
+    );
+
+    renderThreeButtons(
+        "cond-buttons",
+        "cond"
+    );
 
 };
