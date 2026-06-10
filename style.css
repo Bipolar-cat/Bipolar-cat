@@ -104,16 +104,18 @@ h1{
     margin-bottom:10px;
 }
 
-.mood-btn.active{
-    background:#E3F2FD;
-    border:1px solid #2196F3;
-    color:#1976D2;
+#mood-buttons button.active {
+  border: 2px solid #bfdbfe;
+  color: #3b82f6;
+  background-color: #eff6ff;
+  font-weight: bold;
 }
 
-.cond-btn.active{
-    background:#FFF3E0;
-    border:1px solid #FFA726;
-    color:#FB8C00;
+#cond-buttons button.active {
+  border: 2px solid #fde68a;
+  color: #f59e0b;
+  background-color: #fffbeb;
+  font-weight: bold;
 }
 
 .save-settings-btn{
