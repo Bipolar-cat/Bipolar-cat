@@ -1,3 +1,1 @@
-function saveState() { ... }
-
 function loadState() { ... }
