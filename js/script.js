@@ -1,6 +1,19 @@
 console.log("script.js loaded");
 
-let records = [];
+let records = []; // ← 先にこれ
+
+function setMood(value) {
+  const record = {
+    id: Date.now(),
+    timestamp: Date.now(),
+    mood: value,
+    condition: null
+  };
+
+  records.push(record);
+
+  console.log("saved mood:", records);
+}
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -14,6 +27,19 @@ window.addEventListener("DOMContentLoaded", () => {
         "cond"
     );
 
+    function setCondition(value) {
+  const record = {
+    id: Date.now(),
+    timestamp: Date.now(),
+    mood: null,
+    condition: value
+  };
+
+  records.push(record);
+
+  console.log("saved condition:", records);
+    }
+    
 });
 
 {
