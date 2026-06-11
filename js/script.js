@@ -1,3 +1,5 @@
+console.log("script.js loaded");
+
 window.addEventListener("DOMContentLoaded", () => {
 
     renderThreeButtons(
