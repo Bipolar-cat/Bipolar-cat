@@ -22,6 +22,11 @@ function getGraphData() {
   return records.slice(-10);
   }
 
+{
+  date: "Fri Jun 12",
+  mood: 5,
+  condition: 6
+}
   const data = getLatest10();
 renderGraph(data);
 
@@ -84,3 +89,4 @@ function updateRecord(type, value) {
 
   console.log("updated records:", records);
 }
+
