@@ -1,5 +1,7 @@
 console.log("script.js loaded");
 
+let records = [];
+
 window.addEventListener("DOMContentLoaded", () => {
 
     renderThreeButtons(
