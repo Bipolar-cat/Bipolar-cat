@@ -6,13 +6,18 @@ records.push(record);
 console.log(...)
 
 function setMood(value) {
-  const record = {
-    id: Date.now(),
-    timestamp: Date.now(),
-    mood: value,
-    condition: null
-  };
+  updateRecord("mood", value);
+}
 
+function setCondition(value) {
+  updateRecord("condition", value);
+}
+
+function getGraphData() {
+  return records
+    .filter(r => r.mood !== null && r.condition !== null)
+    .slice(-10);
+}
   function getLatest10() {
   return records.slice(-10);
   }
