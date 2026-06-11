@@ -58,3 +58,24 @@ window.addEventListener("DOMContentLoaded", () => {
   mood: 5,
   condition: 6
 }
+
+function updateRecord(type, value) {
+  const today = new Date().toDateString();
+
+  let record = records.find(r => r.date === today);
+
+  if (!record) {
+    record = {
+      id: Date.now(),
+      date: today,
+      timestamp: Date.now(),
+      mood: null,
+      condition: null
+    };
+    records.push(record);
+  }
+
+  record[type] = value;
+
+  console.log("updated records:", records);
+}
