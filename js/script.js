@@ -1,43 +1,9 @@
 console.log("script.js loaded");
 
-let records = []; // ← 先にこれ
-const record = {...}
-records.push(record);
-console.log(...)
+let records = [];
 
-function setMood(value) {
-  updateRecord("mood", value);
-}
-
-function setCondition(value) {
-  updateRecord("condition", value);
-}
-
-function getGraphData() {
-  return records
-    .filter(r => r.mood !== null && r.condition !== null)
-    .slice(-10);
-}
-  function getLatest10() {
-  return records.slice(-10);
-  }
-
-function setCondition(value) {
-  const record = {
-    id: Date.now(),
-    timestamp: Date.now(),
-    mood: null,
-    condition: value
-  }};
-
-  function setCondition(value) {
-  const record = {
-    id: Date.now(),
-    timestamp: Date.now(),
-    mood: null,
-    condition: value
-  }};
-    function updateRecord(type, value) {
+// 1日単位で統合保存
+function updateRecord(type, value) {
   const today = new Date().toDateString();
 
   let record = records.find(r => r.date === today);
@@ -49,48 +15,7 @@ function setCondition(value) {
       timestamp: Date.now(),
       mood: null,
       condition: null
-    }};
-    
-{
-  date: "Fri Jun 12",
-  mood: 5,
-  condition: 6
-}
-      {     
-  const data = getLatest10();
-renderGraph(data);
-
-  records.push(record);
-
-  console.log("saved mood:", records);
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-
-    renderThreeButtons(
-        "mood-buttons",
-        "mood"
-    );
-
-    renderThreeButtons(
-        "cond-buttons",
-        "cond"
-    );
-
-  records.push(record);
-
-  console.log("saved condition:", records);
-    }
-    
-});
-
-{
-  id: 1,
-  timestamp: 123456,
-  mood: 5,
-  condition: 6
-}
-
+    };
     records.push(record);
   }
 
@@ -99,3 +24,29 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log("updated records:", records);
 }
 
+// 気分
+function setMood(value) {
+  updateRecord("mood", value);
+}
+
+// 体調
+function setCondition(value) {
+  updateRecord("condition", value);
+}
+
+// グラフ用（両方揃ってるものだけ）
+function getGraphData() {
+  return records
+    .filter(r => r.mood !== null && r.condition !== null)
+    .slice(-10);
+}
+
+// デバッグ
+function getLatest10() {
+  return records.slice(-10);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderThreeButtons("mood-buttons", "mood");
+  renderThreeButtons("cond-buttons", "cond");
+});
