@@ -1,3 +1,4 @@
+console.log("logs.js version 2");
 console.log("logs.js loaded");
 
 let selectedMood = 2;
