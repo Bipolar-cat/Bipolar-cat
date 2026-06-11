@@ -1,4 +1,6 @@
-function toggleSettings() { ... }
+function toggleSettings() {
+    console.log("settings");
+}
 
 function saveSettings() { ... }
 
