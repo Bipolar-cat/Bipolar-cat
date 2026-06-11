@@ -144,3 +144,12 @@ textarea {
     resize: none;
     color: #333;
 }
+
+.graph-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.graph-inner {
+    min-width: 600px; /* 横スクロール発生ポイント */
+}
