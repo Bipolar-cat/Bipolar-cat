@@ -1,15 +1,11 @@
 console.log("script.js loaded");
+console.log("NEW SCRIPT");
 
 window.addEventListener("DOMContentLoaded", () => {
 
-    renderThreeButtons(
-        "mood-buttons",
-        "mood"
-    );
+    console.log("DOM READY");
 
-    renderThreeButtons(
-        "cond-buttons",
-        "cond"
-    );
+    renderThreeButtons("mood-buttons", "mood");
+    renderThreeButtons("cond-buttons", "cond");
 
 });
