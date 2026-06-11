@@ -28,7 +28,7 @@ function setCondition(value) {
     timestamp: Date.now(),
     mood: null,
     condition: value
-  };
+  }};
 
   function setCondition(value) {
   const record = {
@@ -36,8 +36,7 @@ function setCondition(value) {
     timestamp: Date.now(),
     mood: null,
     condition: value
-  };
-
+  }};
     function updateRecord(type, value) {
   const today = new Date().toDateString();
 
@@ -50,13 +49,14 @@ function setCondition(value) {
       timestamp: Date.now(),
       mood: null,
       condition: null
-    };
+    }};
     
 {
   date: "Fri Jun 12",
   mood: 5,
   condition: 6
 }
+      {     
   const data = getLatest10();
 renderGraph(data);
 
