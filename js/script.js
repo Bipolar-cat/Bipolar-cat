@@ -1,6 +1,9 @@
 console.log("script.js loaded");
 
 let records = []; // ← 先にこれ
+const record = {...}
+records.push(record);
+console.log(...)
 
 function setMood(value) {
   const record = {
