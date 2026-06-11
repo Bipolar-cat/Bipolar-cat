@@ -22,6 +22,36 @@ function getGraphData() {
   return records.slice(-10);
   }
 
+function setCondition(value) {
+  const record = {
+    id: Date.now(),
+    timestamp: Date.now(),
+    mood: null,
+    condition: value
+  };
+
+  function setCondition(value) {
+  const record = {
+    id: Date.now(),
+    timestamp: Date.now(),
+    mood: null,
+    condition: value
+  };
+
+    function updateRecord(type, value) {
+  const today = new Date().toDateString();
+
+  let record = records.find(r => r.date === today);
+
+  if (!record) {
+    record = {
+      id: Date.now(),
+      date: today,
+      timestamp: Date.now(),
+      mood: null,
+      condition: null
+    };
+    
 {
   date: "Fri Jun 12",
   mood: 5,
@@ -47,14 +77,6 @@ window.addEventListener("DOMContentLoaded", () => {
         "cond"
     );
 
-    function setCondition(value) {
-  const record = {
-    id: Date.now(),
-    timestamp: Date.now(),
-    mood: null,
-    condition: value
-  };
-
   records.push(record);
 
   console.log("saved condition:", records);
@@ -69,19 +91,6 @@ window.addEventListener("DOMContentLoaded", () => {
   condition: 6
 }
 
-function updateRecord(type, value) {
-  const today = new Date().toDateString();
-
-  let record = records.find(r => r.date === today);
-
-  if (!record) {
-    record = {
-      id: Date.now(),
-      date: today,
-      timestamp: Date.now(),
-      mood: null,
-      condition: null
-    };
     records.push(record);
   }
 
