@@ -1,13 +1,13 @@
 console.log("logs.js loaded");
 
 function renderThreeButtons(containerId, type){
-
     console.log("render:", containerId);
 
     const container =
         document.getElementById(containerId);
 
     console.log(container);
+
 
     if(!container) return;
     
