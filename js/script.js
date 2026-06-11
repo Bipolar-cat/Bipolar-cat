@@ -10,6 +10,13 @@ function setMood(value) {
     condition: null
   };
 
+  function getLatest10() {
+  return records.slice(-10);
+  }
+
+  const data = getLatest10();
+renderGraph(data);
+
   records.push(record);
 
   console.log("saved mood:", records);
