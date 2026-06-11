@@ -1,14 +1,17 @@
 console.log("logs.js loaded");
 
-let selectedMood = 2;
-let selectedCond = 2;
-
 function renderThreeButtons(containerId, type){
+
+    console.log("render:", containerId);
 
     const container =
         document.getElementById(containerId);
 
+    console.log(container);
+
     if(!container) return;
+    
+}
 
     container.innerHTML = "";
 
