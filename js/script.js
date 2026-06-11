@@ -1,8 +1,5 @@
 console.log("script.js loaded");
 
-let selectedMood = 2;
-        let selectedCond = 2;
-
         function setVal(type, val, btn) {
             const parent = btn.parentElement;
             parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
