@@ -13,3 +13,10 @@ window.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+
+{
+  id: 1,
+  timestamp: 123456,
+  mood: 5,
+  condition: 6
+}
