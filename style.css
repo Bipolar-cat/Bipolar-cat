@@ -1,11 +1,32 @@
-body {
-    ...
-}
+　　　 body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-.container {
-    ...
-}
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 25px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
 
-h1 {
-    ...
-            }
+        h1 {
+            color: #5C6BC0;
+            font-size: 32px;
+            margin: 10px 0 0 0;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
