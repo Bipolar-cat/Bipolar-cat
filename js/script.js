@@ -110,7 +110,6 @@ document.querySelector(".settings").onclick = openSettings;
 // 初期化
 // --------------------
 window.addEventListener("DOMContentLoaded", () => {
-  renderThreeButtons("mood-buttons", "mood");
-  renderThreeButtons("cond-buttons", "condition");
-});
+  renderThreeButtons("mood-btns", "mood");
+renderThreeButtons("cond-btns", "condition");
 
