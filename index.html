@@ -41,12 +41,13 @@
     <button class="active">普通</button>
     <button>悪い</button>
 </div>
-
-<textarea placeholder="メモを入力"></textarea>
   
 <div id="mood-btns" class="btn-group"></div>
 <div id="cond-btns" class="btn-group"></div>
   
+    <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+    <button class="save-btn" onclick="saveData()">記録する</button>
+</div>
 <button class="save-btn">
     記録する
 </button>
@@ -54,10 +55,6 @@
 <div class="chart-container">
     <canvas id="graph"></canvas>
 </div>
-
-       <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-    <button class="save-btn" onclick="saveData()">記録する</button>
-    </div>
       
   <div id="settings-panel">
      <div class="diagnosis-area" style="margin-bottom: 20px;">
