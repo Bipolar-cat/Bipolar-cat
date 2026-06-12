@@ -89,6 +89,9 @@ function renderGraph(data) {
     ctx.stroke();
   }
 
+  drawLine("mood", "blue");
+  drawLine("condition", "orange");
+}
   function openSettings() {
   document.getElementById("settings-panel").style.display = "block";
 }
