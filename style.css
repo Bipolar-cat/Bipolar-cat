@@ -90,6 +90,25 @@ body {
             color: #333;
         }
 
+.settings {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: white;
+    color: #888;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.settings:hover {
+    color: #666;
+}
+
         /* 記録ボタン：横幅を一杯に、角丸を調整 */
         .save-btn {
             width: 100%;
