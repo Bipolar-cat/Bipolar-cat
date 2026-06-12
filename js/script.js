@@ -142,3 +142,7 @@ function renderGraph(data) {
 
   ctx.stroke();
   }
+
+drawLine("mood", "blue");
+drawLine("condition", "orange");
+}
