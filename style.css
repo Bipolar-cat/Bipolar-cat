@@ -27,123 +27,80 @@ h1{
 }
 
 .label{
-    display:block;
-    text-align:left;
-    font-weight:bold;
-    margin:15px 0 8px 5px;
-    color:#444;
-    font-size:15px;
-}
+.input-section {
+            padding: 0 20px;
+        }
 
-.settings-btn{
-    position:absolute;
-    right:0;
-    top:0;
-    border:none;
-    background:none;
-    color:#9CA3AF;
-    font-size:24px;
-    cursor:pointer;
-}
+        .label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 15px 0 8px 5px; /* ラベルとの間隔を少し調整 */
+            color: #444;
+            font-size: 15px;
+        }
 
-.settings-btn:hover,
-.settings-btn:active{
-    color:#6B7280;
-}
+        /* 3段階ボタン：さらに横長、縦をスリムに (padding 10px -> 8px) */
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px; /* ボタン同士の隙間を少し詰めて横長感を強調 */
+            margin-bottom: 5px;
+        }
 
-#settings-panel {
-  display: none;
-}
+        .btn-group button {
+            flex: 1;
+            padding: 8px 0; /* 縦幅をさらに短く */
+            border-radius: 8px; /* 角丸を少しシャープに */
+            border: 1px solid #eee;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666;
+            font-size: 14px;
+        }
 
-#settings-panel.open {
-  display: block;
-}
+        #mood-btns button.active {
+            background-color: #E3F2FD;
+            border: 1px solid #2196F3;
+            color: #1976D2;
+        }
 
-.record-btns{
-    display:flex;
-    justify-content:space-between;
-    gap:6px;
-    margin-bottom:12px;
-}
+        #cond-btns button.active {
+            background-color: #FFF3E0;
+            border: 1px solid #FFA726;
+            color: #FB8C00;
+        }
 
-.record-btn{
-    flex:1;
-    padding:8px 0;
-    border-radius:8px;
-    border:1px solid #EEEEEE;
-    background:#FFFFFF;
-    color:#666666;
-    font-size:14px;
-    font-weight:500;
-    cursor:pointer;
-    transition:all 0.2s;
-}
+        textarea {
+            width: 100%;
+            height: 65px; /* メモ欄も少しだけコンパクトに */
+            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: none;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
+        }
 
-.record-btn.active{
-    background:#4A90E2;
-    color:white;
-}
+        /* 記録ボタン：横幅を一杯に、角丸を調整 */
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 30px; /* 1000003954.pngを参考にしっかり角を丸める */
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 25px;
+            display: block;
+        }
 
-.settings-panel select,
-.settings-panel input[type="text"]{
-    width:100%;
-    padding:10px;
-    margin-top:5px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    box-sizing:border-box;
-}
-
-.settings-panel label{
-    display:block;
-    margin-top:8px;
-}
-
-.settings-panel h4{
-    margin-top:20px;
-    margin-bottom:10px;
-}
-
-#mood-buttons button.active {
-  border: 2px solid #bfdbfe;
-  color: #3b82f6;
-  background-color: #eff6ff;
-  font-weight: bold;
-}
-
-#cond-buttons button.active {
-  border: 2px solid #fde68a;
-  color: #f59e0b;
-  background-color: #fffbeb;
-  font-weight: bold;
-}
-
-.save-settings-btn{
-    width:100%;
-    margin-top:20px;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    background:#4A90E2;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-}
-
-textarea {
-    width: 100%;
-    height: 40px; /* 65 → 少し圧縮 */
-    margin: 10px 0; /* 15 → 少し詰める */
-    padding: 8px 12px; /* 12/15 → すっきり */
-    border-radius: 10px; /* 少しだけ小さく */
-    border: none;
-    background-color: #f5f5f5;
-    font-size: 14px;
-    line-height: 1.4;
-    box-sizing: border-box;
-    resize: none;
-    color: #333;
-}
 
 .graph-wrapper {
     overflow-x: auto;
