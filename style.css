@@ -78,45 +78,41 @@ body {
     color: #FB8C00;
 }
 
-.settings {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .settings {
-  background: white !important;
-  color: #888 !important;
-  border: 1px solid #eee !important;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  transition: 0.2s;
-}
+textarea {
+            width: 100%;
+            height: 65px; /* メモ欄も少しだけコンパクトに */
+            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: none;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
+        }
 
-.settings:hover {
-  background: #f5f5f5;
-  transform: scale(1.05);
-}
+        /* 記録ボタン：横幅を一杯に、角丸を調整 */
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 30px; /* 1000003954.pn参考にしっかり角を丸める */
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 25px;
+            display: block;
+        }
 
-.settings:hover {
-  background: #f5f5f5;
-  color: #666;
-}
+        .chart-container {
+            width: 100%;
+            height: 280px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
 
-#settings-panel {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 1000;
-}
 
         h3 {
             margin-top: 35px;
