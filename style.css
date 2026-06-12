@@ -26,9 +26,14 @@ h1{
     margin-bottom:20px;
 }
 
-.input-section {
-            padding: 0 20px;
-        }
+..settings {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
 
         .label {
             display: block;
