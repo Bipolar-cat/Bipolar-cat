@@ -155,3 +155,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   updateGraph();
 });
+
+window.onload = () => {
+
+    const logs = getLogs();
+
+    drawChart(logs);
+
+    renderLogList(logs);
+
+};
