@@ -72,12 +72,14 @@ body {
   right: 12px;
   z-index: 9999;
   font-size: 20px;
-  color: #9CA3AF;
-  background: white;
+  color: #9CA3AF; /* グレー */
+  background: #ffffff; /* 白 */
   padding: 6px 8px;
-  border-radius: 8px;
-
+  order-radius: 8px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
         h3 {
