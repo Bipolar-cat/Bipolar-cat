@@ -1,48 +1,39 @@
-body{
-    font-family:sans-serif;
-    margin:20px;
-}
+body {
+            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-.header{
-    position:relative;
-    text-align:center;
-    margin-bottom:10px;
-}
+        .container {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 25px 0;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            overflow: hidden;
+        }
 
-h1{
-    color:#4A90E2;
-    font-size:32px;
-    font-weight:bold;
-    margin:0;
-}
+        h1 {
+            color: #5C6BC0;
+            font-size: 32px;
+            margin: 10px 0 0 0;
+        }
 
-.subtitle{
-    display:block;
-    width:100%;
-    text-align:center;
-    color:#9CA3AF;
-    font-size:14px;
-    margin-top:6px;
-    margin-bottom:20px;
-}
+        .subtitle {
+            color: #888;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
 
-.settings {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 9999;
-
-  font-size: 20px;
-  color: #9CA3AF; /* サブタイトルと同じグレー */
-
-  cursor: pointer;
-  background: white; /* 白背景 */
-  padding: 6px 8px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        .input-section {
+            padding: 0 20px;
+        }
 
         .label {
             display: block;
@@ -87,7 +78,7 @@ h1{
 
         textarea {
             width: 100%;
-            height: 50px; /* メモ欄も少しだけコンパクトに */
+            height: 65px; /* メモ欄も少しだけコンパクトに */
             margin: 15px 0;
             padding: 12px 15px;
             border-radius: 12px;
@@ -106,7 +97,7 @@ h1{
             background-color: #4A90E2;
             color: white;
             border: none;
-            border-radius: 30px; /* 1000003954.pngを参考にしっかり角を丸める */
+            border-radius: 30px; /* 1000003954.pn参考にしっかり角を丸める */
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
@@ -114,12 +105,103 @@ h1{
             display: block;
         }
 
+        .chart-container {
+            width: 100%;
+            height: 280px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+        }
 
-.graph-wrapper {
-    overflow-x: auto;
-    width: 100%;
-}
+        h3 {
+            margin-top: 35px;
+            color: #444;　
+            font-size: 18px;
+            padding: 0 20px;
+        }
 
-.graph-inner {
-    min-width: 600px; /* 横スクロール発生ポイント */
-}
+        .log-list {
+            width: 100%;
+        }
+
+        .log-item {
+            text-align: left;
+            padding: 15px 20px;
+            background: #fff;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 14px;
+            transition: background-color 0.5s;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            background-color: #fff9c4 !important;
+        }
+
+        .log-date {
+            color: #4A90E2;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
+
+        <div class="input-section">
+            <label class="label">今の気分は？</label>
+            <div id="mood-btns" class="btn-group">
+                <button onclick="setVal('mood', 1, this)">低い</button>
+                <button onclick="setVal('mood', 2, this)" class="active">普通</button>
+                <button onclick="setVal('mood', 3, this)">良い</button>
+            </div>
+
+            <label class="label">体の調子は？</label>
+            <div id="cond-btns" class="btn-group">
+                <button onclick="setVal('cond', 1, this)">悪い</button>
+                <button onclick="setVal('cond', 2, this)" class="active">普通</button>
+                <button onclick="setVal('cond', 3, this)">良い</button>
+            </div>
+
+            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+            
+            <button class="save-btn" onclick="saveData()">記録する</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <h3>最近の記録</h3>
+        <div id="log-list" class="log-list"></div>
+    </div>
+
+    <script>
+        let selectedMood = 2;
+        let selectedCond = 2;
+
+        function setVal(type, val, btn) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (type === 'mood') selectedMood = val;
+            else selectedCond = val;
+        }
+
+        function saveData() {
+            const note = document.getElementById('note').value;
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            const logs = JSON.parse(localStorage.getItem('innernote_3step_logs') || '[]');
+            logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note });
+            localStorage.setItem('innernote_3step_logs', JSON.stringify(logs));
+            
+            alert("記録しました！");
+            location.reload();
+        }
