@@ -82,6 +82,10 @@ body {
   justify-content: center;
 }
 
+#settings-panel {
+  display: none;
+}
+
         h3 {
             margin-top: 35px;
             color: #444;　
