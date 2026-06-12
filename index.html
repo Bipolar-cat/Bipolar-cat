@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <button class="settings-trigger-btn" onclick="toggleSettings()">⚙</button>
+
+    <title>InnerNote</title>    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
-    <title>InnerNote</title>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
 </head>
 <body>
+
+  <button class="settings-trigger-btn" onclick="toggleSettings()">⚙</button>
+
+    <div id="settings-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>設定</h3>
+            <button onclick="toggleSettings()">閉じる</button>
+        </div>
+    </div>
+  
 <div class="container">
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
@@ -24,11 +39,101 @@
             <option value="発達障害">発達障害</option>
             <option value="その他">その他</option>
         </select>
-            <button class="settings">⚙</button>
-     </div>
 
-    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
+        <select id="age-select">
+            <option value="10">10代</option>
+            <option value="20">20代</option>
+            <option value="30">30代</option>
+            <option value="40">40代</option>
+            <option value="50">50代</option>
+            <option value="60">60代</option>
+            <option value="70">70代</option>
+            <option value="80">80代以上</option>
+        </select>
+
+        <div id="settings-modal" class="modal">
+    <div class="modal-content">
+        <label><input type="checkbox" name="status" value="full-time"> 正社員</label><br>
+        <label><input type="checkbox" name="status" value="part-time"> パート・アルバイト</label><br>
+        <label><input type="checkbox" name="status" value="leave"> 休職中</label><br>
+        <label><input type="checkbox" name="status" value="unemployed"> 離職中</label><br>
+        <label><input type="checkbox" name="status" value="student"> 就学中</label><br>
+        <label><input type="checkbox" name="status" value="school-leave"> 休学中</label><br>
+        <label><input type="checkbox" name="status" value="none"> 無職</label><br>
+
+        <label><input type="checkbox" name="family" value="housewife"> 主婦・主夫</label><br>
+        <label><input type="checkbox" name="family" value="spouse"> 配偶者有</label><br>
+        <label><input type="checkbox" name="family" value="kids"> 子ども有</label><br>
+        <label><input type="checkbox" name="family" value="alone"> 一人暮らし</label><br>
+        <label><input type="checkbox" name="family" value="family-live"> 家族と同居（誰：<input type="text" id="family-memo" style="width: 80px;">）</label><br>
+        <label><input type="checkbox" name="family" value="other-live"> 家族以外と同居（誰：<input type="text" id="other-memo" style="width: 80px;">）</label><br>
+
+        <label><input type="checkbox" name="other" value="hospital"> 通院中</label><br>
+        <label><input type="checkbox" name="other" value="welfare"> 福祉サービス利用中</label><br>
+        <label><input type="checkbox" name="other" value="genetic"> 親族に同じ疾患の人がいる</label><br>
+
+        <button onclick="saveSettings()">保存して閉じる</button>
     </div>
 </div>
+
+    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
+   <div id="diagnosis-fixed-container" ...>
+    <span id="diagnosis-text">診断名: 未設定</span>
+    <button type="button" class="change-btn" onclick="unlockDiagnosis()">変更</button>
+</div>
+
+<div id="settings-modal" class="modal">
+    <div class="modal-content">
+        <h2>設定</h2>
+        <label><input type="radio" name="recordMode" value="step3"> 3段階</label>
+        <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
+        <button onclick="saveSettings()">保存</button>
+        <button onclick="toggleSettings()">閉じる</button>
+    </div>
+</div>
+
+<div class="input-section">
+    <label class="label">今の気分は？</label>
+    <div class="scroll-wrapper">
+        <div id="mood-btns" class="btn-group-circle"></div>
+    </div>
+
+    <label class="label">体の調子は？</label>
+    <div class="scroll-wrapper">
+        <div id="cond-btns" class="btn-group-circle"></div>
+    </div>
+
+    <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+    <button class="save-btn" onclick="saveData()">記録する</button>
+</div>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="summary-section">
+            <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
+            <div id="summary-ts">前回まとめ作成：なし</div>
+            
+            <div id="summary-card">
+                <span class="report-header">【一定期間まとめレポート】</span>
+                <div id="summary-content"></div>
+            </div>
+        </div>
+
+        <div class="log-title">最近の記録</div>
+        <div id="log-list" class="log-list"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script type="module" src="/js/storage.js"></script>
+<script type="module" src="/js/settings.js"></script>
+<script type="module" src="/js/logs.js"></script>
+<script type="module" src="/js/chart.js"></script>
+<script type="module" src="/js/summary.js"></script>
+<script type="module" src="/js/script.js"></script>
+
+</html>
