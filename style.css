@@ -1,4 +1,4 @@
-　　　　body {
+body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
@@ -7,12 +7,11 @@
             justify-content: center;
         }
 
-        /* 大枠の形（幅450px、角丸25px、パディング）を完全統一 */
         .container {
             max-width: 450px;
             width: 100%;
             background: white;
-            padding: 20px 0;
+            padding: 25px 0;
             border-radius: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             text-align: center;
@@ -21,68 +20,130 @@
 
         h1 {
             color: #5C6BC0;
-            font-size: 28px;
-            margin: 5px 0 0 0;
+            font-size: 32px;
+            margin: 10px 0 0 0;
         }
 
         .subtitle {
             color: #888;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
 
-        /* --- 主な診断名エリア（左の表から完全忠実に移植） --- */
-        .diagnosis-area {
-            width: 66.6%;
-            margin: 0 auto 20px auto;
+        .input-section {
+            padding: 0 20px;
+        }
+
+        .label {
+            display: block;
             text-align: left;
-            box-sizing: border-box;
+            font-weight: bold;
+            margin: 15px 0 8px 5px; /* ラベルとの間隔を少し調整 */
+            color: #444;
+            font-size: 15px;
         }
 
-        .diagnosis-fixed-box {
+        /* 3段階ボタン：さらに横長、縦をスリムに (padding 10px -> 8px) */
+        .btn-group {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            background-color: #f5f5f5;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #333;
-            box-sizing: border-box;
+            gap: 6px; /* ボタン同士の隙間を少し詰めて横長感を強調 */
+            margin-bottom: 5px;
         }
 
-        .change-btn {
-            background: none;
+        .btn-group button {
+            flex: 1;
+            padding: 8px 0; /* 縦幅をさらに短く */
+            border-radius: 8px; /* 角丸を少しシャープに */
+            border: 1px solid #eee;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666;
+            font-size: 14px;
+        }
+
+        #mood-btns button.active {
+            background-color: #E3F2FD;
+            border: 1px solid #2196F3;
+            color: #1976D2;
+        }
+
+        #cond-btns button.active {
+            background-color: #FFF3E0;
+            border: 1px solid #FFA726;
+            color: #FB8C00;
+        }
+
+        textarea {
+            width: 100%;
+            height: 65px; /* メモ欄も少しだけコンパクトに */
+            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 12px;
             border: none;
-            color: #4A90E2;
-            font-size: 12px;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
+        }
+
+        /* 記録ボタン：横幅を一杯に、角丸を調整 */
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 30px; /* 1000003954.pn参考にしっかり角を丸める */
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-            padding: 0;
+            margin-bottom: 25px;
+            display: block;
         }
 
-        .select-box {
+        .chart-container {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            font-size: 13px;
-            color: #333;
-            outline: none;
-            box-sizing: border-box;
+            height: 280px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
         }
 
-        .other-diagnosis-input {
-            display: none;
-            width: 100%;
-            margin-top: 6px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #4A90E2;
-            background-color: #fff;
-            font-size: 13px;
-            box-sizing: border-box;
-            color: #333;
+        h3 {
+            margin-top: 35px;
+            color: #444;　
+            font-size: 18px;
+            padding: 0 20px;
         }
+
+        .log-list {
+            width: 100%;
+        }
+
+        .log-item {
+            text-align: left;
+            padding: 15px 20px;
+            background: #fff;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 14px;
+            transition: background-color 0.5s;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .highlight {
+            background-color: #fff9c4 !important;
+        }
+
+        .log-date {
+            color: #4A90E2;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
