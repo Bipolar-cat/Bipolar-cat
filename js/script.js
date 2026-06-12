@@ -68,6 +68,11 @@ function renderGraph(data) {
   const max = 10; // スケール固定（1〜10想定）
   const stepX = canvas.width / (data.length - 1);
 
+  function updateGraph() {
+  const data = getGraphData();
+  renderGraph(data);
+  }
+  
   // 軸反転（上が高い）
   function getY(value) {
     return canvas.height - (value / max) * canvas.height;
@@ -91,6 +96,15 @@ function renderGraph(data) {
 
     ctx.stroke();
   }
+  function setMood(value) {
+  updateRecord("mood", value);
+  updateGraph();
+}
+
+function setCondition(value) {
+  updateRecord("condition", value);
+  updateGraph();
+}
   
 window.addEventListener("DOMContentLoaded", () => {
   renderThreeButtons("mood-buttons", "mood");
