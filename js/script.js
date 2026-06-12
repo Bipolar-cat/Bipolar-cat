@@ -147,17 +147,6 @@ function renderGraph(data) {
   drawLine("condition", "orange");
 }
 
-// --------------------
-// settings
-// --------------------
-function openSettings() {
-  document.getElementById("settings-panel").style.display = "block";
-}
-
-function closeSettings() {
-  document.getElementById("settings-panel").style.display = "none";
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector(".settings");
   if (btn) btn.onclick = openSettings;
