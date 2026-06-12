@@ -53,6 +53,22 @@ body {
   padding: 8px 0;
         }
 
+.record-btn {
+    flex: 1;
+    padding: 8px 0;
+    border: none;
+    border-radius: 14px;
+    background: #f2f2f7;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.record-btn.active {
+    background: #888;
+    color: #fff;
+}
+
         #mood-btns button.active {
             background-color: #E3F2FD;
             border: 1px solid #2196F3;
