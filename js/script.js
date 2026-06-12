@@ -2,7 +2,9 @@ console.log("script.js loaded");
 
 let records = [];
 
-// 1日単位で統合保存
+// --------------------
+// データ保存
+// --------------------
 function updateRecord(type, value) {
   const today = new Date().toDateString();
 
@@ -24,61 +26,54 @@ function updateRecord(type, value) {
   console.log("updated records:", records);
 }
 
-// 気分
+// --------------------
+// 入力
+// --------------------
 function setMood(value) {
   updateRecord("mood", value);
+  updateGraph();
 }
 
-// 体調
 function setCondition(value) {
   updateRecord("condition", value);
+  updateGraph();
 }
 
-// グラフ用（両方揃ってるものだけ）
+// --------------------
+// グラフデータ
+// --------------------
 function getGraphData() {
   return records
     .filter(r => r.mood !== null && r.condition !== null)
     .slice(-10);
 }
 
-// デバッグ
-function getLatest10() {
-  return records.slice(-10);
+// --------------------
+// グラフ更新
+// --------------------
+function updateGraph() {
+  const data = getGraphData();
+  renderGraph(data);
 }
 
-  // 気分（青）
-  drawLine("mood", "blue");
-
-  // 体調（オレンジ）
-  drawLine("condition", "orange");
-}
-
-function getGraphData() {
-  return records
-    .filter(r => r.mood !== null && r.condition !== null)
-    .slice(-10);
-}
-
+// --------------------
+// グラフ描画
+// --------------------
 function renderGraph(data) {
   const canvas = document.getElementById("graph");
   const ctx = canvas.getContext("2d");
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const max = 10; // スケール固定（1〜10想定）
+  if (data.length === 0) return;
+
+  const max = 10;
   const stepX = canvas.width / (data.length - 1);
 
-  function updateGraph() {
-  const data = getGraphData();
-  renderGraph(data);
-  }
-  
-  // 軸反転（上が高い）
   function getY(value) {
     return canvas.height - (value / max) * canvas.height;
   }
 
-  // 線を描く関数
   function drawLine(key, color) {
     ctx.beginPath();
     ctx.strokeStyle = color;
@@ -87,28 +82,24 @@ function renderGraph(data) {
       const x = i * stepX;
       const y = getY(d[key]);
 
-      if (i === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-      }
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
     });
 
     ctx.stroke();
   }
-  function setMood(value) {
-  updateRecord("mood", value);
-  updateGraph();
+
+  // 気分（青）
+  drawLine("mood", "blue");
+
+  // 体調（オレンジ）
+  drawLine("condition", "orange");
 }
 
-function setCondition(value) {
-  updateRecord("condition", value);
-  updateGraph();
-}
-  
+// --------------------
+// 初期化
+// --------------------
 window.addEventListener("DOMContentLoaded", () => {
   renderThreeButtons("mood-buttons", "mood");
-  renderThreeButtons("cond-buttons", "cond");
+  renderThreeButtons("cond-buttons", "condition");
 });
-
-
