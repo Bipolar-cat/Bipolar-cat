@@ -66,13 +66,15 @@ body {
         }
 
 .settings {
+  position: fixed;
+  top: 12px;
+  right: 12px;
   background: white;
   color: #888;
   border: none;
-  border-radius: 8px;
-  padding: 6px 10px;
   cursor: pointer;
-  transition: 0.2s;
+  padding: 6px 10px;
+  border-radius: 8px;
 }
 
 .settings:hover {
