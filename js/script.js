@@ -146,3 +146,12 @@ function renderGraph(data) {
 drawLine("mood", "blue");
 drawLine("condition", "orange");
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("DOMContentLoaded");
+
+  renderThreeButtons("mood-btns", "mood");
+  renderThreeButtons("cond-btns", "condition");
+
+  updateGraph();
+});
