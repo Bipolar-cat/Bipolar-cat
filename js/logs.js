@@ -19,12 +19,9 @@ function renderThreeButtons(containerId, type){
     container.innerHTML = "";
 
     let labels;
-
-    if(type === "mood"){
-        labels = ["良い", "普通", "低い"];
-    }else{
-        labels = ["良い", "普通", "悪い"];
-    }
+    
+renderThreeButtons("mood-btns", "mood");
+renderThreeButtons("cond-btns", "condition");
 
     labels.forEach((label,index)=>{
 
