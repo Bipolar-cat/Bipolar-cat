@@ -27,16 +27,30 @@
     </div>
   </div>
 </div>
+  
+<label class="label">今の気分は？</label>
+<div id="mood-btns" class="btn-group">
+    <button>良い</button>
+    <button class="active">普通</button>
+    <button>低い</button>
+</div>
 
-<div class="input-section">
-    <label class="label">今の気分は？</label>
-    <div class="scroll-wrapper">
-        <div id="mood-btns" class="btn-group-circle"></div>
-    </div>
+<label class="label">体の調子は？</label>
+<div id="cond-btns" class="btn-group">
+    <button>良い</button>
+    <button class="active">普通</button>
+    <button>悪い</button>
+</div>
 
-    <label class="label">体の調子は？</label>
-    <div class="scroll-wrapper">
-        <div id="cond-btns" class="btn-group-circle"></div>
+<textarea placeholder="メモを入力"></textarea>
+
+<button class="save-btn">
+    記録する
+</button>
+
+<div class="chart-container">
+    <canvas id="graph"></canvas>
+</div>
 
        <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
     <button class="save-btn" onclick="saveData()">記録する</button>
