@@ -26,7 +26,6 @@ h1{
     margin-bottom:20px;
 }
 
-.label{
 .input-section {
             padding: 0 20px;
         }
@@ -74,7 +73,7 @@ h1{
 
         textarea {
             width: 100%;
-            height: 65px; /* メモ欄も少しだけコンパクトに */
+            height: 50px; /* メモ欄も少しだけコンパクトに */
             margin: 15px 0;
             padding: 12px 15px;
             border-radius: 12px;
