@@ -22,15 +22,17 @@
 <div class="container">
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
+  
 <div id="settings-panel">
   <div id="settings-modal" class="modal">
     <div class="modal-content">
-        <h2>設定</h2>
+      
+      <h2>設定</h2>
         <label><input type="radio" name="recordMode" value="step3"> 3段階</label>
         <label><input type="radio" name="recordMode" value="step10"> 10段階</label>
-        <button onclick="saveSettings()">保存</button>
-        <button onclick="toggleSettings()">閉じる</button>
+  
     </div>
+  </div>
 </div>
 
 <div class="input-section">
@@ -42,6 +44,10 @@
     <label class="label">体の調子は？</label>
     <div class="scroll-wrapper">
         <div id="cond-btns" class="btn-group-circle"></div>
+
+       <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+    <button class="save-btn" onclick="saveData()">記録する</button>
+    </div>
       
   <div id="settings-panel">
      <div class="diagnosis-area" style="margin-bottom: 20px;">
@@ -101,10 +107,6 @@
    </div>
     </div>
     </div>
- 
-    <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-    <button class="save-btn" onclick="saveData()">記録する</button>
-</div>
 
         <div class="chart-container">
             <canvas id="myChart"></canvas>
