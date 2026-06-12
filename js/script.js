@@ -109,10 +109,10 @@ document.querySelector(".settings").onclick = openSettings;
   drawLine("condition", "orange");
 }
 
-// --------------------
-// 初期化
-// --------------------
 window.addEventListener("DOMContentLoaded", () => {
   renderThreeButtons("mood-btns", "mood");
-renderThreeButtons("cond-btns", "condition");}
+  renderThreeButtons("cond-btns", "condition");
+
+  updateGraph();
+});
 
