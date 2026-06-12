@@ -46,13 +46,55 @@ function getLatest10() {
   return records.slice(-10);
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  renderThreeButtons("mood-buttons", "mood");
-  renderThreeButtons("cond-buttons", "cond");
-});
+  // 気分（青）
+  drawLine("mood", "blue");
+
+  // 体調（オレンジ）
+  drawLine("condition", "orange");
+}
 
 function getGraphData() {
   return records
     .filter(r => r.mood !== null && r.condition !== null)
     .slice(-10);
 }
+
+function renderGraph(data) {
+  const canvas = document.getElementById("graph");
+  const ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const max = 10; // スケール固定（1〜10想定）
+  const stepX = canvas.width / (data.length - 1);
+
+  // 軸反転（上が高い）
+  function getY(value) {
+    return canvas.height - (value / max) * canvas.height;
+  }
+
+  // 線を描く関数
+  function drawLine(key, color) {
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+
+    data.forEach((d, i) => {
+      const x = i * stepX;
+      const y = getY(d[key]);
+
+      if (i === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+
+    ctx.stroke();
+  }
+  
+window.addEventListener("DOMContentLoaded", () => {
+  renderThreeButtons("mood-buttons", "mood");
+  renderThreeButtons("cond-buttons", "cond");
+});
+
+
