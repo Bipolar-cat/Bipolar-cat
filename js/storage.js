@@ -1,11 +1,16 @@
-function loadState() {
+const STORAGE_KEY =
+"innernote_3step_logs";
 
-    const saved =
-        localStorage.getItem("innernote_state");
+function getLogs() {
+    return JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+        || "[]"
+    );
+}
 
-    if (!saved) {
-        return {};
-    }
-
-    return JSON.parse(saved);
+function saveLogs(logs) {
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(logs)
+    );
 }
