@@ -91,6 +91,26 @@ body {
     color: #333;
 }
 
+.settings {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+
+  font-size: 20px;
+  color: #9CA3AF;
+
+  background: white;
+  padding: 6px 8px;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
         /* 記録ボタン：横幅を一杯に、角丸を調整 */
         .save-btn {
             width: 100%;
