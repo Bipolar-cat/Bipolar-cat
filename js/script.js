@@ -111,5 +111,5 @@ document.querySelector(".settings").onclick = openSettings;
 // --------------------
 window.addEventListener("DOMContentLoaded", () => {
   renderThreeButtons("mood-btns", "mood");
-renderThreeButtons("cond-btns", "condition");
+renderThreeButtons("cond-btns", "condition");}
 
