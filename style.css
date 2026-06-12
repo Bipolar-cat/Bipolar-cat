@@ -40,46 +40,43 @@ body {
             font-size: 15px;
         }
 
-        /* 3段階ボタン：さらに横長、縦をスリムに (padding 10px -> 8px) */
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-            gap: 6px; /* ボタン同士の隙間を少し詰めて横長感を強調 */
-            margin-bottom: 5px;
-        }
+        /* 3段階ボタン */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 5px;
+}
 
-        .btn-group button {
-  flex: 1;
-  padding: 8px 0;
-        }
-
-.record-btn {
+.btn-group button {
     flex: 1;
     padding: 8px 0;
-    border: none;
-    border-radius: 14px;
-    background: #f2f2f7;
+
+    border-radius: 8px;
+    border: 1px solid #eee;
+
+    background: white;
+
+    cursor: pointer;
+    transition: all 0.2s;
+
     color: #666;
     font-size: 14px;
-    cursor: pointer;
 }
 
-.record-btn.active {
-    background: #888;
-    color: #fff;
+/* 気分 */
+#mood-btns button.active {
+    background-color: #E3F2FD;
+    border: 1px solid #2196F3;
+    color: #1976D2;
 }
 
-        #mood-btns button.active {
-            background-color: #E3F2FD;
-            border: 1px solid #2196F3;
-            color: #1976D2;
-        }
-
-        #cond-btns button.active {
-            background-color: #FFF3E0;
-            border: 1px solid #FFA726;
-            color: #FB8C00;
-        }
+/* 体調 */
+#cond-btns button.active {
+    background-color: #FFF3E0;
+    border: 1px solid #FFA726;
+    color: #FB8C00;
+}
 
 .settings {
   position: fixed;
