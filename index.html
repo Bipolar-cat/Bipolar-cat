@@ -1,40 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>InnerNote</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <body>
-    <div class="container">
-        <h1>InnerNote</h1>
-        <p class="subtitle">**気分と調子の変化を記録**</p>
-
-        <div class="input-section">
-            <label class="label">今の気分は？</label>
-            <div id="mood-btns" class="btn-group">
-                <button onclick="setVal('mood', 1, this)">低い</button>
-                <button onclick="setVal('mood', 2, this)" class="active">普通</button>
-                <button onclick="setVal('mood', 3, this)">良い</button>
-            </div>
-
-            <label class="label">体の調子は？</label>
-            <div id="cond-btns" class="btn-group">
-                <button onclick="setVal('cond', 1, this)">悪い</button>
-                <button onclick="setVal('cond', 2, this)" class="active">普通</button>
-                <button onclick="setVal('cond', 3, this)">良い</button>
-            </div>
-
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            
-            <button class="save-btn" onclick="saveData()">記録する</button>
-        </div>
-
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
-        </div>
-
-        <h3>最近の記録</h3>
-        <div id="log-list" class="log-list"></div>
-    </div>
+    <link rel="stylesheet"
+          href="style.css">
+</head>
