@@ -96,17 +96,20 @@ body {
     right: 12px;
     width: 40px;
     height: 40px;
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: white;
     color: #888;
-    font-size: 24px;
-    line-height: 1;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    font-size: 22px;
     cursor: pointer;
-    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .settings:hover {
-    color: #666;
+    background: #f8f8f8;
 }
 
         /* 記録ボタン：横幅を一杯に、角丸を調整 */
