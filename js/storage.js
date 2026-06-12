@@ -1,11 +1,18 @@
-const logs = getLogs();
+console.log("storage.js loaded");
 
-logs.push({
-    date: dateStr,
-    mood: selectedMood,
-    cond: selectedCond,
-    note: note,
-    ts: now.getTime()
-});
+const STORAGE_KEY =
+  "innernote_3step_logs";
 
-saveLogs(logs);
+function getLogs() {
+  return JSON.parse(
+    localStorage.getItem(STORAGE_KEY)
+    || "[]"
+  );
+}
+
+function saveLogs(logs) {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(logs)
+  );
+}
