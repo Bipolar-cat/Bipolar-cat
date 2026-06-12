@@ -31,8 +31,17 @@ h1{
   top: 12px;
   right: 12px;
   z-index: 9999;
+
   font-size: 20px;
+  color: #9CA3AF; /* サブタイトルと同じグレー */
+
   cursor: pointer;
+  background: white; /* 白背景 */
+  padding: 6px 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
         .label {
