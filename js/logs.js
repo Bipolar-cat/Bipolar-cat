@@ -1,59 +1,22 @@
-console.log("renderThreeButtons =", typeof renderThreeButtons);
-console.log("logs.js version 2");
-console.log("logs.js loaded");
-
 let selectedMood = 2;
 let selectedCond = 2;
 
-function renderThreeButtons(containerId, type){
+function setVal(type,val,btn){
 
-    console.log("render:", containerId);
+    const parent =
+      btn.parentElement;
 
-    const container =
-        document.getElementById(containerId);
+    parent
+      .querySelectorAll("button")
+      .forEach(b =>
+        b.classList.remove("active")
+      );
 
-    console.log(container);
+    btn.classList.add("active");
 
-    if(!container) return;
-
-    container.innerHTML = "";
-
-    let labels;
-    
-renderThreeButtons("mood-btns", "mood");
-renderThreeButtons("cond-btns", "condition");
-
-    labels.forEach((label,index)=>{
-
-        const btn =
-            document.createElement("button");
-
-        btn.className =
-            `record-btn ${type}-btn`;
-
-        if(index === 1){
-            btn.classList.add("active");
-        }
-
-        btn.textContent = label;
-
-        btn.onclick = () => {
-
-            container
-                .querySelectorAll(".record-btn")
-                .forEach(b =>
-                    b.classList.remove("active")
-                );
-
-            btn.classList.add("active");
-
-            if(type === "mood"){
-                selectedMood = index + 1;
-            }else{
-                selectedCond = index + 1;
-            }
-        };
-
-        container.appendChild(btn);
-    });
+    if(type==="mood"){
+        selectedMood = val;
+    }else{
+        selectedCond = val;
+    }
 }
