@@ -73,55 +73,20 @@ body {
             color: #FB8C00;
         }
 
-        #feeling-text {
-    width: 100%;
-    height: 45px; /* さらにコンパクト */
-    margin: 8px 0;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: none;
-    background-color: #f5f5f5;
-    font-size: 14px;
-    line-height: 1.4;
-    box-sizing: border-box;
-    resize: none;
-    color: #333;
-}
-
-.settings {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 9999;
-  font-size: 20px;
-  color: #9CA3AF;
-  background: #f8f9fa;
-  padding: 6px 8px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-        /* 記録ボタン：横幅を一杯に、角丸を調整 */
-        .save-btn {
+        textarea {
             width: 100%;
-            padding: 15px;
-            background-color: #4A90E2;
-            color: white;
+            height: 65px; /* メモ欄も少しだけコンパクトに */
+            margin: 15px 0;
+            padding: 12px 15px;
+            border-radius: 12px;
             border: none;
-            border-radius: 30px; /* 1000003954.pn参考にしっかり角を丸める */
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 25px;
-            display: block;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: none;
+            color: #333;
         }
 
-        .chart-container {
-            width: 100%;
-            height: 280px;
-            border-top: 1px solid #f0f0f0;
-            padding-top: 15px;
-        }
 
         h3 {
             margin-top: 35px;
