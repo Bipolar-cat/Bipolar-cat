@@ -1,12 +1,11 @@
-const STORAGE_KEY = 'innernote_3step_logs';
-const logs = JSON.parse(
-  localStorage.getItem(STORAGE_KEY)
-  || '[]'
-);
+const logs = getLogs();
 
-logs.push(...);
+logs.push({
+    date: dateStr,
+    mood: selectedMood,
+    cond: selectedCond,
+    note: note,
+    ts: now.getTime()
+});
 
-localStorage.setItem(
-  STORAGE_KEY,
-  JSON.stringify(logs)
-);
+saveLogs(logs);
