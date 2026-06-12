@@ -94,22 +94,24 @@ body {
     position: fixed;
     top: 12px;
     right: 12px;
-    width: 40px;
-    height: 40px;
+    width: 52px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
     color: #888;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    font-size: 22px;
+    border: none;
+    border-radius: 12px;
+    font-size: 32px; /* ⚙を大きく */
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
 }
 
 .settings:hover {
-    background: #f8f8f8;
+    color: #666;
+    transform: scale(1.05);
 }
 
         /* 記録ボタン：横幅を一杯に、角丸を調整 */
