@@ -63,6 +63,71 @@ function renderGraph(data) {
   const canvas = document.getElementById("graph");
   const ctx = canvas.getContext("2d");
 
+  console.log("script.js loaded");
+
+let records = [];
+
+// --------------------
+// データ保存
+// --------------------
+function updateRecord(type, value) {
+  const today = new Date().toDateString();
+
+  let record = records.find(r => r.date === today);
+
+  if (!record) {
+    record = {
+      id: Date.now(),
+      date: today,
+      timestamp: Date.now(),
+      mood: null,
+      condition: null
+    };
+    records.push(record);
+  }
+
+  record[type] = value;
+
+  console.log("updated records:", records);
+}
+
+// --------------------
+// 入力
+// --------------------
+function setMood(value) {
+  updateRecord("mood", value);
+  updateGraph();
+}
+
+function setCondition(value) {
+  updateRecord("condition", value);
+  updateGraph();
+}
+
+// --------------------
+// グラフデータ
+// --------------------
+function getGraphData() {
+  return records
+    .filter(r => r.mood !== null && r.condition !== null)
+    .slice(-10);
+}
+
+// --------------------
+// グラフ更新
+// --------------------
+function updateGraph() {
+  const data = getGraphData();
+  renderGraph(data);
+}
+
+// --------------------
+// グラフ描画
+// --------------------
+function renderGraph(data) {
+  const canvas = document.getElementById("graph");
+  const ctx = canvas.getContext("2d");
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (data.length === 0) return;
@@ -85,6 +150,34 @@ function renderGraph(data) {
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
+
+    ctx.stroke();
+  }
+
+  drawLine("mood", "blue");
+  drawLine("condition", "orange");
+}
+
+// --------------------
+// settings
+// --------------------
+function openSettings() {
+  document.getElementById("settings-panel").style.display = "block";
+}
+
+function closeSettings() {
+  document.getElementById("settings-panel").style.display = "none";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector(".settings");
+  if (btn) btn.onclick = openSettings;
+
+  renderThreeButtons("mood-btns", "mood");
+  renderThreeButtons("cond-btns", "condition");
+
+  updateGraph();
+});
 
     ctx.stroke();
   }
