@@ -1,3 +1,4 @@
+console.log("renderThreeButtons =", typeof renderThreeButtons);
 console.log("logs.js version 2");
 console.log("logs.js loaded");
 
