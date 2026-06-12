@@ -89,6 +89,16 @@ function renderGraph(data) {
     ctx.stroke();
   }
 
+  function openSettings() {
+  document.getElementById("settings-panel").style.display = "block";
+}
+
+function closeSettings() {
+  document.getElementById("settings-panel").style.display = "none";
+}
+
+document.querySelector(".settings").onclick = openSettings;
+  
   // 気分（青）
   drawLine("mood", "blue");
 
@@ -104,10 +114,3 @@ window.addEventListener("DOMContentLoaded", () => {
   renderThreeButtons("cond-buttons", "condition");
 });
 
-function openSettings() {
-  document.getElementById("settings-panel").style.display = "block";
-}
-
-function closeSettings() {
-  document.getElementById("settings-panel").style.display = "none";
-}
