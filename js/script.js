@@ -50,3 +50,9 @@ window.addEventListener("DOMContentLoaded", () => {
   renderThreeButtons("mood-buttons", "mood");
   renderThreeButtons("cond-buttons", "cond");
 });
+
+function getGraphData() {
+  return records
+    .filter(r => r.mood !== null && r.condition !== null)
+    .slice(-10);
+}
