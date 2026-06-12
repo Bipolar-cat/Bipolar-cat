@@ -35,6 +35,10 @@ body {
     z-index: 1000;
 }
 
+#settings-panel {
+    display: none;
+}
+
         h1 {
             color: #5C6BC0;
             font-size: 32px;
