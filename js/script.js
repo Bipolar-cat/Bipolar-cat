@@ -57,17 +57,6 @@ function updateGraph() {
 }
 
 // --------------------
-// グラフ描画
-// --------------------
-function renderGraph(data) {
-  const canvas = document.getElementById("graph");
-  const ctx = canvas.getContext("2d");
-
-  console.log("script.js loaded");
-
-let records = [];
-
-// --------------------
 // データ保存
 // --------------------
 function updateRecord(type, value) {
