@@ -207,27 +207,20 @@ body {
     z-index: 9999;
 }
 
-/* デバッグボタン */
 .debug-btn {
     position: fixed;
     right: 15px;
     bottom: 15px;
-
     width: 55px;
     height: 55px;
-
     border: none;
     border-radius: 50%;
-
     background: #ff5252;
     color: white;
-
     font-size: 24px;
-
     z-index: 9999;
 }
 
-/* デバッグ画面 */
 .debug-panel {
     position: fixed;
     left: 10px;
