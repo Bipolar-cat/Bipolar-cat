@@ -1,5 +1,3 @@
-debug("logs.js loaded");
-
 function saveData() {
 
     debug("saveData開始");
