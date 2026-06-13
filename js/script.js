@@ -1,4 +1,3 @@
-<script>
         const STORAGE_KEY = 'innernote_3step_logs';
         let selectedMood = 2;
         let selectedCond = 2;
@@ -103,3 +102,47 @@
                         x: { 
                             ticks: { 
 
+　// 【修正】ラベルをスキップせず、45度に傾けて1行ですべて表示する
+                                autoSkip: false,
+                                maxRotation: 45, 
+                                minRotation: 45, 
+                                font: { size: 9 },
+                                color: '#666'
+                            },
+                            grid: { display: false }
+                        },
+                        y: { 
+                            min: 0.8, max: 3.2,
+                            ticks: { 
+                                stepSize: 1, 
+                                callback: v => v==3?'良い':v==2?'普通':v==1?'低/悪':'',
+                                font: { size: 10 }, color: '#aaa'
+                            },
+                            grid: { color: '#f0f0f0' }
+                        }
+                    },
+                    plugins: { 
+                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 12 } } }
+                    }
+                }
+            });
+
+            function scrollToLog(dateStr) {
+                const logItems = document.querySelectorAll('.log-item');
+                logItems.forEach(item => {
+                    item.classList.remove('highlight');
+                    if (item.querySelector('.log-date').innerText === dateStr) {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        item.classList.add('highlight');
+                    }
+                });
+            }
+
+            const logList = document.getElementById('log-list');
+            logs.slice().reverse().forEach(l => {
+                const div = document.createElement('div');
+                div.className = 'log-item';
+                div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood==3?'良い':l.mood==2?'普通':'低'} / 体調: ${l.cond==3?'良い':l.cond==2?'普通':'悪い'}<br>${l.note}`;
+                logList.appendChild(div);
+            });
+        };
