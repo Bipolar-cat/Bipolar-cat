@@ -24,7 +24,13 @@ function saveData() {
 
     }
 }
-function setVal(type,val,btn){
+ function setVal(type,val,btn){
+    debug(
+      "setVal: " +
+      type +
+      "=" +
+      val
+    );
 
     const parent = btn.parentElement;
 
