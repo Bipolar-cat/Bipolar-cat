@@ -1,4 +1,4 @@
-                        const activePoints = chart.getElementsAtEventForMode(evt, 'index', { inters<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -39,62 +39,6 @@
             font-weight: bold;
             margin-bottom: 25px;
         }
-
-        /* --- 主な診断名エリアのスタイル（横幅2/3・左揃え） --- */
-        .diagnosis-area {
-            width: 66.6%;
-            margin: 0 auto 20px auto;
-            text-align: left;
-            box-sizing: border-box;
-        }
-
-        .diagnosis-fixed-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f5f5f5;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #333;
-            box-sizing: border-box;
-        }
-
-        .change-btn {
-            background: none;
-            border: none;
-            color: #4A90E2;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        .select-box {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            font-size: 13px;
-            color: #333;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .other-diagnosis-input {
-            display: none;
-            width: 100%;
-            margin-top: 6px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #4A90E2;
-            background-color: #fff;
-            font-size: 13px;
-            box-sizing: border-box;
-            color: #333;
-        }
-        /* ----------------------------------------------- */
 
         .input-section {
             padding: 0 20px;
@@ -263,27 +207,6 @@
         <h1>InnerNote</h1>
         <p class="subtitle">**気分と調子の変化を記録**</p>
 
-        <div class="diagnosis-area" style="margin-bottom: 20px;">
-    <div id="diagnosis-select-container" style="display: block;">
-        <select id="diagnosis-select" class="diagnosis-select" onchange="lockDiagnosis()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: white; -webkit-appearance: none; appearance: none;">
-            <option value="">主な診断名を選択</option>
-            <option value="未診断（健常者）">未診断（健常者）</option>
-            <option value="うつ病">うつ病</option>
-            <option value="双極症">双極症</option>
-            <option value="統合失調症">統合失調症</option>
-            <option value="不安障害">不安障害</option>
-            <option value="適応障害">適応障害</option>
-            <option value="発達障害">発達障害</option>
-            <option value="その他">その他</option>
-        </select>
-    </div>
-
-    <div id="diagnosis-fixed-container" style="background: #efefef; padding: 10px 15px; border-radius: 8px; display: none; align-items: center; justify-content: space-between; font-size: 16px;">
-        <span id="diagnosis-text" style="font-weight: bold; color: #333;">診断名: 未設定</span>
-        <button type="button" class="change-btn" onclick="unlockDiagnosis()" style="background: none; border: none; color: #007bff; font-size: 14px; cursor: pointer; padding: 5px 10px;">変更</button>
-    </div>
-        </div>
-
         <div class="input-section">
             <label class="label">今の気分は？</label>
             <div id="mood-btns" class="btn-group">
@@ -324,28 +247,8 @@
 
     <script>
         const STORAGE_KEY = 'innernote_3step_logs';
-        const DIAGNOSIS_KEY = 'innernote_saved_diagnosis'; // 診断名固定用のキー
         let selectedMood = 2;
         let selectedCond = 2;
-
-        // その他入力欄の切り替え
-        function toggleOtherDiagnosis() {
-            const select = document.getElementById('diagnosis-select');
-            const otherInput = document.getElementById('diagnosis-other');
-            if (select.value === 'その他') {
-                otherInput.style.display = 'block';
-                otherInput.focus();
-            } else {
-                otherInput.style.display = 'none';
-                otherInput.value = '';
-            }
-        }
-
-        // 変更ボタンを押した時
-        function enableDiagnosisChange() {
-            document.getElementById('diagnosis-fixed-container').style.display = 'none';
-            document.getElementById('diagnosis-select-container').style.display = 'block';
-        }
 
         function setVal(type, val, btn) {
             const parent = btn.parentElement;
@@ -357,28 +260,11 @@
 
         function saveData() {
             const note = document.getElementById('note').value;
-            
-            // 診断名の取得ロジック（追加）
-            let diagnosisVal = localStorage.getItem(DIAGNOSIS_KEY) || "双極症"; // デフォルト
-            const isSelectVisible = document.getElementById('diagnosis-select-container').style.display !== 'none';
-            
-            if (isSelectVisible) {
-                const select = document.getElementById('diagnosis-select');
-                diagnosisVal = select.value;
-                if (diagnosisVal === 'その他') {
-                    const otherText = document.getElementById('diagnosis-other').value.trim();
-                    diagnosisVal = otherText ? `その他 (${otherText})` : 'その他';
-                }
-                // 次回のために選択された診断名を固定保存
-                localStorage.setItem(DIAGNOSIS_KEY, diagnosisVal);
-            }
-
             const now = new Date();
             const dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
             
             const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            // 保存データにdiagnosisを追加
-            logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note, ts: now.getTime(), diagnosis: diagnosisVal });
+            logs.push({ date: dateStr, mood: selectedMood, cond: selectedCond, note: note, ts: now.getTime() });
             localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
             
             alert("記録しました！");
@@ -423,26 +309,6 @@
         }
 
         window.onload = () => {
-            // --- 診断名の固定表示ロジック（追加） ---
-            const savedDiagnosis = localStorage.getItem(DIAGNOSIS_KEY);
-            if (savedDiagnosis) {
-                document.getElementById('diagnosis-select-container').style.display = 'none';
-                document.getElementById('diagnosis-fixed-container').style.display = 'flex';
-                document.getElementById('diagnosis-text').innerText = `診断名: ${savedDiagnosis}`;
-                // セレクトボックスの値も同期させておく
-                const select = document.getElementById('diagnosis-select');
-                // 保存された値が選択肢にあるか確認（その他 (XXX) の場合はその他を選択）
-                if (savedDiagnosis.startsWith("その他 (")) {
-                    select.value = "その他";
-                } else {
-                    select.value = savedDiagnosis;
-                }
-            } else {
-                // 初回訪問時はセレクトボックスを表示
-                document.getElementById('diagnosis-fixed-container').style.display = 'none';
-                document.getElementById('diagnosis-select-container').style.display = 'block';
-            }
-
             const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             const last10 = logs.slice(-10);
             
@@ -483,7 +349,7 @@
                     scales: {
                         x: { 
                             ticks: { 
-                                // ラベルをスキップせず、45度に傾けて1行ですべて表示する
+                                // 【修正】ラベルをスキップせず、45度に傾けて1行ですべて表示する
                                 autoSkip: false,
                                 maxRotation: 45, 
                                 minRotation: 45, 
@@ -523,12 +389,11 @@
             logs.slice().reverse().forEach(l => {
                 const div = document.createElement('div');
                 div.className = 'log-item';
-                // 履歴に診断名を表示（追加）
-                const diagStr = l.diagnosis ? ` [${l.diagnosis}]` : '';
-                div.innerHTML = `<span class="log-date">${l.date}${diagStr}</span>気分: ${l.mood==3?'良い':l.mood==2?'普通':'低'} / 体調: ${l.cond==3?'良い':l.cond==2?'普通':'悪い'}<br>${l.note}`;
+                div.innerHTML = `<span class="log-date">${l.date}</span>気分: ${l.mood==3?'良い':l.mood==2?'普通':'低'} / 体調: ${l.cond==3?'良い':l.cond==2?'普通':'悪い'}<br>${l.note}`;
                 logList.appendChild(div);
             });
         };
     </script>
 </body>
 </html>
+ 
