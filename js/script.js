@@ -1,17 +1,29 @@
 function debug(msg){
-
     const panel =
         document.getElementById(
             "debug-panel"
         );
 
     if(panel){
-
         panel.innerHTML +=
             "<div>" + msg + "</div>";
 
         panel.scrollTop =
             panel.scrollHeight;
+    }
+}
+
+function toggleDebug(){
+    const panel =
+        document.getElementById(
+            "debug-panel"
+        );
+
+    if(panel.style.display==="block"){
+        panel.style.display="none";
+
+    }else{
+        panel.style.display="block";
     }
 }
 
@@ -22,10 +34,11 @@ window.onerror = function(
 ){
 
     debug(
-        "ERROR: "
-        + message
-        + " line:"
-        + line
+        "❌ " +
+        message +
+        " (line " +
+        line +
+        ")"
     );
 
     return true;
