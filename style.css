@@ -206,33 +206,3 @@ body {
     color: red;
     z-index: 9999;
 }
-
-.debug-btn {
-    position: fixed;
-    right: 15px;
-    bottom: 15px;
-    width: 55px;
-    height: 55px;
-    border: none;
-    border-radius: 50%;
-    background: #ff5252;
-    color: white;
-    font-size: 24px;
-    z-index: 9999;
-}
-
-.debug-panel {
-    position: fixed;
-    left: 10px;
-    right: 10px;
-    bottom: 80px;
-    height: 250px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 10px;
-    overflow-y: auto;
-    display: none;
-    z-index: 9998;
-    font-size: 12px;
-}
