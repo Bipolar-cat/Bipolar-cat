@@ -146,3 +146,11 @@
                 logList.appendChild(div);
             });
         };
+
+window.onload = () => {
+
+    renderChart();
+
+    renderLogList();
+
+};
