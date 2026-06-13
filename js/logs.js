@@ -26,8 +26,6 @@ function saveData() {
 }
 function setVal(type,val,btn){
 
-    alert("押された");
-
     const parent = btn.parentElement;
 
     parent
