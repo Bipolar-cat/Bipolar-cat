@@ -1,26 +1,28 @@
-           window.onerror = function (
+          function debug(msg) {
+
+    const box =
+        document.getElementById("debug-box");
+
+    if(box){
+        box.innerHTML +=
+            "<div>" + msg + "</div>";
+    }
+}
+
+window.onerror = function(
     message,
     source,
-    lineno,
-    colno,
-    error
-) {
+    line
+){
 
-    console.error("===== ERROR =====");
-    console.error("message:", message);
-    console.error("file:", source);
-    console.error("line:", lineno);
-    console.error("column:", colno);
-    console.error("error:", error);
-
-    alert(
-        "エラー発生\n\n" +
-        message +
-        "\n\nline: " +
-        lineno
+    debug(
+        "ERROR: "
+        + message
+        + " line:"
+        + line
     );
 
-    return false;
+    return true;
 };
 
 console.log("script.js loaded");
