@@ -1,9 +1,5 @@
 function saveData() {
 
-    debug("saveData開始");
-
-    console.log("saveData開始");
-
     try {
 
         const logs = getLogs();
