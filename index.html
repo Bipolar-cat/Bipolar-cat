@@ -1,71 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-<title>InnerNote</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-</head>
-
-<body>
-
 <div class="container">
+        <h1>InnerNote</h1>
+        <p class="subtitle">**気分と調子の変化を記録**</p>
 
-  <button class="settings"
-          onclick="openSettings()">
-    ⚙
-  </button>
+        <div class="input-section">
+            <label class="label">今の気分は？</label>
+            <div id="mood-btns" class="btn-group">
+                <button onclick="setVal('mood', 1, this)">低い</button>
+                <button onclick="setVal('mood', 2, this)" class="active">普通</button>
+                <button onclick="setVal('mood', 3, this)">良い</button>
+            </div>
 
-  <h1>InnerNote</h1>
+            <label class="label">体の調子は？</label>
+            <div id="cond-btns" class="btn-group">
+                <button onclick="setVal('cond', 1, this)">悪い</button>
+                <button onclick="setVal('cond', 2, this)" class="active">普通</button>
+                <button onclick="setVal('cond', 3, this)">良い</button>
+            </div>
 
-  <p class="subtitle">
-    気分と調子の変化を記録
-  </p>
+            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+            
+            <button class="save-btn" onclick="saveData()">記録する</button>
+        </div>
 
-  <div class="input-section">
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
 
-    <label class="label">
-      今の気分は？
-    </label>
+        <div class="summary-section">
+            <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
+            <div id="summary-ts" class="summary-ts">前回まとめ作成：なし</div>
+            
+            <div id="summary-card" class="summary-card">
+                <span class="report-header">【一定期間まとめレポート】</span>
+                <div id="summary-content"></div>
+            </div>
+        </div>
 
-    <div id="mood-btns"
-         class="btn-group">
+        <h3>最近の記録</h3>
+        <div id="log-list" class="log-list"></div>
     </div>
 
-    <label class="label">
-      体の調子は？
-    </label>
 
-    <div id="cond-btns"
-         class="btn-group">
-    </div>
-
-    <textarea id="note"></textarea>
-
-    <button
-      class="save-btn"
-      onclick="saveData()">
-      記録する
-    </button>
-
-  </div>
-
-  <div class="chart-container">
-    <canvas id="myChart"></canvas>
-  </div>
-
-  <div class="summary-section">
-    ...
-  </div>
-
-  <div id="settings-panel">
-    ...
-  </div>
-
-</div>
 
 <script src="js/storage.js"></script>
 <script src="js/settings.js"></script>
