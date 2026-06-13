@@ -1,3 +1,5 @@
+debug("logs.js loaded");
+
 function saveData(){
 
     console.log("saveData開始");
