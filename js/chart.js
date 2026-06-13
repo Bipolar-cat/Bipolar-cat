@@ -1,4 +1,4 @@
-              console.log("chart.js loaded");
+      debug("chart.js loaded");
 new Chart(ctx, {
                 type: 'line',
                 data: {
