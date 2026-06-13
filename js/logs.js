@@ -26,6 +26,3 @@ function saveData() {
             "saveData ERROR",
             e
         );
-
-    }
-}
