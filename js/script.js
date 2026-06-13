@@ -1,11 +1,17 @@
-function debug(msg) {
+function debug(msg){
 
-    const box =
-        document.getElementById("debug-box");
+    const panel =
+        document.getElementById(
+            "debug-panel"
+        );
 
-    if(box){
-        box.innerHTML +=
+    if(panel){
+
+        panel.innerHTML +=
             "<div>" + msg + "</div>";
+
+        panel.scrollTop =
+            panel.scrollHeight;
     }
 }
 
