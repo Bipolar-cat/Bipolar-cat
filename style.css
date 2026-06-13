@@ -1,6 +1,4 @@
-<style>
-        /* いただいた元の完成形CSSをベースとして完全固定 */
-        body {
+body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
@@ -32,62 +30,6 @@
             font-weight: bold;
             margin-bottom: 25px;
         }
-
-        /* --- 主な診断名エリアのスタイル（横幅2/3・左揃え） --- */
-        .diagnosis-area {
-            width: 66.6%;
-            margin: 0 auto 20px auto;
-            text-align: left;
-            box-sizing: border-box;
-        }
-
-        .diagnosis-fixed-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f5f5f5;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #333;
-            box-sizing: border-box;
-        }
-
-        .change-btn {
-            background: none;
-            border: none;
-            color: #4A90E2;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        .select-box {
-            width: 100%;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            font-size: 13px;
-            color: #333;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .other-diagnosis-input {
-            display: none;
-            width: 100%;
-            margin-top: 6px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid #4A90E2;
-            background-color: #fff;
-            font-size: 13px;
-            box-sizing: border-box;
-            color: #333;
-        }
-        /* ----------------------------------------------- */
 
         .input-section {
             padding: 0 20px;
@@ -209,44 +151,3 @@
             margin-top: 10px;
             margin-bottom: 15px;
         }
-        
-        .report-header { font-weight: bold; color: #2E7D32; font-size: 15px; border-bottom: 1px dashed #C5E1A5; padding-bottom: 6px; margin-bottom: 12px; display: block; }
-        .report-item { margin-bottom: 6px; color: #333; }
-        .report-label { font-weight: bold; color: #558B2F; min-width: 80px; display: inline-block; }
-        .report-notes { background: white; padding: 10px 14px; border-radius: 10px; border: 1px solid #E8F5E9; margin-top: 6px; max-height: 100px; overflow-y: auto; font-size: 13px; color: #555; }
-
-        h3 {
-            margin-top: 35px;
-            color: #444;
-            font-size: 18px;
-            padding: 0 20px;
-        }
-
-        .log-list {
-            width: 100%;
-        }
-
-        .log-item {
-            text-align: left;
-            padding: 15px 20px;
-            background: #fff;
-            border-bottom: 1px solid #f5f5f5;
-            font-size: 14px;
-            transition: background-color 0.5s;
-        }
-
-        .log-item:last-child {
-            border-bottom: none;
-        }
-
-        .highlight {
-            background-color: #fff9c4 !important;
-        }
-
-        .log-date {
-            color: #4A90E2;
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-    </style>
