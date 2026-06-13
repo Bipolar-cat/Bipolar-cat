@@ -1,4 +1,5 @@
-        function generateSummary() {
+           console.log("script.js loaded");
+     function generateSummary() {
             
             const avgMood = (targets.reduce((acc, curr) => acc + curr.mood, 0) / targets.length).toFixed(1);
             const avgCond = (targets.reduce((acc, curr) => acc + curr.cond, 0) / targets.length).toFixed(1);
