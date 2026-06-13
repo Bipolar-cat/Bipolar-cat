@@ -1,5 +1,3 @@
-debug("script.js loaded");
-
 function debug(msg){
     const panel =
         document.getElementById(
