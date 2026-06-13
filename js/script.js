@@ -94,8 +94,34 @@
 
 window.onload = () => {
 
-    renderChart();
+    console.log("window.onload");
 
-    renderLogList();
+    try {
+
+        renderChart();
+        console.log("renderChart OK");
+
+    } catch(e) {
+
+        console.error(
+            "renderChart ERROR",
+            e
+        );
+
+    }
+
+    try {
+
+        renderLogList();
+        console.log("renderLogList OK");
+
+    } catch(e) {
+
+        console.error(
+            "renderLogList ERROR",
+            e
+        );
+
+    }
 
 };
