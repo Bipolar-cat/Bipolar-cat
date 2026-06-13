@@ -1,4 +1,29 @@
-           console.log("script.js loaded");
+           window.onerror = function (
+    message,
+    source,
+    lineno,
+    colno,
+    error
+) {
+
+    console.error("===== ERROR =====");
+    console.error("message:", message);
+    console.error("file:", source);
+    console.error("line:", lineno);
+    console.error("column:", colno);
+    console.error("error:", error);
+
+    alert(
+        "エラー発生\n\n" +
+        message +
+        "\n\nline: " +
+        lineno
+    );
+
+    return false;
+};
+
+console.log("script.js loaded");
      function generateSummary() {
             
             const avgMood = (targets.reduce((acc, curr) => acc + curr.mood, 0) / targets.length).toFixed(1);
