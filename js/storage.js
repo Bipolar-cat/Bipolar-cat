@@ -13,3 +13,5 @@ function saveLogs(logs) {
         JSON.stringify(logs)
     );
 }
+getLogs()
+saveLogs()
