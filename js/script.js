@@ -1,21 +1,16 @@
-let selectedMood = 2;
-let selectedCond = 2;
+const STORAGE_KEY =
+    "innernote_3step_logs";
 
-function setVal(type, val, btn) {
+function getLogs() {
+    return JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+        || "[]"
+    );
+}
 
-    const parent = btn.parentElement;
-
-    parent
-        .querySelectorAll("button")
-        .forEach(b => b.classList.remove("active"));
-
-    btn.classList.add("active");
-
-    if (type === "mood") {
-        selectedMood = val;
-    } else {
-        selectedCond = val;
-    }
-
-    console.log(type, val);
+function saveLogs(logs) {
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(logs)
+    );
 }
