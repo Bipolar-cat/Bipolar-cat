@@ -1,3 +1,5 @@
+debug("storage.js loaded");
+
 const STORAGE_KEY = "innernote_3step_logs";
 
 function getLogs() {
