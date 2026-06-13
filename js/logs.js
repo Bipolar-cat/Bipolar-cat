@@ -1,4 +1,4 @@
-debug("logs.js loaded");
+console.log("logs.js loaded");
 
 function saveData() {
 
