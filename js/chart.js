@@ -1,9 +1,3 @@
-console.log("chart.js loaded");
-
-function drawChart(logs){
-
-}
-
 new Chart(ctx, {
                 type: 'line',
                 data: {
