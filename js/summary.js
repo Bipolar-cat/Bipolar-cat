@@ -1,4 +1,3 @@
-debug("summary.js loaded");
 function generateSummary() {
             const logs = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             if (logs.length === 0) return alert("まとめを作成するための記録がありません。");
