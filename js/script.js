@@ -1,4 +1,6 @@
-          function debug(msg) {
+      debug("script.js loaded");
+
+function debug(msg) {
 
     const box =
         document.getElementById("debug-box");
