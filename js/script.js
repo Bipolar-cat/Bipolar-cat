@@ -1,5 +1,3 @@
-        const STORAGE_KEY = 'innernote_3step_logs';
-
         function generateSummary() {
             
             const avgMood = (targets.reduce((acc, curr) => acc + curr.mood, 0) / targets.length).toFixed(1);
