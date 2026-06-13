@@ -153,37 +153,3 @@ console.log("script.js loaded");
                 logList.appendChild(div);
             });
         };
-
-window.onload = () => {
-
-    console.log("window.onload");
-
-    try {
-
-        renderChart();
-        console.log("renderChart OK");
-
-    } catch(e) {
-
-        console.error(
-            "renderChart ERROR",
-            e
-        );
-
-    }
-
-    try {
-
-        renderLogList();
-        console.log("renderLogList OK");
-
-    } catch(e) {
-
-        console.error(
-            "renderLogList ERROR",
-            e
-        );
-
-    }
-
-};
