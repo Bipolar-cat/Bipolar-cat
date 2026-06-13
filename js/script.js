@@ -73,7 +73,12 @@ console.log("script.js loaded");
             if (savedStr) document.getElementById('summary-ts').innerText = `前回まとめ作成：${savedStr}`;
 
             const ctx = document.getElementById('myChart').getContext('2d');
-                
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        ...
+    },               
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
