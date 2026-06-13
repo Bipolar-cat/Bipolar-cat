@@ -33,13 +33,9 @@ window.onerror = function(
     line
 ){
 
-    debug(
-        "❌ " +
-        message +
-        " (line " +
-        line +
-        ")"
-    );
+    function debug(msg){
+    console.log(msg);
+    }
 
     return true;
 };
