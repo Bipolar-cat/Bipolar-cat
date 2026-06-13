@@ -1,1 +1,1 @@
-
+debug("analysis.js loaded");
