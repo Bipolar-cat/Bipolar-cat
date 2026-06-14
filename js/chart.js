@@ -18,7 +18,6 @@ new Chart(ctx, {
                     ]
                 },
 function renderChart()
-    debug("renderChart開始")
 
    const logs = getLogs();
 
