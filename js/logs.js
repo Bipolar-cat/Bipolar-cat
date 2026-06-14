@@ -27,8 +27,13 @@ function saveData() {
 
         saveLogs(logs);
 
-        alert("記録しました");
+renderLogs();
 
+if(typeof renderChart==="function"){
+    renderChart();
+}
+
+alert("記録しました");
     } catch(e){
 
         console.error(e);
