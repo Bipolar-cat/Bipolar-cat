@@ -1,38 +1,23 @@
-function renderChart() {
+options: {
+    responsive: true,
+    maintainAspectRatio: false,
 
-    const logs = getLogs();
-    const last10 = logs.slice(-10);
+    scales: {
+        y: {
+            min: 1,
+            max: 3,
+            stepSize: 1,
 
-    const canvas = document.getElementById("myChart");
-    if (!canvas) return;
+            ticks: {
+                callback: function(value) {
 
-    const ctx = canvas.getContext("2d");
+                    if (value === 3) return "良い";
+                    if (value === 2) return "普通";
+                    if (value === 1) return "低い／悪い";
 
-    new Chart(ctx, {
-        type: "line",
-
-        data: {
-            labels: last10.map(l => l.date),
-
-            datasets: [
-    {
-        label: "気分",
-        data: last10.map(l => l.mood),
-        borderColor: "#2196F3",
-        backgroundColor: "#2196F3"
-    },
-    {
-        label: "体調",
-        data: last10.map(l => l.cond),
-        borderColor: "#FFA726",
-        backgroundColor: "#FFA726"
-    }
-]
-        },
-
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
+                    return "";
+                }
+            }
         }
-    });
+    }
 }
