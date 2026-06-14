@@ -1,13 +1,17 @@
-function getLogs() {
-    return JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-        || "[]"
-    );
-}
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-function saveLogs(logs) {
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(logs)
-    );
-}
+        console.log(
+            "DOMContentLoaded"
+        );
+
+        if(typeof renderChart === "function"){
+            renderChart();
+        }
+
+        if(typeof renderLogs === "function"){
+            renderLogs();
+        }
+    }
+);
