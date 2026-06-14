@@ -20,7 +20,12 @@ function renderChart() {
 
         data:{
             labels: last10.map(l => l.date),
-
+options: {
+        maintainAspectRatio: false,
+        responsive: true
+    }
+});
+            
             datasets:[
                 {
                     label:"気分",
