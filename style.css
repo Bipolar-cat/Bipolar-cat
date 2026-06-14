@@ -18,6 +18,24 @@ body {
             overflow: hidden;
         }
 
+.settings-btn{
+    position:fixed;
+    top:15px;
+    right:15px;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+    background:none;
+
+    font-size:28px;
+    color:#888;
+
+    cursor:pointer;
+    z-index:9999;
+}
+
         h1 {
             color: #5C6BC0;
             font-size: 32px;
