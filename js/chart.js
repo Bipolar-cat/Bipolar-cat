@@ -9,7 +9,22 @@ function renderChart() {
        .getContext("2d");
 
    new Chart(ctx,{
-      // Chart設定
-   });
+          type: "line",
+        data: {
+            labels: last10.map(l => l.date),
+            datasets: [
+                {
+                    label: "気分",
+                    data: last10.map(l => l.mood),
+                    borderColor: "#2196F3"
+                },
+                {
+                    label: "体調",
+                    data: last10.map(l => l.cond),
+                    borderColor: "#FFA726"
+                }
+            ]
+        }
+    });
 
 }
