@@ -52,3 +52,48 @@ function renderChart() {
 
     console.log("Chart作成完了");
 }
+options: {
+    responsive: true,
+    scales: {
+        y: {
+            min: 1,
+            max: 3,
+
+            ticks: {
+                stepSize: 1,
+                callback: function(value) {
+
+                    if(value === 3) return "良い";
+                    if(value === 2) return "普通";
+                    if(value === 1) return "低い／悪い";
+
+                    return "";
+                }
+            },
+
+            grid: {
+    display: true,
+    color: function(context){
+
+        if(
+            context.tick.value === 3 ||
+            context.tick.value === 1
+        ){
+            return "#cfcfcf";
+        }
+
+        return "#e8e8e8";
+    },
+
+    lineWidth: function(context){
+
+        if(
+            context.tick.value === 3 ||
+            context.tick.value === 1
+        ){
+            return 3;
+        }
+
+        return 1;
+    }
+            }
