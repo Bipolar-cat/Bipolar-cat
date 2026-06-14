@@ -17,7 +17,7 @@ new Chart(ctx, {
                         }
                     ]
                 },
-function renderChart()
+function renderChart() {
 
    const logs = getLogs();
 
@@ -32,4 +32,5 @@ function renderChart()
    new Chart(ctx,{
       ...
    });
+
 }
