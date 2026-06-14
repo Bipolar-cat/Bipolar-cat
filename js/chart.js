@@ -1,20 +1,18 @@
-let myChart;
+new Chart(ctx, {
+    type: "line",
 
-function renderChart() {
+    data: {
+        labels: [...],
 
-    const ctx = document.getElementById("myChart");
+        datasets: [
+            {
+                label: "気分",
+                data: [...]
+            }
+        ]
+    },
 
-    if (myChart) {
-        myChart.destroy();
+    options: {
+        responsive: true
     }
-
-    myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: last10.map(l => l.date),
-            datasets: [...]
-        },
-        options: {
-    responsive: true,
-    maintainAspectRatio: false
-        }
+});
