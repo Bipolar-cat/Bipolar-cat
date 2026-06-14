@@ -56,3 +56,12 @@ new Chart(ctx, {
         }
     }
 });
+
+scales: {
+    x: {
+        ticks: {
+            maxRotation: 45,
+            minRotation: 45
+        }
+    }
+}
