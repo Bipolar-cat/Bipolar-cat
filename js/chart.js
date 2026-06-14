@@ -56,22 +56,27 @@ options: {
     responsive: true,
     scales: {
         y: {
-            min: 1,
-            max: 3,
+    min: 1,
+    max: 3,
 
-            ticks: {
-                stepSize: 1,
-                callback: function(value) {
+    ticks: {
+        stepSize: 1,
+        callback: function(value){
 
-                    if(value === 3) return "良い";
-                    if(value === 2) return "普通";
-                    if(value === 1) return "低い／悪い";
+            if(value === 3) return "良い";
+            if(value === 2) return "普通";
+            if(value === 1) return "低い／悪い";
 
-                    return "";
-                }
-            },
+            return "";
+        }
+    },
 
-            grid: {
+    grid: {
+        drawBorder: true,
+        color: "#dddddd",
+        lineWidth: 1.5
+    }
+    
     display: true,
     color: function(context){
 
