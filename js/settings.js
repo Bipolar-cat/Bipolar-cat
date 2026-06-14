@@ -13,3 +13,8 @@ function closeSettings(){
     )
     .style.display="none";
 }
+function toggleSettings() {
+
+    alert("設定画面");
+
+}
