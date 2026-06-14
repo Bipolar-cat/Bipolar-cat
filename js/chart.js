@@ -29,7 +29,7 @@ function renderChart() {
         borderColor: "#2196F3",
         backgroundColor: "#2196F3",
         borderWidth: 3,
-        tension: 0.4,
+        tension: 0.35,
         fill: false,
         pointRadius: 5,
         pointHoverRadius: 8
@@ -40,7 +40,7 @@ function renderChart() {
         borderColor: "#FFA726",
         backgroundColor: "#FFA726",
         borderWidth: 3,
-        tension: 0.4,
+        tension: 0.35,
         fill: false,
         pointRadius: 5,
         pointHoverRadius: 8
