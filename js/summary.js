@@ -1,4 +1,9 @@
-const lastSummaryTs =
+function generateSummary() {
+    const logs = JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || '[]'
+    );
+
+    const lastSummaryTs =
     parseInt(
         localStorage.getItem("last_summary_ts_step3") || "0"
     );
