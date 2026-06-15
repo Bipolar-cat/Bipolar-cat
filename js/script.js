@@ -1,10 +1,21 @@
-document.addEventListener("DOMContentLoaded", () => {
+let selectedMood = 2;
+let selectedCond = 2;
 
-    if (typeof renderChart === "function") {
-        renderChart();
-    }
+function saveData() {
 
-    if (typeof renderLogs === "function") {
-        renderLogs();
-    }
-});
+    const logs = getLogs();
+    const now = Date.now();
+    const note = document.getElementById("note").value;
+
+    logs.push({
+        ts: now,
+        date: formatDate(now),
+        mood: selectedMood,
+        cond: selectedCond,
+        note: note
+    });
+
+    saveLogs(logs);
+    renderLogs();
+    renderChart();
+}
