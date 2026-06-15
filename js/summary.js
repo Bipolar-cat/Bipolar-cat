@@ -1,10 +1,5 @@
-console　STORAGE_KEY = "innernote3step_logs";
+function generateSummary() {
+    const logs = getLogs(); // ←呼び出すだけ
 
-function getLogs() {
-return 
-const logs = getLogs();
-}
-
-function saveLogs(logs) {
-    const logs = getLogs();
+    // 集計処理
 }
