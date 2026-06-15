@@ -57,9 +57,8 @@ function setVal(type,val,btn){
     }
 }
 function renderLogs() {
-
     const logs = getLogs();
-
+}
     const logList =
         document.getElementById("log-list");
 
