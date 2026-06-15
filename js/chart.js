@@ -1,65 +1,64 @@
-new Chart(ctx, {
-    type: "line",
+function renderChart() {
 
-    data: {
-        labels: last10.map(l => l.date),
+    const logs = getLogs();
+    const last10 = logs.slice(-10);
 
-        datasets: [
-            {
-                label: "気分",
-                data: last10.map(l => l.mood),
-                borderColor: "#2196F3",
-                yAxisID: "yMood"
-            },
-            {
-                label: "体調",
-                data: last10.map(l => l.cond),
-                borderColor: "#FFA726",
-                yAxisID: "yCond"
-            }
-        ]
-    },
+    const canvas = document.getElementById("myChart");
 
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
+    if (!canvas) {
+        console.error("myChartが見つからない");
+        return;
+    }
 
-        scales: {
-            yMood: {
-                position: "left",
-                min: 1,
-                max: 3,
-                ticks: {
-                    callback: v => {
-                        if (v === 3) return "良い";
-                        if (v === 2) return "普通";
-                        if (v === 1) return "低い";
-                    }
-                }
-            },
+    const ctx = canvas.getContext("2d");
 
-            yCond: {
-                position: "right",
-                min: 1,
-                max: 3,
-                grid: {
-                    drawOnChartArea: false
+    new Chart(ctx, {
+        type: "line",
+
+        data: {
+            labels: last10.map(l => l.date),
+
+            datasets: [
+                {
+                    label: "気分",
+                    data: last10.map(l => l.mood),
+                    borderColor: "#2196F3",
+                    yAxisID: "yMood"
                 },
-                ticks: {
-                    callback: v => {
-                        if (v === 3) return "良い";
-                        if (v === 2) return "普通";
-                        if (v === 1) return "悪い";
-                    }
+                {
+                    label: "体調",
+                    data: last10.map(l => l.cond),
+                    borderColor: "#FFA726",
+                    yAxisID: "yCond"
                 }
-            },
+            ]
+        },
 
-            x: {
-                ticks: {
-                    maxRotation: 45,
-                    minRotation: 45
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            scales: {
+                yMood: {
+                    position: "left",
+                    min: 1,
+                    max: 3
+                },
+                yCond: {
+                    position: "right",
+                    min: 1,
+                    max: 3,
+                    grid: {
+                        drawOnChartArea: false
+                    }
+                },
+                x: {
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
                 }
             }
         }
-    }
-});
+    });
+}
