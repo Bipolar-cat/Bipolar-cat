@@ -1,12 +1,13 @@
 function renderLogs() {
 
     const logs = getLogs();
-    const list = document.getElementById("log-list");
+    const logList = document.getElementById("log-list");
 
-    list.innerHTML = "";
+    if (!logList) return;
+
+    logList.innerHTML = "";
 
     logs.slice().reverse().forEach(l => {
-
         const div = document.createElement("div");
 
         div.innerHTML = `
@@ -15,6 +16,6 @@ function renderLogs() {
             ${l.note || ""}
         `;
 
-        list.appendChild(div);
+        logList.appendChild(div);
     });
 }
