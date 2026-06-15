@@ -1,21 +1,6 @@
 let selectedMood = 2;
 let selectedCond = 2;
 
-function saveData() {
-
-    const ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
-    const now = Date.now();
-
-    let logs = getLogs();
-
-    logs.push({
-        date: now,
-        mood: selectedMood,
-        cond: selectedCond,
-        note: note,
-        ts: now
-    });
-
     function saveData() {
 
     try {
