@@ -1,33 +1,33 @@
 let selectedMood = 2;
 let selectedCond = 2;
 
-    function saveData() {
+ function saveData() {
 
     try {
-function saveData() {
 
-    const note = document.getElementById("note").value;
-    const now = new Date();
+        const note = document.getElementById("note").value;
+        const now = new Date();
 
-    const logs = getLogs(); // ←必ずここで取得
+        const logs = getLogs();
 
-    logs.push({
-        date: formatDateTime(now),
-        ts: now.getTime(),
-        mood: selectedMood,
-        cond: selectedCond,
-        note: note
-    });
+        logs.push({
+            date: formatDateTime(now),
+            ts: now.getTime(),
+            mood: selectedMood,
+            cond: selectedCond,
+            note: note
+        });
 
-    saveLogs(logs);
+        saveLogs(logs);
 
-    renderLogs();
-    if (typeof renderChart === "function") {
-        renderChart();
-    }
+        renderLogs();
+        if (typeof renderChart === "function") {
+            renderChart();
+        }
 
-    alert("記録しました");
-} catch (e) {
+        alert("記録しました");
+
+    } catch (e) {
 
         console.error(e);
 
