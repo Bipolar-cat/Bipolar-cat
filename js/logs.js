@@ -1,24 +1,22 @@
 let selectedMood = 2;
 let selectedCond = 2;
 
- function saveData() {
+function saveData() {
 
-    try {
+    let logs = getLogs(); // ←これが必要
 
-        const note = document.getElementById("note").value;
-        const now = new Date();
+    const now = Date.now();
 
-        console.log(getLogs());
+    logs.push({
+        date: now,
+        ts: now,
+        mood: selectedMood,
+        cond: selectedCond,
+        note: document.getElementById("note").value
+    });
 
-        logs.push({
-            date: formatDateTime(now),
-            ts: now.getTime(),
-            mood: selectedMood,
-            cond: selectedCond,
-            note: note
-        });
-
-        saveLogs(logs);
+    saveLogs(logs);
+}
 
         renderLogs();
         if (typeof renderChart === "function") {
