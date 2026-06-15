@@ -8,7 +8,7 @@ let selectedCond = 2;
         const note = document.getElementById("note").value;
         const now = new Date();
 
-        const logs = getLogs();
+        console.log(getLogs());
 
         logs.push({
             date: formatDateTime(now),
