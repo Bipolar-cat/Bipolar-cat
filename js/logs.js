@@ -44,6 +44,15 @@ alert("記録しました");
         );
     }
 }
+
+const ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
+
+const now = Date.now();
+
+const logs = getLogs().filter(l => {
+    return (now - l.ts) <= ONE_YEAR;
+});
+
 function setVal(type,val,btn){
 
     const parent =
