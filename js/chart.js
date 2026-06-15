@@ -19,32 +19,33 @@ function renderChart() {
             labels: last10.map(l => l.date),
 
             datasets: [
-                {yMood: {
-    position: "left",
-    min: 1,
-    max: 3,
-    ticks: {
-        callback: v => {
-            if (v === 3) return "良い";
-            if (v === 2) return "普通";
-            if (v === 1) return "低い";
+               scales: {
+    y: {
+        min: 1,
+        max: 3,
+        ticks: {
+            callback: v => {
+                if (v === 3) return "良い";
+                if (v === 2) return "普通";
+                if (v === 1) return "低い";
+            }
         }
     }
-},
-                 yCond: {
-    position: "right",
-    min: 1,
-    max: 3,
-    grid: {
-        drawOnChartArea: false
-    },
-    ticks: {
-        callback: v => {
-            if (v === 3) return "良い";
-            if (v === 2) return "普通";
-            if (v === 1) return "悪い";
+}
+                 
+    ,scales: {
+    y: {
+        min: 1,
+        max: 3,
+        ticks: {
+            callback: v => {
+                if (v === 3) return "良い";
+                if (v === 2) return "普通";
+                if (v === 1) return "悪い";
+            }
         }
     }
+                }
                 }
 
         options: {
