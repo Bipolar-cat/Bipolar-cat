@@ -1,21 +1,27 @@
-let selectedMood = 2;
-let selectedCond = 2;
+function setVal(type, val, btn) {
 
-function saveData() {
+    const parent = btn.parentElement;
 
-    const logs = getLogs();
-    const now = Date.now();
-    const note = document.getElementById("note").value;
+    parent.querySelectorAll("button")
+        .forEach(b => b.classList.remove("active"));
 
-    logs.push({
-        ts: now,
-        date: formatDate(now),
-        mood: selectedMood,
-        cond: selectedCond,
-        note: note
-    });
+    btn.classList.add("active");
 
-    saveLogs(logs);
-    renderLogs();
-    renderChart();
+    if (type === "mood") {
+        selectedMood = val;
+    } else {
+        selectedCond = val;
+    }
+}
+
+function formatDate(date) {
+
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const dd = String(date.getDate()).padStart(2, "0");
+
+    const hh = String(date.getHours()).padStart(2, "0");
+    const min = String(date.getMinutes()).padStart(2, "0");
+
+    return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
 }
