@@ -1,7 +1,10 @@
-console.log("summary.js loaded");
-
 function generateSummary() {
-    const logs = getLogs(); // ←呼び出すだけ
 
-    // 集計処理
+    const logs = getLogs();
+
+    if (logs.length === 0) return;
+
+    const last10 = logs.slice(-10);
+
+    alert(`${last10.length}件を分析`);
 }
