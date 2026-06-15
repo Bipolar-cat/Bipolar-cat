@@ -5,20 +5,19 @@ let selectedCond = 2;
 
     try {
 
-        const ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
-        const now = Date.now();
+        const now = new Date();
 
-        const note = document.getElementById("note").value;
+const dateStr =
+    `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ` +
+    `${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")}`;
 
-        let logs = getLogs();
-
-        logs.push({
-            date: now,
-            mood: selectedMood,
-            cond: selectedCond,
-            note: note,
-            ts: now
-        });
+logs.push({
+    date: dateStr,   // ← 表示用（必須）
+    ts: now.getTime(),
+    mood: selectedMood,
+    cond: selectedCond,
+    note: note
+});
 
         logs = logs.filter(l => (now - l.ts) <= ONE_YEAR);
 
