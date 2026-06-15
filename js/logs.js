@@ -2,12 +2,9 @@ let selectedMood = 2;
 let selectedCond = 2;
 
 function saveData() {
-
-    let logs = getLogs(); // ←これが必要
-
-    const now = Date.now();
-
     let logs = getLogs();
+}
+    const now = Date.now();
         logs.push(...)
         date: now,
         ts: now,
