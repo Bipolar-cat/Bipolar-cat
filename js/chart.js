@@ -21,7 +21,7 @@ function renderChart() {
         type: "line",
 
         data: {
-            labels: last10.map(l => l.date),
+            labels: last10.map(l => l.date)
 
             datasets: [
                 {
