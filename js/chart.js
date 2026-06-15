@@ -18,30 +18,29 @@ function renderChart() {
     const ctx = canvas.getContext("2d");
 
     new Chart(ctx, {
-        type: "line",
+    type: "line",
 
-        data: {
-            labels: last10.map(l => l.date)
+    data: {
+        labels: last10.map(l => l.date),
 
-            datasets: [
-                {
-                    label: "気分",
-                    data: last10.map(l => l.mood),
-                    borderColor: "#2196F3",
-                    yAxisID: "yMood"
-                },
-                {
-                    label: "体調",
-                    data: last10.map(l => l.cond),
-                    borderColor: "#FFA726",
-                    yAxisID: "yCond"
-                }
-            ]
-        },
+        datasets: [
+            {
+                label: "気分",
+                data: last10.map(l => l.mood),
+                borderColor: "#2196F3"
+            },
+            {
+                label: "体調",
+                data: last10.map(l => l.cond),
+                borderColor: "#FFA726"
+            }
+        ]
+    },
 
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
+    options: {
+        responsive: true
+    }
+});
 
             scales: {
                 yMood: {
