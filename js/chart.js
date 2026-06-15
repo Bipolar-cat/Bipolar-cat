@@ -1,12 +1,17 @@
 function renderChart() {
 
-    const logs = getLogs();
+    const logs = getLogs?.() || [];
     const last10 = logs.slice(-10);
+
+    if (last10.length === 0) {
+        console.warn("データなし");
+        return;
+    }
 
     const canvas = document.getElementById("myChart");
 
     if (!canvas) {
-        console.error("myChartが見つからない");
+        console.error("canvasなし");
         return;
     }
 
@@ -19,34 +24,20 @@ function renderChart() {
             labels: last10.map(l => l.date),
 
             datasets: [
-               scales: {
-    y: {
-        min: 1,
-        max: 3,
-        ticks: {
-            callback: v => {
-                if (v === 3) return "良い";
-                if (v === 2) return "普通";
-                if (v === 1) return "低い";
-            }
-        }
-    }
-}
-                 
-    ,scales: {
-    y: {
-        min: 1,
-        max: 3,
-        ticks: {
-            callback: v => {
-                if (v === 3) return "良い";
-                if (v === 2) return "普通";
-                if (v === 1) return "悪い";
-            }
-        }
-    }
+                {
+                    label: "気分",
+                    data: last10.map(l => l.mood),
+                    borderColor: "#2196F3",
+                    yAxisID: "yMood"
+                },
+                {
+                    label: "体調",
+                    data: last10.map(l => l.cond),
+                    borderColor: "#FFA726",
+                    yAxisID: "yCond"
                 }
-                }
+            ]
+        },
 
         options: {
             responsive: true,
