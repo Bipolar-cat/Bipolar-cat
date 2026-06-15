@@ -52,16 +52,14 @@ new Chart(ctx, {
                         if (v === 1) return "悪い";
                     }
                 }
+            },
+
+            x: {
+                ticks: {
+                    maxRotation: 45,
+                    minRotation: 45
+                }
             }
         }
     }
 });
-
-scales: {
-    x: {
-        ticks: {
-            maxRotation: 45,
-            minRotation: 45
-        }
-    }
-}
