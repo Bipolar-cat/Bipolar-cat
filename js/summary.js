@@ -2,9 +2,9 @@ console　STORAGE_KEY = "innernote3step_logs";
 
 function getLogs() {
 return 
-JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+const logs = getLogs();
 }
 
 function saveLogs(logs) {
-    localStorage.setItem(SAMMARY_KEY, JSON.stringify(logs));
+    const logs = getLogs();
 }
