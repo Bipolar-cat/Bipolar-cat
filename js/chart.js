@@ -40,30 +40,16 @@ function renderChart() {
         },
 
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-
-            scales: {
-                yMood: {
-                    position: "left",
-                    min: 1,
-                    max: 3
-                },
-                yCond: {
-                    position: "right",
-                    min: 1,
-                    max: 3,
-                    grid: {
-                        drawOnChartArea: false
-                    }
-                },
-                x: {
-                    ticks: {
-                        maxRotation: 45,
-                        minRotation: 45
-                    }
-                }
-            }
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        yMood: {
+            min: 1,
+            max: 3
+        },
+        yCond: {
+            min: 1,
+            max: 3
         }
-    });
+    }
 }
