@@ -1,5 +1,5 @@
 const STORAGE_KEY =
-    "innernote_3step_logs";
+    "innernote3step_logs";
 
 function getLogs() {
 
