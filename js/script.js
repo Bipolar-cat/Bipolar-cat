@@ -1,3 +1,4 @@
+    console.log("script.js loaded");
 function setVal(type, val, btn) {
 
     const parent = btn.parentElement;
