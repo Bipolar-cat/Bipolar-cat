@@ -31,13 +31,21 @@ function renderChart() {
         }
     }
 },
-                    label: "体調",
-                    data: last10.map(l => l.cond),
-                    borderColor: "#FFA726",
-                    yAxisID: "yCond"
+                 yCond: {
+    position: "right",
+    min: 1,
+    max: 3,
+    grid: {
+        drawOnChartArea: false
+    },
+    ticks: {
+        callback: v => {
+            if (v === 3) return "良い";
+            if (v === 2) return "普通";
+            if (v === 1) return "悪い";
+        }
+    }
                 }
-            ]
-        },
 
         options: {
             responsive: true,
