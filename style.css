@@ -126,14 +126,11 @@ body {
         }
 
 .chart-scroll {
-    width: 100%;
+    .chart-scroll {
     overflow-x: auto;
+    width: 100%;
 }
-
-#myChart {
-    height: 200px;       /* ←Y軸コンパクト */
-    min-width: 900px;    /* ←横スクロール発動 */
-}
+            
 
         /* --- summary（一定期間まとめ）エリアのスタイル --- */
         .summary-section {
