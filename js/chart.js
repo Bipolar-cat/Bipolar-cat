@@ -1,6 +1,6 @@
 function renderChart() {
-
     const logs = getLogs();
+}
 const last10 = logs.slice(-10);
 
     if (last10.length === 0) {
