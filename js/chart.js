@@ -2,11 +2,12 @@ function renderChart() {
 
     const logs = getLogs?.() || [];
     const last10 = logs.slice(-10);
-
-    if (last10.length === 0) {
-        console.warn("データなし");
-        return;
-    }
+    
+if (last10.length === 0) {
+    document.getElementById("myChart").style.display = "none";
+    console.warn("データなし");
+    return;
+}
 
     const canvas = document.getElementById("myChart");
 
