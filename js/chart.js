@@ -1,15 +1,11 @@
 function renderChart() {
+
     const logs = getLogs();
     const last10 = logs.slice(-10);
-    if (last10.length === 0) {
-        console.warn("データなし");
-        return;
-    }
 
-    const canvas = document.getElementById("myChart");
-    if (!canvas) return;
+    if (last10.length === 0) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = document.getElementById("myChart").getContext("2d");
 
     new Chart(ctx, {
         type: "line",
@@ -18,19 +14,13 @@ function renderChart() {
             datasets: [
                 {
                     label: "気分",
-                    data: last10.map(l => l.mood),
-                    borderColor: "#2196F3"
+                    data: last10.map(l => l.mood)
                 },
                 {
                     label: "体調",
-                    data: last10.map(l => l.cond),
-                    borderColor: "#FFA726"
+                    data: last10.map(l => l.cond)
                 }
             ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
         }
     });
 }
