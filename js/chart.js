@@ -1,8 +1,7 @@
 function renderChart() {
 
-    const logs = getLogs(); // ←これ必須
-
-    const last10 = logs.slice(-10);
+    const logs = getLogs();
+const last10 = logs.slice(-10);
 
     if (last10.length === 0) {
         console.warn("データなし");
