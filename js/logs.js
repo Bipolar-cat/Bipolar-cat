@@ -3,29 +3,23 @@ let selectedCond = 2;
 
 function saveData() {
 
-    try {
+    const ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
+    const now = Date.now();
 
-        const note =
-            document.getElementById("note").value;
+    let logs = getLogs();
 
-        const now =
-            new Date();
+    logs.push({
+        date: now,
+        mood: selectedMood,
+        cond: selectedCond,
+        note: note,
+        ts: now
+    });
 
-        const dateStr =
-            `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")}`;
+    logs = logs.filter(l => (now - l.ts) <= ONE_YEAR);
 
-        const logs =
-            getLogs();
-
-        logs.push({
-            date: dateStr,
-            mood: selectedMood,
-            cond: selectedCond,
-            note: note,
-            ts: now.getTime()
-        });
-
-        saveLogs(logs);
+    saveLogs(logs);
+}
 
 renderLogs();
 
@@ -44,14 +38,6 @@ alert("記録しました");
         );
     }
 }
-
-const ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
-
-const now = Date.now();
-
-const logs = getLogs().filter(l => {
-    return (now - l.ts) <= ONE_YEAR;
-});
 
 function setVal(type,val,btn){
 
