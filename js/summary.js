@@ -30,4 +30,3 @@ function generateSummary() {
         "件の記録を対象に集計します"
     );
 }
-}
