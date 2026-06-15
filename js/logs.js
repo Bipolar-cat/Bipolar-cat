@@ -4,15 +4,10 @@ let selectedCond = 2;
     function saveData() {
 
     try {
-
-        const now = new Date();
-
-const dateStr =
-    `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()} ` +
-    `${now.getHours().toString().padStart(2,"0")}:${now.getMinutes().toString().padStart(2,"0")}`;
+const now = new Date();
 
 logs.push({
-    date: dateStr,   // ← 表示用（必須）
+    date: formatDateTime(now), // ←統一フォーマット
     ts: now.getTime(),
     mood: selectedMood,
     cond: selectedCond,
