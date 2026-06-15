@@ -9,7 +9,6 @@ function closeSettings(){
 }
 
 function toggleSettings(){
-
     const panel = document.getElementById("settings-panel");
 
     if(panel.style.display === "block"){
