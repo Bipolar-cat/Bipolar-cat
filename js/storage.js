@@ -20,9 +20,12 @@ function getLogs() {
 }
 
 function saveLogs(logs) {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(logs)
-    );
+    try {
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(logs)
+        );
+    } catch(e) {
+        console.error("保存失敗:", e);
+    }
 }
