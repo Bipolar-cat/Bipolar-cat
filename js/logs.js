@@ -49,8 +49,10 @@ function setVal(type,val,btn){
 
 function renderLogs() {
     const logs = getLogs();
-    const logList =
-        document.getElementById("log-list");
+    const logList =              
+}   
+
+document.getElementById("log-list");
     if(!logList) return;
     logList.innerHTML = "";
     logs
