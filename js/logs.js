@@ -4,29 +4,30 @@ let selectedCond = 2;
     function saveData() {
 
     try {
-const now = new Date();
+function saveData() {
 
-logs.push({
-    date: formatDateTime(now), // ←統一フォーマット
-    ts: now.getTime(),
-    mood: selectedMood,
-    cond: selectedCond,
-    note: note
-});
+    const note = document.getElementById("note").value;
+    const now = new Date();
 
-        logs = logs.filter(l => (now - l.ts) <= ONE_YEAR);
+    const logs = getLogs(); // ←必ずここで取得
 
-        saveLogs(logs);
+    logs.push({
+        date: formatDateTime(now),
+        ts: now.getTime(),
+        mood: selectedMood,
+        cond: selectedCond,
+        note: note
+    });
 
-        renderLogs();
+    saveLogs(logs);
 
-        if (typeof renderChart === "function") {
-            renderChart();
-        }
+    renderLogs();
+    if (typeof renderChart === "function") {
+        renderChart();
+    }
 
-        alert("記録しました");
-
-    } catch (e) {
+    alert("記録しました");
+} catch (e) {
 
         console.error(e);
 
