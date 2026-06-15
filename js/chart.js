@@ -38,7 +38,6 @@ function renderChart() {
                 }
             ]
         },
-        });
 
         options: {
             responsive: true,
@@ -81,4 +80,3 @@ function renderChart() {
             }
         }
     });
-}
