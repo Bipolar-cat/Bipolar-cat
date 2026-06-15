@@ -17,8 +17,11 @@ function saveData() {
     });
 
     saveLogs(logs);
-}
+       console.log("保存成功");
 
+    } catch(e) {
+        console.error("SAVEDATAエラー", e);
+    }
         renderLogs();
         if (typeof renderChart === "function") {
             renderChart();
