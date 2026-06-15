@@ -126,9 +126,13 @@ body {
         }
 
 .chart-scroll {
-    .chart-scroll {
-    overflow-x: auto;
     width: 100%;
+    overflow-x: auto;
+}
+
+#myChart {
+    min-width: 800px; /* ←横スクロールの元 */
+    height: 300px;
 }
             
 
