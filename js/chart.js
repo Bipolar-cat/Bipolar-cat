@@ -38,6 +38,7 @@ function renderChart() {
                 }
             ]
         },
+        });
 
         options: {
             responsive: true,
