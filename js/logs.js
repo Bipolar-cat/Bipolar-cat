@@ -7,7 +7,8 @@ function saveData() {
 
     const now = Date.now();
 
-    logs.push({
+    let logs = getLogs();
+        logs.push(...)
         date: now,
         ts: now,
         mood: selectedMood,
