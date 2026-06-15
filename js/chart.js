@@ -40,33 +40,44 @@ function renderChart() {
         },
 
         options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-    yMood: {
-        min: 1,
-        max: 3,
-        ticks: {
-            callback: v => {
-                if (v === 3) return "良い";
-                if (v === 2) return "普通";
-                if (v === 1) return "低い";
-            }
-        }
-    },
+            responsive: true,
+            maintainAspectRatio: false,
 
-    yCond: {
-        min: 1,
-        max: 3,
-        grid: {
-            drawOnChartArea: false
-        },
-        ticks: {
-            callback: v => {
-                if (v === 3) return "良い";
-                if (v === 2) return "普通";
-                if (v === 1) return "悪い";
+            scales: {
+                yMood: {
+                    min: 1,
+                    max: 3,
+                    ticks: {
+                        callback: v => {
+                            if (v === 3) return "良い";
+                            if (v === 2) return "普通";
+                            if (v === 1) return "低い";
+                        }
+                    }
+                },
+
+                yCond: {
+                    min: 1,
+                    max: 3,
+                    grid: {
+                        drawOnChartArea: false
+                    },
+                    ticks: {
+                        callback: v => {
+                            if (v === 3) return "良い";
+                            if (v === 2) return "普通";
+                            if (v === 1) return "悪い";
+                        }
+                    }
+                },
+
+                x: {
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
+                }
             }
         }
-    }
-    }
+    });
+}
