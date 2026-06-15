@@ -16,28 +16,44 @@ function saveData() {
         ts: now
     });
 
-    logs = logs.filter(l => (now - l.ts) <= ONE_YEAR);
+    function saveData() {
 
-    saveLogs(logs);
-}
+    try {
 
-renderLogs();
+        const ONE_YEAR = 365 * 24 * 60 * 60 * 1000;
+        const now = Date.now();
 
-if(typeof renderChart==="function"){
-    renderChart();
-}
+        const note = document.getElementById("note").value;
 
-alert("記録しました");
-    } catch(e){
+        let logs = getLogs();
+
+        logs.push({
+            date: now,
+            mood: selectedMood,
+            cond: selectedCond,
+            note: note,
+            ts: now
+        });
+
+        logs = logs.filter(l => (now - l.ts) <= ONE_YEAR);
+
+        saveLogs(logs);
+
+        renderLogs();
+
+        if (typeof renderChart === "function") {
+            renderChart();
+        }
+
+        alert("記録しました");
+
+    } catch (e) {
 
         console.error(e);
 
-        alert(
-            "saveDataエラー\n" +
-            e.message
-        );
+        alert("saveDataエラー\n" + e.message);
     }
-}
+    }
 
 function setVal(type,val,btn){
 
