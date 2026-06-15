@@ -1,17 +1,10 @@
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-        console.log(
-            "DOMContentLoaded"
-        );
-
-        if(typeof renderChart === "function"){
-            renderChart();
-        }
-
-        if(typeof renderLogs === "function"){
-            renderLogs();
-        }
+    if (typeof renderChart === "function") {
+        renderChart();
     }
-);
+
+    if (typeof renderLogs === "function") {
+        renderLogs();
+    }
+});
