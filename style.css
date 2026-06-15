@@ -125,8 +125,14 @@ body {
             padding-top: 15px;
         }
 
+.chart-scroll {
+    overflow-x: auto;
+    width: 100%;
+}
+
 #myChart {
-    height: 550px;
+    height: 220px;   /* ←Y軸コンパクト化 */
+    min-width: 800px; /* ←横スクロール発動 */
 }
 
         /* --- summary（一定期間まとめ）エリアのスタイル --- */
