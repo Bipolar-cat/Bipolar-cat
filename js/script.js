@@ -1,15 +1,35 @@
     console.log("script.js loaded");
 
+let selectedMood = 2;
+let selectedCond = 2;
+
 function saveData() {
     console.log("保存ボタン押下");
 
     const logs = getLogs();
 
-    logs.push({
-        date: new Date().toISOString()
-    });
+    const log = {
+        date: formatDate(new Date()),
+        mood: selectedMood,
+        cond: selectedCond,
+        note: document.getElementById("note").value
+    };
+
+    logs.push(log);
 
     saveLogs(logs);
+
+    // メモをクリア
+    document.getElementById("note").value = "";
+
+    // 画面を更新
+    if (typeof renderLogs === "function") {
+        renderLogs();
+    }
+
+    if (typeof updateChart === "function") {
+        updateChart();
+    }
 }
 
 function setVal(type, val, btn) {
