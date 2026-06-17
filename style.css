@@ -36,10 +36,18 @@ body {
 }
 
 .settings-btn {
-    position: fixed;   /* 画面基準で固定 */
-    top: 10px;         /* 上から10px */
-    right: 10px;       /* 右から10px */
-    z-index: 1000;     /* 他の要素より前面 */
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
 }
 
         h1 {
