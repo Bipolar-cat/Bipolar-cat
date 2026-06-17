@@ -19,13 +19,6 @@ body {
 　　　　　　  position: relative;
         }
 
-.title-bar {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
 
 .save-btn{
     width:100%;
@@ -43,27 +36,26 @@ body {
     font-weight: bold;
 }
 
-       .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+.title-bar {
+    position: relative;
+    margin-bottom: 10px;
 }
 
-.header h1 {
+.title-bar h1 {
     margin: 0;
-    flex: 1;
     text-align: center;
 }
 
 .settings-btn {
-    background: none;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
     border: none;
     font-size: 24px;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
-    padding: 0;
 }
 
         .subtitle {
