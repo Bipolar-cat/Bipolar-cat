@@ -1,4 +1,17 @@
     console.log("script.js loaded");
+
+function saveData() {
+    console.log("保存ボタン押下");
+
+    const logs = getLogs();
+
+    logs.push({
+        date: new Date().toISOString()
+    });
+
+    saveLogs(logs);
+}
+
 function setVal(type, val, btn) {
 
     const parent = btn.parentElement;
