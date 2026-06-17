@@ -19,21 +19,21 @@ body {
 　　　　　　  position: relative;
         }
 
-.settings-btn {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 100;
+.settings-btn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:42px;
+    height:42px;
+    border:none;
+    background:none;
+    font-size:28px;
+    color:#888;
+    cursor:pointer;
+    z-index:9999;
 }
+
+
 
 .save-btn{
     width:100%;
