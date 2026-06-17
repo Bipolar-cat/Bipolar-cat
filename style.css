@@ -16,6 +16,7 @@ body {
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             text-align: center;
             overflow: hidden;
+　　　　　　  position: relative;
         }
 
 .save-btn {
@@ -27,6 +28,13 @@ body {
     font-size: 16px;
     text-align: center;
 }
+
+.settings-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 
         h1 {
             color: #5C6BC0;
