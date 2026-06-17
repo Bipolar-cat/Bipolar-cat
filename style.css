@@ -32,6 +32,7 @@ body {
     border-radius:9999px;
     font-size:18px;
     font-weight:700;   /* 太字 */
+    font-weight: bold;
 }
 
 .settings-btn {
