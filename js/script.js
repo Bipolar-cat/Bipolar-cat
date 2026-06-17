@@ -3,14 +3,8 @@
 let selectedMood = 2;
 let selectedCond = 2;
 
-let selectedMood = 2;
-let selectedCond = 2;
-
 function saveData() {
-    console.log("保存ボタン押下");
-
     const logs = getLogs();
-
     logs.push({
         date: formatDate(new Date()),
         mood: selectedMood,
@@ -22,11 +16,8 @@ function saveData() {
 
     document.getElementById("note").value = "";
 
+    renderLogs();
     renderChart();
-
-    if (typeof updateChart === "function") {
-        updateChart();
-    }
 }
 
 function setVal(type, val, btn) {
@@ -46,13 +37,15 @@ function setVal(type, val, btn) {
 }
 
 function formatDate(date) {
-
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const dd = String(date.getDate()).padStart(2, "0");
-
     const hh = String(date.getHours()).padStart(2, "0");
     const min = String(date.getMinutes()).padStart(2, "0");
-
     return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
 }
+
+window.onload = function () {
+    renderLogs();
+    renderChart();
+};
