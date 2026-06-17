@@ -30,11 +30,11 @@ body {
 }
 
 .settings-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: fixed;   /* 画面基準で固定 */
+    top: 10px;         /* 上から10px */
+    right: 10px;       /* 右から10px */
+    z-index: 1000;     /* 他の要素より前面 */
 }
-
 
         h1 {
             color: #5C6BC0;
