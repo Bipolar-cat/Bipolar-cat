@@ -19,6 +19,22 @@ body {
 　　　　　　  position: relative;
         }
 
+.settings-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
 .save-btn{
     width:100%;
     height:56px;
@@ -33,21 +49,6 @@ body {
     font-size:18px;
     font-weight:700;   /* 太字 */
     font-weight: bold;
-}
-
-.settings-btn {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background: transparent;
-    font-size: 24px;
-    cursor: pointer;
 }
 
         h1 {
