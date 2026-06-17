@@ -26,11 +26,12 @@ body {
     justify-content:center;
     align-items:center;
     padding:0;
-    text-align:center;
     background:#2196f3;
     color:#fff;
     border:none;
     border-radius:9999px;
+    font-size:18px;
+    font-weight:700;   /* 太字 */
 }
 
 .settings-btn {
