@@ -5,9 +5,7 @@ let selectedCond = 2;
 
 function saveData() {
     console.log("保存ボタン押下");
-
     const logs = getLogs();
-
     const log = {
         date: formatDate(new Date()),
         mood: selectedMood,
@@ -16,7 +14,7 @@ function saveData() {
     };
 
     logs.push(log);
-
+    
     saveLogs(logs);
 
     // メモをクリア
