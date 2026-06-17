@@ -22,7 +22,7 @@ function saveData() {
 
     document.getElementById("note").value = "";
 
-    renderLogs();
+    renderChart();
 
     if (typeof updateChart === "function") {
         updateChart();
