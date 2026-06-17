@@ -48,14 +48,15 @@ body {
 
 .settings-btn {
     position: absolute;
-    top: 0;
-    right: 20px;
-    width: 40px;
-    height: 40px;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
     background: transparent;
     border: none;
     font-size: 24px;
     cursor: pointer;
+    padding: 0;
 }
 
         .subtitle {
