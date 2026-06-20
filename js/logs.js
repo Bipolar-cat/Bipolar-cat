@@ -10,11 +10,13 @@ function renderLogs() {
     logs.slice().reverse().forEach(l => {
         const div = document.createElement("div");
 
-        div.innerHTML = `
-            ${l.date}<br>
-            気分:${l.mood} / 体調:${l.cond}<br>
-            ${l.note || ""}
-        `;
+       div.className = "log-item";
+
+div.innerHTML = `
+    <span class="log-date">${l.date}</span>
+    気分:${l.mood} / 体調:${l.cond}<br>
+    ${l.note || ""}
+`;
 
         logList.appendChild(div);
     });
