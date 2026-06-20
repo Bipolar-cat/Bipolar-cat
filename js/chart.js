@@ -95,5 +95,8 @@ options: {
             }
         }
     }
-});
-}
+}   // ← options を閉じる
+
+}); // ← new Chart を閉じる
+
+} // ← renderChar
