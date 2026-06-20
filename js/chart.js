@@ -1,3 +1,5 @@
+let myChart = null;
+
 function renderChart() {
 
     const logs = getLogs();
@@ -7,7 +9,12 @@ function renderChart() {
 
     const ctx = document.getElementById("myChart").getContext("2d");
 
-    new Chart(ctx, {
+    // 前のグラフを削除
+    if (myChart) {
+        myChart.destroy();
+    }
+
+    myChart = new Chart(ctx, {
         type: "line",
         data: {
             labels: last10.map(l => l.date),
