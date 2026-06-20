@@ -52,4 +52,15 @@ function formatDate(date) {
 window.onload = function () {
     renderLogs();
     renderChart();
+
+    document
+        .querySelector("#mood-btns button:nth-child(2)")
+        .classList.add("active");
+
+    document
+        .querySelector("#cond-btns button:nth-child(2)")
+        .classList.add("active");
+
+    selectedMood = 2;
+    selectedCond = 2;
 };
