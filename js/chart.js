@@ -55,10 +55,7 @@ function renderChart() {
             }
         ]
     },
-    options: {
-        // ここに options が続く
-    }
-});
+   
 options: {
     responsive: true,
     scales: {
