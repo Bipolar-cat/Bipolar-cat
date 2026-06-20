@@ -34,6 +34,11 @@ function setVal(type, val, btn) {
     } else {
         selectedCond = val;
     }
+
+    console.log(
+        "selectedMood =", selectedMood,
+        "selectedCond =", selectedCond
+    );
 }
 
 function formatDate(date) {
