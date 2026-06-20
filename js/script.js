@@ -1,7 +1,7 @@
     console.log("script.js loaded");
 
-let selectedMood = 2;
-let selectedCond = 2;
+let selectedMood = 5;
+let selectedCond = 5;
 
 function saveData() {
 
