@@ -14,6 +14,7 @@ function saveData() {
         note: document.getElementById("note").value
     });
 
+    
     console.log(logs);   // ←追加
 
     saveLogs(logs);
