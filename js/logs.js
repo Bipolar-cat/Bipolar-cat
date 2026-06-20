@@ -12,9 +12,19 @@ function renderLogs() {
 
        div.className = "log-item";
 
+const moodText =
+    l.mood === 10 ? "良い" :
+    l.mood === 5 ? "普通" :
+    "低い";
+
+const condText =
+    l.cond === 10 ? "良い" :
+    l.cond === 5 ? "普通" :
+    "悪い";
+
 div.innerHTML = `
     <span class="log-date">${l.date}</span>
-    気分:${l.mood} / 体調:${l.cond}<br>
+    気分：${moodText} ／ 体調：${condText}<br>
     ${l.note || ""}
 `;
 
