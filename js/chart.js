@@ -25,24 +25,40 @@ function renderChart() {
     const ctx = canvas.getContext("2d");
 
     myChart = new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: last10.map(l => l.date),
-            datasets: [
-                {
-                    label: "気分",
-                    data: last10.map(l => l.mood),
-                    borderColor: "#2196F3",
-                    tension: 0.3
-                },
-                {
-                    label: "体調",
-                    data: last10.map(l => l.cond),
-                    borderColor: "#FF9800",
-                    tension: 0.3
-                }
-            ]
-        },
+    type: "line",
+    data: {
+        labels: last10.map(l => l.date),
+        datasets: [
+            {
+                label: "気分",
+                data: last10.map(l => l.mood),
+                borderColor: "#2196F3",
+                backgroundColor: "#2196F3",
+                pointBackgroundColor: "#2196F3",
+                pointBorderColor: "#2196F3",
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                borderWidth: 3,
+                tension: 0.3
+            },
+            {
+                label: "体調",
+                data: last10.map(l => l.cond),
+                borderColor: "#FFA726",
+                backgroundColor: "#FFA726",
+                pointBackgroundColor: "#FFA726",
+                pointBorderColor: "#FFA726",
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                borderWidth: 3,
+                tension: 0.3
+            }
+        ]
+    },
+    options: {
+        // ここに options が続く
+    }
+});
 options: {
     responsive: true,
     scales: {
