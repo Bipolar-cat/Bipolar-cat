@@ -301,3 +301,10 @@ body {
     line-height:1.6;
     white-space:pre-wrap;
 }
+
+.log-note {
+    text-align: left;
+    padding: 16px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
