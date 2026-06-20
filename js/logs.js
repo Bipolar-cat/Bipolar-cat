@@ -1,37 +1,47 @@
-logs.slice().reverse().forEach(l => {
+function renderLogs() {
 
-    const div = document.createElement("div");
-    div.className = "log-item";
+    const logs = getLogs();
+    const logList = document.getElementById("log-list");
 
-    const moodText =
-        l.mood === 10 ? "良い" :
-        l.mood === 5 ? "普通" :
-        "低い";
+    if (!logList) return;
 
-    const condText =
-        l.cond === 10 ? "良い" :
-        l.cond === 5 ? "普通" :
-        "悪い";
+    logList.innerHTML = "";
 
-    div.innerHTML = `
-    <span class="log-date">${l.date}</span>
+    logs.slice().reverse().forEach(l => {
 
-    <div class="log-status">
-        <span class="mood-text">
-            <span class="status-dot mood-dot"></span>
-            気分：${moodText}
-        </span>
+        const div = document.createElement("div");
+        div.className = "log-item";
 
-        <span class="cond-text">
-            <span class="status-dot cond-dot"></span>
-            体調：${condText}
-        </span>
-    </div>
+        const moodText =
+            l.mood === 10 ? "良い" :
+            l.mood === 5 ? "普通" :
+            "低い";
 
-    <div class="log-note">
-        ${l.note || ""}
-    </div>
-`;
+        const condText =
+            l.cond === 10 ? "良い" :
+            l.cond === 5 ? "普通" :
+            "悪い";
 
-    logList.appendChild(div);
-});
+        div.innerHTML = `
+            <span class="log-date">${l.date}</span>
+
+            <div class="log-status">
+                <span class="mood-text">
+                    <span class="status-dot mood-dot"></span>
+                    気分：${moodText}
+                </span>
+
+                <span class="cond-text">
+                    <span class="status-dot cond-dot"></span>
+                    体調：${condText}
+                </span>
+            </div>
+
+            <div class="log-note">
+                ${l.note || ""}
+            </div>
+        `;
+
+        logList.appendChild(div);
+    });
+}
