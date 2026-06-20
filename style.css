@@ -112,17 +112,21 @@ body {
             font-size: 14px;
         }
 
-        #mood-btns button.active {
-            background-color: #E3F2FD;
-            border: 1px solid #2196F3;
-            color: #1976D2;
-        }
+        .btn-group button.active {
+    font-weight: bold;
+}
 
-        #cond-btns button.active {
-            background-color: #FFF3E0;
-            border: 1px solid #FFA726;
-            color: #FB8C00;
-        }
+#mood-btns button.active {
+    background-color: #E3F2FD !important;
+    border: 1px solid #2196F3 !important;
+    color: #1976D2 !important;
+}
+
+#cond-btns button.active {
+    background-color: #FFF3E0 !important;
+    border: 1px solid #FFA726 !important;
+    color: #FB8C00 !important;
+}
 
         textarea {
             width: 100%;
