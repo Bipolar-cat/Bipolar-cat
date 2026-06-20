@@ -22,6 +22,7 @@ function renderChart() {
         myChart.destroy();
     }
 
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
     myChart = new Chart(ctx, {
