@@ -4,7 +4,9 @@ let selectedMood = 2;
 let selectedCond = 2;
 
 function saveData() {
+
     const logs = getLogs();
+
     logs.push({
         date: formatDate(new Date()),
         mood: selectedMood,
@@ -12,9 +14,9 @@ function saveData() {
         note: document.getElementById("note").value
     });
 
-    saveLogs(logs);
+    console.log(logs);   // ←追加
 
-    document.getElementById("note").value = "";
+    saveLogs(logs);
 
     renderLogs();
     renderChart();
