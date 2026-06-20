@@ -282,3 +282,42 @@ datasets: [
     color: red;
     z-index: 9999;
 }
+
+.log-status {
+    display: flex;
+    gap: 18px;
+    margin: 8px 0;
+    font-weight: bold;
+    align-items: center;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.mood-dot {
+    background-color: #2196F3;   /* 気分ボタンと同じ青 */
+}
+
+.cond-dot {
+    background-color: #FFA726;   /* 体調ボタンと同じオレンジ */
+}
+
+.mood-text {
+    color: #2196F3;
+}
+
+.cond-text {
+    color: #FFA726;
+}
+
+.log-note {
+    margin-top: 6px;
+    color: #555;
+    line-height: 1.5;
+}
