@@ -160,19 +160,6 @@ body {
     height: 300px;
 }
             
-                
-        label: "体調",
-        data: last10.map(l => l.cond),
-        borderColor: "#FFA726",
-        backgroundColor: "#FFA726",
-        pointBackgroundColor: "#FFA726",
-        pointBorderColor: "#FFA726",
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        borderWidth: 3,
-        tension: 0.3
-    }
-]
 
         /* --- summary（一定期間まとめ）エリアのスタイル --- */
         .summary-section {
