@@ -9,7 +9,6 @@ function renderChart() {
 
     const ctx = document.getElementById("myChart").getContext("2d");
 
-    // 前のグラフを削除
     if (myChart) {
         myChart.destroy();
     }
