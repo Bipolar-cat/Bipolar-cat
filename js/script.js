@@ -32,9 +32,9 @@ function setVal(type, val, btn) {
         selectedCond = val;
     }
     console.log(
-        "selectedMood =", selectedMood,
-        "selectedCond =", selectedCond
-    );
+    "selectedMood =", selectedMood,
+    "selectedCond =", selectedCond
+);
 }
 
 function formatDate(date) {
