@@ -245,7 +245,7 @@ datasets: [
             width: 100%;
         }
 
-      .log-item{
+    .log-item{
     background:#fff;
     margin:12px 15px;
     padding:16px;
@@ -263,11 +263,13 @@ datasets: [
             background-color: #fff9c4 !important;
         }
 
-        .log-date {
-            color: #4A90E2;
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
+ .log-date{
+    display:block;
+    font-size:13px;
+    color:#888;
+    font-weight:bold;
+    margin-bottom:10px;
+}
         }
 
 #debug-box {
@@ -293,21 +295,20 @@ datasets: [
     align-items: center;
 }
 
-.status-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
+.status-dot{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    margin-right:6px;
 }
 
-.mood-dot {
-    background-color: #2196F3;   /* 気分ボタンと同じ青 */
+.mood-dot{
+    background:#2196F3;
 }
 
-.cond-dot {
-    background-color: #FFA726;   /* 体調ボタンと同じオレンジ */
+.cond-dot{
+    background:#FFA726;
 }
 
 .mood-text {
@@ -318,8 +319,12 @@ datasets: [
     color: #FFA726;
 }
 
-.log-note {
-    margin-top: 6px;
-    color: #555;
-    line-height: 1.5;
+.log-note{
+    margin-top:12px;
+    padding:10px 12px;
+    background:#f8f9fa;
+    border-radius:10px;
+    color:#444;
+    line-height:1.6;
+    white-space:pre-wrap;
 }
