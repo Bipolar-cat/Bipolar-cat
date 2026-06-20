@@ -43,19 +43,27 @@ function renderChart() {
                 }
             ]
         },
-        options: {
-            responsive: true,
-            scales: {
-               y: {
-    min: 1,
-    max: 10,
-    ticks: {
-        stepSize: 1,
-        callback: function(value) {
-            if (value === 1) return "低い/悪い";
-            if (value === 5) return "普通";
-            if (value === 10) return "良い";
-            return "";
+      options: {
+    responsive: true,
+    scales: {
+        y: {
+            min: 1,
+            max: 10,
+            ticks: {
+                stepSize: 1,
+                callback: function(value) {
+                    switch (value) {
+                        case 1:
+                            return "低い";
+                        case 5:
+                            return "普通";
+                        case 10:
+                            return "良い";
+                        default:
+                            return "";
+                    }
+                }
+            }
         }
     }
 }
