@@ -43,7 +43,7 @@ function renderChart() {
                 }
             ]
         },
-      options: {
+options: {
     responsive: true,
     scales: {
         y: {
@@ -62,6 +62,19 @@ function renderChart() {
                         default:
                             return "";
                     }
+                }
+            },
+            grid: {
+                color: function(context) {
+                    const v = context.tick.value;
+
+                    // 1・5・10だけ横線を表示
+                    if (v === 1 || v === 5 || v === 10) {
+                        return "#d9d9d9";
+                    }
+
+                    // それ以外の横線は非表示
+                    return "rgba(0,0,0,0)";
                 }
             }
         }
