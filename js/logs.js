@@ -14,17 +14,24 @@ logs.slice().reverse().forEach(l => {
         "悪い";
 
     div.innerHTML = `
-        <span class="log-date">${l.date}</span>
+    <span class="log-date">${l.date}</span>
 
-        <div class="log-status">
-            <span class="mood-text">● 気分：${moodText}</span>
-            <span class="cond-text">● 体調：${condText}</span>
-        </div>
+    <div class="log-status">
+        <span class="mood-text">
+            <span class="status-dot mood-dot"></span>
+            気分：${moodText}
+        </span>
 
-        <div class="log-note">
-            ${l.note || ""}
-        </div>
-    `;
+        <span class="cond-text">
+            <span class="status-dot cond-dot"></span>
+            体調：${condText}
+        </span>
+    </div>
+
+    <div class="log-note">
+        ${l.note || ""}
+    </div>
+`;
 
     logList.appendChild(div);
 });
