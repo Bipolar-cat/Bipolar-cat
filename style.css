@@ -160,6 +160,32 @@ body {
     height: 300px;
 }
             
+datasets: [
+    {
+        label: "気分",
+        data: last10.map(l => l.mood),
+        borderColor: "#2196F3",
+        backgroundColor: "#2196F3",
+        pointBackgroundColor: "#2196F3",
+        pointBorderColor: "#2196F3",
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 3,
+        tension: 0.3
+    },
+    {
+        label: "体調",
+        data: last10.map(l => l.cond),
+        borderColor: "#FFA726",
+        backgroundColor: "#FFA726",
+        pointBackgroundColor: "#FFA726",
+        pointBorderColor: "#FFA726",
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 3,
+        tension: 0.3
+    }
+]
 
         /* --- summary（一定期間まとめ）エリアのスタイル --- */
         .summary-section {
