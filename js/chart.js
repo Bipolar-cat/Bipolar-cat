@@ -16,6 +16,10 @@ function renderChart() {
         return;
     }
 
+    if (myChart) {
+    myChart.destroy();
+}
+    
     const ctx = canvas.getContext("2d");
 
     if (myChart) {
