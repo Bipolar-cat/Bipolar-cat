@@ -53,7 +53,12 @@ function renderChart() {
             ]
         },
         options: {
-            responsive: true,
+    responsive: true,
+    maintainAspectRatio: false,
+
+    plugins: {
+        legend: {
+            position: "top"
             scales: {
                 y: {
                     min: 1,
