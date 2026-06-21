@@ -16,22 +16,15 @@ function renderChart() {
         return;
     }
 
-    if (myChart) {
+  if (myChart) {
     myChart.destroy();
 }
-    
-    const ctx = canvas.getContext("2d");
 
-    if (myChart) {
-        myChart.destroy();
-    }
+const ctx = canvas.getContext("2d");
 
-    myChart = new Chart(ctx, {
-        // ← あなたの options の内容
-    });
- 
-    type: "line",
-    data: {
+myChart = new Chart(ctx, {
+        type: "line",
+        data: {
         labels: last10.map(l => l.date),
         datasets: [
             {
