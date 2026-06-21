@@ -59,6 +59,9 @@ function renderChart() {
     plugins: {
         legend: {
             position: "top"
+                 }
+                    },
+            
             scales: {
                 y: {
                     min: 1,
