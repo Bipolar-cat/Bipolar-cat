@@ -8,13 +8,12 @@ function renderChart() {
     const canvas = document.getElementById("myChart");
     if (!canvas) return;
 
-    if (last10.length === 0) {
-
-       if (!canvas) return;
-
-if (myChart) {
-    myChart.destroy();
-    myChart = null;
+   if (last10.length === 0) {
+    if (myChart) {
+        myChart.destroy();
+        myChart = null;
+    }
+    return;
 }
 
 const ctx = canvas.getContext("2d");
