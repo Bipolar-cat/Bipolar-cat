@@ -8,17 +8,24 @@ function renderChart() {
     const canvas = document.getElementById("myChart");
     if (!canvas) return;
 
-   if (last10.length === 0) {
+    if (last10.length === 0) {
+        if (myChart) {
+            myChart.destroy();
+            myChart = null;
+        }
+        return;
+    }
+
+    const ctx = canvas.getContext("2d");
+
     if (myChart) {
         myChart.destroy();
-        myChart = null;
     }
-    return;
-}
 
-const ctx = canvas.getContext("2d");
-
-myChart = new Chart(ctx, {
+    myChart = new Chart(ctx, {
+        // ← あなたの options の内容
+    });
+ 
     type: "line",
     data: {
         labels: last10.map(l => l.date),
@@ -40,6 +47,7 @@ myChart = new Chart(ctx, {
                 pointRadius: 5,
                 borderWidth: 3,
                 tension: 0.3
+                }
             }
         ]
     },
