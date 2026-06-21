@@ -44,7 +44,6 @@ myChart = new Chart(ctx, {
                 pointRadius: 5,
                 borderWidth: 3,
                 tension: 0.3
-            }
         ]
     },
     options: {
@@ -74,3 +73,4 @@ myChart = new Chart(ctx, {
         }
     }
 });
+}
