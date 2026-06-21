@@ -16,15 +16,15 @@ function renderChart() {
         return;
     }
 
-  if (myChart) {
+ if (myChart) {
     myChart.destroy();
 }
 
 const ctx = canvas.getContext("2d");
 
 myChart = new Chart(ctx, {
-        type: "line",
-        data: {
+    type: "line",
+    data: {
         labels: last10.map(l => l.date),
         datasets: [
             {
@@ -44,7 +44,6 @@ myChart = new Chart(ctx, {
                 pointRadius: 5,
                 borderWidth: 3,
                 tension: 0.3
-                }
             }
         ]
     },
