@@ -221,10 +221,40 @@ canvas{
     overflow-y:auto;
 }
 
-.report-header { font-weight: bold; color: #2E7D32; font-size: 15px; border-bottom: 1px dashed #C5E1A5; padding-bottom: 6px; margin-bottom: 12px; display: block; }
-        .report-item { margin-bottom: 6px; color: #333; }
-        .report-label { font-weight: bold; color: #558B2F; min-width: 80px; display: inline-block; }
-        .report-notes { background: white; padding: 10px 14px; border-radius: 10px; border: 1px solid #E8F5E9; margin-top: 6px; max-height: 100px; overflow-y: auto; font-size: 13px; color: #555; }
+.report-header { 
+            font-weight: bold;
+            color: #2E7D32;
+            font-size: 15px;
+            border-bottom: 1px dashed #C5E1A5;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            display: block; 
+}
+       
+.report-item { 
+            margin-bottom: 6px;
+            color: #333; 
+}
+
+.report-label {
+            
+            font-weight: bold;
+            color: #558B2F;
+            min-width: 80px;
+            display: inline-block;
+}
+
+.report-notes {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #E8F5E9;
+            margin-top: 6px;
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: #555;
+}
 
         h3 {
             margin-top: 35px;
@@ -233,3 +263,8 @@ canvas{
             padding: 0 20px;
         }
 
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
