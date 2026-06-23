@@ -41,7 +41,7 @@ function renderChart() {
                     pointRadius: 4,
                     pointHoverRadius: 6,
                     borderWidth: 2,
-                    tension: 0.3
+                    tension:0.45
                 },
                 {
                     label: "体調",
@@ -54,7 +54,7 @@ function renderChart() {
                     pointRadius: 4,
                     pointHoverRadius: 6,
                     borderWidth: 2,
-                    tension: 0.3
+                    tension:0.45
                 }
             ]
         },
