@@ -25,10 +25,6 @@ function renderChart() {
         type: "line",
 
         data: {
-           <div class="chart-box">
-    <canvas id="myChart"></canvas>
-</div>
-
             datasets: [
             labels: last10.map((l, index) => {
 
