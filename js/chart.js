@@ -60,71 +60,79 @@ function renderChart() {
         },
 
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
+    responsive: true,
+    maintainAspectRatio: false,
 
-            plugins: {
-                legend: {
-                    position: "top"
+    interaction: {
+        mode: "index",
+        intersect: false
+    },
+
+    plugins: {
+        legend: {
+            position: "top",
+            labels: {
+                usePointStyle: true,
+                boxWidth: 10,
+                font: {
+                    size: 12
+                }
+            }
+        },
+        tooltip: {
+            titleFont: {
+                size: 11
+            },
+            bodyFont: {
+                size: 11
+            }
+        }
+    },
+
+    scales: {
+
+        x: {
+            grid: {
+                display: false
+            },
+            ticks: {
+                maxRotation: 0,
+                minRotation: 0,
+                font: {
+                    size: 10
+                }
+            }
+        },
+
+        y: {
+            min: 1,
+            max: 10,
+
+            ticks: {
+                stepSize: 1,
+
+                callback: function(value) {
+
+                    if (value === 1) return "低い";
+                    if (value === 5) return "普通";
+                    if (value === 10) return "良い";
+
+                    return "";
                 }
             },
 
-            scales: {
-                y: {
-                    min: 1,
-                    max: 10,
+            grid: {
+                color: function(context) {
 
-                    ticks: {
-                        stepSize: 1,
-                        callback: function(value) {
-                            if (value === 1) return "低い";
-                            if (value === 5) return "普通";
-                            if (value === 10) return "良い";
-                            return "";
-                        }
-                    },
+                    const v = context.tick.value;
 
-                    grid: {
-                        color: function(context) {
-                            const v = context.tick.value;
-
-                            return (
-                                v === 1 ||
-                                v === 5 ||
-                                v === 10
-                            )
-                                ? "#d9d9d9"
-                                : "rgba(0,0,0,0)";
-                        }
-                    }
-                },
-
-                x: {
-                    ticks: {
-                        maxRotation: 45,
-                        minRotation: 45
-                    }
+                    return (v === 1 || v === 5 || v === 10)
+                        ? "#dddddd"
+                        : "rgba(0,0,0,0)";
                 }
             }
         }
-    });
+
+    }
 }
-
-plugins: {
-    tooltip: {
-        displayColors: true,
-        titleFont: {
-            size: 11
-        },
-        bodyFont: {
-            size: 11
-        }
-    }
-},
-
-x: {
-    ticks: {
-        maxRotation: 0,
-        minRotation: 0
-    }
-},
+        
