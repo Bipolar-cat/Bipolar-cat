@@ -25,37 +25,45 @@ function renderChart() {
         type: "line",
 
         data: {
-            labels: last10.map(l => {
+            labels: last10.map(l => l.date.substring(5,16)),
     return l.date.substring(11, 16); // 19:47 のみ表示
 }),
 
             datasets: [
+               {
+    label: "気分",
+    data: last10.map(l => l.mood),
+
+    borderColor: "#2196F3",
+    backgroundColor: "#2196F3",
+
+    pointBackgroundColor: "#2196F3",
+    pointBorderColor: "#ffffff",
+
+    pointRadius: 4,
+    pointHoverRadius: 6,
+
+    borderWidth: 2,
+    tension: 0.45,
+    fill: false
+},
                 {
-                    label: "気分",
-                    data: last10.map(l => l.mood),
-                    borderColor: "#2196F3",
-                    backgroundColor: "#2196F3",
-                    pointBackgroundColor: "#2196F3",
-                    pointBorderColor: "#2196F3",
-                    pointRadius: 5,
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
-                    borderWidth: 2,
-                    tension:0.45
-                },
-                {
-                    label: "体調",
-                    data: last10.map(l => l.cond),
-                    borderColor: "#FFA726",
-                    backgroundColor: "#FFA726",
-                    pointBackgroundColor: "#FFA726",
-                    pointBorderColor: "#FFA726",
-                    pointRadius: 5,
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
-                    borderWidth: 2,
-                    tension:0.45
-                }
+    label: "体調",
+    data: last10.map(l => l.cond),
+
+    borderColor: "#FFA726",
+    backgroundColor: "#FFA726",
+
+    pointBackgroundColor: "#FFA726",
+    pointBorderColor: "#ffffff",
+
+    pointRadius: 4,
+    pointHoverRadius: 6,
+
+    borderWidth: 2,
+    tension: 0.45,
+    fill: false
+}
             ]
         },
 
