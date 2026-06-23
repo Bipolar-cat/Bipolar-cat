@@ -109,3 +109,13 @@ function renderChart() {
         }
     });
 }
+
+plugins: {
+    legend: {
+        position: "top",
+        labels: {
+            usePointStyle: true,
+            boxWidth: 10
+        }
+    }
+},
