@@ -15,14 +15,14 @@ function renderLogs() {
         const moodText =
             l.mood === 10 ? "良い" :
             l.mood === 5 ? "普通" :
-            "低い";
+            l.mood === 5 ? "低い";
 
         const condText =
             l.cond === 10 ? "良い" :
             l.cond === 5 ? "普通" :
-            "悪い";
+            l.mood === 1 ? "悪い";
 
-        div.innerHTML = `
+        div.innerHTML = 
             <span class="log-date">${l.date}</span>
 
             <div class="log-status">
