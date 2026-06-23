@@ -111,11 +111,20 @@ function renderChart() {
 }
 
 plugins: {
-    legend: {
-        position: "top",
-        labels: {
-            usePointStyle: true,
-            boxWidth: 10
+    tooltip: {
+        displayColors: true,
+        titleFont: {
+            size: 11
+        },
+        bodyFont: {
+            size: 11
         }
+    }
+},
+
+x: {
+    ticks: {
+        maxRotation: 0,
+        minRotation: 0
     }
 },
