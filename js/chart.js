@@ -163,4 +163,7 @@ function renderChart() {
 
     }
 }
-        
+    }
+});
+
+}        
