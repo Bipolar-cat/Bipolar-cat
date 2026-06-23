@@ -4,6 +4,10 @@ function renderChart() {
 
     const logs = getLogs();
     const last10 = logs.slice(-10);
+    const chartWidth = Math.max(last10.length * 80, 700);
+
+    document.querySelector(".chart-inner").style.width =
+    chartWidth + "px";
 
     const canvas = document.getElementById("myChart");
     if (!canvas) return;
@@ -65,12 +69,15 @@ function renderChart() {
                     pointBackgroundColor: "#2196F3",
                     pointBorderColor: "#ffffff",
 
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
+                   pointRadius: 6,
+pointHoverRadius: 8,
+pointBorderWidth: 2,
+pointBorderColor: "#fff",
+pointHitRadius: 15,
 
-                    borderWidth: 2,
-                    tension: 0.45,
-                    fill: false
+borderWidth: 3,
+tension: 0.55,
+fill: false,
                 },
 
                 {
@@ -83,12 +90,15 @@ function renderChart() {
                     pointBackgroundColor: "#FFA726",
                     pointBorderColor: "#ffffff",
 
-                    pointRadius: 4,
-                    pointHoverRadius: 6,
+                   pointRadius: 6,
+pointHoverRadius: 8,
+pointBorderWidth: 2,
+pointBorderColor: "#fff",
+pointHitRadius: 15,
 
-                    borderWidth: 2,
-                    tension: 0.45,
-                    fill: false
+borderWidth: 3,
+tension: 0.55,
+fill: false,
                 }
 
             ]
@@ -139,24 +149,19 @@ function renderChart() {
 
             scales: {
 
-                x: {
-
-                    grid: {
-                        display: false
-                    },
-
-                    ticks: {
-
-                        maxRotation: 0,
-                        minRotation: 0,
-
-                        font: {
-                            size: 10
-                        }
-
-                    }
-
-                },
+               x: {
+    grid: {
+        display: false
+    },
+    ticks: {
+        maxRotation: 45,
+        minRotation: 45,
+        autoSkip: false,
+        font: {
+            size: 10
+        }
+    }
+},
 
                 y: {
 
