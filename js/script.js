@@ -40,13 +40,20 @@ function setVal(type, val, btn) {
 );
 }
 
-function formatDate(date) {
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, "0");
-    const dd = String(date.getDate()).padStart(2, "0");
-    const hh = String(date.getHours()).padStart(2, "0");
-    const min = String(date.getMinutes()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+function formatDate(dateStr, showYear = false) {
+
+    const d = new Date(dateStr);
+
+    const y = d.getFullYear();
+    const m = d.getMonth() + 1;
+    const day = d.getDate();
+
+    const h = String(d.getHours()).padStart(2, "0");
+    const min = String(d.getMinutes()).padStart(2, "0");
+
+    return showYear
+        ? `${y}/${m}/${day} ${h}:${min}`
+        : `${m}/${day} ${h}:${min}`;
 }
 
 window.onload = function () {
