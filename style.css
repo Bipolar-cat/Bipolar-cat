@@ -146,41 +146,32 @@ body {
     caret-color: #000;
 }
 
+/* グラフ */
 .chart-container{
-    margin-top:20px;
-    margin-bottom:15px;
+    margin:20px 0 15px;
 }
 
 .chart-scroll{
     overflow-x:auto;
     overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
 }
 
 .chart-inner{
-    min-width:900px;
+    width:900px;      /* 後でJavaScriptで自動変更 */
     height:320px;
 }
 
 #myChart{
-    width:100%;
-    height:100%;
+    width:100% !important;
+    height:100% !important;
 }
 
-.chart-inner canvas{
-    width:100%!important;
-    height:100%!important;
+.section-title{
+    margin:0 0 10px;
+    font-size:18px;
+    font-weight:600;
 }
-
-.chart-box {
-    width: 100%;
-    height: 260px;
-    margin-top: 20px;
-}
-
-.chart-box canvas {
-    width: 100% !important;
-    height: 100% !important;
-}            
 
         /* --- summary（一定期間まとめ）エリアのスタイル --- */
         .summary-section {
