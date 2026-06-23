@@ -24,32 +24,44 @@ function renderChart() {
     myChart = new Chart(ctx, {
         type: "line",
 
-        data: {
-            datasets: [
-            labels: last10.map((l, index) => {
+       data: {
 
-    const d = new Date(l.date);
+    labels: last10.map((l, index) => {
 
-    const year = d.getFullYear();
-    const month = d.getMonth() + 1;
-    const day = d.getDate();
-    const hour = String(d.getHours()).padStart(2, "0");
-    const min = String(d.getMinutes()).padStart(2, "0");
+        const d = new Date(l.date);
 
-    if (index === 0) {
-        return `${year}/${month}/${day}\n${hour}:${min}`;
-    }
+        const year = d.getFullYear();
+        const month = d.getMonth() + 1;
+        const day = d.getDate();
+        const hour = String(d.getHours()).padStart(2, "0");
+        const min = String(d.getMinutes()).padStart(2, "0");
 
-    const prev = new Date(last10[index - 1].date);
+        if (index === 0) {
+            return `${year}/${month}/${day}\n${hour}:${min}`;
+        }
 
-    if (year !== prev.getFullYear()) {
-        return `${year}/${month}/${day}\n${hour}:${min}`;
-    }
+        const prev = new Date(last10[index - 1].date);
 
-    return `${month}/${day}\n${hour}:${min}`;
-}),
+        if (year !== prev.getFullYear()) {
+            return `${year}/${month}/${day}\n${hour}:${min}`;
+        }
+
+        return `${month}/${day}\n${hour}:${min}`;
+    }),
+
+    datasets: [
+        {
+            label: "気分",
+            ...
+        },
+        {
+            label: "体調",
+            ...
+        }
+    ]
+},
         
-               {
+               
     label: "気分",
     data: last10.map(l => l.mood),
 
