@@ -25,11 +25,34 @@ function renderChart() {
         type: "line",
 
         data: {
-            labels: last10.map(l => l.date.substring(5,16)),
-    return l.date.substring(11, 16); // 19:47 のみ表示
-}),
+           <div class="chart-box">
+    <canvas id="myChart"></canvas>
+</div>
 
             datasets: [
+            labels: last10.map((l, index) => {
+
+    const d = new Date(l.date);
+
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
+    const hour = String(d.getHours()).padStart(2, "0");
+    const min = String(d.getMinutes()).padStart(2, "0");
+
+    if (index === 0) {
+        return `${year}/${month}/${day}\n${hour}:${min}`;
+    }
+
+    const prev = new Date(last10[index - 1].date);
+
+    if (year !== prev.getFullYear()) {
+        return `${year}/${month}/${day}\n${hour}:${min}`;
+    }
+
+    return `${month}/${day}\n${hour}:${min}`;
+}),
+        
                {
     label: "気分",
     data: last10.map(l => l.mood),
