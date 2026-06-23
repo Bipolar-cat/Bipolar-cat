@@ -24,7 +24,6 @@ function renderChart() {
         myChart.destroy();
     }
 
-    // データ数に応じて横幅を広げる
 const chartInner = document.querySelector(".chart-inner");
 
 if (chartInner) {
