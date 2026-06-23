@@ -148,7 +148,23 @@ body {
 
 .chart-container{
     width:100%;
+    overflow-x:auto;.chart-container{
+    width:100%;
     overflow-x:auto;
+    overflow-y:hidden;
+
+    margin:15px 0 10px;
+}
+
+.chart-inner{
+    width:700px;
+    height:260px;
+}
+
+.chart-inner canvas{
+    width:100%!important;
+    height:100%!important;
+}
     overflow-y:hidden;
     margin:15px 0;
 }
