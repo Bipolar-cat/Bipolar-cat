@@ -38,8 +38,9 @@ function renderChart() {
                     pointBackgroundColor: "#2196F3",
                     pointBorderColor: "#2196F3",
                     pointRadius: 5,
-                    pointHoverRadius: 7,
-                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    borderWidth: 2,
                     tension: 0.3
                 },
                 {
@@ -50,8 +51,9 @@ function renderChart() {
                     pointBackgroundColor: "#FFA726",
                     pointBorderColor: "#FFA726",
                     pointRadius: 5,
-                    pointHoverRadius: 7,
-                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    borderWidth: 2,
                     tension: 0.3
                 }
             ]
