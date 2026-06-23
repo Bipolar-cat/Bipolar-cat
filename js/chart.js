@@ -75,15 +75,15 @@ if (chartInner) {
                     pointBackgroundColor: "#2196F3",
                     pointBorderColor: "#ffffff",
 
-                   pointRadius: 6,
-pointHoverRadius: 8,
-pointBorderWidth: 2,
-pointBorderColor: "#fff",
-pointHitRadius: 15,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointBorderWidth: 2,
+                    pointBorderColor: "#fff",
+                    pointHitRadius: 15,
 
-borderWidth: 3,
-tension: 0.55,
-fill: false,
+                    borderWidth: 3,
+                    tension: 0.55,
+                    fill: false,
                 },
 
                 {
@@ -96,15 +96,15 @@ fill: false,
                     pointBackgroundColor: "#FFA726",
                     pointBorderColor: "#ffffff",
 
-                   pointRadius: 6,
-pointHoverRadius: 8,
-pointBorderWidth: 2,
-pointBorderColor: "#fff",
-pointHitRadius: 15,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointBorderWidth: 2,
+                    pointBorderColor: "#fff",
+                    pointHitRadius: 15,
 
-borderWidth: 3,
-tension: 0.55,
-fill: false,
+                    borderWidth: 3,
+                    tension: 0.55,
+                    fill: false,
                 }
 
             ]
@@ -153,60 +153,50 @@ fill: false,
 
             },
 
-            scales: {
+           scales: {
 
-               x: {
-    grid: {
-        display: false
-    },
-    ticks: {
-        maxRotation: 45,
-        minRotation: 45,
-        autoSkip: false,
-        font: {
-            size: 10
+    x: {
+        grid: {
+            display: false
+        },
+        ticks: {
+            maxRotation: 45,
+            minRotation: 45,
+            autoSkip: false,
+            font: {
+                size: 10
+            }
         }
-    }
-},
+    },
 
-                y: {
-                    position: "left",
-                    min: 1,
-                    max: 10,
+    y: {
+        position: "left",
+        min: 1,
+        max: 10,
 
-                    ticks: {
+        ticks: {
+            stepSize: 1,
+            callback: function(value) {
+                if (value === 10) return "良い";
+                if (value === 5) return "普通";
+                if (value === 1) return "低い/悪い";
+                return "";
+            }
+        },
 
-                        stepSize: 1,
+        grid: {
+            color: function(context) {
+                const v = context.tick.value;
 
-                        callback: function(value) {
-
-                            if (value === 1) return "低い/悪い";
-                            if (value === 5) return "普通";
-                            if (value === 10) return "良い";
-
-                            return "";
-
-                        }
-
-                    },
-
-                    grid: {
-
-                        color: function(context) {
-
-                            const v = context.tick.value;
-
-                            if (v === 1 || v === 5 || v === 10) {
-                                return "#dddddd";
-                            }
-
-                            return "rgba(0,0,0,0)";
-
-                             },
+                return (v === 1 || v === 5 || v === 10)
+                    ? "#dddddd"
+                    : "rgba(0,0,0,0)";
+            }
+        }
+    },
 
     y2: {
         position: "right",
-
         min: 1,
         max: 10,
 
@@ -216,8 +206,7 @@ fill: false,
 
         ticks: {
             stepSize: 1,
-
-            callback(value) {
+            callback: function(value) {
                 if (value === 10) return "良い";
                 if (value === 5) return "普通";
                 if (value === 1) return "低い/悪い";
@@ -225,17 +214,5 @@ fill: false,
             }
         }
     }
-}
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-
-    });
 
 }
