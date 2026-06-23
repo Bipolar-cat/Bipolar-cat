@@ -1,6 +1,6 @@
 function renderLogs() {
 
-    const logs = getLogs();
+     const logs = getLogs().slice(-5).reverse();
     const logList = document.getElementById("log-list");
 
     if (!logList) return;
