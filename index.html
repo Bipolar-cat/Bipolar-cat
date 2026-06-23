@@ -46,11 +46,22 @@
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
     
+<!-- グラフ -->
 <div class="chart-container">
-    <div class="chart-inner">
-        <canvas id="myChart"></canvas>
+
+    <h3 class="section-title">気分・体調グラフ</h3>
+
+    <div class="chart-scroll">
+        <div class="chart-inner">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
+
 </div>
+
+<!-- summary -->
+<div id="summary"></div>
+
     
         <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary (一定期間まとめ)</button>
@@ -62,6 +73,9 @@
             </div>
         </div>
 
+    
+<!-- 最近の記録 -->
+<div id="logs"></div>
         <h3>最近の記録</h3>
 <div id="log-list" class="log-list"></div>
 
