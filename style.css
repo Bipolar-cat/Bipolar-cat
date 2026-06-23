@@ -7,12 +7,13 @@ body {
             justify-content: center;
         }
 
-      .container{
+ .container{
     width:100%;
     max-width:430px;
-    margin:0 auto;
-    padding:20px;
-    box-sizing:border-box;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
 }
 
 .save-btn{
@@ -147,13 +148,11 @@ body {
 }
 
 .chart-scroll{
-    overflow-x:auto;
-    overflow-y:hidden;
+    margin:18px 0;
 }
 
 .chart-inner{
-    min-width:900px;
-    height:320px;
+    height:220px;
 }
 
 #myChart{
@@ -170,7 +169,7 @@ body {
         /* --- summary（一定期間まとめ）エリアのスタイル --- */
         .summary-section {
             padding: 0 20px;
-            margin-top: 25px;
+            margin-top: 18px 0;
             text-align: center;
         }
 
@@ -208,6 +207,14 @@ body {
             margin-bottom: 15px;
         }
 
+.logs-section{
+    margin-top:20px;
+}
+
+.log-list{
+    max-height:330px;
+    overflow-y:auto;
+}
 
 .report-header { font-weight: bold; color: #2E7D32; font-size: 15px; border-bottom: 1px dashed #C5E1A5; padding-bottom: 6px; margin-bottom: 12px; display: block; }
         .report-item { margin-bottom: 6px; color: #333; }
@@ -221,42 +228,3 @@ body {
             padding: 0 20px;
         }
 
-function renderLogs() {
-
-    const MAX_LOGS = 5;
-    const logs = getLogs().slice(-MAX_LOGS).reverse();
-
-    const logList = document.getElementById("log-list");
-
-    if (!logList) return;
-
-    logList.innerHTML = "";
-
-    logs.forEach(l => {
-
-        const mood =
-            l.mood === 10 ? "良い" :
-            l.mood === 5 ? "普通" : "低い";
-
-        const cond =
-            l.cond === 10 ? "良い" :
-            l.cond === 5 ? "普通" : "悪い";
-
-        const item = document.createElement("div");
-        item.className = "log-item";
-
-        item.innerHTML = `
-            <div class="log-date">${l.date}</div>
-
-            <div class="log-status">
-                <span class="mood">🔵 気分：${mood}</span>
-                <span class="cond">🟠 体調：${cond}</span>
-            </div>
-
-            ${l.note ? `<div class="log-note">${l.note}</div>` : ""}
-        `;
-
-        logList.appendChild(item);
-    });
-
-}
