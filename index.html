@@ -11,7 +11,6 @@
     </head>
     
 <body>
-<div id="debug-box"></div>
 <div class="container">
 
     <div id="settings-panel"
@@ -46,18 +45,14 @@
             <button class="save-btn" onclick="saveData()">記録する</button>
         </div>
 
-    <div class="chart-scroll">
-        <div class="chart-inner">
-            <canvas id="myChart"></canvas>
+          <div class="chart-container">
+            <div class="chart-scroll">
+              <div class="chart-inner">
+                <canvas id="myChart"></canvas>
         </div>
     </div>
-
 </div>
 
-<!-- summary -->
-<div id="summary"></div>
-
-    
         <div class="summary-section">
             <button class="summary-action-btn" onclick="generateSummary()">summary（最近の傾向）</button>
             <div id="summary-ts" class="summary-ts">前回まとめ作成：なし</div>
@@ -76,8 +71,9 @@
 
     <div id="log-list" class="log-list"></div>
 
-</section>
+  </section>
 
+</div>
     
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
 <script src="js/storage.js"></script>
