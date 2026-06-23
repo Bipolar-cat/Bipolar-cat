@@ -22,7 +22,8 @@ function renderChart() {
 const chartInner = document.querySelector(".chart-inner");
 
 if (chartInner) {
-    chartInner.style.width = Math.max(last10.length * 90, 900) + "px";
+    chartInner.style.width =
+        Math.max(last10.length * 70, window.innerWidth - 40) + "px";
 }
     const ctx = canvas.getContext("2d");
 
