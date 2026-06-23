@@ -190,25 +190,27 @@ if (chartInner) {
         }
     },
 
-    y2: {
-        position: "right",
-        min: 1,
-        max: 10,
+   y2: {
+    position: "right",
+    min: 1,
+    max: 10,
 
-        grid: {
-            drawOnChartArea: false
-        },
+    grid: {
+        drawOnChartArea: false
+    },
 
-        ticks: {
-            stepSize: 1,
-            callback: function(value) {
-                if (value === 10) return "良い";
-                if (value === 5) return "普通";
-                if (value === 1) return "低い/悪い";
-                return "";
-             }
-                }
-            }
+    ticks: {
+        stepSize: 1,
+        callback: function(value) {
+            if (value === 10) return "良い";
+            if (value === 5) return "普通";
+            if (value === 1) return "低い/悪い";
+            return "";
         }
     }
+}
+}
+}
 });
+
+}
