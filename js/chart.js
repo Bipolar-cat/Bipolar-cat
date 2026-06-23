@@ -1,4 +1,4 @@
-せらlet myChart = null;
+let myChart = null;
 
 function renderChart() {
 
