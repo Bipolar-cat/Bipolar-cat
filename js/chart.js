@@ -24,6 +24,12 @@ function renderChart() {
         myChart.destroy();
     }
 
+    // データ数に応じて横幅を広げる
+const chartInner = document.querySelector(".chart-inner");
+
+if (chartInner) {
+    chartInner.style.width = Math.max(last10.length * 90, 900) + "px";
+}
     const ctx = canvas.getContext("2d");
 
     // 年が変わった時だけ西暦を表示
