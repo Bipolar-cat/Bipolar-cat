@@ -1,8 +1,7 @@
 function renderLogs() {
-    
-     const MAX_LOGS = 5;
 
-     const logs = getLogs().slice(-MAX_LOGS).reverse();
+    const MAX_LOGS = 5;
+    const logs = getLogs().slice(-MAX_LOGS).reverse();
 
     const logList = document.getElementById("log-list");
 
@@ -10,39 +9,28 @@ function renderLogs() {
 
     logList.innerHTML = "";
 
-    logs.slice().reverse().forEach(l => {
+    logs.forEach(l => {
 
         const div = document.createElement("div");
         div.className = "log-item";
 
         const moodText =
             l.mood === 10 ? "良い" :
-            l.mood === 5 ? "普通" :
-            l.mood === 5 ? "低い";
+            l.mood === 5 ? "普通" : "低い";
 
         const condText =
             l.cond === 10 ? "良い" :
-            l.cond === 5 ? "普通" :
-            l.mood === 1 ? "悪い";
+            l.cond === 5 ? "普通" : "悪い";
 
-        div.innerHTML = 
-            <span class="log-date">${l.date}</span>
+        div.innerHTML = `
+            <div class="log-date">${l.date}</div>
 
             <div class="log-status">
-                <span class="mood-text">
-                    <span class="status-dot mood-dot"></span>
-                    気分：${moodText}
-                </span>
-
-                <span class="cond-text">
-                    <span class="status-dot cond-dot"></span>
-                    体調：${condText}
-                </span>
+                <span>🔵 気分：${moodText}</span>
+                <span>🟠 体調：${condText}</span>
             </div>
 
-            <div class="log-note">
-                ${l.note || ""}
-            </div>
+            ${l.note ? `<div class="log-note">${l.note}</div>` : ""}
         `;
 
         logList.appendChild(div);
