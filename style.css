@@ -147,13 +147,20 @@ body {
 }
 
 .chart-container{
+    width:100%;
     overflow-x:auto;
     overflow-y:hidden;
+    margin:15px 0;
 }
 
 .chart-inner{
     min-width:700px;
     height:260px;
+}
+
+.chart-inner canvas{
+    width:100% !important;
+    height:100% !important;
 }
 
 .chart-box {
