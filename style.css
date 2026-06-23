@@ -228,32 +228,42 @@ body {
             padding: 0 20px;
         }
 
-.log-list{
-    max-height:420px;
-    overflow-y:auto;
-}
+function renderLogs() {
 
-.log-item{
-    padding:12px;
-    margin-bottom:10px;
-    border-bottom:1px solid #eee;
-}
+    const MAX_LOGS = 5;
+    const logs = getLogs().slice(-MAX_LOGS).reverse();
 
-.log-date{
-    font-size:12px;
-    color:#888;
-    margin-bottom:6px;
-}
+    const logList = document.getElementById("log-list");
 
-.log-status{
-    display:flex;
-    gap:20px;
-    font-weight:600;
-    margin-bottom:6px;
-}
+    if (!logList) return;
 
-.log-note{
-    color:#444;
-    line-height:1.5;
-    white-space:pre-wrap;
+    logList.innerHTML = "";
+
+    logs.forEach(l => {
+
+        const mood =
+            l.mood === 10 ? "良い" :
+            l.mood === 5 ? "普通" : "低い";
+
+        const cond =
+            l.cond === 10 ? "良い" :
+            l.cond === 5 ? "普通" : "悪い";
+
+        const item = document.createElement("div");
+        item.className = "log-item";
+
+        item.innerHTML = `
+            <div class="log-date">${l.date}</div>
+
+            <div class="log-status">
+                <span class="mood">🔵 気分：${mood}</span>
+                <span class="cond">🟠 体調：${cond}</span>
+            </div>
+
+            ${l.note ? `<div class="log-note">${l.note}</div>` : ""}
+        `;
+
+        logList.appendChild(item);
+    });
+
 }
