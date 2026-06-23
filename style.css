@@ -151,7 +151,13 @@ body {
 }
 
 .chart-inner{
+    min-width:100%;
     height:220px;
+}
+
+canvas{
+    display:block;
+    width:100% !important;
 }
 
 #myChart{
