@@ -236,6 +236,19 @@ body {
     padding-right: 4px;
 }
 
+.log-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.log-list::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 10px;
+}
+
+.log-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
     .log-item{
     background:#fff;
     margin:12px 15px;
