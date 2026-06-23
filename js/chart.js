@@ -27,26 +27,18 @@ if (chartInner) {
 }
     const ctx = canvas.getContext("2d");
 
-    // 年が変わった時だけ西暦を表示
-    const labels = last10.map((l, index) => {
+    const d = new Date(l.date);
 
-        const d = new Date(l.date);
+const year = d.getFullYear();
+const month = d.getMonth() + 1;
+const day = d.getDate();
 
-        const year = d.getFullYear();
-        const month = d.getMonth() + 1;
-        const day = d.getDate();
+const hour = String(d.getHours()).padStart(2, "0");
+const min = String(d.getMinutes()).padStart(2, "0");
 
-        const hour = String(d.getHours()).padStart(2, "0");
-        const min = String(d.getMinutes()).padStart(2, "0");
+const prev = last10[index - 1];
 
-
-        const prev = last10[index - 1];
-
-        const showYear =
-    !prev ||
-    new Date(prev.date).getFullYear() !== year;
-
-return showYear
+const showYear =
     ? `${year}/${month}/${day}\n${hour}:${min}`
     : `${month}/${day}\n${hour}:${min}`;
 
