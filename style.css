@@ -227,9 +227,14 @@ body {
             padding: 0 20px;
         }
 
-        .log-list {
-            width: 100%;
-        }
+       .log-list {
+    max-height: 320px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 4px;
+}
 
     .log-item{
     background:#fff;
