@@ -206,8 +206,10 @@ if (chartInner) {
                 if (value === 5) return "普通";
                 if (value === 1) return "低い/悪い";
                 return "";
+           }
+                    }
+                }
             }
         }
-    }
-
+    });
 }
