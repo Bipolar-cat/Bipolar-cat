@@ -25,7 +25,9 @@ function renderChart() {
         type: "line",
 
         data: {
-            labels: last10.map(l => l.date),
+            labels: last10.map(l => {
+    return l.date.substring(11, 16); // 19:47 のみ表示
+}),
 
             datasets: [
                 {
