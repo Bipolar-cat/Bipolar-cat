@@ -1,6 +1,7 @@
 let myChart = null;
 
 function renderChart() {
+
     const logs = getLogs();
     const last10 = logs.slice(-10);
 
@@ -21,148 +22,185 @@ function renderChart() {
 
     const ctx = canvas.getContext("2d");
 
-    myChart = new Chart(ctx, {
-        type: "line",
-
-       data: {
-
-    labels: last10.map((l, index) => {
+    // 年が変わった時だけ西暦を表示
+    const labels = last10.map((l, index) => {
 
         const d = new Date(l.date);
 
         const year = d.getFullYear();
         const month = d.getMonth() + 1;
         const day = d.getDate();
+
         const hour = String(d.getHours()).padStart(2, "0");
         const min = String(d.getMinutes()).padStart(2, "0");
 
-        if (index === 0) {
-            return `${year}/${month}/${day}\n${hour}:${min}`;
-        }
+        if (index > 0) {
+            const prev = new Date(last10[index - 1].date);
 
-        const prev = new Date(last10[index - 1].date);
-
-        if (year !== prev.getFullYear()) {
-            return `${year}/${month}/${day}\n${hour}:${min}`;
+            if (prev.getFullYear() !== year) {
+                return `${year}/${month}/${day}\n${hour}:${min}`;
+            }
         }
 
         return `${month}/${day}\n${hour}:${min}`;
-    }),
+    });
 
-    datasets: [
-        {           
-    label: "気分",
-    data: last10.map(l => l.mood),
+    myChart = new Chart(ctx, {
 
-    borderColor: "#2196F3",
-    backgroundColor: "#2196F3",
+        type: "line",
 
-    pointBackgroundColor: "#2196F3",
-    pointBorderColor: "#ffffff",
+        data: {
 
-    pointRadius: 4,
-    pointHoverRadius: 6,
+            labels: labels,
 
-    borderWidth: 2,
-    tension: 0.45,
-    fill: false
-},
+            datasets: [
+
                 {
-    label: "体調",
-    data: last10.map(l => l.cond),
+                    label: "気分",
+                    data: last10.map(l => l.mood),
 
-    borderColor: "#FFA726",
-    backgroundColor: "#FFA726",
+                    borderColor: "#2196F3",
+                    backgroundColor: "#2196F3",
 
-    pointBackgroundColor: "#FFA726",
-    pointBorderColor: "#ffffff",
+                    pointBackgroundColor: "#2196F3",
+                    pointBorderColor: "#ffffff",
 
-    pointRadius: 4,
-    pointHoverRadius: 6,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
 
-    borderWidth: 2,
-    tension: 0.45,
-    fill: false
-}
+                    borderWidth: 2,
+                    tension: 0.45,
+                    fill: false
+                },
+
+                {
+                    label: "体調",
+                    data: last10.map(l => l.cond),
+
+                    borderColor: "#FFA726",
+                    backgroundColor: "#FFA726",
+
+                    pointBackgroundColor: "#FFA726",
+                    pointBorderColor: "#ffffff",
+
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+
+                    borderWidth: 2,
+                    tension: 0.45,
+                    fill: false
+                }
+
             ]
         },
 
         options: {
-    responsive: true,
-    maintainAspectRatio: false,
 
-    interaction: {
-        mode: "index",
-        intersect: false
-    },
+            responsive: true,
+            maintainAspectRatio: false,
 
-    plugins: {
-        legend: {
-            position: "top",
-            labels: {
-                usePointStyle: true,
-                boxWidth: 10,
-                font: {
-                    size: 12
-                }
-            }
-        },
-        tooltip: {
-            titleFont: {
-                size: 11
+            interaction: {
+                mode: "index",
+                intersect: false
             },
-            bodyFont: {
-                size: 11
+
+            plugins: {
+
+                legend: {
+
+                    position: "top",
+
+                    labels: {
+
+                        usePointStyle: true,
+                        boxWidth: 10,
+
+                        font: {
+                            size: 12
+                        }
+
+                    }
+
+                },
+
+                tooltip: {
+
+                    titleFont: {
+                        size: 11
+                    },
+
+                    bodyFont: {
+                        size: 11
+                    }
+
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    grid: {
+                        display: false
+                    },
+
+                    ticks: {
+
+                        maxRotation: 0,
+                        minRotation: 0,
+
+                        font: {
+                            size: 10
+                        }
+
+                    }
+
+                },
+
+                y: {
+
+                    min: 1,
+                    max: 10,
+
+                    ticks: {
+
+                        stepSize: 1,
+
+                        callback: function(value) {
+
+                            if (value === 1) return "低い";
+                            if (value === 5) return "普通";
+                            if (value === 10) return "良い";
+
+                            return "";
+
+                        }
+
+                    },
+
+                    grid: {
+
+                        color: function(context) {
+
+                            const v = context.tick.value;
+
+                            if (v === 1 || v === 5 || v === 10) {
+                                return "#dddddd";
+                            }
+
+                            return "rgba(0,0,0,0)";
+
+                        }
+
+                    }
+
+                }
+
             }
+
         }
-    },
 
-    scales: {
+    });
 
-        x: {
-            grid: {
-                display: false
-            },
-            ticks: {
-                maxRotation: 0,
-                minRotation: 0,
-                font: {
-                    size: 10
-                }
-            }
-        },
-
-        y: {
-            min: 1,
-            max: 10,
-
-            ticks: {
-                stepSize: 1,
-
-                callback: function(value) {
-
-                    if (value === 1) return "低い";
-                    if (value === 5) return "普通";
-                    if (value === 10) return "良い";
-
-                    return "";
-                }
-            },
-
-            grid: {
-                color: function(context) {
-
-                    const v = context.tick.value;
-
-                    return (v === 1 || v === 5 || v === 10)
-                        ? "#dddddd"
-                        : "rgba(0,0,0,0)";
-                }
-            }
-        }
-
-    }
 }
-});
-
-}        
