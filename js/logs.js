@@ -11,28 +11,29 @@ function renderLogs() {
 
     logs.forEach(l => {
 
-        const div = document.createElement("div");
-        div.className = "log-item";
-
-        const moodText =
+        const mood =
             l.mood === 10 ? "良い" :
             l.mood === 5 ? "普通" : "低い";
 
-        const condText =
+        const cond =
             l.cond === 10 ? "良い" :
             l.cond === 5 ? "普通" : "悪い";
 
-        div.innerHTML = `
+        const item = document.createElement("div");
+        item.className = "log-item";
+
+        item.innerHTML = `
             <div class="log-date">${l.date}</div>
 
             <div class="log-status">
-                <span>🔵 気分：${moodText}</span>
-                <span>🟠 体調：${condText}</span>
+                <span class="mood">🔵 気分：${mood}</span>
+                <span class="cond">🟠 体調：${cond}</span>
             </div>
 
             ${l.note ? `<div class="log-note">${l.note}</div>` : ""}
         `;
 
-        logList.appendChild(div);
+        logList.appendChild(item);
     });
+
 }
