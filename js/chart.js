@@ -1,4 +1,4 @@
-let myChart = null;
+せらlet myChart = null;
 
 function renderChart() {
 
@@ -32,7 +32,7 @@ if (chartInner) {
 
         const d = new Date(l.date);
 
-        const year = d.getFullYear();
+        const year = d.getFullYear();、
         const month = d.getMonth() + 1;
         const day = d.getDate();
 
@@ -42,16 +42,17 @@ if (chartInner) {
         if (index > 0) {
             const prev = new Date(last10[index - 1].date);
 
-            if (prev.getFullYear() !== year) {
-                return `${year}/${month}/${day}\n${hour}:${min}`;
-            }
-        }
+           const prev = last10[index - 1];
 
-        return `${month}/${day}\n${hour}:${min}`;
-    });
+const showYear =
+    !prev ||
+    new Date(prev.date).getFullYear() !== year;
+
+return showYear
+    ? `${year}/${month}/${day}\n${hour}:${min}`
+    : `${month}/${day}\n${hour}:${min}`;
 
     myChart = new Chart(ctx, {
-
         type: "line",
 
         data: {
