@@ -4,11 +4,6 @@ function renderChart() {
 
     const logs = getLogs();
     const last10 = logs.slice(-10);
-    const chartWidth = Math.max(last10.length * 80, 700);
-
-    document.querySelector(".chart-inner").style.width =
-    chartWidth + "px";
-
     const canvas = document.getElementById("myChart");
     if (!canvas) return;
 
