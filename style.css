@@ -7,13 +7,12 @@ body {
             justify-content: center;
         }
 
- .container{
+.container{
     width:100%;
     max-width:430px;
-    margin:auto;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+    margin:0 auto;
+    padding:16px;
+    box-sizing:border-box;
 }
 
 .save-btn{
