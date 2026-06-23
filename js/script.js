@@ -54,16 +54,6 @@ function formatDate(dateStr, showYear = false) {
     return showYear
         ? `${y}/${m}/${day} ${h}:${min}`
         : `${m}/${day} ${h}:${min}`;
-
-    const prev = logs[index + 1];
-
-const showYear =
-    !prev ||
-    new Date(prev.date).getFullYear() !==
-    new Date(l.date).getFullYear();
-
-const dateText = formatDate(l.date, showYear);
-    
 }
 
 window.onload = function () {
