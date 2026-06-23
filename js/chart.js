@@ -50,18 +50,7 @@ function renderChart() {
     }),
 
     datasets: [
-        {
-            label: "気分",
-            ...
-        },
-        {
-            label: "体調",
-            ...
-        }
-    ]
-},
-        
-               
+        {           
     label: "気分",
     data: last10.map(l => l.mood),
 
