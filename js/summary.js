@@ -1,3 +1,7 @@
+ /*function generateSummary(logs) {
+
+    return "最近は安定しています";
+}*/
 function generateSummary() {
 
     const logs = getLogs();
