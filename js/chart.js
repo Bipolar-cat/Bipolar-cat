@@ -1,9 +1,8 @@
-/*
- * chart.js
+/*chart.js ◎
  * グラフ描画専用
- *
  * 保存処理を書かない
  * DOM操作を書かない
+ *renderChart(logs)
  */
 let myChart = null;
 
