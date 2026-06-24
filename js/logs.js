@@ -1,4 +1,5 @@
 /*logs.js △
+*記録一覧表示
 *addLog
 *deleteLog
 *updateLog
