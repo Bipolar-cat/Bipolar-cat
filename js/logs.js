@@ -1,3 +1,8 @@
+/*addLog
+*deleteLog
+*updateLog
+/*getLogs
+    
 function renderLogs() {
 
     const MAX_LOGS = 5;
