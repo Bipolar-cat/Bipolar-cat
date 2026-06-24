@@ -6,7 +6,7 @@
 *画面更新
 *const text = generateSummary(logs);
 
-alert(text);/*
+/*alert(text);
 
         console.log("script.js loaded");
 
