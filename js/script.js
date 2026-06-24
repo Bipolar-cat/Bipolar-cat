@@ -10,6 +10,8 @@ let selectedCond = 5;
 
 function saveData() {
     const logs = getLogs();
+    const saveBtn = document.querySelector(".save-btn");
+    const statusEl = document.getElementById("status");
 
     logs.push({
         date: formatDate(new Date()),
@@ -21,6 +23,30 @@ function saveData() {
     console.log("New log saved:", logs[logs.length - 1]);
 
     saveLogs(logs);
+
+    // ✅ ボタンにビジュアルフィードバック（縮む効果）
+    if (saveBtn) {
+        saveBtn.classList.add("saving");
+        saveBtn.textContent = "✔️ ログを残す";
+        
+        // ステータステキストも表示
+        if (statusEl) {
+            statusEl.textContent = "✔️ ログを記録しました！";
+            statusEl.classList.add("show");
+            
+            // 2秒後にステータスを消す
+            setTimeout(() => {
+                statusEl.classList.remove("show");
+                statusEl.textContent = "";
+            }, 2000);
+        }
+
+        // 1秒後にボタンを戻す
+        setTimeout(() => {
+            saveBtn.classList.remove("saving");
+            saveBtn.textContent = "記録する";
+        }, 1000);
+    }
 
     // UI更新
     renderLogs();
