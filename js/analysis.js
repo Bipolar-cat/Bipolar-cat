@@ -1,4 +1,5 @@
-/*ここはDOM操作禁止にします
+/*analysis.js（未実装）
+*ここはDOM操作禁止にします
 *getAverageMood()
 *getAverageCond()
 *
