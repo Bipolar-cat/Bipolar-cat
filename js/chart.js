@@ -125,16 +125,14 @@ function renderChart() {
                     position: "left",
                     min: 1,
                     max: 10,
+                    // ✅ 目盛りを 1, 5, 10 だけに限定
                     ticks: {
-                        stepSize: 1,
-                        // ✅ Y軸ラベルをテキスト表示
                         callback: function(value) {
-                            const labelMap = {
-                                10: "良い",
-                                5: "普通",
-                                1: "低い/悪い"
-                            };
-                            return labelMap[value] || "";
+                            // ✅ 1, 5, 10 のみラベル表示
+                            if (value === 10) return "良い";
+                            if (value === 5) return "普通";
+                            if (value === 1) return "低い/悪い";
+                            return ""; // 他の値は非表示
                         },
                         font: {
                             size: 12,
@@ -144,6 +142,7 @@ function renderChart() {
                         padding: 10
                     },
                     grid: {
+                        // ✅ 1, 5, 10 の位置のみグリッドラインを表示
                         color: function(context) {
                             const v = context.tick.value;
                             return [1, 5, 10].includes(v)
