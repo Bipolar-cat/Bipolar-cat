@@ -125,31 +125,34 @@ function renderChart() {
                     position: "left",
                     min: 1,
                     max: 10,
-                    // ✅ 目盛りを 1, 5, 10 だけに限定
+                    // ✅ Y軸ラベルを 1, 5, 10 だけ表示
                     ticks: {
+                        stepSize: 9,  // 1 → 10 → 19... で 1 と 10 を確保
+                        // ✅ すべての値に対応
                         callback: function(value) {
-                            // ✅ 1, 5, 10 のみラベル表示
                             if (value === 10) return "良い";
                             if (value === 5) return "普通";
                             if (value === 1) return "低い/悪い";
-                            return ""; // 他の値は非表示
+                            return "";
                         },
                         font: {
-                            size: 12,
+                            size: 13,
                             weight: "bold"
                         },
                         color: "#333",
-                        padding: 10
+                        padding: 12,
+                        maxRotation: 0,
+                        minRotation: 0
                     },
                     grid: {
-                        // ✅ 1, 5, 10 の位置のみグリッドラインを表示
                         color: function(context) {
                             const v = context.tick.value;
                             return [1, 5, 10].includes(v)
-                                ? "#dddddd"
+                                ? "#e0e0e0"
                                 : "rgba(0,0,0,0)";
                         },
-                        drawBorder: true
+                        drawBorder: true,
+                        lineWidth: 1
                     }
                 }
             }
