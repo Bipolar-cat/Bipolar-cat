@@ -1,6 +1,11 @@
  /*文章生成
  *generateSummary()
-　*
+ *例えば
+ *const result = analyzeTrend(logs);
+ *を受け取って
+ *最近10件では気分はやや安定しています。
+ *
+ *体調は平均6.2です。
  * function generateSummary(logs) {
  *
    * return "最近は安定しています";
