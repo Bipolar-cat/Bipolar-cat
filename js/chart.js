@@ -127,6 +127,7 @@ function renderChart() {
                     max: 10,
                     ticks: {
                         stepSize: 1,
+                        // ✅ Y軸ラベルをテキスト表示
                         callback: function(value) {
                             const labelMap = {
                                 10: "良い",
@@ -134,7 +135,13 @@ function renderChart() {
                                 1: "低い/悪い"
                             };
                             return labelMap[value] || "";
-                        }
+                        },
+                        font: {
+                            size: 12,
+                            weight: "bold"
+                        },
+                        color: "#333",
+                        padding: 10
                     },
                     grid: {
                         color: function(context) {
@@ -142,26 +149,8 @@ function renderChart() {
                             return [1, 5, 10].includes(v)
                                 ? "#dddddd"
                                 : "rgba(0,0,0,0)";
-                        }
-                    }
-                },
-                y2: {
-                    position: "right",
-                    min: 1,
-                    max: 10,
-                    grid: {
-                        drawOnChartArea: false
-                    },
-                    ticks: {
-                        stepSize: 1,
-                        callback: function(value) {
-                            const labelMap = {
-                                10: "良い",
-                                5: "普通",
-                                1: "低い/悪い"
-                            };
-                            return labelMap[value] || "";
-                        }
+                        },
+                        drawBorder: true
                     }
                 }
             }
