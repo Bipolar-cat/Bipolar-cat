@@ -1,4 +1,5 @@
- /*文章生成
+ /*summary.js △
+ *文章生成
  *generateSummary()
  *例えば
  *const result = analyzeTrend(logs);
