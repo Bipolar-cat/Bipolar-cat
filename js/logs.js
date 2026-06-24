@@ -1,9 +1,9 @@
 /*logs.js △
 *記録一覧表示
-*addLog
-*deleteLog
-*updateLog
-/*getLogs
+*addLog()
+*deleteLog()
+*updateLog()
+*getRecentLogs()*/
     
 function renderLogs() {
 
