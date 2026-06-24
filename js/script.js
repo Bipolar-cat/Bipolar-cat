@@ -1,4 +1,14 @@
-    console.log("script.js loaded");
+/*script.js 〇
+* 画面制御+イベント
+*ボタン
+*フォーム
+*イベント
+*画面更新
+*const text = generateSummary(logs);
+
+alert(text);/*
+
+        console.log("script.js loaded");
 
 let selectedMood = 5;
 let selectedCond = 5;
