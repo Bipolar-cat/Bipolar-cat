@@ -1,10 +1,8 @@
-/*
+/*storage.js◎
  * storage.js
  * localStorage専用
  *
  * UI処理を書かない
- */
-/*
  * getLogs()
  * saveLogs()
  */
