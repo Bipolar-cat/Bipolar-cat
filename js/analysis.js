@@ -1,5 +1,5 @@
-
-/*getAverageMood()
+/*ここはDOM操作禁止にします
+*getAverageMood()
 *getAverageCond()
 *
 *getBestDay()
