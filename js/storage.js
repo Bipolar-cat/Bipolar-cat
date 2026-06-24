@@ -4,6 +4,11 @@
  *
  * UI処理を書かない
  */
+/*
+ * getLogs()
+ * saveLogs()
+ */
+
 const STORAGE_KEY =
     "innernote3step_logs";
 
