@@ -2,7 +2,7 @@
 
    * return "最近は安定しています";
 *}
-*/const result = analyzeTrend(logs);*//
+*const result = analyzeTrend(logs);*/
 
 function generateSummary() {
 
