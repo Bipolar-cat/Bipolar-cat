@@ -1,3 +1,9 @@
+/*
+ * storage.js
+ * localStorage専用
+ *
+ * UI処理を書かない
+ */
 const STORAGE_KEY =
     "innernote3step_logs";
 
