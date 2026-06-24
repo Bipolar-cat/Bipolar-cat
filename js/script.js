@@ -1,20 +1,14 @@
 /*script.js 〇
-* 画面制御+イベント
-*ボタン
-*フォーム
-*イベント
-*画面更新
-*const text = generateSummary(logs);
+ * 画面制御+イベント
+ * ボタン、フォーム、イベント、画面更新
+ */
 
-/*alert(text);*/
-
-        console.log("script.js loaded");
+console.log("script.js loaded");
 
 let selectedMood = 5;
 let selectedCond = 5;
 
 function saveData() {
-
     const logs = getLogs();
 
     logs.push({
@@ -24,13 +18,16 @@ function saveData() {
         note: document.getElementById("note").value
     });
 
-    
-    console.log(logs);   // ←追加
+    console.log("New log saved:", logs[logs.length - 1]);
 
     saveLogs(logs);
 
+    // UI更新
     renderLogs();
     renderChart();
+
+    // フォームをリセット
+    document.getElementById("note").value = "";
 }
 
 function setVal(type, val, btn) {
@@ -44,15 +41,15 @@ function setVal(type, val, btn) {
     } else {
         selectedCond = val;
     }
+
     console.log(
-    "selectedMood =", selectedMood,
-    "selectedCond =", selectedCond
-);
+        "selectedMood =", selectedMood,
+        "selectedCond =", selectedCond
+    );
 }
 
-function formatDate(dateStr, showYear = false) {
-
-    const d = new Date(dateStr);
+function formatDate(dateObj, showYear = false) {
+    const d = new Date(dateObj);
 
     const y = d.getFullYear();
     const m = d.getMonth() + 1;
@@ -66,18 +63,33 @@ function formatDate(dateStr, showYear = false) {
         : `${m}/${day} ${h}:${min}`;
 }
 
+function toggleSettings() {
+    const panel = document.getElementById("settings-panel");
+    if (panel) {
+        panel.style.display = 
+            panel.style.display === "none" ? "block" : "none";
+    }
+}
+
 window.onload = function () {
+    // グラフとログを初期化
     renderLogs();
     renderChart();
 
-    document
-        .querySelector("#mood-btns button:nth-child(2)")
-        .classList.add("active");
+    // ✅ ボタンが 1, 5, 10 なので初期値を 5（普通）に設定
+    const moodBtns = document.querySelectorAll("#mood-btns button");
+    const condBtns = document.querySelectorAll("#cond-btns button");
 
-    document
-        .querySelector("#cond-btns button:nth-child(2)")
-        .classList.add("active");
+    // 中央ボタン（index 1）が「普通」＝ 5
+    if (moodBtns[1]) {
+        moodBtns[1].classList.add("active");
+        selectedMood = 5;
+    }
 
-    selectedMood = 2;
-    selectedCond = 2;
+    if (condBtns[1]) {
+        condBtns[1].classList.add("active");
+        selectedCond = 5;
+    }
+
+    console.log("Initialized - selectedMood:", selectedMood, "selectedCond:", selectedCond);
 };
