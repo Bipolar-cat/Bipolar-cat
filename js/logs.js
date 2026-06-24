@@ -1,4 +1,5 @@
-/*addLog
+/*logs.js △
+*addLog
 *deleteLog
 *updateLog
 /*getLogs
