@@ -1,7 +1,9 @@
  /*function generateSummary(logs) {
 
     return "最近は安定しています";
-}*/
+}
+const result = analyzeTrend(logs);/*
+
 function generateSummary() {
 
     const logs = getLogs();
