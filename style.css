@@ -13,9 +13,11 @@ body {
 
 .container{
     width:100%;
-    max-width:430px;
+    max-width:450px;
     margin:0 auto;
-    padding:16px;
+    background:#FFFFFF;
+    border-radius:25px;
+    padding:20px;
     box-sizing:border-box;
 }
 
