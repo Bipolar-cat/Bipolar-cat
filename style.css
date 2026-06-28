@@ -183,8 +183,11 @@ body {
 /* ==========================================
    4. グラフ
 ========================================== */
-.chart-container{
-    margin:20px 0 15px;
+..chart-container{
+    width:100%;
+    height:350px;
+    border-top:1px solid #F3F4F6;
+    padding-top:15px;
 }
 
 .chart-scroll{
@@ -197,8 +200,8 @@ body {
 }
 
 canvas{
-    display:block;
-    width:100%
+    width:100%;
+    height:100%;
 }
 
 #myChart{
@@ -206,6 +209,7 @@ canvas{
     height:100%;
 }
 
+/* セクション見出し */
 .section-title{
     margin:0 0 10px;
     font-size:18px;
