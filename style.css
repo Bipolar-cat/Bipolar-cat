@@ -77,13 +77,14 @@ body {
     cursor: pointer;
 }
 
-        .subtitle {
-            text-align: center;
-            color: #888;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
+ .subtitle{
+    text-align:center;
+    color:#888888;
+    font-size:0.75rem;
+    font-weight:bold;
+    margin-top:5px;
+    margin-bottom:15px;
+ }
 
         .input-section {
             padding: 0 20px;
