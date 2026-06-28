@@ -1,3 +1,6 @@
+/* ==========================
+   全体レイアウト
+========================== */
 body {
     font-family: 'Helvetica Neue', Arial,
     "Hiragino Kaku Gothic ProN",
@@ -37,6 +40,9 @@ body {
     font-weight: bold;
 }
 
+/* ==========================
+   タイトル
+========================== */
 .title-bar {
     position: relative;
     margin-bottom: 10px;
