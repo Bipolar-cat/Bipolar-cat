@@ -1,9 +1,15 @@
 body {
-            font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 10px;
-        }
+    font-family: 'Helvetica Neue', Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
+    background-color: #F8F9FA;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
 
 .container{
     width:100%;
