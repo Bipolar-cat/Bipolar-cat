@@ -1,6 +1,12 @@
-/* ==========================
-   全体レイアウト
-========================== */
+/* ==========================================
+   InnerNote style.css Ver.0.1
+   UI仕様書 Ver.0.1 準拠
+========================================== */
+
+
+/* ==========================================
+   1. 全体レイアウト
+========================================== */
 body {
     font-family: 'Helvetica Neue', Arial,
     "Hiragino Kaku Gothic ProN",
@@ -24,25 +30,9 @@ body {
     box-sizing:border-box;
 }
 
-.save-btn{
-    width:100%;
-    height:56px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:0;
-    background:#2196f3;
-    color:#fff;
-    border:none;
-    border-radius:9999px;
-    font-size:18px;
-    font-weight:700;   /* 太字 */
-    font-weight: bold;
-}
-
-/* ==========================
-   タイトル
-========================== */
+/* ==========================================
+   2. タイトル
+========================================== */
 .title-bar {
     position: relative;
     margin-bottom: 10px;
@@ -92,6 +82,10 @@ body {
     margin-bottom:15px;
  }
 
+
+/* ==========================================
+   3. 入力エリア
+========================================== */
         .input-section {
             padding: 0 20px;
         }
@@ -156,7 +150,25 @@ body {
     caret-color: #000;
 }
 
-/* グラフ */
+.save-btn{
+    width:100%;
+    height:56px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:0;
+    background:#2196f3;
+    color:#fff;
+    border:none;
+    border-radius:9999px;
+    font-size:18px;
+    font-weight:700;   /* 太字 */
+    font-weight: bold;
+}
+
+/* ==========================================
+   4. グラフ
+========================================== */
 .chart-container{
     margin:20px 0 15px;
 }
@@ -186,7 +198,10 @@ canvas{
     font-weight:600;
 }
 
-        /* --- summary（一定期間まとめ）エリアのスタイル --- */
+
+/* ==========================================
+   5. Summary
+========================================== */
         .summary-section {
             padding: 0 20px;
             margin-top: 18px 0;
@@ -231,6 +246,10 @@ h3 {
     text-align: center;
 }
 
+
+/* ==========================================
+   6. 最近の記録
+========================================== */
 .logs-section{
     margin-top:20px;
 }
