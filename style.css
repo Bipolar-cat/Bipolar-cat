@@ -53,19 +53,20 @@ body {
     font-weight:bold;
 }
 
-#settings-panel {
+/* ==========================================
+   設定パネル
+========================================== */
+
+#settings-panel{
     display: none;
-    position: absolute;
-    top: 55px;
-    right: 15px;
-    width: 220px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    width: calc(100% - 40px);
+    margin: 0 auto 20px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     padding: 15px;
-    text-align: left;
-    z-index: 1000;
+    box-sizing: border-box;
 }
 
 .settings-btn {
