@@ -47,10 +47,9 @@ function saveData() {
 
     saveLogs(logs);
 
-    renderChart();   // グラフ更新
-    renderLogs();    // 最近の記録更新
+renderChart();
+renderLogs();
 
-    document.getElementById("note").value = "";
+document.getElementById("note").value = "";
 
-    alert("記録しました");
-}
+alert("記録しました");
