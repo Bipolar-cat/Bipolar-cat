@@ -136,7 +136,7 @@ body {
 .btn-group button{
     flex:1;                /* 横幅を均等 */
     height:52px;           /* Step10と同じ高さ */
-    border-radius:18px;    /* 少し角丸 */
+    border-radius:12px;    /* 少し角丸 */
     border:1px solid #E5E7EB;
     background:#fff;
     font-size:18px;
