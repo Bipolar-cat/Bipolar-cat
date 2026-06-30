@@ -160,10 +160,11 @@ body {
 
 /* 体調（オレンジ）
 */#cond-btns button.active{
+    #cond-btns button.active{
     background:#FFF3E0;
     border:1px solid #FFA726;
     color:#FB8C00;
-}
+    }
 
       textarea {
     width: 100%;
