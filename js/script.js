@@ -15,6 +15,8 @@ let cond = 5;
 function setVal(type, value, button) {
 
     console.log(type, value);
+
+    alert(type);
     
     // 値を保存
     if (type === "mood") {
