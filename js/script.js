@@ -35,6 +35,8 @@ function setVal(type, value, button) {
 // 記録を保存
 function saveData() {
 
+    console.log("saveData exists");
+
     const note = document.getElementById("note").value;
 
     const logs = getLogs();
