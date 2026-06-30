@@ -25,13 +25,6 @@ function renderChart() {
         myChart.destroy();
     }
 
-    // 横スクロール幅を設定
-    const chartInner = document.querySelector(".chart-inner");
-    if (chartInner) {
-        chartInner.style.width =
-            Math.max(last10.length * 70, window.innerWidth - 40) + "px";
-    }
-
     const ctx = canvas.getContext("2d");
 
     // ✅ ラベルを正しく生成（日付フォーマット）
