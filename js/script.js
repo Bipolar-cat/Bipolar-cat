@@ -50,7 +50,7 @@ function saveData() {
 renderChart();
 renderLogs();
 
+// 入力欄を空にする
 document.getElementById("note").value = "";
 
 alert("記録しました");
-}
