@@ -159,8 +159,7 @@ body {
 }
 
 
-/* 体調（オレンジ）
-*/#cond-btns button.active{
+/* 体調（オレンジ）*/
    #cond-btns button.active{
     background:#FFF3E0;
     border:1px solid #FFA726;
