@@ -30,10 +30,11 @@ body {
     width:100%;
     max-width:450px;
     margin:0 auto;
+    padding:20px;
     background:#FFFFFF;
     border-radius:25px;
-    padding:20px;
     box-sizing:border-box;
+    overflow:hidden;   /* ←追加 */
 }
 
 /* ==========================================
