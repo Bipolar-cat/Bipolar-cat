@@ -31,3 +31,22 @@ function setVal(type, value, button) {
     // 押したボタンだけ active
     button.classList.add("active");
 }
+
+// 記録を保存
+function saveData() {
+
+    const note = document.getElementById("note").value;
+
+    const logs = getLogs();
+
+    logs.push({
+        date: new Date().toISOString(),
+        mood: mood,
+        cond: cond,
+        note: note
+    });
+
+    saveLogs(logs);
+
+    alert("記録しました");
+}
