@@ -53,4 +53,4 @@ function saveData() {
     alert("記録しました");
 }
 
-console.log("script.js loaded");
+console.log(typeof saveData);
