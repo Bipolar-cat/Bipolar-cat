@@ -54,4 +54,5 @@ renderLogs();
 document.getElementById("note").value = "";
 
 alert("記録しました");
+    
 }
