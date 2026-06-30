@@ -32,10 +32,7 @@ function setVal(type, value, button) {
     button.classList.add("active");
 }
 
-// 記録を保存
 function saveData() {
-
-    console.log("saveData exists");
 
     const note = document.getElementById("note").value;
 
@@ -50,7 +47,10 @@ function saveData() {
 
     saveLogs(logs);
 
+    renderChart();   // グラフ更新
+    renderLogs();    // 最近の記録更新
+
+    document.getElementById("note").value = "";
+
     alert("記録しました");
 }
-
-console.log(typeof saveData);
