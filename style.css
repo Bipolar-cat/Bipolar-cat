@@ -206,7 +206,8 @@ body {
 }
 
 .chart-scroll{
-    margin:18px 0;
+    width:100%;
+    overflow:hidden;
 }
 
 .chart-inner{
