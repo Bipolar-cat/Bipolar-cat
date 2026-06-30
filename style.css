@@ -130,7 +130,6 @@ body {
 
 /* 3段階ボタン */
 .btn-group{
-.btn-group{
     display:flex;
     gap:16px;              /* ボタン同士 */
     margin:8px 0 24px;
