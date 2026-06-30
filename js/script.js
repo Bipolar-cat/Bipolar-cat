@@ -14,8 +14,6 @@ let cond = 5;
 // ボタン選択
 function setVal(type, value, button) {
 
-    console.log(type, value);
-    
     // 値を保存
     if (type === "mood") {
         mood = value;
