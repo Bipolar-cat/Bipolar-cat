@@ -134,17 +134,16 @@ body {
     gap:12px;
 }
 
-/* ボタン共通 */
 .btn-group button{
     flex:1;
-    height:44px;
-    border-radius:9999px;
+    height:52px;
+    border-radius:16px;
     border:1px solid #E5E7EB;
     background:#FFFFFF;
+    font-size:18px;
+    font-weight:600;
     color:#666;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
+    transition:.2s;
 }
 
  .btn-group button.active {
