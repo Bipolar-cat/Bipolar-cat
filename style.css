@@ -110,9 +110,6 @@ body {
 /* ==========================================
    3. 入力エリア
 ========================================== */
-      /* ==========================================
-   3. 入力エリア
-========================================== */
 
 /* 入力エリア全体 */
 .input-section{
@@ -166,9 +163,10 @@ body {
     color:#FB8C00;
    }
 
-      textarea {
-    width: 100%;
-    height: 50px;
+      textarea{
+    width:100%;
+    height:50px;
+    margin:5px 0 15px;
     margin: 15px 0;
     padding: 12px 15px;
     border-radius: 12px;
@@ -200,7 +198,7 @@ body {
 /* ==========================================
    4. グラフ
 ========================================== */
-..chart-container{
+.chart-container{
     width:100%;
     height:350px;
     border-top:1px solid #F3F4F6;
@@ -212,13 +210,12 @@ body {
 }
 
 .chart-inner{
-    min-width:100%;
     height:220px;
 }
 
 canvas{
+    display:block;
     width:100%;
-    height:100%;
 }
 
 #myChart{
@@ -237,10 +234,9 @@ canvas{
 /* ==========================================
    5. Summary
 ========================================== */
-        .summary-section {
-            padding: 0 20px;
-            margin-top: 18px 0;
-            text-align: center;
+        .summary-section{
+          padding:0 20px;
+          margin:18px 0;
         }
 
         .summary-action-btn {
