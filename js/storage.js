@@ -27,7 +27,13 @@ function getLogs() {
     }
 }
 
-function saveLogs(logs) {
+saveLogs(logs);
+
+console.log(getLogs());
+
+renderChart();
+renderLogs();
+
     try {
         localStorage.setItem(
             STORAGE_KEY,
