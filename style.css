@@ -130,18 +130,20 @@ body {
 
 /* 3段階ボタン */
 .btn-group{
+.btn-group{
     display:flex;
-    gap:12px;
+    gap:16px;              /* ボタン同士 */
+    margin:8px 0 24px;
 }
 
 .btn-group button{
-    flex:1;
-    height:52px;
-    border-radius:16px;
+    flex:1;                /* 横幅を均等 */
+    height:52px;           /* Step10と同じ高さ */
+    border-radius:18px;    /* 少し角丸 */
     border:1px solid #E5E7EB;
-    background:#FFFFFF;
+    background:#fff;
     font-size:18px;
-    font-weight:600;
+    font-weight:700;
     color:#666;
     transition:.2s;
 }
@@ -160,11 +162,11 @@ body {
 
 /* 体調（オレンジ）
 */#cond-btns button.active{
-    #cond-btns button.active{
+   #cond-btns button.active{
     background:#FFF3E0;
     border:1px solid #FFA726;
     color:#FB8C00;
-    }
+   }
 
       textarea {
     width: 100%;
