@@ -5,7 +5,7 @@
 
 function renderLogs() {
 
-    console.log("renderLogs");
+    console.log(getLogs());
     
     const MAX_LOGS = 5;
     const logs = getLogs().slice(-MAX_LOGS).reverse();
