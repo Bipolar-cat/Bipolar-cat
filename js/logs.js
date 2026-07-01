@@ -10,7 +10,7 @@ function renderLogs() {
     const MAX_LOGS = 5;
     const logs = getLogs().slice(-MAX_LOGS).reverse();
 
-    const logList = document.getElementById("log-list");
+    const logList = document.getElementById("logs");
     if (!logList) return;
 
     logList.innerHTML = "";
