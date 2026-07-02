@@ -6,34 +6,23 @@
  * saveLogs()
  */
 
-const STORAGE_KEY =
-    "innernote3step_logs";
+const STORAGE_KEY = "innernote3step_logs";
 
 function getLogs() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  } catch (e) {
+    console.error(e);
 
-    try {
-
-        return JSON.parse(
-            localStorage.getItem(
-                STORAGE_KEY
-            ) || "[]"
-        );
-
-    } catch(e) {
-
-        console.error(e);
-
-        return [];
-    }
+    return [];
+  }
 }
 
 function saveLogs(logs) {
-    try {
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(logs)
-        );
-    } catch(e) {
-        console.error("保存失敗:", e);
-    }
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+  } catch (e) {
+    console.error("保存失敗:", e);
+  }
 }
+f;

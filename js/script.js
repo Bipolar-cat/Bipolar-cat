@@ -1,83 +1,141 @@
-/*script.js 〇
-* 画面制御+イベント
-*ボタン
-*フォーム
-*イベント
-*画面更新
-*const text = generateSummary(logs);
+/* script.js
+ * Ver.0.2
+ * 画面制御・イベント管理
+ */
 
-/*alert(text);*/
+console.log("script.js loaded");
 
-        console.log("script.js loaded");
-
+// ----------------------------
+// 現在の選択値（Step3）
+// ----------------------------
 let selectedMood = 5;
 let selectedCond = 5;
 
+// ----------------------------
+// ボタン選択
+// ----------------------------
+function setVal(type, value, button) {
+  // active解除
+  const group = button.parentElement;
+
+  group.querySelectorAll("button").forEach((btn) => {
+    btn.classList.remove("active");
+  });
+
+  // 選択ボタン
+  button.classList.add("active");
+
+  // 値保存
+  if (type === "mood") {
+    selectedMood = value;
+  } else {
+    selectedCond = value;
+  }
+
+  console.log("Mood:", selectedMood, "Cond:", selectedCond);
+}
+
+// ----------------------------
+// 保存
+// ----------------------------
 function saveData() {
+  const logs = getLogs();
 
-    const logs = getLogs();
+  logs.push({
+    date: formatDate(new Date(), true),
 
-    logs.push({
-        date: formatDate(new Date()),
-        mood: selectedMood,
-        cond: selectedCond,
-        note: document.getElementById("note").value
-    });
+    mood: selectedMood,
 
-    
-    console.log(logs);   // ←追加
+    cond: selectedCond,
 
-    saveLogs(logs);
+    note: document.getElementById("note").value,
+  });
 
-    renderLogs();
-    renderChart();
+  saveLogs(logs);
+
+  renderChart();
+
+  renderLogs();
+
+  // 入力欄クリア
+  document.getElementById("note").value = "";
+
+  // ステータス表示
+  const status = document.getElementById("status");
+
+  if (status) {
+    status.textContent = "✔️ 記録しました";
+
+    status.classList.add("show");
+
+    setTimeout(() => {
+      status.classList.remove("show");
+
+      status.textContent = "";
+    }, 2000);
+  }
+
+  console.log("保存完了");
 }
 
-function setVal(type, val, btn) {
-    const parent = btn.parentElement;
-    parent.querySelectorAll("button")
-        .forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
+// ----------------------------
+// 日付表示
+// ----------------------------
+function formatDate(dateObj, showYear = false) {
+  const d = new Date(dateObj);
 
-    if (type === "mood") {
-        selectedMood = val;
-    } else {
-        selectedCond = val;
-    }
-    console.log(
-    "selectedMood =", selectedMood,
-    "selectedCond =", selectedCond
-);
+  const y = d.getFullYear();
+
+  const m = d.getMonth() + 1;
+
+  const day = d.getDate();
+
+  const h = String(d.getHours()).padStart(2, "0");
+
+  const min = String(d.getMinutes()).padStart(2, "0");
+
+  if (showYear) {
+    return `${y}/${m}/${day} ${h}:${min}`;
+  }
+
+  return `${m}/${day} ${h}:${min}`;
 }
 
-function formatDate(dateStr, showYear = false) {
+// ----------------------------
+// 設定画面
+// ----------------------------
+function toggleSettings() {
+  const panel = document.getElementById("settings-panel");
 
-    const d = new Date(dateStr);
-
-    const y = d.getFullYear();
-    const m = d.getMonth() + 1;
-    const day = d.getDate();
-
-    const h = String(d.getHours()).padStart(2, "0");
-    const min = String(d.getMinutes()).padStart(2, "0");
-
-    return showYear
-        ? `${y}/${m}/${day} ${h}:${min}`
-        : `${m}/${day} ${h}:${min}`;
+  if (panel) {
+    panel.classList.toggle("open");
+  }
 }
 
-window.onload = function () {
-    renderLogs();
-    renderChart();
+// ----------------------------
+// 初期化
+// ----------------------------
+window.addEventListener("DOMContentLoaded", () => {
+  // 初期ボタン（普通）
+  const moodBtns = document.querySelectorAll("#mood-btns button");
 
-    document
-        .querySelector("#mood-btns button:nth-child(2)")
-        .classList.add("active");
+  const condBtns = document.querySelectorAll("#cond-btns button");
 
-    document
-        .querySelector("#cond-btns button:nth-child(2)")
-        .classList.add("active");
+  if (moodBtns[1]) {
+    moodBtns[1].classList.add("active");
+  }
 
-    selectedMood = 2;
-    selectedCond = 2;
-};
+  if (condBtns[1]) {
+    condBtns[1].classList.add("active");
+  }
+
+  selectedMood = 5;
+  selectedCond = 5;
+
+  // 初期描画
+  renderChart();
+
+  renderLogs();
+
+  console.log("InnerNote Ver0.2 Ready");
+});

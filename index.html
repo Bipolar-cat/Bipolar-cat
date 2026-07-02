@@ -1,88 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InnerNote</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
-    </head>
-    
-<body>
-<div class="container">
+    <script>
+      eruda.init();
+    </script>
+  </head>
 
-    <div id="settings-panel"
-     style="display:none;">
-    設定画面
+  <body>
+    <div class="container">
+      <div id="settings-panel" style="display: none">設定画面</div>
+
+      <div class="title-bar">
+        <h1>InnerNote</h1>
+
+        <button class="settings-btn" onclick="toggleSettings()">⚙</button>
+      </div>
+
+      <p class="subtitle">**気分と調子の変化を記録**</p>
+
+      <div class="input-section">
+        <label class="label">今の気分は？</label>
+        <div id="mood-btns" class="btn-group">
+          <button onclick="setVal('mood', 1, this)">低い</button>
+          <button onclick="setVal('mood', 5, this)" class="active">普通</button>
+          <button onclick="setVal('mood', 10, this)">良い</button>
+        </div>
+
+        <label class="label">今の体調は？</label>
+        <div id="cond-btns" class="btn-group">
+          <button onclick="setVal('cond', 1, this)">悪い</button>
+          <button onclick="setVal('cond', 5, this)" class="active">普通</button>
+          <button onclick="setVal('cond', 10, this)">良い</button>
+        </div>
+
+        <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
+        <button class="save-btn" onclick="saveData()">記録する</button>
+
+        <!-- ✅ ステータスメッセージ表示 -->
+        <p id="status"></p>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-scroll">
+          <div class="chart-inner">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-section">
+        <button class="summary-action-btn" onclick="generateSummary()">
+          summary（最近の傾向）
+        </button>
+        <div id="summary-ts" class="summary-ts">前回まとめ作成：なし</div>
+
+        <div id="summary-card" class="summary-card">
+          <span class="report-header">【最近の傾向】</span>
+          <div id="summary-content"></div>
+        </div>
+      </div>
+
+      <!-- 最近の記録 -->
+      <section class="logs-section">
+        <h3 class="section-title">最近の記録</h3>
+
+        <div id="log-list" class="log-list"></div>
+      </section>
     </div>
-    
-    <div class="title-bar">
-    <h1>InnerNote</h1>
 
-    <button class="settings-btn" onclick="toggleSettings()">⚙</button>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<p class="subtitle">**気分と調子の変化を記録**</p>
-
-    <div class="input-section">
-    <label class="label">今の気分は？</label>
-<div id="mood-btns" class="btn-group">
-    <button onclick="setVal('mood', 1, this)">低い</button>
-    <button onclick="setVal('mood', 5, this)" class="active">普通</button>
-    <button onclick="setVal('mood', 10, this)">良い</button>
-</div>
-
-    <label class="label">今の体調は？</label>
-<div id="cond-btns" class="btn-group">
-    <button onclick="setVal('cond', 1, this)">悪い</button>
-    <button onclick="setVal('cond', 5, this)" class="active">普通</button>
-    <button onclick="setVal('cond', 10, this)">良い</button>
-</div>
-
-            <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
-            <button class="save-btn" onclick="saveData()">記録する</button>
-        </div>
-
-          <div class="chart-container">
-            <div class="chart-scroll">
-              <div class="chart-inner">
-                <canvas id="myChart"></canvas>
-        </div>
-    </div>
-</div>
-
-        <div class="summary-section">
-            <button class="summary-action-btn" onclick="generateSummary()">summary（最近の傾向）</button>
-            <div id="summary-ts" class="summary-ts">前回まとめ作成：なし</div>
-            
-            <div id="summary-card" class="summary-card">
-                <span class="report-header">【最近の傾向】</span>
-                <div id="summary-content"></div>
-            </div>
-        </div>
-
-    
-<!-- 最近の記録 -->
-<section class="logs-section">
-
-    <h3 class="section-title">最近の記録</h3>
-
-    <div id="log-list" class="log-list"></div>
-
-  </section>
-
-</div>
-    
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
-<script src="js/storage.js"></script>
-<script src="js/chart.js"></script>
-<script src="js/script.js"></script>
-<script src="js/logs.js"></script>
-<script src="js/summary.js"></script>
-<script src="js/settings.js"></script>
-
-    
-</body>
+    <script src="js/storage.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/logs.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/analysis.js"></script>
+    <script src="js/summary.js"></script>
+    <script src="js/settings.js"></script>
+  </body>
 </html>
