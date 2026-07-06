@@ -1,4 +1,20 @@
+/* ==========================================
+   InnerNote
+   style.css
+
+   Version : 0.1
+   Last Update : 2026-06-29
+
+   このファイルはUI仕様書Ver.0.1に従う
+========================================== */
+
+
+/* ==========================================
+   1. 全体レイアウト
+========================================== */
+/* アプリ全体を中央に配置 */
 body {
+<<<<<<< HEAD
   font-family:
     "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
     Meiryo, sans-serif;
@@ -239,6 +255,214 @@ textarea:focus {
   position: relative;
   height: 550px;
   min-width: 100%;
+=======
+    font-family: 'Helvetica Neue', Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
+    background-color: #F8F9FA;
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    width:100%;
+    max-width:450px;
+    margin:0 auto;
+    padding:20px;
+    background:#FFFFFF;
+    border-radius:25px;
+    box-sizing:border-box;
+    overflow:hidden;   /* ←追加 */
+}
+
+/* ==========================================
+   2. タイトル
+========================================== */
+/* タイトルと設定ボタン */
+.title-bar {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.title-bar h1{
+    margin:0;
+    text-align:center;
+    color:#5C6BC0;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* ==========================================
+   設定パネル
+========================================== */
+
+/* ==========================================
+   設定画面
+========================================== */
+
+#settings-panel{
+
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transform:translateY(-10px);
+    transition: 
+       max-height .35s ease,
+       opacity .25s ease,
+       transform .25s ease;
+    background:#fff;
+    border-radius:16px;
+    margin:0 auto 20px;
+    padding:0 15px;
+    box-sizing:border-box;
+}
+
+#settings-panel.open{
+    max-height:600px;
+    opacity:1;
+    transform:translateY(0);
+    padding:15px;
+}
+
+.settings-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+ .subtitle{
+    text-align:center;
+    color:#888888;
+    font-size:0.75rem;
+    font-weight:bold;
+    margin-top:5px;
+    margin-bottom:15px;
+ }
+
+
+/* ==========================================
+   3. 入力エリア
+========================================== */
+
+/* 入力エリア全体 */
+.input-section{
+    padding:0;
+}
+
+/* ラベル */
+.label{
+    display:block;
+    margin:18px 0 8px;
+    font-size:15px;
+    font-weight:bold;
+    color:#444;
+}
+
+/* 3段階ボタン */
+.btn-group{
+    display:flex;
+    gap:16px;              /* ボタン同士 */
+    margin:8px 0 20px;
+}
+
+.btn-group button{
+    flex:1;                /* 横幅を均等 */
+    height:52px;           /* Step10と同じ高さ */
+    border-radius:10px;    /* 少し角丸 */
+    border:1px solid #E5E7EB;
+    background:#fff;
+    font-size:18px;
+    font-weight:700;
+    color:#666;
+    transition:.2s;
+}
+
+ .btn-group button.active {
+    font-weight: bold;
+}
+
+/* 気分（青） */
+#mood-btns button.active{
+    background:#E3F2FD;
+    border:1px solid #2196F3;
+    color:#1976D2;
+}
+
+
+/* 体調（オレンジ）*/
+   #cond-btns button.active{
+    background:#FFF3E0;
+    border:1px solid #FFA726;
+    color:#FB8C00;
+   }
+
+      textarea{
+    width:100%;
+    height:50px;
+    margin:20px 0;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: none;
+    background-color: #F5F5F5;
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: none;
+    color: #000;
+    caret-color: #000;
+      }
+
+.save-btn{
+    width:100%;
+    height:56px;
+    margin-top:8px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:0;
+    background:#2196f3;
+    color:#fff;
+    border:none;
+    border-radius:9999px;
+    font-size:18px;
+    font-weight: bold;
+}
+
+/* ==========================================
+   4. グラフ
+========================================== */
+.chart-container{
+    width:100%;
+    height:350px;
+    border-top:1px solid #F3F4F6;
+    padding-top:15px;
+}
+
+.chart-scroll{
+    width:100%;
+    overflow:hidden;
+    margin:18px 0;
+}
+
+.chart-inner{
+    width:100%;
+    height:220px;
+}
+
+canvas{
+    display:block;
+    width:100% !important;
+    max-width:100%;
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 }
 
 #myChart {
@@ -247,6 +471,7 @@ textarea:focus {
   display: block;
 }
 
+<<<<<<< HEAD
 canvas {
   width: 100% !important;
   height: 100% !important;
@@ -258,6 +483,23 @@ canvas {
   font-size: 18px;
   font-weight: 600;
 }
+=======
+/* セクション見出し */
+.section-title{
+    margin:0 0 10px;
+    font-size:18px;
+    font-weight:600;
+}
+
+
+/* ==========================================
+   5. Summary
+========================================== */
+        .summary-section{
+          padding:0;
+          margin:18px 0;
+        }
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 
 /* --- summary（一定期間まとめ）エリアのスタイル --- */
 .summary-section {
@@ -325,8 +567,17 @@ h3 {
   text-align: center;
 }
 
+<<<<<<< HEAD
 .logs-section {
   margin-top: 20px;
+=======
+
+/* ==========================================
+   6. 最近の記録
+========================================== */
+.logs-section{
+    margin-top:20px;
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 }
 
 .log-list {
@@ -395,6 +646,16 @@ h3 {
 
 html,
 body {
+<<<<<<< HEAD
   width: 100%;
   overflow-x: hidden;
+=======
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 }

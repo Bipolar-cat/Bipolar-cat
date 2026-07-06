@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ja">
+<<<<<<< HEAD
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -96,4 +97,228 @@
     <script src="js/logs.js"></script>
     <script src="js/script.js"></script>
   </body>
+=======
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InnerNote</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>
+        eruda.init();
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ==========================================
+         タイトル
+    =========================================== -->
+
+    <div class="title-bar">
+        <h1>InnerNote</h1>
+
+        <button
+            class="settings-btn"
+            onclick="toggleSettings()">
+            ⚙
+        </button>
+    </div>
+
+    <p class="subtitle">
+        **気分と調子の変化を記録**
+    </p>
+
+
+    <!-- ==========================================
+         設定画面
+    =========================================== -->
+
+    <div id="settings-panel">
+
+        <h3 class="settings-title">
+            設定
+        </h3>
+
+        <div class="setting-item">
+            <label>
+                <input
+                    type="radio"
+                    name="step"
+                    checked>
+
+                Step3表示
+            </label>
+        </div>
+
+        <div class="setting-item">
+            <label>
+                <input
+                    type="radio"
+                    name="step">
+
+                Step10表示
+            </label>
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         入力エリア
+    =========================================== -->
+
+    <div class="input-section">
+
+        <label class="label">
+            今の気分は？
+        </label>
+
+        <div
+            id="mood-btns"
+            class="btn-group">
+
+            <button onclick="setVal('mood',1,this)">
+                低い
+            </button>
+
+            <button
+                class="active"
+                onclick="setVal('mood',5,this)">
+                普通
+            </button>
+
+            <button onclick="setVal('mood',10,this)">
+                良い
+            </button>
+
+        </div>
+
+
+        <label class="label">
+            今の体調は？
+        </label>
+
+        <div
+            id="cond-btns"
+            class="btn-group">
+
+            <button onclick="setVal('cond',1,this)">
+                悪い
+            </button>
+
+            <button
+                class="active"
+                onclick="setVal('cond',5,this)">
+                普通
+            </button>
+
+            <button onclick="setVal('cond',10,this)">
+                良い
+            </button>
+
+        </div>
+
+
+        <textarea
+            id="note"
+            placeholder="今の気持ちをメモ..."></textarea>
+
+
+        <button
+            class="save-btn"
+            onclick="saveData()">
+            記録する
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         グラフ
+    =========================================== -->
+
+    <div class="chart-container">
+
+        <div class="chart-scroll">
+
+            <div class="chart-inner">
+
+                <canvas id="myChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         Summary
+    =========================================== -->
+
+    <div class="summary-section">
+
+        <button
+            class="summary-action-btn"
+            onclick="generateSummary()"
+
+            summary（最近の傾向）
+
+        </button>
+
+        <div
+            id="summaryTime"
+            class="summary-ts">
+
+            前回まとめ作成：なし
+
+        </div>
+
+        <div
+            id="summaryCard"
+            class="summary-card">
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         最近の記録
+    =========================================== -->
+
+    <div class="logs-section">
+
+        <h3>
+            最近の記録
+        </h3>
+
+        <div
+            id="log-list"
+            class="log-list">
+        </div>
+
+    </div>
+
+</div>
+
+    
+<script src="js/storage.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/script.js"></script>
+<script src="js/logs.js"></script>
+<!-- <script src="js/summary.js"></script> -->
+<!-- <script src="js/settings.js"></script> -->
+
+</body>
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 </html>

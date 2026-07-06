@@ -1,9 +1,21 @@
+<<<<<<< HEAD
+=======
+/*storage.js ◎
+ * localStorage専用
+ *保存・読み込み
+ * UI処理を書かない
+ * getLogs()
+ * saveLogs()
+ */
+
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 const STORAGE_KEY = "innernote3step_logs";
 
 // ----------------------------
 // localStorage
 // ----------------------------
 function getLogs() {
+<<<<<<< HEAD
   return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 }
 
@@ -41,4 +53,29 @@ function getMode() {
 
 function saveMode(mode) {
   localStorage.setItem(MODE_KEY, mode);
+=======
+
+    try {
+        return JSON.parse(
+            localStorage.getItem(STORAGE_KEY) || "[]"
+        );
+    } catch (e) {
+        console.error(e);
+        return [];
+    }
+
+}
+
+function saveLogs(logs) {
+
+    try {
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(logs)
+        );
+    } catch (e) {
+        console.error("保存失敗:", e);
+    }
+
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 }

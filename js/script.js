@@ -1,12 +1,45 @@
+<<<<<<< HEAD
 alert("script.js 読み込み成功");
 
 /* =========================
    script.js
    UI操作・保存処理
 ========================= */
+=======
+function toggleSettings(){
 
-let selectedMood = 5;
-let selectedCond = 5;
+    const panel =
+        document.getElementById("settings-panel");
+
+    panel.classList.toggle("open");
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
+
+}
+
+// 現在の選択値
+let mood = 5;
+let cond = 5;
+
+// ボタン選択
+function setVal(type, value, button) {
+
+    // 値を保存
+    if (type === "mood") {
+        mood = value;
+    } else {
+        cond = value;
+    }
+
+    // 同じグループの active を外す
+    const group = document.getElementById(type + "-btns");
+
+    group.querySelectorAll("button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    // 押したボタンだけ active
+    button.classList.add("active");
+}
 
 // ----------------------------
 // Stepボタン生成
@@ -14,6 +47,7 @@ let selectedCond = 5;
 function createButtons(type) {
   const mode = getMode();
 
+<<<<<<< HEAD
   console.log("createButtons", type, mode);
 
   const container = document.getElementById(
@@ -44,9 +78,21 @@ function createButtons(type) {
       }
 
       container.appendChild(btn);
+=======
+    const note = document.getElementById("note").value;
+
+    const logs = getLogs();
+
+    logs.push({
+        date: new Date().toISOString(),
+        mood: mood,
+        cond: cond,
+        note: note
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
     });
   }
 
+<<<<<<< HEAD
   // ------------------
   // Step10
   // ------------------
@@ -167,4 +213,16 @@ function toggleSettings() {
   const panel = document.getElementById("settings-panel");
 
   panel.style.display = panel.style.display === "block" ? "none" : "block";
+=======
+    saveLogs(logs);
+
+renderChart();
+renderLogs();
+
+// 入力欄を空にする
+document.getElementById("note").value = "";
+
+alert("記録しました");
+    
+>>>>>>> 2571b7275aec63c51187926138b64065b9618389
 }
