@@ -100,16 +100,25 @@ body {
 #settings-panel {
   display: none;
   position: absolute;
-  top: 55px;
-  right: 15px;
-  width: 220px;
-  background: #ffffff;
-  border: 1px solid #ddd;
+  top: 70px;
+  right: 18px;
+  width: 190px;
+  background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 15px;
-  text-align: left;
-  z-index: 1000;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+}
+
+#settings-panel h4 {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+
+#settings-panel label {
+  display: block;
+  padding: 8px 0;
+  cursor: pointer;
 }
 
 .settings-btn {
@@ -159,7 +168,8 @@ body {
 
 .btn-group button {
   flex: 1;
-  padding: 8px 0;
+  height: 52px; /* ←これ追加 */
+  padding: 0; /* ←高さ固定するならpadding消すのが安全 */
   border-radius: 8px;
   border: 1px solid #eee;
   background: white;
@@ -207,34 +217,37 @@ textarea:focus {
   outline: none;
 }
 
-/* ✅ グラフコンテナ - 高さを400pxに増加 */
-.chart-container {
-  margin: 20px 0 15px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
+/* ===== Graph ===== */
 
+.chart-container {
+  width: 100%;
+  height: 580px;
+  min-height: 400px;
+  display: block;
+}
 .chart-scroll {
-  margin: 18px 0;
   overflow-x: auto;
   overflow-y: hidden;
-  border-radius: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chart-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .chart-inner {
+  position: relative;
+  height: 550px;
   min-width: 100%;
-  height: 400px; /* ✅ 220px → 400px に増加 */
-  padding: 0 20px; /* ✅ 左右に余裕を追加 */
-}
-
-canvas {
-  display: block;
-  width: 100% !important;
 }
 
 #myChart {
+  width: 100% !important;
+  height: 340px !important;
+  display: block;
+}
+
+canvas {
   width: 100% !important;
   height: 100% !important;
   display: block;

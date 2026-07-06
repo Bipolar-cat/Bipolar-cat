@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>InnerNote</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script src="js/script.js"></script>
     <script>
       eruda.init();
     </script>
@@ -20,24 +21,38 @@
         <h1>InnerNote</h1>
 
         <button class="settings-btn" onclick="toggleSettings()">⚙</button>
+        <div id="settings-panel">
+
+      <h4>表示モード</h4>
+
+      <label>
+        <input
+          type="radio"
+          name="mode"
+          value="step3"
+        >
+        Step3
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="mode"
+          value="step10"
+        >
+        Step10
+      </label>
+
       </div>
 
       <p class="subtitle">**気分と調子の変化を記録**</p>
 
       <div class="input-section">
         <label class="label">今の気分は？</label>
-        <div id="mood-btns" class="btn-group">
-          <button onclick="setVal('mood', 1, this)">低い</button>
-          <button onclick="setVal('mood', 5, this)" class="active">普通</button>
-          <button onclick="setVal('mood', 10, this)">良い</button>
-        </div>
+        <div id="mood-btns" class="btn-group"></div>
 
         <label class="label">今の体調は？</label>
-        <div id="cond-btns" class="btn-group">
-          <button onclick="setVal('cond', 1, this)">悪い</button>
-          <button onclick="setVal('cond', 5, this)" class="active">普通</button>
-          <button onclick="setVal('cond', 10, this)">良い</button>
-        </div>
+        <div id="cond-btns" class="btn-group"></div>
 
         <textarea id="note" placeholder="今の気持ちをメモ..."></textarea>
         <button class="save-btn" onclick="saveData()">記録する</button>
@@ -80,8 +95,5 @@
     <script src="js/chart.js"></script>
     <script src="js/logs.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/analysis.js"></script>
-    <script src="js/summary.js"></script>
-    <script src="js/settings.js"></script>
   </body>
 </html>

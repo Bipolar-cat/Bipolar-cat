@@ -1,105 +1,164 @@
-/* script.js
- * Ver.0.2
- * 画面制御・イベント管理
- */
+alert("script.js 読み込み成功");
 
-console.log("script.js loaded");
+/* =========================
+   script.js
+   UI操作・保存処理
+========================= */
 
-// ----------------------------
-// 現在の選択値（Step3）
-// ----------------------------
 let selectedMood = 5;
 let selectedCond = 5;
 
 // ----------------------------
-// ボタン選択
+// Stepボタン生成
 // ----------------------------
+function createButtons(type) {
+  const mode = getMode();
+
+  console.log("createButtons", type, mode);
+
+  const container = document.getElementById(
+    type === "mood" ? "mood-btns" : "cond-btns",
+  );
+
+  container.innerHTML = "";
+
+  // ------------------
+  // Step3
+  // ------------------
+  if (mode === "step3") {
+    const labels = [
+      { text: "低", value: 1 },
+      { text: "普通", value: 2 },
+      { text: "良い", value: 3 },
+    ];
+
+    labels.forEach((item) => {
+      const btn = document.createElement("button");
+
+      btn.textContent = item.text;
+
+      btn.onclick = () => setVal(type, item.value, btn);
+
+      if (item.value === 2) {
+        btn.classList.add("active");
+      }
+
+      container.appendChild(btn);
+    });
+  }
+
+  // ------------------
+  // Step10
+  // ------------------
+  else {
+    for (let i = 1; i <= 10; i++) {
+      const btn = document.createElement("button");
+
+      btn.textContent = i;
+
+      btn.onclick = () => setVal(type, i, btn);
+
+      if (i === 5) {
+        btn.classList.add("active");
+      }
+
+      container.appendChild(btn);
+    }
+  }
+}
+
 function setVal(type, value, button) {
-  // active解除
   const group = button.parentElement;
 
   group.querySelectorAll("button").forEach((btn) => {
     btn.classList.remove("active");
   });
 
-  // 選択ボタン
   button.classList.add("active");
 
-  // 値保存
   if (type === "mood") {
     selectedMood = value;
-  } else {
-    selectedCond = value;
   }
 
-  console.log("Mood:", selectedMood, "Cond:", selectedCond);
+  if (type === "cond") {
+    selectedCond = value;
+  }
 }
 
-// ----------------------------
-// 保存
-// ----------------------------
+//------------------------
+// 保存処理
+//------------------------
 function saveData() {
   const logs = getLogs();
 
+  const now = new Date();
+
+  const note = document.getElementById("note").value.trim();
+
   logs.push({
-    date: formatDate(new Date(), true),
-
+    date: formatDate(now, true),
     mood: selectedMood,
-
     cond: selectedCond,
-
-    note: document.getElementById("note").value,
+    note: note,
+    ts: now.getTime(),
   });
 
   saveLogs(logs);
 
   renderChart();
-
   renderLogs();
 
-  // 入力欄クリア
   document.getElementById("note").value = "";
 
-  // ステータス表示
   const status = document.getElementById("status");
 
   if (status) {
-    status.textContent = "✔️ 記録しました";
-
-    status.classList.add("show");
-
+    status.textContent = "保存しました";
     setTimeout(() => {
-      status.classList.remove("show");
-
       status.textContent = "";
-    }, 2000);
+    }, 1500);
   }
-
-  console.log("保存完了");
 }
 
-// ----------------------------
-// 日付表示
-// ----------------------------
-function formatDate(dateObj, showYear = false) {
-  const d = new Date(dateObj);
+//------------------------
+// 初期化
+//------------------------
+window.addEventListener("DOMContentLoaded", () => {
+  // 設定取得
+  const mode = getMode();
 
-  const y = d.getFullYear();
+  console.log("現在のモード:", mode);
 
-  const m = d.getMonth() + 1;
+  // ラジオボタン復元
+  const radio = document.querySelector(`input[name="mode"][value="${mode}"]`);
 
-  const day = d.getDate();
-
-  const h = String(d.getHours()).padStart(2, "0");
-
-  const min = String(d.getMinutes()).padStart(2, "0");
-
-  if (showYear) {
-    return `${y}/${m}/${day} ${h}:${min}`;
+  if (radio) {
+    radio.checked = true;
   }
 
-  return `${m}/${day} ${h}:${min}`;
-}
+  // 初期値
+  selectedMood = mode === "step3" ? 2 : 5;
+  selectedCond = mode === "step3" ? 2 : 5;
+
+  // 設定変更
+  document.querySelectorAll('input[name="mode"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      saveMode(radio.value);
+
+      location.reload();
+    });
+  });
+
+  // ボタン生成
+  createButtons("mood");
+  createButtons("cond");
+
+  // 初期表示
+  renderChart();
+  renderLogs();
+
+  console.log("InnerNote Ver0.2 Ready");
+});
 
 // ----------------------------
 // 設定画面
@@ -107,35 +166,5 @@ function formatDate(dateObj, showYear = false) {
 function toggleSettings() {
   const panel = document.getElementById("settings-panel");
 
-  if (panel) {
-    panel.classList.toggle("open");
-  }
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
 }
-
-// ----------------------------
-// 初期化
-// ----------------------------
-window.addEventListener("DOMContentLoaded", () => {
-  // 初期ボタン（普通）
-  const moodBtns = document.querySelectorAll("#mood-btns button");
-
-  const condBtns = document.querySelectorAll("#cond-btns button");
-
-  if (moodBtns[1]) {
-    moodBtns[1].classList.add("active");
-  }
-
-  if (condBtns[1]) {
-    condBtns[1].classList.add("active");
-  }
-
-  selectedMood = 5;
-  selectedCond = 5;
-
-  // 初期描画
-  renderChart();
-
-  renderLogs();
-
-  console.log("InnerNote Ver0.2 Ready");
-});
