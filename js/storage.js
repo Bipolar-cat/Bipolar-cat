@@ -1,38 +1,67 @@
-<<<<<<< HEAD
-=======
-/*storage.js ◎
- * localStorage専用
- *保存・読み込み
- * UI処理を書かない
- * getLogs()
- * saveLogs()
- */
-
->>>>>>> 2571b7275aec63c51187926138b64065b9618389
-const STORAGE_KEY = "innernote3step_logs";
+/* =========================
+   storage.js
+   localStorage・設定管理
+========================= */
 
 // ----------------------------
-// localStorage
+// 保存キー
+// ----------------------------
+const STORAGE_KEY = "innernote_logs";
+const MODE_KEY = "innernote_mode";
+
+// ----------------------------
+// ログ取得
 // ----------------------------
 function getLogs() {
-<<<<<<< HEAD
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (e) {
+    console.error("ログ読み込み失敗", e);
+    return [];
+  }
 }
 
+// ----------------------------
+// ログ保存
+// ----------------------------
 function saveLogs(logs) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+  } catch (e) {
+    console.error("ログ保存失敗", e);
+  }
+}
+
+// ----------------------------
+// モード取得
+// step3 / step10
+// ----------------------------
+function getMode() {
+  return localStorage.getItem(MODE_KEY) || "step3";
+}
+
+// ----------------------------
+// モード保存
+// ----------------------------
+function saveMode(mode) {
+  localStorage.setItem(MODE_KEY, mode);
 }
 
 // ----------------------------
 // 日付フォーマット
 // ----------------------------
-function formatDate(dateObj, showYear = false) {
+function formatDate(dateObj, showYear = true) {
   const d = new Date(dateObj);
 
   const y = d.getFullYear();
+
   const m = d.getMonth() + 1;
+
   const day = d.getDate();
+
   const h = String(d.getHours()).padStart(2, "0");
+
   const min = String(d.getMinutes()).padStart(2, "0");
 
   if (showYear) {
@@ -40,42 +69,4 @@ function formatDate(dateObj, showYear = false) {
   }
 
   return `${m}/${day} ${h}:${min}`;
-}
-
-// ----------------------------
-// 表示モード設定
-// ----------------------------
-const MODE_KEY = "innernote_mode";
-
-function getMode() {
-  return localStorage.getItem(MODE_KEY) || "step3";
-}
-
-function saveMode(mode) {
-  localStorage.setItem(MODE_KEY, mode);
-=======
-
-    try {
-        return JSON.parse(
-            localStorage.getItem(STORAGE_KEY) || "[]"
-        );
-    } catch (e) {
-        console.error(e);
-        return [];
-    }
-
-}
-
-function saveLogs(logs) {
-
-    try {
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(logs)
-        );
-    } catch (e) {
-        console.error("保存失敗:", e);
-    }
-
->>>>>>> 2571b7275aec63c51187926138b64065b9618389
 }

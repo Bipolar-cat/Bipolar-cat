@@ -1,157 +1,220 @@
-/*summary.js △
- * サマリー生成・表示
- * generateSummary() - 最近の傾向レポートを生成
- * displaySummaryCard() - サマリーカードを表示
- */
+/* =================================================
+   summary.js
 
-/**
- * 最近の傾向をまとめたレポートを生成・表示
- */
+   InnerNote Summary機能
+
+   役割
+   ・記録されたデータを整理する
+   ・指定された範囲の事実を表示する
+   ・利用者自身の振り返り材料を作る
+
+   行わないこと
+   ・診断
+   ・評価
+   ・助言
+   ・原因推測
+   ・将来予測
+
+================================================= */
+
+/* =========================
+   Summary保存キー
+========================= */
+
+const SUMMARY_TS_KEY = "innernote_last_summary_ts";
+
+const SUMMARY_STR_KEY = "innernote_last_summary_str";
+
+/* =========================
+   Summary生成
+========================= */
+
 function generateSummary() {
-<<<<<<< HEAD
   const logs = getLogs();
 
+  // 記録がない場合
   if (logs.length === 0) {
-    alert("記録がまだありません");
+    alert("まとめを作成するための記録がありません。");
+
     return;
   }
 
-  // 分析を実行
-  const analysis = analyzeTrend(logs, 10);
+  /*
+      前回Summary以降の記録を対象にする
 
-  // レポートテキストを生成
-  const reportText = generateReportText(analysis, logs.length);
+      ※InnerNote側が期間を決定するのではなく
+        利用者が押下したタイミングを基準に
+        未確認記録を整理する
+    */
 
-  // サマリーカードに表示
-  displaySummaryCard(reportText, analysis);
+  const lastTs = Number(localStorage.getItem(SUMMARY_TS_KEY) || 0);
 
-  // 最後の作成時刻を記録
+  let targets = logs.filter((log) => log.ts > lastTs);
+
+  /*
+      新しい記録がない場合
+    */
+
+  if (targets.length === 0) {
+    const result = confirm(
+      "前回まとめ作成以降の新しい記録がありません。\n\n直近10件を表示しますか？",
+    );
+
+    if (!result) {
+      return;
+    }
+
+    targets = logs.slice(-10);
+  }
+
+  /*
+      集計
+    */
+
+  const count = targets.length;
+
+  const avgMood = (
+    targets.reduce((sum, log) => sum + Number(log.mood), 0) / count
+  ).toFixed(1);
+
+  const avgCond = (
+    targets.reduce((sum, log) => sum + Number(log.cond), 0) / count
+  ).toFixed(1);
+
+  /*
+      メモ抽出
+
+      解釈しない
+      そのまま表示
+    */
+
+  const notes = targets
+
+    .filter((log) => log.note && log.note.trim() !== "")
+
+    .map((log) => `・${log.note}`)
+
+    .join("<br>");
+
+  const startDate = targets[0].date;
+
+  const endDate = targets[targets.length - 1].date;
+
+  renderSummary({
+    count,
+
+    startDate,
+
+    endDate,
+
+    avgMood,
+
+    avgCond,
+
+    notes,
+  });
+
+  /*
+      Summary作成日時保存
+    */
+
   const now = new Date();
-  const timeStr = formatDate(now, true);
-  const summaryTs = document.getElementById("summary-ts");
-  if (summaryTs) {
-    summaryTs.textContent = `前回まとめ作成：${timeStr}`;
+
+  localStorage.setItem(SUMMARY_TS_KEY, now.getTime());
+
+  localStorage.setItem(SUMMARY_STR_KEY, formatDate(now, true));
+
+  const ts = document.getElementById("summary-ts");
+
+  if (ts) {
+    ts.textContent = "前回まとめ作成：" + formatDate(now, true);
   }
-
-  console.log("Summary generated:", analysis);
-=======
-    const logs = getLogs();
-
-    if (logs.length === 0) {
-        alert("記録がまだありません");
-        return;
-    }
-
-    // 分析を実行
-    const analysis = analyzeTrend(logs, 10);
-
-    // レポートテキストを生成
-    const reportText = generateReportText(analysis, logs.length);
-
-    // サマリーカードに表示
-    displaySummaryCard(reportText, analysis);
-
-    // 最後の作成時刻を記録
-    const now = new Date();
-    const timeStr = formatDate(now, true);
-    const summaryTs = document.getElementById("summary-ts");
-    if (summaryTs) {
-        summaryTs.textContent = `前回まとめ作成：${timeStr}`;
-    }
-
-    console.log("Summary generated:", analysis);
->>>>>>> 2571b7275aec63c51187926138b64065b9618389
 }
 
-/**
- * 分析結果からレポートテキストを生成
- * @param {Object} analysis - analyzeTrend()の戻り値
- * @param {Number} totalCount - 全ログ件数
- * @returns {String} レポートテキスト
- */
-function generateReportText(analysis, totalCount) {
-<<<<<<< HEAD
-  let text = `<div class="report-item">`;
-  text += `<span class="report-label">直近10件の分析結果</span><br>`;
-  text += `</div>`;
+/* =========================
+   表示処理
+========================= */
 
-  text += `<div class="report-item">`;
-  text += `<span class="report-label">気分：</span>`;
-  text += `平均 ${analysis.moodAvg} / 10 ${analysis.moodTrend}`;
-  text += `</div>`;
+function renderSummary(data) {
+  const card = document.getElementById("summary-card");
 
-  text += `<div class="report-item">`;
-  text += `<span class="report-label">体調：</span>`;
-  text += `平均 ${analysis.condAvg} / 10 ${analysis.condTrend}`;
-  text += `</div>`;
+  const content = document.getElementById("summary-content");
 
-  text += `<div class="report-item">`;
-  text += `<span class="report-label">安定度：</span>`;
-  text += `${analysis.stability}`;
-  text += `</div>`;
-
-  text += `<div class="report-item">`;
-  text += `<span class="report-label">データ数：</span>`;
-  text += `累計 ${totalCount}件`;
-  text += `</div>`;
-
-  return text;
-=======
-    let text = `<div class="report-item">`;
-    text += `<span class="report-label">直近10件の分析結果</span><br>`;
-    text += `</div>`;
-
-    text += `<div class="report-item">`;
-    text += `<span class="report-label">気分：</span>`;
-    text += `平均 ${analysis.moodAvg} / 10 ${analysis.moodTrend}`;
-    text += `</div>`;
-
-    text += `<div class="report-item">`;
-    text += `<span class="report-label">体調：</span>`;
-    text += `平均 ${analysis.condAvg} / 10 ${analysis.condTrend}`;
-    text += `</div>`;
-
-    text += `<div class="report-item">`;
-    text += `<span class="report-label">安定度：</span>`;
-    text += `${analysis.stability}`;
-    text += `</div>`;
-
-    text += `<div class="report-item">`;
-    text += `<span class="report-label">データ数：</span>`;
-    text += `累計 ${totalCount}件`;
-    text += `</div>`;
-
-    return text;
->>>>>>> 2571b7275aec63c51187926138b64065b9618389
-}
-
-/**
- * サマリーカードを表示
- * @param {String} reportHTML - レポートHTML
- * @param {Object} analysis - 分析データ
- */
-function displaySummaryCard(reportHTML, analysis) {
-<<<<<<< HEAD
-  const summaryCard = document.getElementById("summary-card");
-  const summaryContent = document.getElementById("summary-content");
-
-  if (!summaryCard || !summaryContent) {
-    console.error("Summary card elements not found");
+  if (!card || !content) {
     return;
   }
 
-  summaryContent.innerHTML = reportHTML;
-  summaryCard.style.display = "block";
-=======
-    const summaryCard = document.getElementById("summary-card");
-    const summaryContent = document.getElementById("summary-content");
+  card.style.display = "block";
 
-    if (!summaryCard || !summaryContent) {
-        console.error("Summary card elements not found");
-        return;
-    }
+  content.innerHTML = `
 
-    summaryContent.innerHTML = reportHTML;
-    summaryCard.style.display = "block";
->>>>>>> 2571b7275aec63c51187926138b64065b9618389
+
+        <div class="report-item">
+
+            対象期間：
+            ${data.startDate}
+            ～
+            ${data.endDate}
+
+        </div>
+
+
+
+        <div class="report-item">
+
+            記録件数：
+            ${data.count}件
+
+        </div>
+
+
+
+        <div class="report-item">
+
+            平均気分：
+            ${data.avgMood}
+
+        </div>
+
+
+
+        <div class="report-item">
+
+            平均体調：
+            ${data.avgCond}
+
+        </div>
+
+
+
+        <div class="report-item">
+
+            記録されたメモ：
+
+        </div>
+
+
+
+        <div class="report-notes">
+
+            ${data.notes || "（メモはありません）"}
+
+        </div>
+
+
+    `;
+}
+
+/* =========================
+   初期表示
+========================= */
+
+function loadSummaryStatus() {
+  const saved = localStorage.getItem(SUMMARY_STR_KEY);
+
+  const ts = document.getElementById("summary-ts");
+
+  if (saved && ts) {
+    ts.textContent = "前回まとめ作成：" + saved;
+  }
 }
