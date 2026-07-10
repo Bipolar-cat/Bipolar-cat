@@ -1,220 +1,274 @@
-/* =================================================
-   summary.js
+/*==================================================
+InnerNote v2.0
+summary.js
 
-   InnerNote Summary機能
+役割
+・Summary生成
+・記録の整理
+・客観的事実のみ表示
 
-   役割
-   ・記録されたデータを整理する
-   ・指定された範囲の事実を表示する
-   ・利用者自身の振り返り材料を作る
+行わないこと
+・診断
+・評価
+・助言
+・原因推測
+・コメントへの返答
+・将来予測
 
-   行わないこと
-   ・診断
-   ・評価
-   ・助言
-   ・原因推測
-   ・将来予測
+Summaryは利用者が指定した期間の
+記録を整理するための機能です。
+==================================================*/
 
-================================================= */
+//======================================
+// 保存キー
+//======================================
 
-/* =========================
-   Summary保存キー
-========================= */
+const SUMMARY_TS_KEY = "last_summary_ts";
+const SUMMARY_STR_KEY = "last_summary_str";
 
-const SUMMARY_TS_KEY = "innernote_last_summary_ts";
+//======================================
+// Summary状態表示
+//======================================
 
-const SUMMARY_STR_KEY = "innernote_last_summary_str";
+function renderSummaryStatus() {
+  const area = document.getElementById("summary-ts");
 
-/* =========================
-   Summary生成
-========================= */
+  if (!area) return;
 
-function generateSummary() {
-  const logs = getLogs();
+  const last = localStorage.getItem(SUMMARY_STR_KEY);
 
-  // 記録がない場合
-  if (logs.length === 0) {
-    alert("まとめを作成するための記録がありません。");
-
-    return;
-  }
-
-  /*
-      前回Summary以降の記録を対象にする
-
-      ※InnerNote側が期間を決定するのではなく
-        利用者が押下したタイミングを基準に
-        未確認記録を整理する
-    */
-
-  const lastTs = Number(localStorage.getItem(SUMMARY_TS_KEY) || 0);
-
-  let targets = logs.filter((log) => log.ts > lastTs);
-
-  /*
-      新しい記録がない場合
-    */
-
-  if (targets.length === 0) {
-    const result = confirm(
-      "前回まとめ作成以降の新しい記録がありません。\n\n直近10件を表示しますか？",
-    );
-
-    if (!result) {
-      return;
-    }
-
-    targets = logs.slice(-10);
-  }
-
-  /*
-      集計
-    */
-
-  const count = targets.length;
-
-  const avgMood = (
-    targets.reduce((sum, log) => sum + Number(log.mood), 0) / count
-  ).toFixed(1);
-
-  const avgCond = (
-    targets.reduce((sum, log) => sum + Number(log.cond), 0) / count
-  ).toFixed(1);
-
-  /*
-      メモ抽出
-
-      解釈しない
-      そのまま表示
-    */
-
-  const notes = targets
-
-    .filter((log) => log.note && log.note.trim() !== "")
-
-    .map((log) => `・${log.note}`)
-
-    .join("<br>");
-
-  const startDate = targets[0].date;
-
-  const endDate = targets[targets.length - 1].date;
-
-  renderSummary({
-    count,
-
-    startDate,
-
-    endDate,
-
-    avgMood,
-
-    avgCond,
-
-    notes,
-  });
-
-  /*
-      Summary作成日時保存
-    */
-
-  const now = new Date();
-
-  localStorage.setItem(SUMMARY_TS_KEY, now.getTime());
-
-  localStorage.setItem(SUMMARY_STR_KEY, formatDate(now, true));
-
-  const ts = document.getElementById("summary-ts");
-
-  if (ts) {
-    ts.textContent = "前回まとめ作成：" + formatDate(now, true);
-  }
+  area.textContent = last ? `前回Summary：${last}` : "前回Summary：なし";
 }
 
-/* =========================
-   表示処理
-========================= */
+//======================================
+// Summary対象取得
+//======================================
 
-function renderSummary(data) {
+function getSummaryLogs() {
+  const logs = getLogs();
+
+  if (logs.length === 0) {
+    return [];
+  }
+
+  /*
+        Ver0.2
+
+        直近10件
+
+        Ver1.0以降
+
+        指定期間
+
+        7日
+
+        30日
+
+        90日
+
+        任意期間
+    */
+
+  return logs.slice(-10);
+}
+
+//======================================
+// 平均計算
+//======================================
+
+function calculateAverage(logs) {
+  if (logs.length === 0) {
+    return {
+      mood: 0,
+
+      cond: 0,
+    };
+  }
+
+  const mood = logs.reduce((sum, l) => sum + l.mood, 0) / logs.length;
+
+  const cond = logs.reduce((sum, l) => sum + l.cond, 0) / logs.length;
+
+  return {
+    mood: Number(mood.toFixed(1)),
+
+    cond: Number(cond.toFixed(1)),
+  };
+}
+
+//======================================
+// 頻出単語
+//======================================
+
+function extractFrequentWords(logs) {
+  const map = {};
+
+  logs.forEach((log) => {
+    if (!log.note) return;
+
+    log.note
+
+      .replace(/[。、,\n]/g, " ")
+
+      .split(/\s+/)
+
+      .forEach((word) => {
+        word = word.trim();
+
+        if (word.length < 2) return;
+
+        map[word] = (map[word] || 0) + 1;
+      });
+  });
+
+  return Object.entries(map)
+
+    .sort((a, b) => b[1] - a[1])
+
+    .slice(0, 10);
+}
+
+//======================================
+// 頻出フレーズ
+//======================================
+
+function extractFrequentPhrases(logs) {
+  const map = {};
+
+  logs.forEach((log) => {
+    if (!log.note) return;
+
+    const text = log.note.trim();
+
+    if (text.length < 4) return;
+
+    map[text] = (map[text] || 0) + 1;
+  });
+
+  return Object.entries(map)
+
+    .sort((a, b) => b[1] - a[1])
+
+    .slice(0, 5);
+}
+
+//======================================
+// Summary表示
+//======================================
+
+function renderSummary(logs) {
   const card = document.getElementById("summary-card");
 
   const content = document.getElementById("summary-content");
 
-  if (!card || !content) {
+  if (!card || !content) return;
+
+  const avg = calculateAverage(logs);
+
+  const words = extractFrequentWords(logs);
+
+  const phrases = extractFrequentPhrases(logs);
+
+  let html = "";
+
+  html += `
+<h3>対象情報</h3>
+
+<p>記録件数：${logs.length}件</p>
+
+<p>平均気分：${avg.mood}</p>
+
+<p>平均体調：${avg.cond}</p>
+`;
+
+  html += "<hr>";
+
+  html += "<h3>頻出単語</h3>";
+
+  if (words.length === 0) {
+    html += "なし";
+  } else {
+    html += "<ul>";
+
+    words.forEach((w) => {
+      html += `
+<li>${w[0]}（${w[1]}）</li>
+`;
+    });
+
+    html += "</ul>";
+  }
+
+  html += "<hr>";
+
+  html += "<h3>頻出フレーズ</h3>";
+
+  if (phrases.length === 0) {
+    html += "なし";
+  } else {
+    html += "<ul>";
+
+    phrases.forEach((p) => {
+      html += `
+<li>${p[0]}</li>
+`;
+    });
+
+    html += "</ul>";
+  }
+
+  html += "<hr>";
+
+  html += "<h3>コメント一覧</h3>";
+
+  logs.forEach((log) => {
+    html += `
+<p>
+
+${log.date}
+
+<br>
+
+${log.note || ""}
+
+</p>
+
+`;
+  });
+
+  content.innerHTML = html;
+
+  card.style.display = "block";
+}
+
+//======================================
+// Summary生成
+//======================================
+
+function generateSummary() {
+  const logs = getSummaryLogs();
+
+  if (logs.length === 0) {
+    alert("Summary対象がありません。");
+
     return;
   }
 
-  card.style.display = "block";
+  renderSummary(logs);
 
-  content.innerHTML = `
+  const now = new Date();
 
+  localStorage.setItem(
+    SUMMARY_TS_KEY,
 
-        <div class="report-item">
+    now.getTime(),
+  );
 
-            対象期間：
-            ${data.startDate}
-            ～
-            ${data.endDate}
+  localStorage.setItem(
+    SUMMARY_STR_KEY,
 
-        </div>
+    formatDate(now, true),
+  );
 
-
-
-        <div class="report-item">
-
-            記録件数：
-            ${data.count}件
-
-        </div>
-
-
-
-        <div class="report-item">
-
-            平均気分：
-            ${data.avgMood}
-
-        </div>
-
-
-
-        <div class="report-item">
-
-            平均体調：
-            ${data.avgCond}
-
-        </div>
-
-
-
-        <div class="report-item">
-
-            記録されたメモ：
-
-        </div>
-
-
-
-        <div class="report-notes">
-
-            ${data.notes || "（メモはありません）"}
-
-        </div>
-
-
-    `;
-}
-
-/* =========================
-   初期表示
-========================= */
-
-function loadSummaryStatus() {
-  const saved = localStorage.getItem(SUMMARY_STR_KEY);
-
-  const ts = document.getElementById("summary-ts");
-
-  if (saved && ts) {
-    ts.textContent = "前回まとめ作成：" + saved;
-  }
+  renderSummaryStatus();
 }
