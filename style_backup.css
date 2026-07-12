@@ -7,59 +7,18 @@
 
    このファイルはUI仕様書Ver.0.1に従う
 ========================================== */
-/* ==========================================
-   Reset / Base
-========================================== */
-body {
-  background: red !important;
-}
-
-html,
-body {
-  width: 100%;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
 
 /* ==========================================
-   Header（Ver.0.2）
+   1. 全体レイアウト
 ========================================== */
-
+/* アプリ全体を中央に配置 */
 .page-header {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  min-height: 40px;
   margin-bottom: 8px;
 }
-
-.page-header h1 {
-  margin: 0;
-  color: #1976d2;
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-}
-/* ==========================================
-   Subtitle
-========================================== */
-
-.subtitle {
-  text-align: center;
-  color: #666;
-  margin: 0 0 20px;
-}
-/* ==========================================
-   1. 全体レイアウト
-========================================== */
-/* アプリ全体を中央に配置 */
 
 body {
   font-family:
@@ -172,13 +131,12 @@ body {
 
 .settings-btn {
   position: absolute;
-  top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
   border: none;
-  background: rgba(255, 0, 0, 0.2);
+  background: transparent;
   font-size: 24px;
   cursor: pointer;
   transition: transform 0.2s;
@@ -186,27 +144,34 @@ body {
 
 .settings-btn:hover {
   transform: rotate(90deg);
-  opacity: 0.7;
+}
+
+.subtitle {
+  text-align: center;
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 25px;
 }
 
 .input-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  padding: 0 20px;
 }
 
-.record-label {
+.label {
   display: block;
-  margin: 0 0 8px 5px;
-  font-size: 15px;
+  text-align: left;
   font-weight: bold;
+  margin: 15px 0 8px 5px;
   color: #444;
+  font-size: 15px;
 }
 
 .btn-group {
   display: flex;
-  gap: 16px;
-  margin: 0;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 5px;
 }
 
 .btn-group button {
@@ -293,7 +258,7 @@ textarea:focus {
   background: #ffffff;
   border-radius: 25px;
   box-sizing: border-box;
-  overflow: visible;
+  overflow: hidden; /* ←追加 */
 }
 
 /* ==========================================
@@ -332,30 +297,35 @@ textarea:focus {
   padding: 15px;
 }
 
+.settings-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+========================================== */
+
+.input-section {
+  padding: 0;
+}
+
 /* ラベル */
-.settings-label {
+.label {
   display: block;
-  margin: 16px 0 8px;
+  margin: 18px 0 8px;
   font-size: 15px;
   font-weight: bold;
   color: #444;
 }
 
-/* ==========================================
-   2. 入力エリア
-========================================== */
-
-.input-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 /* 3段階ボタン */
 .btn-group {
   display: flex;
-  gap: 16px;
-  margin: 8px 0 16px;
+  gap: 16px; /* ボタン同士 */
+  margin: 8px 0 20px;
 }
 
 .btn-group button {
@@ -589,4 +559,17 @@ h3 {
   overflow-y: auto;
   font-size: 13px;
   color: #555;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }

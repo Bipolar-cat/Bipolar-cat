@@ -77,7 +77,7 @@ function createButtons(type) {
       {
         label: type === "mood" ? "低い" : "悪い",
 
-        value: 1,
+        value: 0,
       },
 
       {
@@ -114,7 +114,7 @@ function createButtons(type) {
   // Step10
   //----------------------------------
   else {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 0; i <= 10; i++) {
       const btn = document.createElement("button");
 
       btn.textContent = i;

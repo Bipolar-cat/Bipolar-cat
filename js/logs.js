@@ -58,7 +58,7 @@ function renderLogs() {
 // ----------------------------
 function getMoodLabel(value) {
   switch (value) {
-    case 1:
+    case 0:
       return "低い";
 
     case 5:
@@ -77,7 +77,7 @@ function getMoodLabel(value) {
 // ----------------------------
 function getCondLabel(value) {
   switch (value) {
-    case 1:
+    case 0:
       return "悪い";
 
     case 5:

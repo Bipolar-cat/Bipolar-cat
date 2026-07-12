@@ -144,7 +144,7 @@ function renderChart() {
         y:
           mode === "step3"
             ? {
-                min: 1,
+                min: 0,
 
                 max: 10,
 
@@ -156,7 +156,7 @@ function renderChart() {
 
                     if (value === 5) return "普通";
 
-                    if (value === 1) return "低い";
+                    if (value === 0) return "低い";
 
                     return "";
                   },
