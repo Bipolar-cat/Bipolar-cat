@@ -42,13 +42,19 @@ function renderChart() {
 
           backgroundColor: "#3b82f6",
 
-          borderWidth: 2,
+          borderWidth: 3,  // ← 線をしっかり太く
 
-          tension: 0.3,
+          tension: 0.4,  // ← 緩やかな波を描く
 
-          pointRadius: 4,
+          pointRadius: 6,  // ← 点を大きく（正丸）
 
           pointHitRadius: 20,
+
+          pointBorderWidth: 2,  // ← 白い縁取りでくっきり
+
+          pointBorderColor: "#fff",
+
+          pointBackgroundColor: "#3b82f6",  // ← 塗りつぶし色
 
           fill: false,
         },
@@ -62,13 +68,19 @@ function renderChart() {
 
           backgroundColor: "#f59e0b",
 
-          borderWidth: 2,
+          borderWidth: 3,  // ← 線をしっかり太く
 
-          tension: 0.3,
+          tension: 0.4,  // ← 緩やかな波を描く
 
-          pointRadius: 4,
+          pointRadius: 6,  // ← 点を大きく（正丸）
 
           pointHitRadius: 20,
+
+          pointBorderWidth: 2,  // ← 白い縁取りでくっきり
+
+          pointBorderColor: "#fff",
+
+          pointBackgroundColor: "#f59e0b",  // ← 塗りつぶし色
 
           fill: false,
         },
@@ -146,20 +158,33 @@ function renderChart() {
             ? {
                 min: 0,
 
-                max: 10,
+                max: 10.5,  // ← 上に余白を作る
 
                 ticks: {
                   stepSize: 1,
+
+                  padding: 30,  // ← 「良い」ラベルの上に余白
 
                   callback(value) {
                     if (value === 10) return "良い";
 
                     if (value === 5) return "普通";
 
-                    if (value === 0) return "低い";
+                    if (value === 0) return "低い／悪い";
 
                     return "";
                   },
+
+                  font: {
+                    weight: "bold",
+                    size: 14,
+                    color: "#222",
+                  },
+                },
+
+                grid: {
+                  color: "rgba(0,0,0,0.08)",  // ← グリッド線を薄く表示
+                  drawBorder: true,
                 },
               }
             : {
@@ -176,6 +201,15 @@ function renderChart() {
       plugins: {
         legend: {
           position: "top",
+          labels: {
+            padding: 20,  // ← 凡例の下に余白
+            font: {
+              size: 13,
+              weight: "bold",
+            },
+            boxWidth: 15,
+            boxHeight: 15,
+          },
         },
       },
     },
