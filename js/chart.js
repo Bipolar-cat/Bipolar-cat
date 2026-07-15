@@ -42,19 +42,19 @@ function renderChart() {
 
           backgroundColor: "#3b82f6",
 
-          borderWidth: 3,  // ← 線をしっかり太く
+          borderWidth: 3,
 
-          tension: 0.4,  // ← 緩やかな波を描く
+          tension: 0.4,
 
-          pointRadius: 6,  // ← 点を大きく（正丸）
+          pointRadius: 6,
 
           pointHitRadius: 20,
 
-          pointBorderWidth: 2,  // ← 白い縁取りでくっきり
+          pointBorderWidth: 2,
 
           pointBorderColor: "#fff",
 
-          pointBackgroundColor: "#3b82f6",  // ← 塗りつぶし色
+          pointBackgroundColor: "#3b82f6",
 
           fill: false,
         },
@@ -68,19 +68,19 @@ function renderChart() {
 
           backgroundColor: "#f59e0b",
 
-          borderWidth: 3,  // ← 線をしっかり太く
+          borderWidth: 3,
 
-          tension: 0.4,  // ← 緩やかな波を描く
+          tension: 0.4,
 
-          pointRadius: 6,  // ← 点を大きく（正丸）
+          pointRadius: 6,
 
           pointHitRadius: 20,
 
-          pointBorderWidth: 2,  // ← 白い縁取りでくっきり
+          pointBorderWidth: 2,
 
           pointBorderColor: "#fff",
 
-          pointBackgroundColor: "#f59e0b",  // ← 塗りつぶし色
+          pointBackgroundColor: "#f59e0b",
 
           fill: false,
         },
@@ -158,12 +158,12 @@ function renderChart() {
             ? {
                 min: 0,
 
-                max: 10.5,  // ← 上に余白を作る
+                max: 10.5,
 
                 ticks: {
                   stepSize: 1,
 
-                  padding: 30,  // ← 「良い」ラベルの上に余白
+                  padding: 30,
 
                   callback(value) {
                     if (value === 10) return "良い";
@@ -180,11 +180,14 @@ function renderChart() {
                     size: 14,
                     color: "#222",
                   },
+
+                  backdropPadding: 6,
                 },
 
                 grid: {
-                  color: "rgba(0,0,0,0.08)",  // ← グリッド線を薄く表示
+                  color: "rgba(0,0,0,0.08)",
                   drawBorder: true,
+                  lineWidth: 1,
                 },
               }
             : {
@@ -198,11 +201,20 @@ function renderChart() {
               },
       },
 
+      layout: {
+        padding: {
+          left: 5,  // ← 左余白を詰める
+          right: 10,
+          top: 10,
+          bottom: 10,
+        },
+      },
+
       plugins: {
         legend: {
           position: "top",
           labels: {
-            padding: 20,  // ← 凡例の下に余白
+            padding: 20,
             font: {
               size: 13,
               weight: "bold",
