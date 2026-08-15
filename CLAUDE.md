@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-InnerNote (code name "innarva") is a static, client-side-only web app for recording daily mood and physical condition, deployed via GitHub Pages at `bipolar-cat.github.io`. It has no backend, no build step, and no package manager — it's plain HTML/CSS/JS loaded directly by the browser, with Chart.js pulled from a CDN in `index.html`.
+Innarva (formerly "InnerNote") is a static, client-side-only web app for recording daily mood and physical condition, deployed via GitHub Pages at bipolar-cat.github.io. It has no backend, no build step, and no package manager — it's plain HTML/CSS/JS loaded directly by the browser, with Chart.js pulled from a CDN in index.html.
 
 The product is built for a PSW (psychiatric survivor worker) audience: it helps users log mood/condition over time and produce a summary they can show a doctor during limited appointment time. There are two parallel input modes, Step3 (Bad/Normal/Good, beginner-friendly) and Step10 (0–10 scale), which share the same underlying data.
 
@@ -58,6 +58,6 @@ Numbered docs are the source of truth for product decisions, in reading order pe
 
 ## Known quirks
 
-- The product is called "InnerNote" throughout `docs/`, but source file headers/comments and the HTML `<title>` still say "innarva" (an earlier name) — this is not a typo to silently fix across the board, just an inconsistency to be aware of when searching/grepping.
+- The product is called "Innarva" throughout `docs/` (the current name). Some source file headers/comments and older references may still say "InnerNote" (the earlier name, per `docs/CLAUDE.md` §19) — this is not a typo to silently fix across the board, just an inconsistency to be aware of when searching/grepping. Per project rules, past names are not to be bulk-renamed without explicit approval.
 - `style.css` currently contains `body { background: red !important; }` near the top — appears to be leftover debug styling rather than intentional (conflicts with `05_DesignGuide.md`'s white/gray background rationale).
 - `style_backup.css` exists alongside `style.css` but is not referenced by `index.html`; it's a manual backup, not a build artifact.
